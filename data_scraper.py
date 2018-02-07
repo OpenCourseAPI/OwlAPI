@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from os.path import abspath
+from collections import defaultdict
 
 # 3rd party
 import requests
@@ -7,10 +8,12 @@ from bs4 import BeautifulSoup
 
 SCHEDULE = 'schedule.html'
 
+
 def main():
     # content = mine()
     content = urlopen(f'file://{abspath(SCHEDULE)}')
     parse(content)
+
 
 def mine(write=False):
     headers = {
@@ -40,11 +43,19 @@ def mine(write=False):
 
     return res.content
 
+
 def parse(content):
+    listings = defaultdict(list)
+
     soup = BeautifulSoup(content, 'html5lib')
-    table = soup.find(lambda tag: tag.name == 'table')
-    # rows = table.findAll(lambda tag: tag.name == 'tr')
-    print(rows)
+    tables = soup.find_all('table', {'class': 'TblCourses'})
+
+    for t in tables:
+        rows = t.find_all('tr', {'class': 'CourseRow'})
+        listings[t['dept-desc']].append(rows)
+
+    print(listings['Accounting'])
+
 
 if __name__ == "__main__":
     main()
