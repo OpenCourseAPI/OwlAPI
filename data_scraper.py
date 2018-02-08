@@ -3,7 +3,6 @@ from os import makedirs
 from os.path import abspath, join, exists
 from collections import namedtuple, defaultdict
 from json import dumps, JSONEncoder
-import pprint
 
 # 3rd party
 import requests
@@ -20,14 +19,13 @@ def main():
     if not exists(DB_ROOT):
         makedirs(DB_ROOT, exist_ok=True)
 
-    mine(write=True)
-    content = urlopen(f'file://{abspath(SCHEDULE)}')
-
+    content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine(write=True)
     db = TinyDB(join(DB_ROOT, 'database.json'))
-    parse(content, db=(db or None))
 
-    for table in db:
-        print(table)
+    # parse(content, db=(db or None))
+
+    for i in db:
+        print(i)
 
 
 def mine(write=False):
@@ -43,9 +41,7 @@ def mine(write=False):
         'Connection': 'keep-alive',
     }
 
-    data = [
-      ('termcode', f'{TERM_CODE}'),
-    ]
+    data = [('termcode', f'{TERM_CODE}'), ]
 
     res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', headers=headers, data=data)
     res.raise_for_status()
@@ -60,8 +56,6 @@ def mine(write=False):
 
 
 def parse(content, db=None):
-    # pp = pprint.PrettyPrinter(depth=4)
-
     soup = BeautifulSoup(content, 'html5lib')
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
@@ -84,8 +78,6 @@ def parse(content, db=None):
         j = {f'{d.dept}': dumps(d, cls=MyEncoder)}
 
         db and db.insert(j)
-
-        # pp.pprint(d.__dict__)
 
 class Department():
     def __init__(self, dept, dept_desc):
