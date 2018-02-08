@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 from os.path import abspath
+from collections import namedtuple, defaultdict
 import json
+import pprint
 
 # 3rd party
 import requests
@@ -8,6 +10,8 @@ from bs4 import BeautifulSoup
 
 SCHEDULE = 'schedule.html'
 TERM_CODE = '201841'
+HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
+           'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
 
 
 def main():
@@ -46,34 +50,29 @@ def mine(write=False):
 
 
 def parse(content):
+    pp = pprint.PrettyPrinter(depth=3)
+
     depts = list()
-
     soup = BeautifulSoup(content, 'html5lib')
-    tables = soup.find_all('table', {'class': 'TblCourses'})
 
+    tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
         d = Department(t['dept'], t['dept-desc'])
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
+        s = defaultdict(list)
         for r in rows:
             cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
+
             for i, c in enumerate(cols):
                 a = c.find('a')
                 cols[i] = a.get_text() if a else cols[i].get_text()
 
-            s = Section(cols)
-            d.sections.append(s)
+            s[f'{cols[2]}'].append(namedtuple('data', HEADERS)(*cols))
+            d.sections.append(dict(s))
 
         depts.append(d)
-
-    print(depts[0].__dict__)
-
-
-class Section():
-    def __init__(self, data):
-        self.course, self.CRN, self.desc, self.status, self.days, self.time, self.start, self.end,\
-            self.room, self.campus, self.units, self.instructor, self.seats, self.wait_seats, self.wait_cap = data
-
+        pp.pprint(d.__dict__)
 
 class Department():
     def __init__(self, dept, dept_desc):
@@ -84,6 +83,3 @@ class Department():
 
 if __name__ == "__main__":
     main()
-
-# Course | CRN | Title | Status | Days | Time | Start | End | | Room
-# | Campus | Units | Instructor | Seats Available | Waitlist Slots | Waitlist Capacity |
