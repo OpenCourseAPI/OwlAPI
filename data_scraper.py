@@ -50,7 +50,7 @@ def mine(write=False):
 
 
 def parse(content):
-    pp = pprint.PrettyPrinter(depth=3)
+    pp = pprint.PrettyPrinter(depth=4)
 
     depts = list()
     soup = BeautifulSoup(content, 'html5lib')
@@ -69,10 +69,11 @@ def parse(content):
                 cols[i] = a.get_text() if a else cols[i].get_text()
 
             s[f'{cols[2]}'].append(namedtuple('data', HEADERS)(*cols))
-            d.sections.append(dict(s))
+        d.sections.append(dict(s))
 
         depts.append(d)
         pp.pprint(d.__dict__)
+        break
 
 class Department():
     def __init__(self, dept, dept_desc):
