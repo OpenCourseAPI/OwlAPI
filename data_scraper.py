@@ -22,10 +22,16 @@ def main():
     content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine(write=True)
     db = TinyDB(join(DB_ROOT, 'database.json'))
 
-    # parse(content, db=(db or None))
+    # parse(content, db=db)
 
-    for i in db:
-        print(i)
+    try:
+        # if len(db) > 0:
+        #     entry = db.search(Query()['CHEM'].exists())
+        #     # entry = db.table('CHEM')
+        #     print(entry[0]['CHEM'])
+        print(db.tables())
+    except KeyError:
+        pass
 
 
 def mine(write=False):
@@ -56,11 +62,12 @@ def mine(write=False):
 
 
 def parse(content, db=None):
+    db.purge_tables()
     soup = BeautifulSoup(content, 'html5lib')
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
-        d = Department(t['dept'], t['dept-desc'])
+        dept, dept_desc = t['dept'], t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
         s = defaultdict(list)
@@ -72,12 +79,11 @@ def parse(content, db=None):
                     a = c.find('a')
                     cols[i] = a.get_text() if a else cols[i].get_text()
 
-                s[f'{cols[2]}'].append(namedtuple('data', HEADERS)(*cols))
+                s[f'{cols[0]}'].append(namedtuple('data', HEADERS)(*cols))
 
-        d.sections.append(dict(s))
-        j = {f'{d.dept}': dumps(d, cls=MyEncoder)}
+        j = dict(s)
+        db.table(f'{dept}').insert(j)
 
-        db and db.insert(j)
 
 class Department():
     def __init__(self, dept, dept_desc):
@@ -85,9 +91,12 @@ class Department():
         self.dept_desc = dept_desc
         self.sections = list()
 
-class MyEncoder(JSONEncoder):
-    def default(self, o):
-        return o.__dict__
+    def serialize(self):
+        return {
+            'dept': self.dept,
+            'dept_desc': self.dept_desc,
+            'sections': dumps(self.sections),
+        }
 
 
 if __name__ == "__main__":
