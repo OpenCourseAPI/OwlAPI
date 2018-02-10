@@ -18,13 +18,24 @@ async def hello():
 
 
 @app.route('/list', methods=['GET'])
-def api_depts():
-    return ', '.join(db.tables()), 200
+def api_list():
+    qp = request.args
+    if 'dept' not in qp:
+        return jsonify(', '.join(db.tables())), 200
+
+    qp_dept = qp['dept']
+    if qp_dept in db.tables():
+        table = db.table(f'{qp_dept}')
+        keys = set().union(*(d.keys() for d in table.all()))
+        return jsonify(', '.join(keys)), 200
+
+    return f"Error! Could not list (this shouldn't happen)", 404
 
 
 @app.route('/get', methods=['GET'])
 def api_dept():
     qp = request.args
+
     qp_dept = qp['dept']
     if qp_dept in db.tables():
         table = db.table(f'{qp_dept}')
@@ -35,11 +46,14 @@ def api_dept():
 
         qp_section = qp['section']
 
-        section = next((e[f'{qp_section}'] for e in entries if f'{qp_section}' in e))
+        try:
+            section = next((e[f'{qp_section}'] for e in entries if f'{qp_section}' in e))
+        except StopIteration:
+            return f'Error! Could not find section: {qp_section}', 404
         if section:
             return jsonify(section), 200
 
-    return "", 303
+    return f'Error! Could not find department: {qp_dept}', 404
 
 
 if __name__ == "__main__":

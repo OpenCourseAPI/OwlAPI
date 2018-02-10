@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from os import makedirs
 from os.path import abspath, join, exists
-from collections import namedtuple, defaultdict
+from collections import defaultdict
 from json import dumps
 from re import match
 
@@ -60,7 +60,8 @@ def parse(content, db=None):
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
-        dept, dept_desc = t['dept'], t['dept-desc']
+        dept = t['dept'].replace(' ', '')
+        dept_desc = t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
         s = defaultdict(list)
@@ -74,17 +75,20 @@ def parse(content, db=None):
 
                 try:
                     key = get_key(f'{cols[0]}')[0]
-                    data = namedtuple('data', HEADERS)(*cols)
-                    s[key].append(data._asdict())
+                    data = dict(zip(HEADERS, cols))
+                    s[key].append(data)
                 except KeyError:
                     continue
 
         j = dict(s)
         db.table(f'{dept}').insert(j)
 
+
 def get_key(course):
-    course = course.split(' ')
-    section = course[1][1:].lstrip('0')
+    c = course.split(' ')
+    idx = 1 if len(c) < 3 else 2
+    section = c[idx][1:].lstrip('0')
+
     if '.' in section:
         sp = section.split('.')
         try:
@@ -95,20 +99,6 @@ def get_key(course):
     else:
         match_obj = match('(\d*\D?)\d*([YWH])?', section)
         return match_obj.groups()
-
-
-class Department():
-    def __init__(self, dept, dept_desc):
-        self.dept = dept
-        self.dept_desc = dept_desc
-        self.sections = list()
-
-    def serialize(self):
-        return {
-            'dept': self.dept,
-            'dept_desc': self.dept_desc,
-            'sections': dumps(self.sections),
-        }
 
 
 if __name__ == "__main__":
