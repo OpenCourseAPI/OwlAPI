@@ -5,7 +5,6 @@ from pprint import pprint
 # 3rd party
 from quart import Quart, jsonify, request
 from tinydb import TinyDB, Query
-from tinyTable import TinyTable
 
 app = Quart(__name__)
 
@@ -38,9 +37,7 @@ def api_dept():
 
         section = next((e[f'{qp_section}'] for e in entries if f'{qp_section}' in e))
         if section:
-            print(section)
             return jsonify(section), 200
-
 
     return "", 303
 

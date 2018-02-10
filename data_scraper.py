@@ -2,12 +2,13 @@ from urllib.request import urlopen
 from os import makedirs
 from os.path import abspath, join, exists
 from collections import namedtuple, defaultdict
-from json import dumps, JSONEncoder
+from json import dumps
+from re import match
 
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 
 SCHEDULE = 'schedule.html'
 TERM_CODE = '201841'
@@ -22,16 +23,8 @@ def main():
     content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine(write=True)
     db = TinyDB(join(DB_ROOT, 'database.json'))
 
-    # parse(content, db=db)
-
-    try:
-        # if len(db) > 0:
-        #     entry = db.search(Query()['CHEM'].exists())
-        #     # entry = db.table('CHEM')
-        #     print(entry[0]['CHEM'])
-        print(db.tables())
-    except KeyError:
-        pass
+    parse(content, db=db)
+    print(db.tables())
 
 
 def mine(write=False):
@@ -79,10 +72,29 @@ def parse(content, db=None):
                     a = c.find('a')
                     cols[i] = a.get_text() if a else cols[i].get_text()
 
-                s[f'{cols[0]}'].append(namedtuple('data', HEADERS)(*cols))
+                try:
+                    key = get_key(f'{cols[0]}')[0]
+                    data = namedtuple('data', HEADERS)(*cols)
+                    s[key].append(data._asdict())
+                except KeyError:
+                    continue
 
         j = dict(s)
         db.table(f'{dept}').insert(j)
+
+def get_key(course):
+    course = course.split(' ')
+    section = course[1][1:].lstrip('0')
+    if '.' in section:
+        sp = section.split('.')
+        try:
+            sp[1] = filter(lambda c: not c.isdigit(), sp[1])
+        except KeyError:
+            pass
+        return tuple(sp)
+    else:
+        match_obj = match('(\d*\D?)\d*([YWH])?', section)
+        return match_obj.groups()
 
 
 class Department():
