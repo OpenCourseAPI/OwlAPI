@@ -11,6 +11,7 @@ requests = "*"
 "beautifulsoup4" = "*"
 tinydb = "*"
 quart = "*"
+"html5lib" = "*"
 
 
 [dev-packages]
