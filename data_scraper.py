@@ -64,7 +64,7 @@ def parse(content, db=None):
         dept_desc = t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
-        s = defaultdict(list)
+        s = defaultdict(list)  # key: list()
         for r in rows:
             cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 

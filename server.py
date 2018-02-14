@@ -19,7 +19,9 @@ async def hello():
 
 @app.route('/list', methods=['GET'])
 def api_list():
-    qp = request.args
+    raw = request.args
+    qp = {k: v.upper() for k, v in raw.items()}
+
     if 'dept' not in qp:
         return jsonify(', '.join(db.tables())), 200
 
@@ -34,7 +36,8 @@ def api_list():
 
 @app.route('/get', methods=['GET'])
 def api_dept():
-    qp = request.args
+    raw = request.args
+    qp = {k: v.upper() for k, v in raw.items()}
 
     qp_dept = qp['dept']
     if qp_dept in db.tables():
@@ -57,4 +60,4 @@ def api_dept():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
