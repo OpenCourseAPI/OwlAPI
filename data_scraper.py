@@ -28,6 +28,11 @@ def main():
 
 
 def mine(write=False):
+    '''
+    Mine will hit the database for foothill's class listings and write it to a file
+    :param write: (bool) write to file?
+    :return res.content: (json) the html body
+    '''
     headers = {
         'Origin': 'https://banssb.fhda.edu',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -54,7 +59,7 @@ def mine(write=False):
     return res.content
 
 
-def parse(content, db=None):
+def parse(content, db):
     db.purge_tables()
     soup = BeautifulSoup(content, 'html5lib')
 
@@ -64,7 +69,7 @@ def parse(content, db=None):
         dept_desc = t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
-        s = defaultdict(list)  # key: list()
+        s = defaultdict(lambda: defaultdict(list))  # key: list()
         for r in rows:
             cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 
@@ -76,7 +81,13 @@ def parse(content, db=None):
                 try:
                     key = get_key(f'{cols[0]}')[0]
                     data = dict(zip(HEADERS, cols))
-                    s[key].append(data)
+                    crn = data['CRN']
+
+                    if len(s[key][crn]) > 0:
+                        comb = set(s[key][crn][0].items()) ^ set(data.items())
+                        if len(comb) == 0:
+                            continue
+                    s[key][crn].append(data)
                 except KeyError:
                     continue
 
@@ -92,7 +103,7 @@ def get_key(course):
     if '.' in section:
         sp = section.split('.')
         try:
-            sp[1] = filter(lambda c: not c.isdigit(), sp[1])
+            sp[1] = filter(lambda a: not a.isdigit(), sp[1])
         except KeyError:
             pass
         return tuple(sp)
