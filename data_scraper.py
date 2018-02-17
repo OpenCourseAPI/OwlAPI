@@ -98,18 +98,10 @@ def parse(content, db):
 def get_key(course):
     c = course.split(' ')
     idx = 1 if len(c) < 3 else 2
-    section = c[idx][1:].lstrip('0')
+    section = c[idx]
 
-    if '.' in section:
-        sp = section.split('.')
-        try:
-            sp[1] = filter(lambda a: not a.isdigit(), sp[1])
-        except KeyError:
-            pass
-        return tuple(sp)
-    else:
-        match_obj = match('(\d*\D?)\d*([YWH])?', section)
-        return match_obj.groups()
+    match_obj = match('F0*(\d*\w?)\.?\d*([YWH])?', section)
+    return match_obj.groups()
 
 
 if __name__ == "__main__":
