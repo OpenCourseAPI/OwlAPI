@@ -1,10 +1,32 @@
 # FoothilAPI
+This is an ~~unofficial~~ API that serves class data from MyPortal to students wishing to use it. You can run it locally by running the steps below.
 
-## Sample Data
-| Course | CRN | Title | Status | Days | Time | Start | End |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| ACTG F001A02Y | 40065 | FINANCIAL ACCOUNTING I | Open | TTh | 10:00 AM-11:50 AM | 04/09/2018 | 06/29/2018 |
+This project is made portable by [pipenv](http://pipenv.readthedocs.io/en/latest/basics/) - which "harnesses Pipfile, pip, and virtualenv into one single command."
 
-| Room | Campus | Units | Instructor | Seats Available | Waitlist Slots | Waitlist Capacity |
-| --- | --- | --- | --- | --- | --- | --- |
-| 3203 | FH | 5.00 | Huang| 40 | 15 | 15 |
+### Contributors
+Main contributor: **Kishan Emens**
+
+Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
+
+## Setup
+
+**Install pipenv onto root**
+> `pip install pipenv`
+
+
+**Download all dependencies for Foothill API**
+
+Navigate to folder for API then run
+> `pipenv install`
+
+
+**Start pipenv session**
+> `pipenv shell`
+
+
+**Run Data Scraper**
+> `python data_scraper.py`
+
+
+**Start API**
+> `python server.py`
