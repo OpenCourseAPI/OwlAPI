@@ -79,7 +79,7 @@ def api_one():
 
     data = get_one(qp)
     json = jsonify(data)
-    return (json, 200) if data else ('Could not find given parameters in database', 404)
+    return (json, 200) if data else ('Could not find given selectors in database', 404)
 
 
 @app.route('/get', methods=['POST'])
@@ -105,10 +105,12 @@ async def api_many():
 
     for qp in raw['courses']:
         d = get_one(qp)
+        if not d: #null case from get_one (invalid param)
+            return 'Could not find one or more selectors in database', 404
         data.append(d)
 
     json = jsonify({'courses': data})
-    return (json, 200) if data else ('Could not find given parameters in database', 404)
+    return json, 200
 
 
 if __name__ == "__main__":
