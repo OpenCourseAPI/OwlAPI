@@ -16,7 +16,7 @@ async def hello():
 
 
 @app.route('/list', methods=['GET'])
-def api_list():
+async def api_list():
     '''
     `/list` with [GET] handles a single request to get department or course keys from the database
     It expects a mandatory query parameter `dept` which is first checked for existence and then returns the dept keys.
@@ -37,13 +37,13 @@ def api_list():
         keys = set().union(*(d.keys() for d in table.all()))
         return jsonify(', '.join(keys)), 200
 
-    return f"Error! Could not list (this shouldn't happen)", 404
+    return "Error! Could not list", 404
 
 
 def get_one(qp: dict()):
     '''
-    This is a subfunction used by the `/get` route to extract course data.
-    It works for both
+    This is a helper used by the `/get` route to extract course data.
+    It works for both [GET] and [POST] and fetches data from the database
     :return:
     '''
     qp_dept = qp['dept']
@@ -65,10 +65,14 @@ def get_one(qp: dict()):
 
 
 @app.route('/get', methods=['GET'])
-def api_one():
+async def api_one():
     '''
     `/get` with [GET] handles a single request to get a whole department or a whole course listing from the database
-    It expects a mandatory query parameter `dept` and an optionally `course`. ex.{'dept': 'CS', 'course': '2C'}
+    It expects a mandatory query parameter `dept` and an optionally `course`.
+
+    Example:
+        {'dept': 'CS', 'course': '2C'}
+
     If only `dept` is requested, it checked for its existence in the database and then returns it.
     However, if `course` is also selected, it will return only the data of that course within the department.
     :return: 200 - Found entry and returned data successfully to the user.
@@ -79,7 +83,7 @@ def api_one():
 
     data = get_one(qp)
     json = jsonify(data)
-    return (json, 200) if data else ('Could not find given selectors in database', 404)
+    return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
 
 @app.route('/get', methods=['POST'])
@@ -103,10 +107,10 @@ async def api_many():
     raw = await request.get_json()
     data = []
 
-    for qp in raw['courses']:
-        d = get_one(qp)
-        if not d: #null case from get_one (invalid param)
-            return 'Could not find one or more selectors in database', 404
+    for course in raw['courses']:
+        d = get_one(course)
+        if not d:  # null case from get_one (invalid param)
+            return 'Error! Could not find one or more selectors in database', 404
         data.append(d)
 
     json = jsonify({'courses': data})
