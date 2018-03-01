@@ -1,4 +1,5 @@
 from os.path import join
+from collections import defaultdict
 
 # 3rd party
 from quart import Quart, jsonify, request
@@ -18,7 +19,7 @@ async def hello():
 @app.route('/list', methods=['GET'])
 async def api_list():
     '''
-    `/list` with [GET] handles a single request to get department or course keys from the database
+    `/list` with [GET] handles a single request to list department or course keys from the database
     It expects a mandatory query parameter `dept` which is first checked for existence and then returns the dept keys.
     However, if `course` is also selected, it will return only the data of that course within the department.
     :return: 200 - Found entry and returned keys successfully to the user.
@@ -39,8 +40,32 @@ async def api_list():
 
     return "Error! Could not list", 404
 
+def generate_url(dept: str, course: str):
+    '''
+    This is a helper
+    :param dept:
+    :param course:
+    :return:
+    '''
+    return f"get?dept={dept}&course={course}"
 
-def get_one(qp: dict()):
+@app.route('/urls', methods=['GET'])
+async def api_list_url():
+    '''
+    `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
+    :return: 200 - Should always return
+    '''
+    data = defaultdict(list)
+
+    for dept in db.tables():
+        table = db.table(dept)
+        keys = set().union(*(d.keys() for d in table.all()))
+        data[f'{dept}'].append({k: generate_url(dept, k) for k in keys})
+
+    return jsonify(data), 200
+
+
+def get_one(qp: dict):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
