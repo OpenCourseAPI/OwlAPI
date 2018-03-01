@@ -20,16 +20,16 @@ def main():
     if not exists(DB_ROOT):
         makedirs(DB_ROOT, exist_ok=True)
 
-    content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine(write=True)
+    content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine()
     db = TinyDB(join(DB_ROOT, 'database.json'))
 
     parse(content, db=db)
     print(db.tables())
 
 
-def mine(write=False):
+def mine(write=True):
     '''
-    Mine will hit the database for foothill's class listings and write it to a file
+    Mine will hit the database for foothill's class listings and write it to a file.
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
