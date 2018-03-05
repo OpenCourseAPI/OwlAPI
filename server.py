@@ -5,18 +5,18 @@ from collections import defaultdict
 from quart import Quart, jsonify, request
 from tinydb import TinyDB
 
-app = Quart(__name__)
+application = Quart(__name__)
 
 DB_ROOT = 'db/'
 db = TinyDB(join(DB_ROOT, 'database.json'))
 
 
-@app.route('/')
+@application.route('/')
 async def hello():
     return 'Foothill API'
 
 
-@app.route('/list', methods=['GET'])
+@application.route('/list', methods=['GET'])
 async def api_list():
     '''
     `/list` with [GET] handles a single request to list department or course keys from the database
@@ -49,7 +49,7 @@ def generate_url(dept: str, course: str):
     '''
     return f"get?dept={dept}&course={course}"
 
-@app.route('/urls', methods=['GET'])
+@application.route('/urls', methods=['GET'])
 async def api_list_url():
     '''
     `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
@@ -89,7 +89,7 @@ def get_one(qp: dict):
             return course
 
 
-@app.route('/get', methods=['GET'])
+@application.route('/get', methods=['GET'])
 async def api_one():
     '''
     `/get` with [GET] handles a single request to get a whole department or a whole course listing from the database
@@ -111,7 +111,7 @@ async def api_one():
     return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
 
-@app.route('/get', methods=['POST'])
+@application.route('/get', methods=['POST'])
 async def api_many():
     '''
     `/get` with [POST] handles a batch request to get many departments or a many course listings from the database.
@@ -143,4 +143,4 @@ async def api_many():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(host='0.0.0.0', debug=True)
