@@ -30,3 +30,8 @@ Navigate to folder for API then run
 
 **Start API**
 > `python server.py`
+
+## Advanced Setup
+
+**Starting application with gunicorn**
+> `gunicorn --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 server:application`
