@@ -13,7 +13,7 @@ Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 `GET /get` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
-<!-- <div class="test-request" id="get"></div> -->
+<script type="form/interact"></script>
 
 > `GET /get?dept=CS&course=2C`
 ```
