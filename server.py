@@ -16,79 +16,6 @@ async def hello():
     return 'Foothill API'
 
 
-@application.route('/list', methods=['GET'])
-async def api_list():
-    '''
-    `/list` with [GET] handles a single request to list department or course keys from the database
-    It expects a mandatory query parameter `dept` which is first checked for existence and then returns the dept keys.
-    However, if `course` is also selected, it will return only the data of that course within the department.
-    :return: 200 - Found entry and returned keys successfully to the user.
-    :return: 404 - Could not find entry
-    :return:
-    '''
-    raw = request.args
-    qp = {k: v.upper() for k, v in raw.items()}
-
-    if 'dept' not in qp:
-        return jsonify(', '.join(db.tables())), 200
-
-    qp_dept = qp['dept']
-    if qp_dept in db.tables():
-        table = db.table(f'{qp_dept}')
-        keys = set().union(*(d.keys() for d in table.all()))
-        return jsonify(', '.join(keys)), 200
-
-    return "Error! Could not list", 404
-
-def generate_url(dept: str, course: str):
-    '''
-    This is a helper
-    :param dept:
-    :param course:
-    :return:
-    '''
-    return f"get?dept={dept}&course={course}"
-
-@application.route('/urls', methods=['GET'])
-async def api_list_url():
-    '''
-    `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
-    :return: 200 - Should always return
-    '''
-    data = defaultdict(list)
-
-    for dept in db.tables():
-        table = db.table(dept)
-        keys = set().union(*(d.keys() for d in table.all()))
-        data[f'{dept}'].append({k: generate_url(dept, k) for k in keys})
-
-    return jsonify(data), 200
-
-
-def get_one(qp: dict):
-    '''
-    This is a helper used by the `/get` route to extract course data.
-    It works for both [GET] and [POST] and fetches data from the database
-    :return:
-    '''
-    qp_dept = qp['dept']
-    if qp_dept in db.tables():
-        table = db.table(f'{qp_dept}')
-        entries = table.all()
-
-        if 'course' not in qp:
-            return entries
-
-        qp_course = qp['course']
-
-        try:
-            course = next((e[f'{qp_course}'] for e in entries if f'{qp_course}' in e))
-        except StopIteration:
-            return dict()
-        if course:
-            return course
-
-
 @application.route('/get', methods=['GET'])
 async def api_one():
     '''
@@ -141,6 +68,78 @@ async def api_many():
     json = jsonify({'courses': data})
     return json, 200
 
+
+def get_one(qp: dict):
+    '''
+    This is a helper used by the `/get` route to extract course data.
+    It works for both [GET] and [POST] and fetches data from the database
+    :return:
+    '''
+    qp_dept = qp['dept']
+    if qp_dept in db.tables():
+        table = db.table(f'{qp_dept}')
+        entries = table.all()
+
+        if 'course' not in qp:
+            return entries
+
+        qp_course = qp['course']
+
+        try:
+            course = next((e[f'{qp_course}'] for e in entries if f'{qp_course}' in e))
+        except StopIteration:
+            return dict()
+        if course:
+            return course
+
+
+@application.route('/list', methods=['GET'])
+async def api_list():
+    '''
+    `/list` with [GET] handles a single request to list department or course keys from the database
+    It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
+    However, if `course` is also selected, it will return only the data of that course within the department.
+    :return: 200 - Found entry and returned keys successfully to the user.
+    :return: 404 - Could not find entry
+    :return:
+    '''
+    raw = request.args
+    qp = {k: v.upper() for k, v in raw.items()}
+
+    if 'dept' not in qp:
+        return jsonify(', '.join(db.tables())), 200
+
+    qp_dept = qp['dept']
+    if qp_dept in db.tables():
+        table = db.table(f'{qp_dept}')
+        keys = set().union(*(d.keys() for d in table.all()))
+        return jsonify(', '.join(keys)), 200
+
+    return "Error! Could not list", 404
+
+def generate_url(dept: str, course: str):
+    '''
+    This is a helper
+    :param dept:
+    :param course:
+    :return:
+    '''
+    return f"get?dept={dept}&course={course}"
+
+@application.route('/urls', methods=['GET'])
+async def api_list_url():
+    '''
+    `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
+    :return: 200 - Should always return
+    '''
+    data = defaultdict(list)
+
+    for dept in db.tables():
+        table = db.table(dept)
+        keys = set().union(*(d.keys() for d in table.all()))
+        data[f'{dept}'].append({k: generate_url(dept, k) for k in keys})
+
+    return jsonify(data), 200
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)
