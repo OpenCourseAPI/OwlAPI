@@ -11,10 +11,10 @@ Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 ## Routes
 
 ### Get
-> `GET /get` handles a single request to get a whole department or a whole course listing from the database
-> It expects a mandatory query parameter `dept` and an optionally `course`.
+`GET /get` handles a single request to get a whole department or a whole course listing from the database
+It expects a mandatory query parameter `dept` and an optionally `course`.
 
-`GET /get?dept=CS&course=2C`
+> `GET /get?dept=CS&course=2C`
 ```
 {"40407":
   [
@@ -38,30 +38,41 @@ Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 }
 ```
 
-> `POST /get` handles a batch request to get many departments or a many course listings from the database.
-> This batch request is meant to simulate hitting the api route with this data N times.
-> It expects a mandatory list of objects containing keys `dept` and `course`.
+`POST /get` handles a batch request to get many departments or a many course listings from the database.
+This batch request is meant to simulate hitting the api route with this data N times.
+It expects a mandatory list of objects containing keys `dept` and `course`.
+
+> `POST /get`
+```
+{
+  "courses": [
+    {"dept":"CS", "course":"1A"},
+    {"dept":"MATH", "course":"1A"},
+    {"dept":"ENGL", "course":"1A"}
+  ]
+}
+```
 
 **Coming soon: filters**
 
 ### List
-> `GET /list` handles a single request to list department or course keys from the database
-> It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
+`GET /list` handles a single request to list department or course keys from the database
+It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
 
-`GET /list`
+> `GET /list`
 ```
 IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR, PHOT, ITRN, DMS, AHS, EMTP, ATHL, APEL, HIST, HORT, GEOG, SPED, ALCB, RT, MDIA, ENGR, THTR, NCSV, NCBS, ACTG, NCEL, KINS, DANC, HUMN, DA, JAPN, CRLP, VITI, BIOL, BUSI, PSE, _default, ECON, RSPT, ART, NCBH, PHT, LA, CS, LINC, MUS, EMS, PHED, ENGL, VT, HLTH, APPT, MATH, COMM, NCP, GID, LIBR, APSM, PHDA, PHIL, WMN, NANO, PSYC, ESLL, SOC, APIW, PHYS
 ```
 
-`GET /list&dept=CS`
+> `GET /list&dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
 ### URLs
-> `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
+`GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
 
-`GET /urls`
+> `GET /urls`
 ```
 "CS":[
   {"10": "get?dept=CS&course=10",
@@ -106,5 +117,28 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 ## Advanced Setup
 
-**Starting application with gunicorn**
-> `gunicorn --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 server:application`
+**Create a file named OwlAPI.service**
+> `sudo vi /etc/systemd/system/OwlAPI.service`
+
+**Paste in this sample config changing `user`**
+```
+[Unit]
+Description=Gunicorn instance to serve OwlAPI
+After=network.target
+
+[Service]
+User=user
+Group=nginx
+WorkingDirectory=/home/user/OwlAPI
+Environment="PATH=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/"
+ExecStart=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/gunicorn --workers 3 --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 -m 007 server:application
+
+[Install]
+WantedBy=multi-user.target
+```
+You'll also have to change the virtualenv path to match the id from when you ran `pipenv shell`
+
+**Start and enable the service**
+> `sudo systemctl start OwlAPI`
+
+> `sudo systemctl enable OwlAPI`
