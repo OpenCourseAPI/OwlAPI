@@ -8,32 +8,6 @@ Main contributor: **Kishan Emens**
 
 Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 
-## Setup
-
-**Install pipenv onto root**
-> `pip install pipenv`
-
-
-**Download all dependencies for Foothill API**
-> `pipenv install`
-
-
-**Start pipenv session**
-> `pipenv shell`
-
-
-**Run Data Scraper**
-> `python data_scraper.py`
-
-
-**Start API**
-> `python server.py`
-
-## Advanced Setup
-
-**Starting application with gunicorn**
-> `gunicorn --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 server:application`
-
 ## Routes
 
 ### Get
@@ -108,3 +82,29 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 ],
 "MATH": [...]
 ```
+
+## Setup
+
+**Install pipenv onto root**
+> `pip install pipenv`
+
+
+**Download all dependencies for Foothill API**
+> `pipenv install`
+
+
+**Start pipenv session**
+> `pipenv shell`
+
+
+**Run Data Scraper**
+> `python data_scraper.py`
+
+
+**Start API**
+> `python server.py`
+
+## Advanced Setup
+
+**Starting application with gunicorn**
+> `gunicorn --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 server:application`
