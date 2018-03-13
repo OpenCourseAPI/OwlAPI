@@ -141,6 +141,5 @@ async def api_many():
     json = jsonify({'courses': data})
     return json, 200
 
-
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)
