@@ -2,7 +2,7 @@ from os.path import join
 from collections import defaultdict
 
 # 3rd party
-from quart import Quart, jsonify, request
+from quart import Quart, jsonify, request, render_template
 from tinydb import TinyDB
 
 application = Quart(__name__)
@@ -12,8 +12,8 @@ db = TinyDB(join(DB_ROOT, 'database.json'))
 
 
 @application.route('/')
-async def hello():
-    return 'Foothill API'
+async def idx():
+    return await render_template('index.html')
 
 
 @application.route('/get', methods=['GET'])
