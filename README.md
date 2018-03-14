@@ -13,8 +13,6 @@ Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 `GET /get` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
-<script type="form/interact"></script>
-
 > `GET /get?dept=CS&course=2C`
 ```
 {"40407":
@@ -39,6 +37,11 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
+<span>
+  <script type="form/interact" data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></script>
+</span>
+
+
 `POST /get` handles a batch request to get many departments or a many course listings from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
@@ -53,6 +56,10 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
   ]
 }
 ```
+
+<span>
+  <script type="form/interact" data-request-type="POST" data-request-url="/get" data-request-body=`{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}`></script>
+</span>
 
 **Coming soon: filters**
 
