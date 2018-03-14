@@ -1,0 +1,17 @@
+.text {
+  height: 100%;
+}
+
+p.control {
+  margin-bottom: 0px !important;
+}
+
+.button.is-medium, .input.is-medium, .textarea[rows] {
+  height: 100%;
+  padding: .5em !important;
+  font-size: 1rem !important;
+}
+
+.textarea[rows] {
+  min-height: 40px !important;
+}

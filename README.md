@@ -37,9 +37,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<span>
-  <script type="form/interact" data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></script>
-</span>
+<span><script type="form/interact" data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></script></span>
 
 
 `POST /get` handles a batch request to get many departments or a many course listings from the database.
@@ -57,9 +55,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<span>
-  <script type="form/interact" data-request-type="POST" data-request-url="/get" data-request-body=`{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}`></script>
-</span>
+<span><script type="form/interact" data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></script></span>
 
 **Coming soon: filters**
 
@@ -72,10 +68,12 @@ It takes an optional query parameter `dept` which is first checked for existence
 IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR, PHOT, ITRN, DMS, AHS, EMTP, ATHL, APEL, HIST, HORT, GEOG, SPED, ALCB, RT, MDIA, ENGR, THTR, NCSV, NCBS, ACTG, NCEL, KINS, DANC, HUMN, DA, JAPN, CRLP, VITI, BIOL, BUSI, PSE, _default, ECON, RSPT, ART, NCBH, PHT, LA, CS, LINC, MUS, EMS, PHED, ENGL, VT, HLTH, APPT, MATH, COMM, NCP, GID, LIBR, APSM, PHDA, PHIL, WMN, NANO, PSYC, ESLL, SOC, APIW, PHYS
 ```
 
-> `GET /list&dept=CS`
+> `GET /list?dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
+
+<span><script type="form/interact" data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></script></span>
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
@@ -101,6 +99,9 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 ],
 "MATH": [...]
 ```
+
+<span><script type="form/interact" data-request-type="GET" data-request-url="/urls" data-request-body=""></script></span>
+
 
 ## Setup
 
