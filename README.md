@@ -37,12 +37,14 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<span id="interact"><div data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></span>
+<div id="interact"><div data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></div>
 
+**Coming soon: filters**
 
 `POST /get` handles a batch request to get many departments or a many course listings from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
+
 
 > `POST /get`
 ```
@@ -55,9 +57,8 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<span id="interact"><div data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></span>
+<div id="interact"><div data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
 
-**Coming soon: filters**
 
 ### List
 `GET /list` handles a single request to list department or course keys from the database
@@ -73,7 +74,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
-<span id="interact"><div data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></span>
+<div id="interact"><div data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></div>
+
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
@@ -100,7 +102,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 "MATH": [...]
 ```
 
-<span id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></span>
+<div id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></div>
 
 
 ## Setup

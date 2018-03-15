@@ -3,3 +3,4 @@ __pycache__/
 *.DS_Store
 *.json
 schedule.html
+static/README.md
