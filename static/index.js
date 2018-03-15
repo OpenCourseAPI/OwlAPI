@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-  whenAvailable('span[style*="display:none"]', forms => {
+  whenAvailable('#interact', forms => {
     [].forEach.call(forms, f => {
       var type = f.firstChild.dataset.requestType;
       var url = f.firstChild.dataset.requestUrl;
