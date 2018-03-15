@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', function(){
     [].forEach.call(forms, f => {
       var type = f.firstChild.dataset.requestType;
       var url = f.firstChild.dataset.requestUrl;
-      var body = f.firstChild.dataset.requestBody;
+      var data = f.firstChild.dataset.requestBody;
 
       var el = document.createElement("div");
-      el.innerHTML = generate_data(type, url, body);
+      el.innerHTML = generate_data(type, url, data);
 
       f.replaceChild(el, f.firstChild);
     });
@@ -22,27 +22,27 @@ document.addEventListener('DOMContentLoaded', function(){
 }, false);
 
 function whenAvailable(name, callback) {
-    var interval = 10; // ms
-    window.setTimeout(function() {
-        var forms = document.querySelectorAll(name);
-        if (forms.length) {
-            callback(forms);
-        } else {
-            window.setTimeout(arguments.callee, interval);
-        }
-    }, interval);
+  var interval = 10; // ms
+  window.setTimeout(function() {
+    var forms = document.querySelectorAll(name);
+    if (forms.length) {
+        callback(forms);
+    } else {
+        window.setTimeout(arguments.callee, interval);
+    }
+  }, interval);
 }
 
-function generate_data(type, url, body) {
-  var input = (type == 'GET') ? `<input class="input is-medium" id="body" type="text" value="${url + body}">` :
-                                `<textarea class="textarea is-small" id="body" rows="1">${body}</textarea>`
+function generate_data(type, url, data) {
+  var input = (type == 'GET') ? `<input class="input is-medium" id="data" type="text" value="${url + data}">` :
+                                `<textarea class="input" id="body">${data}</textarea>`
 
   return `
           <div class="field has-addons text">
-            <script type="form/url" data-url=${url}></script>
             <p class="control">
               <a class="button is-medium is-static" id="type">${type}</a>
             </p>
+            <script type="form/url" data-url=${url}></script>
             <p class="control is-expanded">
               ${input}
             </p>
@@ -52,6 +52,10 @@ function generate_data(type, url, body) {
                 Submit
               </a>
             </div>
+            <div class="modal" id="modal">
+              <div class="modal-background" onclick="toggleModal(this.parentElement, false)"></div>
+              <div class="modal-content"></div>
+            </div>
           </div>
          `
 }
@@ -60,40 +64,47 @@ function request_submit(event) {
   var field = event.target.parentElement.parentElement;
   var type = field.querySelector('#type').innerHTML;
   var url = field.querySelector('script[type="form/url"]').dataset.url;
-  var body = field.querySelector('#body');
+  var data = (type == 'GET') ? field.querySelector('#data').value : field.querySelector('#body').innerHTML; ;
 
-  body = (type == 'GET') ? body.value : body.innerHTML;
-
-  var baseUrl = "http://floof.li";
+  var modal = field.querySelector('#modal');
 
   if (type == 'GET') {
-    if (!body)
-      body = " ";
-    fetch(baseUrl + body, {
+    if (!data)
+      data = " ";
+    fetch(data, {
         method: 'GET',
-        redirect: 'follow',
       })
-      .then(response => {
-          //
-      })
+      .then(response => { updateModal(modal, response) })
       .catch(function(err) {
-          console.info(err + " url: " + baseUrl);
+        console.info(err + " url: " + body);
     });
   }
   else if (type = 'POST') {
-    fetch(baseUrl + url, {
+    fetch(url, {
         headers: {
+          'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        redirect: 'follow',
-        body: body
+        body: data
       })
-      .then(response => {
-          //
-      })
+      .then(response => { updateModal(modal, response) })
       .catch(function(err) {
-          console.info(err + " url: " + baseUrl);
+        console.info(err + " url: " + url);
     });
   }
+}
+
+function updateModal(modal, response) {
+  var res = Promise.resolve(response.json());
+  var modalContent = modal.querySelector('.modal-content');
+
+  res.then(json => {
+    modalContent.innerHTML = `<pre>${JSON.stringify(json, undefined, 2)}</pre>`;
+    toggleModal(modal, true);
+  });
+}
+
+function toggleModal(modal, state) {
+  state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
 }

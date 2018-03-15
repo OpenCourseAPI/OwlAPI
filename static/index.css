@@ -6,12 +6,24 @@ p.control {
   margin-bottom: 0px !important;
 }
 
-.button.is-medium, .input.is-medium, .textarea[rows] {
-  height: 100%;
-  padding: .5em !important;
-  font-size: 1rem !important;
+input.input, textarea.input{
+  font-family: monospace;
 }
 
-.textarea[rows] {
-  min-height: 40px !important;
+.button.is-medium, .input.is-medium, textarea.input{
+  height: 100%;
+  padding: .5em !important;
+  font-size: 1em !important;
+}
+
+textarea {
+  resize: none;
+}
+
+textarea.input {
+  width: 100%;
+}
+
+.noscroll {
+  overflow: hidden;
 }

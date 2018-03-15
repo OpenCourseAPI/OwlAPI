@@ -105,7 +105,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 <div id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></div>
 
 
-## Setup
+## Local Setup
 
 **Install pipenv onto root**
 > `pip install pipenv`
@@ -126,7 +126,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 **Start API**
 > `python server.py`
 
-## Advanced Setup
+## Server Setup
+### OwlAPI Service
 
 **Create a file named OwlAPI.service**
 > `sudo vi /etc/systemd/system/OwlAPI.service`
@@ -154,7 +155,8 @@ You'll also have to change the virtualenv path to match the id from when you ran
 
 > `sudo systemctl enable OwlAPI`
 
-**Create a file named refreshDB.service**
+### Database Refresh Service
+**Create a file named refeshDB.service**
 > `sudo vi /etc/systemd/system/refeshDB.service`
 
 **Paste in this sample config changing `user`**
@@ -175,7 +177,7 @@ StandardError=journal
 WantedBy=multi-user.target
 ```
 
-**Create a file named refreshDB.timer**
+**Create a file named refeshDB.timer**
 > `sudo vi /etc/systemd/system/refeshDB.timer`
 
 ```
