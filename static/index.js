@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', function(){
-  var forms = document.querySelectorAll('script[type="form/interact"]');
-
-  whenAvailable('script[type="form/interact"]', function(forms) {
+  whenAvailable('span[style*="display:none"]', forms => {
     [].forEach.call(forms, f => {
-      var type = f.dataset.requestType;
-      var url = f.dataset.requestUrl;
-      var body = f.dataset.requestBody;
+      var type = f.firstChild.dataset.requestType;
+      var url = f.firstChild.dataset.requestUrl;
+      var body = f.firstChild.dataset.requestBody;
 
       var el = document.createElement("div");
       el.innerHTML = generate_data(type, url, body);
 
-      f.parentNode.replaceChild(el, f);
+      f.replaceChild(el, f.firstChild);
     });
 
     var numbers = document.querySelectorAll('.token.number');
