@@ -37,7 +37,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<span><div id="interact" data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></span>
+<span id="interact"><div data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></span>
 
 
 `POST /get` handles a batch request to get many departments or a many course listings from the database.
@@ -55,7 +55,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<span><div id="interact" data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></span>
+<span id="interact"><div data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></span>
 
 **Coming soon: filters**
 
@@ -73,7 +73,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
-<span><div id="interact" data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></span>
+<span id="interact"><div data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></span>
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
@@ -100,7 +100,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 "MATH": [...]
 ```
 
-<span><div id="interact" data-request-type="GET" data-request-url="/urls" data-request-body=""></div></span>
+<span id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></span>
 
 
 ## Setup
