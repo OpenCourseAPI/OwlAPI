@@ -10,10 +10,20 @@ input.input, textarea.input{
   font-family: monospace;
 }
 
-.button.is-medium, .input.is-medium, textarea.input{
+a.button, input.input, textarea.input{
   height: 100%;
   padding: .5em !important;
   font-size: 1em !important;
+}
+
+a.button.left {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+a.button.right {
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
 }
 
 textarea {

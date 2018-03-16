@@ -40,16 +40,18 @@ function generate_data(type, url, data) {
   return `
           <div class="field has-addons text">
             <p class="control">
-              <a class="button is-medium is-static" id="type">${type}</a>
+              <a class="button is-medium is-static left" id="type">${type}</a>
             </p>
             <script type="form/url" data-url=${url}></script>
             <p class="control is-expanded">
               ${input}
             </p>
-            <div class="control">
-              <a class="button is-medium is-light is-inverted"
-                 onclick="request_submit(event)">
-                Submit
+            <div class="control" onclick="request_submit(this.parentElement)">
+              <a class="button is-medium is-dark has-text-white right faa-parent animated-hover" id="button">
+                <span>Send</span>
+                <span class="icon is-small has-text-white faa-pulse animated-hover">
+                  <i class="fas fa-paper-plane"></i>
+                </span>
               </a>
             </div>
             <div class="modal" id="modal">
@@ -60,23 +62,28 @@ function generate_data(type, url, data) {
          `
 }
 
-function request_submit(event) {
-  var field = event.target.parentElement.parentElement;
+function request_submit(field) {
   var type = field.querySelector('#type').innerHTML;
   var url = field.querySelector('script[type="form/url"]').dataset.url;
   var data = (type == 'GET') ? field.querySelector('#data').value : field.querySelector('#body').innerHTML; ;
 
   var modal = field.querySelector('#modal');
+  var button = field.querySelector('#button');
+  button.classList.add('is-loading');
 
   if (type == 'GET') {
     if (!data)
       data = " ";
     fetch(data, {
+      headers: {
+        'Accept': 'application/json, application/xml, text/plain, text/html, *.*'
+      },
         method: 'GET',
       })
-      .then(response => { updateModal(modal, response) })
+      .then(response => { updateModal(modal, button, response) })
       .catch(function(err) {
         console.info(err + " url: " + body);
+        button.classList.remove('is-loading');
     });
   }
   else if (type = 'POST') {
@@ -88,20 +95,22 @@ function request_submit(event) {
         method: 'POST',
         body: data
       })
-      .then(response => { updateModal(modal, response) })
+      .then(response => { updateModal(modal, button, response) })
       .catch(function(err) {
         console.info(err + " url: " + url);
+        button.classList.remove('is-loading');
     });
   }
 }
 
-function updateModal(modal, response) {
+function updateModal(modal, button, response) {
   var res = Promise.resolve(response.json());
   var modalContent = modal.querySelector('.modal-content');
 
   res.then(json => {
     modalContent.innerHTML = `<pre>${JSON.stringify(json, undefined, 2)}</pre>`;
     toggleModal(modal, true);
+    button.classList.remove('is-loading');
   });
 }
 
