@@ -1,4 +1,4 @@
-# OwlAPI
+# FoothilAPI
 This is an ~~unofficial~~ API that serves class data from MyPortal to students wishing to use it. You can run it locally by running the steps below.
 
 This project is made portable by [pipenv](http://pipenv.readthedocs.io/en/latest/basics/) - which "harnesses Pipfile, pip, and virtualenv into one single command."
@@ -9,7 +9,8 @@ Main contributor: **Kishan Emens**
 Other contributors: **Byron White**, **Joshua Fan**, **Jaxon Welsh**
 
 ## Routes
-### Get
+<a class="page-section" id="1"></a>
+### Get Single
 `GET /get` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
@@ -40,13 +41,14 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 <div id="interact"><div data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></div>
 
 **Coming soon: filters**
+<a class="page-section" id="2"></a>
+### Get batch
 
 `POST /get` handles a batch request to get many departments or a many course listings from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
 
-
-> `POST /get`
+> `POST /get`<a class="page-section" id="2"></a>
 ```
 {
   "courses": [
@@ -57,8 +59,8 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
+<a class="page-section" id="3"></a>
 <div id="interact"><div data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
-
 
 ### List
 `GET /list` handles a single request to list department or course keys from the database
@@ -74,8 +76,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
+<a class="page-section" id="4"></a>
 <div id="interact"><div data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></div>
-
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
@@ -102,8 +104,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 "MATH": [...]
 ```
 
+<a class="page-section" id="5"></a>
 <div id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></div>
-
 
 ## Local Setup
 
@@ -126,6 +128,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 **Start API**
 > `python server.py`
 
+<a class="page-section" id="6"></a>
 ## Server Setup
 ### OwlAPI Service
 

@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function(){
       n.classList.remove('number');
     });
   });
-
 }, false);
 
 function whenAvailable(name, callback) {
@@ -38,7 +37,7 @@ function generate_data(type, url, data) {
                                 `<textarea class="input" id="body">${data}</textarea>`
 
   return `
-          <div class="field has-addons text">
+          <div class="field has-addons is-hidden-mobile text">
             <p class="control">
               <a class="button is-medium is-static left" id="type">${type}</a>
             </p>
@@ -116,4 +115,26 @@ function updateModal(modal, button, response) {
 
 function toggleModal(modal, state) {
   state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
+}
+
+var scrollTimer = null;
+$(window).scroll(function () {
+    if (scrollTimer) {
+        clearTimeout(scrollTimer);   // clear any previous pending timer
+    }
+    scrollTimer = setTimeout(updateMenu, 5);   // set new timer
+});
+
+function updateMenu(){
+  scrollTimer = null;
+  var scrollDistance = $(window).scrollTop();
+
+  var sections = $('.page-section');
+  sections.each(function(i) {
+      if ($(this).offset().top + 20 <= scrollDistance) {
+          if (i != sections.length - 1)
+            $(".menu-item:not('.menu-item-unselectable') a.is-active").removeClass('is-active');
+          $(".menu-item:not('.menu-item-unselectable') a").eq(i).not(".button").addClass('is-active');
+      }
+  });
 }
