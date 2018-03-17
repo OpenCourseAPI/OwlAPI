@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     var sections = document.querySelectorAll("h3");
-    sections.forEach((section, i) => {
-      var waypoint = new Waypoint({
+    sections.forEach(section => {
+      var waypointDown = new Waypoint({
         element: section,
         handler: function(direction) {
           if (direction == 'down')
@@ -23,10 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
           return section.scrollTop + 1;
         }
       });
-    });
-
-    sections.forEach((section, i) => {
-      var waypoint = new Waypoint({
+      var waypointUp = new Waypoint({
         element: section,
         handler: function(direction) {
           if (direction == 'up')

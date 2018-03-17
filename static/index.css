@@ -18,7 +18,7 @@
 
 p.control { margin-bottom: 0px !important; }
 
-input.input, textarea.input{ font-family: monospace; }
+input.input, textarea.input{ font-family: monospace !important; }
 
 a.button, input.input, textarea.input{ height: 100%; padding: .5em !important; font-size: 1em !important; }
 
