@@ -56,7 +56,6 @@ function whenAvailable(name, callback) {
 }
 
 function updateMenu(sectionID) {
-  console.log(sectionID);
   document.querySelectorAll('.menu-item a.is-active:not(.unselectable)')[0].classList.remove('is-active');
   document.querySelectorAll(`.menu-item a[href*=${sectionID}]:not(.unselectable)`)[0].classList.add('is-active');
 }
