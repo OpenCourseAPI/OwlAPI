@@ -3,10 +3,10 @@ This is an ~~unofficial~~ API that serves class data from MyPortal to students w
 
 This project is made portable by [pipenv](http://pipenv.readthedocs.io/en/latest/basics/) - which "harnesses Pipfile, pip, and virtualenv into one single command."
 
-#### Contributors
+**Contributors**
 Main contributor: **Kishan Emens**
 
-Other contributors: **Byron White**, **Joshua Fan**
+Other contributors: Byron White, Joshua Fan
 
 
 ## Routes
