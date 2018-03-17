@@ -11,8 +11,34 @@ document.addEventListener('DOMContentLoaded', function(){
       f.replaceChild(el, f.firstChild);
     });
 
-    var numbers = document.querySelectorAll('.token.number');
+    var sections = document.querySelectorAll("h3");
+    sections.forEach((section, i) => {
+      var waypoint = new Waypoint({
+        element: section,
+        handler: function(direction) {
+          if (direction == 'down')
+            updateMenu(section.id);
+        },
+        offset: function() {
+          return section.scrollTop + 1;
+        }
+      });
+    });
 
+    sections.forEach((section, i) => {
+      var waypoint = new Waypoint({
+        element: section,
+        handler: function(direction) {
+          if (direction == 'up')
+            updateMenu(section.id);
+        },
+        offset: function() {
+          return section.scrollTop - 1;
+        }
+      });
+    });
+
+    var numbers = document.querySelectorAll('.token.number');
     numbers.forEach(n => {
       n.classList.add('punctuation');
       n.classList.remove('number');
@@ -30,6 +56,12 @@ function whenAvailable(name, callback) {
         window.setTimeout(arguments.callee, interval);
     }
   }, interval);
+}
+
+function updateMenu(sectionID) {
+  console.log(sectionID);
+  document.querySelectorAll('.menu-item a.is-active:not(.unselectable)')[0].classList.remove('is-active');
+  document.querySelectorAll(`.menu-item a[href*=${sectionID}]:not(.unselectable)`)[0].classList.add('is-active');
 }
 
 function generate_data(type, url, data) {
@@ -115,26 +147,4 @@ function updateModal(modal, button, response) {
 
 function toggleModal(modal, state) {
   state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
-}
-
-var scrollTimer = null;
-$(window).scroll(function () {
-    if (scrollTimer) {
-        clearTimeout(scrollTimer);   // clear any previous pending timer
-    }
-    scrollTimer = setTimeout(updateMenu, 5);   // set new timer
-});
-
-function updateMenu(){
-  scrollTimer = null;
-  var scrollDistance = $(window).scrollTop();
-
-  var sections = $('.page-section');
-  sections.each(function(i) {
-      if ($(this).offset().top + 20 <= scrollDistance) {
-          if (i != sections.length - 1)
-            $(".menu-item:not('.menu-item-unselectable') a.is-active").removeClass('is-active');
-          $(".menu-item:not('.menu-item-unselectable') a").eq(i).not(".button").addClass('is-active');
-      }
-  });
 }

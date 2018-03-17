@@ -1,6 +1,18 @@
-.menu.sidebar { background: #f5f5f5; position: fixed; height: 100%; width: 25vw; padding: 56px 5vw 0 2vw; }
+.menu.sidebar { background: #f3f3f3; background: -webkit-linear-gradient(to right, #f3f3f3, #fff); background: linear-gradient(to right, #f3f3f3, #fff); }
+
+.menu.sidebar { position: fixed; height: 100%; width: 25vw; margin-right: 5vw; padding: 76px 5vw 0 2vw; }
+
+.menu-list a:hover:not(.is-active):not(.unselectable) { background: rgba(175,175,175,.9); background: -webkit-linear-gradient(to right, rgba(175,175,175,.9), rgba(175,175,175,.5)); background: linear-gradient(to right, rgba(175,175,175,.9), rgba(175,175,175,.5)); color: #fff; }
+
+.menu-list a.is-active { background: #2f2f2f; background: -webkit-linear-gradient(to right, #2f2f2f,rgba(47,47,47,.5)); background: linear-gradient(to right, #2f2f2f, rgba(47,47,47,.5)); color: #fff; }
+
+.menu-item a.unselectable { pointer-events: none; }
+
+.menu-item a:hover.unselectable { background: transparent; }
 
 .md-html { min-width: 200px; max-width: 790px; margin: 56px auto 0 auto; padding: 20px; }
+
+.page-section { position: relative; height: 6vh; padding-right: 100vw; }
 
 .text { height: 100%; }
 
