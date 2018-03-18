@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
             updateMenu(section.id);
         },
         offset: function() {
-          return section.scrollTop + 1;
+          return section.scrollTop + 3;
         }
       });
       var waypointUp = new Waypoint({
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
             updateMenu(section.id);
         },
         offset: function() {
-          return section.scrollTop - 1;
+          return section.scrollTop - 3;
         }
       });
     });
