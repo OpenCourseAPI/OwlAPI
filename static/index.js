@@ -81,7 +81,7 @@ function generate_data(type, url, data) {
                 </span>
               </a>
             </div>
-            <div class="modal" id="modal">
+            <div class="modal" id="modal" aria-hidden="true">
               <div class="modal-background" onclick="toggleModal(this.parentElement, false)"></div>
               <div class="modal-content"></div>
             </div>

@@ -1,5 +1,5 @@
 from urllib.request import urlopen
-from os import makedirs
+from os import makedirs, rename, remove
 from os.path import abspath, join, exists
 from collections import defaultdict
 from json import dumps
@@ -60,8 +60,14 @@ def mine(write=True):
 
 
 def parse(content, db):
-    db.purge_tables()
+    '''
+    Parse takes the content from the request and then populates the database with the data
+    :param content: (html) The html containing the courses
+    :param db: (TinyDB) the current database
+    '''
     soup = BeautifulSoup(content, 'html5lib')
+    temp_path = join(DB_ROOT, 'temp.json')
+    temp = TinyDB(temp_path)
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
@@ -92,10 +98,17 @@ def parse(content, db):
                     continue
 
         j = dict(s)
-        db.table(f'{dept}').insert(j)
+        temp.table(f'{dept}').insert(j)
+
+    rename(temp_path, join(DB_ROOT, 'database.json')) and remove(temp_path)
 
 
 def get_key(course):
+    '''
+    This is the key parser for the course names
+    :param course: (str) The unparsed string containing the course name
+    :return match_obj.groups(): (list) the string for the regex match
+    '''
     c = course.split(' ')
     idx = 1 if len(c) < 3 else 2
     section = c[idx]

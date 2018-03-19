@@ -1,17 +1,17 @@
 # OwlAPI
-This is an ~~unofficial~~ API that serves class data from MyPortal to students wishing to use it. You can run it locally by running the steps below.
+This is an ~~unofficial~~ API that serves course data from MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
 
-This project is made portable by [pipenv](http://pipenv.readthedocs.io/en/latest/basics/) - which "harnesses Pipfile, pip, and virtualenv into one single command."
+#### Contributors
+[**Kishan Emens**](https://github.com/phi-line), [Byron White](https://github.com/BoomSyrup), [Joshua Fan](https://github.com/joshuaptfan)
 
-**Contributors**
+If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
 
-Main contributor: **Kishan Emens**
-
-Other contributors: Byron White, Joshua Fan
+#### Dependencies
+[Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [Requests](https://github.com/requests/requests), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/)
 
 
 ## Routes
-### Get Single
+### Get single
 `GET /get` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
@@ -108,7 +108,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 <div id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></div>
 
 ## Setup
-### Local Setup
+### Local setup
 
 **Install pipenv onto root**
 > `pip install pipenv`
@@ -130,8 +130,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 > `python server.py`
 
 
-### Server Setup
-#### OwlAPI Service
+### Server setup
+#### OwlAPI service
 
 **Create a file named OwlAPI.service**
 > `sudo vi /etc/systemd/system/OwlAPI.service`
@@ -159,9 +159,9 @@ You'll also have to change the virtualenv path to match the id from when you ran
 
 > `sudo systemctl enable OwlAPI`
 
-#### Database Refresh Service
-**Create a file named refeshDB.service**
-> `sudo vi /etc/systemd/system/refeshDB.service`
+#### Database refresh service
+**Create a file named refreshDB.service**
+> `sudo vi /etc/systemd/system/refreshDB.service`
 
 **Paste in this sample config changing `user`**
 ```
