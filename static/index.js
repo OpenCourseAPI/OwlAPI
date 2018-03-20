@@ -62,7 +62,7 @@ function updateMenu(sectionID) {
 
 function generate_data(type, url, data) {
   var input = (type == 'GET') ? `<input class="input is-medium" id="data" type="text" value="${url + data}">` :
-                                `<textarea class="input" id="body">${data}</textarea>`
+                                `<textarea class="input" id="data">${data}</textarea>`
 
   return `
           <div class="field has-addons is-hidden-mobile text">
@@ -92,7 +92,7 @@ function generate_data(type, url, data) {
 function request_submit(field) {
   var type = field.querySelector('#type').innerHTML;
   var url = field.querySelector('script[type="form/url"]').dataset.url;
-  var data = (type == 'GET') ? field.querySelector('#data').value : field.querySelector('#body').innerHTML; ;
+  var data = field.querySelector('#data').value;
 
   var modal = field.querySelector('#modal');
   var button = field.querySelector('#button');

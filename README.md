@@ -12,10 +12,10 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 
 ## Routes
 ### Get single
-`GET /get` handles a single request to get a whole department or a whole course listing from the database
+`GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
-> `GET /get?dept=CS&course=2C`
+> `GET /single?dept=CS&course=2C`
 ```
 {"40407":
   [
@@ -39,17 +39,17 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/get" data-request-body="?dept=CS&course=2C"></div></div>
+<div id="interact"><div data-request-type="GET" data-request-url="/single" data-request-body="?dept=CS&course=2C"></div></div>
 
 **Coming soon: filters**
 
 
 ### Get batch
-`POST /get` handles a batch request to get many departments or a many course listings from the database.
+`POST /batch` handles a batch request to get many departments or a many course listings from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
 
-> `POST /get`
+> `POST /batch`
 ```
 {
   "courses": [
@@ -60,7 +60,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/get" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}],"filters":{"status":"Open", "date":{"M":1, "T":0, "W":1, "Th":0, "F":0, "Sa":0, "Su":0}}}'></div></div>
 
 
 ### List

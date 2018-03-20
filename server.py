@@ -16,10 +16,10 @@ async def idx():
     return await render_template('index.html')
 
 
-@application.route('/get', methods=['GET'])
+@application.route('/single', methods=['GET'])
 async def api_one():
     '''
-    `/get` with [GET] handles a single request to get a whole department or a whole course listing from the database
+    `/single` with [GET] handles a single request to get a whole department or a whole course listing from the database
     It expects a mandatory query parameter `dept` and an optionally `course`.
 
     Example:
@@ -33,25 +33,32 @@ async def api_one():
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    data = get_one(qp)
+    data = get_one(qp, dict())
     json = jsonify(data)
     return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
 
-@application.route('/get', methods=['POST'])
+@application.route('/batch', methods=['POST'])
 async def api_many():
     '''
-    `/get` with [POST] handles a batch request to get many departments or a many course listings from the database.
+    `/batch` with [POST] handles a batch request to get many departments or a many course listings from the database.
     This batch request is meant to simulate hitting the api route with this data N times.
     It expects a mandatory list of objects containing keys `dept` and `course`.
 
-    Example:
+    Example Body:
         {
             "courses": [
                 {"dept": "MATH", "course": "1A"},
                 {"dept": "ENGL", "course": "1A"},
                 {"dept": "CHEM", "course": "1A"}
-            ]
+            ],
+            "filters": {
+                "campus": "FH",
+                "days": {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0},
+                "type": {"standard":1, "online":1, "hybrid":0},
+                "status": "Open",
+                "time": "01:30 PM-03:20 PM"
+            }
         }
     :return: 200 - Found all entries and returned data successfully to the user.
     :return: 404 - Could not find one or more entries.
@@ -60,16 +67,16 @@ async def api_many():
     data = []
 
     for course in raw['courses']:
-        d = get_one(course)
+        d = get_one(course, filters=raw['filters'] if ('filters' in raw) else dict())
         if not d:  # null case from get_one (invalid param)
-            return 'Error! Could not find one or more selectors in database', 404
+            return 'Error! Could not find one or more course selectors in database', 404
         data.append(d)
 
     json = jsonify({'courses': data})
     return json, 200
 
 
-def get_one(qp: dict):
+def get_one(qp: dict, filters: dict):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
@@ -87,6 +94,17 @@ def get_one(qp: dict):
 
         try:
             course = next((e[f'{qp_course}'] for e in entries if f'{qp_course}' in e))
+            if filters:
+                for key in course.copy():
+                    # 'Full' 'Waitlist' 'Open'
+                    if 'status' in filters:
+                        if course[key][0]['status'] != filters['status']:
+                            course.pop(key, None)
+                            continue
+
+            if not course:
+                assert StopIteration
+
         except StopIteration:
             return dict()
         if course:
