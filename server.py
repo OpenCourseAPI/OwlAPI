@@ -5,6 +5,7 @@ from re import match
 # 3rd party
 from quart import Quart, jsonify, request, render_template
 from tinydb import TinyDB
+from maya import when, MayaInterval
 
 application = Quart(__name__)
 
@@ -14,7 +15,8 @@ db = TinyDB(join(DB_ROOT, 'database.json'))
 COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
-TYPE_ALIAS = {"standard": None, "online": "W", "hybrid": "Y"}
+TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
+
 
 @application.route('/')
 async def idx():
@@ -52,17 +54,16 @@ async def api_many():
 
     Example Body:
         {
-            "courses": [
-                {"dept": "MATH", "course": "1A"},
-                {"dept": "ENGL", "course": "1A"},
-                {"dept": "CHEM", "course": "1A"}
+            'courses': [
+                {'dept': 'MATH', 'course': '1A'},
+                {'dept': 'ENGL', 'course': '1A'},
+                {'dept': 'CHEM', 'course': '1A'}
             ],
-            "filters": {
-                "campus": "FH",
-                "days": {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0},
-                "types": {"standard":1, "online":1, "hybrid":0},
-                "status": "Open",
-                "time": "01:30 PM-03:20 PM"
+            'filters': {
+                'days': {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0},
+                'types': {'standard':1, 'online':1, 'hybrid':0},
+                'status': {'open':1, 'waitlist':0, 'full':0},
+                'time': {'start':'8:30 AM', 'end':'9:40 PM'}
             }
         }
     :return: 200 - Found all entries and returned data successfully to the user.
@@ -73,7 +74,7 @@ async def api_many():
 
     for course in raw['courses']:
         d = get_one(course, filters=raw['filters'] if ('filters' in raw) else dict())
-        if not d:  # null case from get_one (invalid param)
+        if not d:  # null case from get_one (invalid param or filter)
             return 'Error! Could not find one or more course selectors in database', 404
         data.append(d)
 
@@ -101,16 +102,17 @@ def get_one(qp: dict, filters: dict):
             course = next((e[f'{qp_course}'] for e in entries if f'{qp_course}' in e))
             if filters:
                 for key in course.copy():
-                    # 'Full' 'Waitlist' 'Open'
-                    if 'status' in filters and filters['status'] in ('Full', 'Waitlist', 'Open'):
-                        if course[key][0]['status'] != filters['status']:
-                            course.pop(key, None)
-                            continue
+                    # {'open':0, 'waitlist':0, 'full':0}
+                    if 'status' in filters:
+                        status_mask = {k for (k, v) in filters['status'].items() if v == 0}
+                        for status in status_mask:
+                            if course[key][0]['status'].lower() == status:
+                                course.pop(key, None)
+                                continue
 
-                    #  {"standard":1, "online":1, "hybrid":0}
+                    # {'standard':1, 'online':1, 'hybrid':0}
                     if 'types' in filters:
                         section = get_key(course[key][0]['course'])
-
                         type_mask = {k for (k, v) in filters['types'].items() if v == 0}
                         if type_mask:
                             did_pop = False
@@ -123,7 +125,7 @@ def get_one(qp: dict, filters: dict):
                                 course.pop(key, None)
                                 continue
 
-                    # {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}
+                    # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
                     if 'days' in filters:
                         filtered_days = {k for (k, v) in filters['days'].items() if v == 1}
                         if filtered_days:
@@ -136,6 +138,17 @@ def get_one(qp: dict, filters: dict):
                             if course_days:
                                 union = filtered_days & course_days
                                 if len(course_days) > len(union):
+                                    course.pop(key, None)
+                                    continue
+
+                    # {'start':'8:30 AM', 'end':'9:40 PM'}
+                    if 'time' in filters:
+                        f_range = MayaInterval(start=when(filters['time']['start']), end=when(filters['time']['end']))
+                        for c in course[key]:
+                            if '-' in c['time']:
+                                data = c['time'].split('-')
+                                c_range = MayaInterval(start=when(data[0]), end=when(data[1]))
+                                if not c_range.intersects(f_range):
                                     course.pop(key, None)
                                     continue
 
@@ -180,7 +193,7 @@ async def api_list():
         keys = set().union(*(d.keys() for d in table.all()))
         return jsonify(', '.join(keys)), 200
 
-    return "Error! Could not list", 404
+    return 'Error! Could not list', 404
 
 
 @application.route('/urls', methods=['GET'])
@@ -208,5 +221,5 @@ def generate_url(dept: str, course: str):
     '''
     return f"get?dept={dept}&course={course}"
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     application.run(host='0.0.0.0', debug=True)
