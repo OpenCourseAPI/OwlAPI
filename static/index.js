@@ -62,10 +62,10 @@ function updateMenu(sectionID) {
 
 function generate_data(type, url, data) {
   var input = (type == 'GET') ? `<input class="input is-medium" id="data" type="text" value="${url + data}">` :
-                                `<textarea class="input" id="body">${data}</textarea>`
+                                `<textarea class="input" id="data">${data}</textarea>`
 
   return `
-          <div class="field has-addons is-hidden-mobile text">
+          <div class="field has-addons text">
             <p class="control">
               <a class="button is-medium is-static left" id="type">${type}</a>
             </p>
@@ -92,7 +92,7 @@ function generate_data(type, url, data) {
 function request_submit(field) {
   var type = field.querySelector('#type').innerHTML;
   var url = field.querySelector('script[type="form/url"]').dataset.url;
-  var data = (type == 'GET') ? field.querySelector('#data').value : field.querySelector('#body').innerHTML; ;
+  var data = field.querySelector('#data').value;
 
   var modal = field.querySelector('#modal');
   var button = field.querySelector('#button');
@@ -107,10 +107,13 @@ function request_submit(field) {
       },
         method: 'GET',
       })
-      .then(response => { updateModal(modal, button, response) })
-      .catch(function(err) {
-        console.info(err + " url: " + body);
+      .then(response => {
         button.classList.remove('is-loading');
+        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
+      })
+      .catch(err => {
+        button.classList.remove('is-loading');
+        console.info(err + " url: " + body);
     });
   }
   else if (type = 'POST') {
@@ -122,8 +125,11 @@ function request_submit(field) {
         method: 'POST',
         body: data
       })
-      .then(response => { updateModal(modal, button, response) })
-      .catch(function(err) {
+      .then(response => {
+        button.classList.remove('is-loading');
+        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
+      })
+      .catch(err => {
         console.info(err + " url: " + url);
         button.classList.remove('is-loading');
     });
@@ -131,13 +137,12 @@ function request_submit(field) {
 }
 
 function updateModal(modal, button, response) {
-  var res = Promise.resolve(response.json());
+  var res = Promise.resolve(response);
   var modalContent = modal.querySelector('.modal-content');
 
   res.then(json => {
     modalContent.innerHTML = `<pre>${JSON.stringify(json, undefined, 2)}</pre>`;
     toggleModal(modal, true);
-    button.classList.remove('is-loading');
   });
 }
 

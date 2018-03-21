@@ -13,6 +13,7 @@ tinydb = "*"
 quart = "*"
 "html5lib" = "*"
 gunicorn = "*"
+maya = "*"
 
 
 [dev-packages]
