@@ -65,7 +65,7 @@ function generate_data(type, url, data) {
                                 `<textarea class="input" id="data">${data}</textarea>`
 
   return `
-          <div class="field has-addons is-hidden-mobile text">
+          <div class="field has-addons text">
             <p class="control">
               <a class="button is-medium is-static left" id="type">${type}</a>
             </p>

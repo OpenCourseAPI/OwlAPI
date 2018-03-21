@@ -45,7 +45,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 
 
 ### Get batch
-`POST /batch` handles a batch request to get many departments or a many course listings from the database.
+`POST /batch` handles a batch request to get many departments or many sections from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
 
@@ -60,7 +60,66 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}],"filters":{"status":"Open", "types":{"standard":0, "online":1, "hybrid":0}, "days":{"M":1, "T":1, "W":1, "Th":1, "F":1, "S":0, "U":0}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
+
+### Filters
+Additionally, in the `POST /batch` body you can specify any number of filters to narrow the results. Add the filter key to the post body and then apply the appropriate filter. Multiple options can be selected by changing the value from a `0` to a `1`.
+Be careful because too many filters may result in zero sections returned from the database. Also, even if 2 out of 3 courses are valid, one invalid will return `404`.
+
+#### Filter by status
+Filter by the availability of a course (Open, Waitlist, Full). The example below shows how you can filter only `open` and `waitlist` sections.
+
+> `POST /batch`
+```
+{
+  "courses": [{"dept":"CS", "course":"1A"}]
+  "filters": {"status": {"open":1, "waitlist":1, "full":0}}
+}
+```
+
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></div></div>
+
+
+#### Filter by type
+Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` sections.
+
+> `POST /batch`
+```
+{
+  "courses": [{"dept":"CS", "course":"1A"}]
+  "filters": {"types":{"standard":1, "online":0, "hybrid":0}}
+}
+```
+
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></div></div>
+
+
+#### Filter by days
+Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The example below shows how you can filter only `M` and `W` sections.
+
+> `POST /batch`
+```
+{
+  "courses": [{"dept":"CS", "course":"1A"}]
+  "filters": {"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}
+}
+```
+
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></div></div>
+
+
+#### Filter by time
+Filter by a specified time interval (7:30 AM - 12:00 PM). The example below shows how you can filter only morning sections.
+
+> `POST /batch`
+```
+{
+  "courses": [{"dept":"CS", "course":"1A"}]
+  "filters": {"time":{"start":"7:30 AM", "end":"12:00 PM"}}
+}
+```
+
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></div></div>
 
 
 ### List
