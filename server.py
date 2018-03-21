@@ -1,6 +1,6 @@
 from os.path import join
 from collections import defaultdict
-from re import search
+from re import match
 
 # 3rd party
 from quart import Quart, jsonify, request, render_template
@@ -10,8 +10,9 @@ application = Quart(__name__)
 
 DB_ROOT = 'db/'
 db = TinyDB(join(DB_ROOT, 'database.json'))
-DAY_MATCH = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
+COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
+DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 @application.route('/')
 async def idx():
@@ -99,33 +100,60 @@ def get_one(qp: dict, filters: dict):
             if filters:
                 for key in course.copy():
                     # 'Full' 'Waitlist' 'Open'
-                    if 'status' in filters:
+                    if 'status' in filters and filters['status'] in ('Full', 'Waitlist', 'Open'):
                         if course[key][0]['status'] != filters['status']:
                             course.pop(key, None)
                             continue
 
-                    # {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}
-                    if 'days' in filters:
-                        filtered_days = {k for (k, v) in filters['days'].items() if v == 1}
-                        course_days = set()
-                        for c in course[key]:
-                            days_match = search(DAY_MATCH, c['days'])
-                            if days_match:
-                                course_days = course_days.union({x for x in days_match.groups() if x is not None})
-
-                        if course_days:
-                            union = filtered_days & course_days
-                            if len(course_days) > len(union):
+                    # 'Hybrid' 'Online' ''
+                    if 'type' in filters and filters['type'] in ('', 'Hybrid', 'Online'):
+                        section = get_key(course[key][0]['course'])
+                        if filters['type'] == '':
+                            if section[1] is None:
+                                course.pop(key, None)
+                                continue
+                        elif filters['type'] == 'Hybrid':
+                            if section[1] != 'Y':
+                                course.pop(key, None)
+                                continue
+                        elif filters['type'] == 'Online':
+                            if len(section) < 1 or section[1] != 'W':
                                 course.pop(key, None)
                                 continue
 
-            if not course:
-                assert StopIteration
+                    # {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}
+                    if 'days' in filters:
+                        filtered_days = {k for (k, v) in filters['days'].items() if v == 1}
+                        if filtered_days:
+                            course_days = set()
+                            for c in course[key]:
+                                days_match = match(DAYS_PATTERN, c['days'])
+                                if days_match:
+                                    course_days = course_days.union({x for x in days_match.groups() if x is not None})
+
+                            if course_days:
+                                union = filtered_days & course_days
+                                if len(course_days) > len(union):
+                                    course.pop(key, None)
+                                    continue
 
         except StopIteration:
             return dict()
-        if course:
-            return course
+        return course if course else dict()
+
+
+def get_key(course):
+    '''
+    This is the key parser for the course names
+    :param course: (str) The unparsed string containing the course name
+    :return match_obj.groups(): (list) the string for the regex match
+    '''
+    c = course.split(' ')
+    idx = 1 if len(c) < 3 else 2
+    section = c[idx]
+
+    match_obj = match(COURSE_PATTERN, section)
+    return match_obj.groups()
 
 
 @application.route('/list', methods=['GET'])
