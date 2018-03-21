@@ -40,7 +40,7 @@ async def api_one():
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    data = get_one(qp, dict())
+    data = get_one(qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
@@ -49,8 +49,11 @@ async def api_one():
 async def api_many():
     '''
     `/batch` with [POST] handles a batch request to get many departments or a many course listings from the database.
-    This batch request is meant to simulate hitting the api route with this data N times.
-    It expects a mandatory list of objects containing keys `dept` and `course`.
+    This batch request is meant to simulate hitting the api route with this data N times. It expects a mandatory list of
+    objects containing keys `dept` and `course`.
+
+    `/batch` also accepts a series of filters that can be applied to the results. See filter_courses() for info about
+    what each filter does.
 
     Example Body:
         {
@@ -82,90 +85,127 @@ async def api_many():
     return json, 200
 
 
-def get_one(qp: dict, filters: dict):
+def get_one(data: dict, filters: dict):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
-    :return:
+
+    :param data: (dict) The query param or the POST body dict
+    :param filters: (dict) A optional dictionary of filters to be passed to filter_courses()
+    :return: course: (dict) A singular course listing from the database (if it passes filters)
     '''
-    qp_dept = qp['dept']
-    if qp_dept in db.tables():
-        table = db.table(f'{qp_dept}')
+    data_dept = data['dept']
+    if data_dept in db.tables():
+        table = db.table(f'{data_dept}')
         entries = table.all()
 
-        if 'course' not in qp:
+        if 'course' not in data:
             return entries
 
-        qp_course = qp['course']
+        data_course = data['course']
 
         try:
-            course = next((e[f'{qp_course}'] for e in entries if f'{qp_course}' in e))
+            course = next((e[f'{data_course}'] for e in entries if f'{data_course}' in e))
             if filters:
-                for key in course.copy():
-                    # {'open':0, 'waitlist':0, 'full':0}
-                    if 'status' in filters:
-                        status_mask = {k for (k, v) in filters['status'].items() if v == 0}
-                        for status in status_mask:
-                            if course[key][0]['status'].lower() == status:
-                                course.pop(key, None)
-                                continue
-
-                    # {'standard':1, 'online':1, 'hybrid':0}
-                    if 'types' in filters:
-                        section = get_key(course[key][0]['course'])
-                        type_mask = {k for (k, v) in filters['types'].items() if v == 0}
-                        if type_mask:
-                            did_pop = False
-                            for type in type_mask:
-                                if section[1] == TYPE_ALIAS[type]:
-                                    did_pop = True
-                                    break
-
-                            if did_pop:
-                                course.pop(key, None)
-                                continue
-
-                    # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
-                    if 'days' in filters:
-                        filtered_days = {k for (k, v) in filters['days'].items() if v == 1}
-                        if filtered_days:
-                            course_days = set()
-                            for c in course[key]:
-                                days_match = match(DAYS_PATTERN, c['days'])
-                                if days_match:
-                                    course_days = course_days.union({x for x in days_match.groups() if x is not None})
-
-                            if course_days:
-                                union = filtered_days & course_days
-                                if len(course_days) > len(union):
-                                    course.pop(key, None)
-                                    continue
-
-                    # {'start':'8:30 AM', 'end':'9:40 PM'}
-                    if 'time' in filters:
-                        f_range = MayaInterval(start=when(filters['time']['start']), end=when(filters['time']['end']))
-                        for c in course[key]:
-                            if '-' in c['time']:
-                                data = c['time'].split('-')
-                                c_range = MayaInterval(start=when(data[0]), end=when(data[1]))
-                                if not c_range.intersects(f_range):
-                                    course.pop(key, None)
-                                    continue
+                filter_courses(filters, course)
 
         except StopIteration:
             return dict()
         return course if course else dict()
 
 
-def get_key(course):
+def filter_courses(filters, course):
+    '''
+    This is a helper called by get_one() that filters a set of classes based on some filter conditionals
+
+    Be careful with these as they can be limiting on the data, often returning as 404 when
+    one of the courses does not pass the filter. Additionally, filters like status and types can be extremely limiting
+    on the data. Some courses won't even offer non-online classes. Below is an example input with these filters.
+
+    Example filters: {
+                'status': {'open':1, 'waitlist':0, 'full':0},
+                'types': {'standard':1, 'online':1, 'hybrid':0},
+                'days': {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0},
+                'time': {'start':'8:30 AM', 'end':'9:40 PM'}
+            }
+
+    :param filters: `status` - filter by the availability of a course (Open, Waitlist, Full)
+                    `types` - filter by the format of the course (In Person, Online, Hybrid)
+                    `days` - filter by the days the course should be limited to (M, T, W, Th, F, S, U)
+                    `time` - filter by a specified time interval (8:30 AM - 9:40 PM)
+    :param course: (dict) the mutable course listing
+    :return: None
+    '''
+    for key in course.copy():
+        # {'open':0, 'waitlist':0, 'full':0}
+        if 'status' in filters:
+            status_mask = {k for (k, v) in filters['status'].items() if v == 0}
+            did_pop = False
+            for status in status_mask:
+                if course[key][0]['status'].lower() == status:
+                    did_pop = True
+                    break
+
+            if did_pop:
+                course.pop(key, None)
+                continue
+
+        # {'standard':1, 'online':1, 'hybrid':0}
+        if 'types' in filters:
+            section = get_key(course[key][0]['course'])
+            type_mask = {k for (k, v) in filters['types'].items() if v == 0}
+            if type_mask:
+                did_pop = False
+                for type in type_mask:
+                    if section[1] == TYPE_ALIAS[type]:
+                        did_pop = True
+                        break
+
+                if did_pop:
+                    course.pop(key, None)
+                    continue
+
+        # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
+        if 'days' in filters:
+            filtered_days = {k for (k, v) in filters['days'].items() if v == 1}
+            if filtered_days:
+                course_days = set()
+                for c in course[key]:
+                    days_match = match(DAYS_PATTERN, c['days'])
+                    if days_match:
+                        course_days = course_days.union({x for x in days_match.groups() if x is not None})
+
+                if course_days:
+                    union = filtered_days & course_days
+                    if len(course_days) > len(union):
+                        course.pop(key, None)
+                        continue
+
+        # {'start':'8:30 AM', 'end':'9:40 PM'}
+        if 'time' in filters:
+            f_range = MayaInterval(start=when(filters['time']['start']), end=when(filters['time']['end']))
+            did_pop = False
+            for c in course[key]:
+                if '-' in c['time']:
+                    data = c['time'].split('-')
+                    c_range = MayaInterval(start=when(data[0]), end=when(data[1]))
+                    if not c_range.intersects(f_range):
+                        did_pop = True
+                        break
+            if did_pop:
+                course.pop(key, None)
+                continue
+
+
+def get_key(key):
     '''
     This is the key parser for the course names
-    :param course: (str) The unparsed string containing the course name
+    :param key: (str) The unparsed string containing the course name
     :return match_obj.groups(): (list) the string for the regex match
     '''
-    c = course.split(' ')
-    idx = 1 if len(c) < 3 else 2
-    section = c[idx]
+    k = key.split(' ')
+    i = 1 if len(k) < 3 else 2
+    section = k[i]
 
     match_obj = match(COURSE_PATTERN, section)
     return match_obj.groups()
