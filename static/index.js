@@ -107,10 +107,13 @@ function request_submit(field) {
       },
         method: 'GET',
       })
-      .then(response => { updateModal(modal, button, response) })
-      .catch(function(err) {
-        console.info(err + " url: " + body);
+      .then(response => {
         button.classList.remove('is-loading');
+        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
+      })
+      .catch(err => {
+        button.classList.remove('is-loading');
+        console.info(err + " url: " + body);
     });
   }
   else if (type = 'POST') {
@@ -122,8 +125,11 @@ function request_submit(field) {
         method: 'POST',
         body: data
       })
-      .then(response => { updateModal(modal, button, response) })
-      .catch(function(err) {
+      .then(response => {
+        button.classList.remove('is-loading');
+        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
+      })
+      .catch(err => {
         console.info(err + " url: " + url);
         button.classList.remove('is-loading');
     });
@@ -131,13 +137,12 @@ function request_submit(field) {
 }
 
 function updateModal(modal, button, response) {
-  var res = Promise.resolve(response.json());
+  var res = Promise.resolve(response);
   var modalContent = modal.querySelector('.modal-content');
 
   res.then(json => {
     modalContent.innerHTML = `<pre>${JSON.stringify(json, undefined, 2)}</pre>`;
     toggleModal(modal, true);
-    button.classList.remove('is-loading');
   });
 }
 
