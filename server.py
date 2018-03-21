@@ -14,6 +14,8 @@ db = TinyDB(join(DB_ROOT, 'database.json'))
 COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
+TYPE_ALIAS = {"standard": None, "online": "W", "hybrid": "Y"}
+
 @application.route('/')
 async def idx():
     return await render_template('index.html')
@@ -58,7 +60,7 @@ async def api_many():
             "filters": {
                 "campus": "FH",
                 "days": {"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0},
-                "type": {"standard":1, "online":1, "hybrid":0},
+                "types": {"standard":1, "online":1, "hybrid":0},
                 "status": "Open",
                 "time": "01:30 PM-03:20 PM"
             }
@@ -105,19 +107,19 @@ def get_one(qp: dict, filters: dict):
                             course.pop(key, None)
                             continue
 
-                    # 'Hybrid' 'Online' ''
-                    if 'type' in filters and filters['type'] in ('', 'Hybrid', 'Online'):
+                    #  {"standard":1, "online":1, "hybrid":0}
+                    if 'types' in filters:
                         section = get_key(course[key][0]['course'])
-                        if filters['type'] == '':
-                            if section[1] is None:
-                                course.pop(key, None)
-                                continue
-                        elif filters['type'] == 'Hybrid':
-                            if section[1] != 'Y':
-                                course.pop(key, None)
-                                continue
-                        elif filters['type'] == 'Online':
-                            if len(section) < 1 or section[1] != 'W':
+
+                        type_mask = {k for (k, v) in filters['types'].items() if v == 0}
+                        if type_mask:
+                            did_pop = False
+                            for type in type_mask:
+                                if section[1] == TYPE_ALIAS[type]:
+                                    did_pop = True
+                                    break
+
+                            if did_pop:
                                 course.pop(key, None)
                                 continue
 
@@ -180,14 +182,6 @@ async def api_list():
 
     return "Error! Could not list", 404
 
-def generate_url(dept: str, course: str):
-    '''
-    This is a helper
-    :param dept:
-    :param course:
-    :return:
-    '''
-    return f"get?dept={dept}&course={course}"
 
 @application.route('/urls', methods=['GET'])
 async def api_list_url():
@@ -203,6 +197,16 @@ async def api_list_url():
         data[f'{dept}'].append({k: generate_url(dept, k) for k in keys})
 
     return jsonify(data), 200
+
+
+def generate_url(dept: str, course: str):
+    '''
+    This is a helper
+    :param dept:
+    :param course:
+    :return:
+    '''
+    return f"get?dept={dept}&course={course}"
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0', debug=True)

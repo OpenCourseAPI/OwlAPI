@@ -60,7 +60,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}],"filters":{"status":"Open", "date":{"M":1, "T":0, "W":1, "Th":0, "F":0, "Sa":0, "Su":0}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"1A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}],"filters":{"status":"Open", "types":{"standard":0, "online":1, "hybrid":0}, "days":{"M":1, "T":1, "W":1, "Th":1, "F":1, "S":0, "U":0}}}'></div></div>
 
 
 ### List
