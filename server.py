@@ -189,7 +189,7 @@ def filter_courses(filters, course):
                 if '-' in c['time']:
                     data = c['time'].split('-')
                     c_range = MayaInterval(start=when(data[0]), end=when(data[1]))
-                    if not c_range.intersects(f_range):
+                    if not f_range.contains(c_range):
                         did_pop = True
                         break
             if did_pop:
