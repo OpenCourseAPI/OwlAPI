@@ -7,7 +7,7 @@ This is an ~~unofficial~~ API that serves course data from MyPortal to students 
 If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
 
 #### Dependencies
-[Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [Requests](https://github.com/requests/requests), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/)
+[Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 
 ## Routes
