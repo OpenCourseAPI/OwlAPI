@@ -81,13 +81,13 @@ Filter by the availability of a course (Open, Waitlist, Full). The example below
 
 
 #### Filter by type
-Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` sections.
+Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` and `hybrid` sections.
 
 > `POST /batch`
 ```
 {
   "courses": [{"dept":"CS", "course":"1A"}]
-  "filters": {"types":{"standard":1, "online":0, "hybrid":0}}
+  "filters": {"types":{"standard":0, "online":1, "hybrid":1}}
 }
 ```
 
