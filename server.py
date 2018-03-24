@@ -259,7 +259,8 @@ def generate_url(dept: str, course: str):
     :param course:
     :return:
     '''
-    return f"get?dept={dept}&course={course}"
+    return {"dept":f"{dept}", "course":f"{course}"}
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0', debug=True)
