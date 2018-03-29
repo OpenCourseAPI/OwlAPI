@@ -41,9 +41,6 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 
 <div id="interact"><div data-request-type="GET" data-request-url="/single" data-request-body="?dept=CS&course=2C"></div></div>
 
-**Coming soon: filters**
-
-
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
