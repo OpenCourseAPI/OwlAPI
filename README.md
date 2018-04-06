@@ -9,6 +9,27 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 #### Dependencies
 [Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
+## Data overview
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. Below the various data points are listed and described:
+
+### Static data
+- `CRN` Course Number
+- `course` Course ID (format: `[F*0][ID][Section number][W (Online) / Y (Hybrid) / H (Honors)]`)
+- `desc` Short-form course description
+- `campus` Campus the section is held at
+- `days` Day(s) the section is held on (M, T, W, Th, F, S, U)
+- `instructor` Professor for the section
+- `room` Room the section is held at
+- `time` Time for the section
+- `start` First date for the section
+- `end` Last date for the course
+- `units` Number of course units
+
+### Seat data
+- `seats` Seats left in the course
+- `wait_cap` Waitlist capacity
+- `wait_seats` Waitlist slots left in the course
+
 
 ## Routes
 ### Get single
@@ -40,9 +61,6 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 ```
 
 <div id="interact"><div data-request-type="GET" data-request-url="/single" data-request-body="?dept=CS&course=2C"></div></div>
-
-**Coming soon: filters**
-
 
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
