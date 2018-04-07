@@ -13,23 +13,28 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. Below the various data points are listed and described:
 
 ### Static data
-- `CRN` Course Number
-- `course` Course ID (format: `[F*0][ID][Section number][W (Online) / Y (Hybrid) / H (Honors)]`)
-- `desc` Short-form course description
-- `campus` Campus the section is held at
-- `days` Day(s) the section is held on (M, T, W, Th, F, S, U)
-- `instructor` Professor for the section
-- `room` Room the section is held at
-- `time` Time for the section
-- `start` First date for the section
-- `end` Last date for the course
-- `units` Number of course units
+```
+CRN        | Course Number
+course     | Course ID (format: [F0*][ID][Section ID][WYH]) see note
+desc       | Short-form course description
+campus     | Campus the section is held at
+days       | Day(s) the section is held on (M, T, W, Th, F, S, U)
+instructor | Professor for the section
+room       | Room the section is held at
+time       | Time for the section
+start      | First date for the section
+end        | Last date for the course
+units      | Number of course units
+```
+> W (Online) / Y (Hybrid) / H (Honors)
+
 
 ### Seat data
-- `seats` Seats left in the course
-- `wait_cap` Waitlist capacity
-- `wait_seats` Waitlist slots left in the course
-
+```
+seats      | Seats left in the course
+wait_cap   | Waitlist capacity
+wait_seats | Waitlist slots left in the course
+```
 
 ## Routes
 ### Get single
