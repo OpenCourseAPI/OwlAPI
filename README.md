@@ -35,6 +35,7 @@ seats      | Seats left in the course
 wait_cap   | Waitlist capacity
 wait_seats | Waitlist slots left in the course
 ```
+On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
 ## Routes
 ### Get single
