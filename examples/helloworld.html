@@ -1,14 +1,3 @@
-## Examples
-
-This documentation is designed for people new to JavaScript programming and making API requests. It is designed to let you quickly start exploring and developing applications with MyPortal data.
-
-### Hello, World
-
-The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example we use the `Fetch API` to make requests to [floof.li](https://floof.li). You can read more about `Fetch` [here](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch).
-
-In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page.
-
-```
 <!DOCTYPE html>
 <html>
   <head>
@@ -45,10 +34,7 @@ In this example, we aim to make a simple interface to the OwlAPI with an interac
           method: 'GET'
         })
         .then(response => {
-          return Promise.resolve(response.json());
-        })
-        .then(data => {
-          console.log(JSON.stringify(data));
+          Promise.resolve(response);
         })
         .catch(err => {
           console.log(err);
@@ -56,4 +42,3 @@ In this example, we aim to make a simple interface to the OwlAPI with an interac
     }
   </script>
 </html>
-```
