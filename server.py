@@ -3,7 +3,7 @@ from collections import defaultdict
 from re import match
 
 # private lib
-from crossdomain import crossdomain
+from crossdomain import add_cors_headers
 
 # 3rd party
 from quart import Quart, jsonify, request, render_template
@@ -11,6 +11,7 @@ from tinydb import TinyDB
 from maya import when, MayaInterval
 
 application = Quart(__name__)
+application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
 db = TinyDB(join(DB_ROOT, 'database.json'))
@@ -27,7 +28,6 @@ async def idx():
 
 
 @application.route('/single', methods=['GET'])
-@crossdomain(origin='*')
 async def api_one():
     '''
     `/single` with [GET] handles a single request to get a whole department or a whole course listing from the database
@@ -50,7 +50,6 @@ async def api_one():
 
 
 @application.route('/batch', methods=['POST'])
-@crossdomain(origin='*')
 async def api_many():
     '''
     `/batch` with [POST] handles a batch request to get many departments or a many course listings from the database.
@@ -217,7 +216,6 @@ def get_key(key):
 
 
 @application.route('/list', methods=['GET'])
-@crossdomain(origin='*')
 async def api_list():
     '''
     `/list` with [GET] handles a single request to list department or course keys from the database
@@ -243,7 +241,6 @@ async def api_list():
 
 
 @application.route('/urls', methods=['GET'])
-@crossdomain(origin='*')
 async def api_list_url():
     '''
     `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
