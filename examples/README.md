@@ -107,7 +107,7 @@ It employs the use of [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CS
 
 ### JavaScript code
 
-In this example, we want to make a request based on the input field's query parameter string. We do this by using the Fetch API's [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to keep things framework agnostic and it's simplicity of use.
+In this example, we want to make a request based on the input field's query parameter string. We do this by using the Fetch API's [`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to keep things framework agnostic and it's simplicity of use.
 
 Upon receiving a response back from the server, we want to display the JSON data back to the user in a success. In the case of a failure, we want to display an error message back to the user.
 
@@ -135,12 +135,14 @@ function submitRequest(input) {
 }
 ```
 
-When `sumbitRequest()` is called, we pass in the `#input` div as a parameter. Then, using the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) Document method, we extract the data from the `#data` input and prepare the `#output` container for content injection.
+When `sumbitRequest()` is called, we pass in the `#input` element as a parameter. Then, using the [`querySelector`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) Document method, we extract the data from the `#data` input and prepare the `#output` container for content injection.
 
 Next, we create a new URL from the data and use `fetch()` with `method: 'GET'` to make a request. The `.then()` and `.catch()` methods might be new to you, and they are something known as [Promise prototypes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/prototype). Using asynchronous operations like web requests require use of Promises to account for timing while getting data from an external source.
-[.then()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) allows us to do something with the data after it has come back from the server, and can be chained with itself to perform additionally processing on the data.
-[.catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) operates in a similar fashion, allowing us to detect some errors that might occur during request process. It should be noted that `.catch()` will only raise on network errors; a HTTP status of `404` will not make `.catch()` trigger.
+
+- [`.then()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then) allows us to do something with the data after it has come back from the server, and can be chained with itself to perform additionally processing on the data.
+
+- [`.catch()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) operates in a similar fashion, allowing us to detect some errors that might occur during request process. It should be noted that `.catch()` will only raise on network errors; a HTTP status of `404` will not make `.catch()` trigger.
 
 ### Conclusion
 
-With this basic code, you should be able to successfully make `GET` requests to OwlAPI's `/single` endpoint using `Fetch API`. The `Fetch API` provides a consistent method to make web requests easy, and can be used to make `POST` requests used advanced usage of OwlAPI. You can read more about making advanced queries and filters in the next section.
+With this basic code, you should be able to successfully make `GET` requests to OwlAPI's `/single` endpoint using `Fetch API`. It provides a consistent method to make web requests easy, and can be used to make `POST` requests used advanced usage of OwlAPI. You can read more about making advanced queries and filters in the next section.
