@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OwlAPI interface</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      body, html {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto;
+      }
+      span, input {
+        font-family: monospace;
+        font-size: 1em;
+      }
+      input {
+        width: 25vw;
+        border: 0;
+        outline: 0;
+        border-bottom: 1px dashed black;
+      }
+      .content {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="input" class="content">
+      <button onclick="submitRequest(this.parentElement)">GET</button>
+      <span>https://floof.li/single</span>
+      <input id="data" type="text" value="?dept=CS&course=2C">
+    </div>
+    <pre id="output" class="content"></pre>
+  </body>
+  <script>
+    function submitRequest(input) {
+      var data = input.querySelector('#data');
+      var output = document.querySelector('#output');
+
+      var url = new URL("https://floof.li/single" + data.value);
+
+      fetch(url, {
+          method: 'GET'
+        })
+        .then(response => {
+          return Promise.resolve(response.json());
+        })
+        .then(json => {
+          console.log(json);
+          output.innerHTML = JSON.stringify(json, null, 2);
+        })
+        .catch(err => {
+          console.log(err);
+      });
+    }
+  </script>
+</html>
