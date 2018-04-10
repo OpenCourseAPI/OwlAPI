@@ -1,10 +1,16 @@
 # Examples
 
-This documentation is designed for people new to JavaScript programming and making API requests. It is designed to let you quickly start exploring and developing applications with MyPortal data.
+This documentation is designed for people new to JavaScript programming and making API requests. It is designed to let you quickly start exploring and developing applications with MyPortal data. The examples will step you through the basic steps of making a web requests, and then onto more advanced topics as you gain expertise.
 
-## Hello World
+## Prerequisites
 
-The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page.
+To best understand this example, you should be at least familiar with the basics of HTML templating. If you are not, it is recommended to go through the [Free Code Camp](https://www.freecodecamp.org/) series of tutorials to get a start.
+
+You are not required to know Javascript for the first guide. But, as the guides progress in difficulty, you will be expected to know the basics of Javascript and/or Object Oriented Programming. Free Code Camp also has Javascript tutorials.
+
+## Simple data request
+
+The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page. We will be hitting OwlAPI's [`/single`](https://floof.li/#get-single) endpoint to retrieve a single entry from the database. It is the most basic interaction you can make to the API.
 
 ```
 <!DOCTYPE html>
@@ -67,6 +73,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
   </script>
 </html>
 ```
+[Try Example](/#)
 
 ### Overview
 
@@ -103,7 +110,7 @@ The style in this example is simple:
 </style>
 ```
 
-It employs the use of [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) Layout tools to center and display content nicely.
+It employs the use of [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) Layout tools to center and display content nicely. Some additional styling is given to 
 
 ### JavaScript code
 
