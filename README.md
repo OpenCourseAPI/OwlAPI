@@ -33,7 +33,7 @@ wait_seats | Waitlist slots left in the course
 
 On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
-## Routes
+## Endpoints
 ### Get single
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
