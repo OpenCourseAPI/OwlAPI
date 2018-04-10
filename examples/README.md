@@ -77,7 +77,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
 
 ### Overview
 
-In this example, we have an input field where we can enter in valid query parameters to the `/single` endpoint. See the docs [here](https://floof.li/) for more information. Upon hitting the `GET` button, the JavaScript code uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make a request to [floof.li](https://floof.li) with the query params attached. Upon receiving a response, it pretty prints the JSON data to the output container.
+In this example, we have an input field where we can enter in valid query parameters to the [`/single`](https://floof.li/#get-single) endpoint. Upon hitting the `GET` button, the JavaScript code uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make a request to [floof.li](https://floof.li) with the query params attached. Upon receiving a response, it pretty prints the JSON data to the output container.
 
 ### HTML template
 
