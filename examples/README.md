@@ -21,23 +21,19 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
     <meta charset="utf-8">
     <style>
       body, html {
-        height: 100%;
         display: grid;
         grid-template-rows: auto;
       }
-      span, input {
-        font-family: monospace;
-        font-size: 1em;
+      span, button, input, pre {
+        font: 1.2em monospace;
       }
       input {
         width: 25vw;
         border: 0;
-        outline: 0;
         border-bottom: 1px dashed black;
       }
       .content {
-        margin-left: auto;
-        margin-right: auto;
+        margin:0 auto;
       }
     </style>
   </head>
@@ -89,23 +85,19 @@ The style in this example is simple:
 ```
 <style>
   body, html {
-    height: 100%;
     display: grid;
     grid-template-rows: auto;
   }
-  span, input {
-    font-family: monospace;
-    font-size: 1em;
+  span, button, input, pre {
+    font: 1.2em monospace;
   }
   input {
     width: 25vw;
     border: 0;
-    outline: 0;
     border-bottom: 1px dashed black;
   }
   .content {
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
   }
 </style>
 ```
