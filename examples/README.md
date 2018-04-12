@@ -81,7 +81,25 @@ Firstly, let's cover the HTML template used in this example. In order to use HTM
 
 Most current browsers will render content that is declared with this DOCTYPE in "standards mode" which means that your application should be more cross-browser compliant. The DOCTYPE is also designed to degrade gracefully; browsers that don't understand it will ignore it, and use "quirks mode" to display their content.
 
-The style in this example is simple:
+We are using a barebones `<body>` for simple input and output. It has a text field to enter in the request parameters for the `GET`, and a button to submit the request:
+```
+<body>
+  <div id="input" class="content">
+    <button onclick="submitRequest(this.parentElement)">GET</button>
+    <span>https://floof.li/single</span>
+    <input id="data" type="text" value="?dept=CS&course=2C">
+  </div>
+  <pre id="output" class="content"></pre>
+</body>
+```
+
+On the `<button>`, there is an [`onclick`](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick) event handlwer which upon clicking it, will call the function `submitRequest()` (covered later). An input field is initialized with a default `value` and can be changed freely.
+A `<pre>` container will hold our output from the web request.
+
+### CSS style
+Now, let's cover the CSS used to format our template. It uses 
+
+The `<style>` in this example is simple:
 ```
 <style>
   body, html {
@@ -102,7 +120,7 @@ The style in this example is simple:
 </style>
 ```
 
-It employs the use of [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) Layout tools to center and display content nicely. Some additional styling is given to 
+It employs the use of [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) Layout tools to center and display content nicely. Some additional styling is given to the font selection and size of the body's text.
 
 ### JavaScript code
 
@@ -142,6 +160,8 @@ Next, we create a new URL from the data and use `fetch()` with `method: 'GET'` t
 
 - [`.catch()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) operates in a similar fashion, allowing us to detect some errors that might occur during request process. It should be noted that `.catch()` will only raise on network errors; a HTTP status of `404` will not make `.catch()` trigger.
 
+Upon recieving a valid response from the web server, we can now format our content into the `#output` container. We first convert the `JSON` data into a string format using [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). The parameters used here will format the JSON into a format that is easy to read for humans. Finally, We set the [`innerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) of the output container to the output string we generated.
+
 ### Conclusion
 
-With this basic code, you should be able to successfully make `GET` requests to OwlAPI's `/single` endpoint using `Fetch API`. It provides a consistent method to make web requests easy, and can be used to make `POST` requests used advanced usage of OwlAPI. You can read more about making advanced queries and filters in the next section.
+With this basic code, you should be able to successfully make `GET` requests to OwlAPI's `/single` endpoint using `Fetch API`; it provides a consistent method to make web requests easy, and can be used to make `POST` requests used advanced usage of OwlAPI. You can read more about making advanced queries and filters in the next section.
