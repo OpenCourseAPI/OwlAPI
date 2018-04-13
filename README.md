@@ -210,7 +210,10 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 
 ### Server setup
+This is a setup guide for using [`systemctl`](https://www.freedesktop.org/software/systemd/man/systemctl.html) to run the server in the background. This small guide also covers how to setup a servive to refresh the database on timed interval.
+
 #### OwlAPI service
+This service is the main driver which runs the API. Gunicorn is used to serve Python through [`WSGI`](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface), and [`nginx`](https://www.nginx.com/) is used to direct port traffic to The API.
 
 **Create a file named OwlAPI.service**
 > `sudo vi /etc/systemd/system/OwlAPI.service`
@@ -239,6 +242,8 @@ You'll also have to change the virtualenv path to match the id from when you ran
 > `sudo systemctl enable OwlAPI`
 
 #### Database refresh service
+This service runs in the background to refresh the database on a timed interval. This keeps the API fresh with new data from MyPortal. It's crucial to have the data refreshed if live course seat and status data is desired.
+
 **Create a file named refreshDB.service**
 > `sudo vi /etc/systemd/system/refreshDB.service`
 
