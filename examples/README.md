@@ -165,3 +165,7 @@ Upon recieving a valid response from the web server, we can now format our conte
 ### Conclusion
 
 With this basic code, you should be able to successfully make `GET` requests to OwlAPI's `/single` endpoint using `Fetch API`; it provides a consistent method to make web requests easy, and can be used to make `POST` requests used advanced usage of OwlAPI. You can read more about making advanced queries and filters in the next section.
+
+## Advanced data request
+
+Now that you've learned to make a simple call to OwlAPI's `/single` endpoint, it's time to step things up and make a `POST` request to OwlAPI's [`/batch`](https://floof.li/#get-batch) endpoint. Not only can you fetch multiple datapoints at the same time, but you can also filter the results by multiple queries. In this example, we will be expanding on the last example by adding support for multiple course fields and filters.
