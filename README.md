@@ -164,22 +164,22 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 > `GET /urls`
 ```
-"CS":[
-  {"10": "get?dept=CS&course=10",
-  "18":  "get?dept=CS&course=18",
-  "1A":  "get?dept=CS&course=1A",
-  "1B":  "get?dept=CS&course=1B",
-  "1C":  "get?dept=CS&course=1C",
-  "20A": "get?dept=CS&course=20A",
-  "21A": "get?dept=CS&course=21A",
-  "21B": "get?dept=CS&course=21B",
-  "22A": "get?dept=CS&course=22A",
-  "2A":  "get?dept=CS&course=2A",
-  "2B":  "get?dept=CS&course=2B",
-  "2C":  "get?dept=CS&course=2C",
-  "30A": "get?dept=CS&course=30A",
-  "30B": "get?dept=CS&course=30B",
-  {...}
+"CS": [
+  {
+    "2A": {
+      "course": "2A",
+      "dept": "CS"
+    },
+    "2B": {
+      "course": "2B",
+      "dept": "CS"
+    },
+    "2C": {
+      "course": "2C",
+      "dept": "CS"
+    },
+    {...}
+  }
 ],
 "MATH": [...]
 ```
