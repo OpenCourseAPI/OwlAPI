@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 .menu.sidebar { background: #f3f3f3; background: -webkit-linear-gradient(to right, #f3f3f3, #fff); background: linear-gradient(to right, #f3f3f3, #fff); }
 
 .menu.sidebar { position: fixed; height: 100%; width: 25vw; margin-right: 5vw; padding: 76px 5vw 0 2vw; }
@@ -29,6 +31,10 @@ a.button.right { border-top-right-radius: 5px !important; border-bottom-right-ra
 textarea { resize: none; }
 
 textarea.input { width: 100%; }
+
+.modal-card, .modal-content { height: 100% !important; overflow: scroll !important; }
+
+.page-content{ height: 100%; overflow: auto; }
 
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
 
