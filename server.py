@@ -4,6 +4,7 @@ from re import match
 from crossdomain import add_cors_headers
 
 import itertools as itr
+import typing as ty
 
 # 3rd party
 from quart import Quart, jsonify, request, render_template
@@ -275,14 +276,14 @@ async def api_list_url():
     return jsonify(data), 200
 
 
-def generate_url(dept: str, course: str) -> str:
+def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
     """
     This is a helper
     :param dept:
     :param course:
     :return: dict[str, str]
     """
-    return {"dept":f"{dept}", "course":f"{course}"}
+    return {"dept": f"{dept}", "course": f"{course}"}
 
 
 if __name__ == '__main__':
