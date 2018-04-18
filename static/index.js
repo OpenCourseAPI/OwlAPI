@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function(){
       n.classList.add('punctuation');
       n.classList.remove('number');
     });
+
+    document.querySelector('#footer').classList.remove('is-hidden');
   });
 }, false);
 

@@ -1,16 +1,39 @@
 # OwlAPI
-This is an ~~unofficial~~ API that serves course data from MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
+This is an ~~unofficial~~ API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
 
 #### Contributors
-[**Kishan Emens**](https://github.com/phi-line), [Byron White](https://github.com/BoomSyrup), [Joshua Fan](https://github.com/joshuaptfan)
+[**Kishan Emens**](https://github.com/phi-line), [Byron White](https://github.com/BoomSyrup), [Joshua Fan](https://github.com/joshuaptfan), [John Schwarz](https://github.com/TryExceptElse)
 
 If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
 
 #### Dependencies
 [Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
+## Data overview
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. Below the various data points are listed and described:
 
-## Routes
+### JSON data
+```
+CRN        | Course Number
+course     | Course ID (format: [F0*][ID][Section ID][WYH]) see note
+desc       | Short-form course description
+campus     | Campus the section is held at
+days       | Day(s) the section is held on (M, T, W, Th, F, S, U)
+instructor | Professor for the section
+room       | Room the section is held at
+time       | Time for the section
+start      | First date for the section
+end        | Last date for the course
+units      | Number of course units
+seats      | Seats left in the course
+wait_cap   | Waitlist capacity
+wait_seats | Waitlist slots left in the course
+```
+> W (Online) / Y (Hybrid) / H (Honors)
+
+On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
+
+## Endpoints
 ### Get single
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
@@ -40,9 +63,6 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 ```
 
 <div id="interact"><div data-request-type="GET" data-request-url="/single" data-request-body="?dept=CS&course=2C"></div></div>
-
-**Coming soon: filters**
-
 
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
@@ -144,22 +164,22 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 > `GET /urls`
 ```
-"CS":[
-  {"10": "get?dept=CS&course=10",
-  "18":  "get?dept=CS&course=18",
-  "1A":  "get?dept=CS&course=1A",
-  "1B":  "get?dept=CS&course=1B",
-  "1C":  "get?dept=CS&course=1C",
-  "20A": "get?dept=CS&course=20A",
-  "21A": "get?dept=CS&course=21A",
-  "21B": "get?dept=CS&course=21B",
-  "22A": "get?dept=CS&course=22A",
-  "2A":  "get?dept=CS&course=2A",
-  "2B":  "get?dept=CS&course=2B",
-  "2C":  "get?dept=CS&course=2C",
-  "30A": "get?dept=CS&course=30A",
-  "30B": "get?dept=CS&course=30B",
-  {...}
+"CS": [
+  {
+    "2A": {
+      "course": "2A",
+      "dept": "CS"
+    },
+    "2B": {
+      "course": "2B",
+      "dept": "CS"
+    },
+    "2C": {
+      "course": "2C",
+      "dept": "CS"
+    },
+    {...}
+  }
 ],
 "MATH": [...]
 ```
@@ -190,7 +210,10 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 
 ### Server setup
+This is a setup guide for using [`systemctl`](https://www.freedesktop.org/software/systemd/man/systemctl.html) to run the server in the background. This small guide also covers how to setup a servive to refresh the database on timed interval.
+
 #### OwlAPI service
+This service is the main driver which runs the API. Gunicorn is used to serve Python through [`WSGI`](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface), and [`nginx`](https://www.nginx.com/) is used to direct port traffic to The API.
 
 **Create a file named OwlAPI.service**
 > `sudo vi /etc/systemd/system/OwlAPI.service`
@@ -219,6 +242,8 @@ You'll also have to change the virtualenv path to match the id from when you ran
 > `sudo systemctl enable OwlAPI`
 
 #### Database refresh service
+This service runs in the background to refresh the database on a timed interval. This keeps the API fresh with new data from MyPortal. It's crucial to have the data refreshed if live course seat and status data is desired.
+
 **Create a file named refreshDB.service**
 > `sudo vi /etc/systemd/system/refreshDB.service`
 

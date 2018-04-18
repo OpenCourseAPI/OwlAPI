@@ -1,6 +1,7 @@
 from os.path import join
 from collections import defaultdict
 from re import match
+from crossdomain import add_cors_headers
 
 import itertools as itr
 
@@ -10,6 +11,7 @@ from tinydb import TinyDB
 from maya import when, MayaInterval
 
 application = Quart(__name__)
+application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
 db = TinyDB(join(DB_ROOT, 'database.json'))
@@ -278,9 +280,9 @@ def generate_url(dept: str, course: str) -> str:
     This is a helper
     :param dept:
     :param course:
-    :return: str
+    :return: dict[str, str]
     """
-    return f"get?dept={dept}&course={course}"
+    return {"dept":f"{dept}", "course":f"{course}"}
 
 
 if __name__ == '__main__':
