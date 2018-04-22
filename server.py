@@ -14,13 +14,16 @@ application = Quart(__name__)
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
-db = TinyDB(join(DB_ROOT, 'database.json'))
 
 COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
 
+try:
+    database = TinyDB(join(DB_ROOT, 'database.json'))
+except FileNotFoundError:
+    database = dict()
 
 @application.route('/')
 async def idx():
@@ -89,7 +92,7 @@ async def api_many():
     return json, 200
 
 
-def get_one(data: dict, filters: dict):
+def get_one(data: dict, filters: dict, db=database):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
@@ -216,7 +219,7 @@ def get_key(key):
 
 
 @application.route('/list', methods=['GET'])
-async def api_list():
+async def api_list(db=database):
     '''
     `/list` with [GET] handles a single request to list department or course keys from the database
     It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
@@ -241,7 +244,7 @@ async def api_list():
 
 
 @application.route('/urls', methods=['GET'])
-async def api_list_url():
+async def api_list_url(db=database):
     '''
     `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
     :return: 200 - Should always return
