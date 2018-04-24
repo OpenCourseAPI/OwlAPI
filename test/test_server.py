@@ -1,8 +1,10 @@
-from os.path import join
+from os.path import join, dirname, abspath
 
 from unittest import TestCase
 from tinydb import TinyDB
 
+from sys import path
+path.append(dirname(dirname(abspath(__file__))))
 from server import generate_url, get_one
 
 DB_ROOT = '../test/test_db/'
@@ -32,5 +34,16 @@ class TestGetOne(TestCase):
 
         self.assertEqual(
             course,
+            get_one(data=data, filters=dict(), db=test_database)
+        )
+
+class TestGetMany(TestCase):
+    def test_get_two_dept(self):
+        data = {'courses': [{'dept': 'CS'},{'dept': 'MATH'}]}
+        depts = {'courses' [test_database.table(f"{data['courses'][0]['dept']}").all()]}
+        depts['courses'].append(test_database.table(f"{data['courses'][1]['dept']}").all())
+
+        self.assertEqual(
+            depts,
             get_one(data=data, filters=dict(), db=test_database)
         )
