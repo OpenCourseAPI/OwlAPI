@@ -298,7 +298,7 @@ def generate_url(dept: str, course: str):
     :param course:
     :return:
     '''
-    return {"dept":f"{dept}", "course":f"{course}"}
+    return {"dept":dept, "course":course}
 
 
 if __name__ == '__main__':
