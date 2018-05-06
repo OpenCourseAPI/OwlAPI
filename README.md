@@ -10,7 +10,7 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 [Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 ## Data overview
-OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. Below the various data points are listed and described:
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. Below the various data points are listed and described:
 
 ### JSON data
 ```
@@ -69,6 +69,8 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
   ]
 }
 ```
+
+You can view an example of the `/single` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/single).
 
 <div id="interact"><div data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2C"></div></div>
 
