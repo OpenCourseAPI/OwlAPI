@@ -1,8 +1,6 @@
-from urllib.request import urlopen
 from os import makedirs, rename, remove
-from os.path import abspath, join, exists
+from os.path import join, exists
 from collections import defaultdict
-from json import dumps
 from re import match
 
 # 3rd party
@@ -11,25 +9,36 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
 SCHEDULE = 'schedule.html'
-TERM_CODE = '201841'
+TERM_CODES = {'fh': '201841', 'da': '201842'}
 HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
            'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
 DB_ROOT = 'db/'
+
+COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWH])?'
 
 def main():
     if not exists(DB_ROOT):
         makedirs(DB_ROOT, exist_ok=True)
 
-    content = urlopen(f'file://{abspath(SCHEDULE)}') if exists(SCHEDULE) else mine()
-    db = TinyDB(join(DB_ROOT, 'database.json'))
+    for term in TERM_CODES.keys():
+        temp_path = join(DB_ROOT, 'temp.json')
+        temp = TinyDB(temp_path)
 
-    parse(content, db=db)
-    print(db.tables())
+        content = mine(TERM_CODES[term])
+        parse(content, db=temp)
+
+        rename(temp_path, join(DB_ROOT, f'{term}_database.json')) and remove(temp_path)
+
+    fh_db = TinyDB(join(DB_ROOT, 'fh_database.json'))
+    da_db = TinyDB(join(DB_ROOT, 'da_database.json'))
+    print('Foothill', fh_db.tables())
+    print('De Anza', da_db.tables())
 
 
-def mine(write=True):
+def mine(term, write=False):
     '''
     Mine will hit the database for foothill's class listings and write it to a file.
+    :param term: (str) the term to mine
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
@@ -45,7 +54,7 @@ def mine(write=True):
         'Connection': 'keep-alive',
     }
 
-    data = [('termcode', f'{TERM_CODE}'), ]
+    data = [('termcode', f'{term}'), ]
 
     res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', headers=headers, data=data)
     res.raise_for_status()
@@ -66,8 +75,6 @@ def parse(content, db):
     :param db: (TinyDB) the current database
     '''
     soup = BeautifulSoup(content, 'html5lib')
-    temp_path = join(DB_ROOT, 'temp.json')
-    temp = TinyDB(temp_path)
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
@@ -85,7 +92,7 @@ def parse(content, db):
                     cols[i] = a.get_text() if a else cols[i].get_text()
 
                 try:
-                    key = get_key(f'{cols[0]}')[0]
+                    key = get_key(f'{cols[0] if cols[0] else cols[1]}')[0]
                     data = dict(zip(HEADERS, cols))
                     crn = data['CRN']
 
@@ -98,9 +105,7 @@ def parse(content, db):
                     continue
 
         j = dict(s)
-        temp.table(f'{dept}').insert(j)
-
-    rename(temp_path, join(DB_ROOT, 'database.json')) and remove(temp_path)
+        db.table(f'{dept}').insert(j)
 
 
 def get_key(course):
@@ -113,7 +118,7 @@ def get_key(course):
     idx = 1 if len(c) < 3 else 2
     section = c[idx]
 
-    match_obj = match('F0*(\d*\w?)\.?\d*([YWH])?', section)
+    match_obj = match(COURSE_PATTERN, section)
     return match_obj.groups()
 
 

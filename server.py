@@ -15,6 +15,8 @@ application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
 
+CAMPUS_LIST = ['fh', 'da']
+
 COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
@@ -30,8 +32,8 @@ async def idx():
     return await render_template('index.html')
 
 
-@application.route('/single', methods=['GET'])
-async def api_one():
+@application.route('/<campus>/single', methods=['GET'])
+async def api_one(campus):
     '''
     `/single` with [GET] handles a single request to get a whole department or a whole course listing from the database
     It expects a mandatory query parameter `dept` and an optionally `course`.
@@ -41,19 +43,25 @@ async def api_one():
 
     If only `dept` is requested, it checked for its existence in the database and then returns it.
     However, if `course` is also selected, it will return only the data of that course within the department.
+
+    :param campus: (str) Campus to retrieve data from
+
     :return: 200 - Found entry and returned data successfully to the user.
     :return: 404 - Could not find entry
     '''
+    if campus not in CAMPUS_LIST:
+        return ('Error! Could not find campus in database', 404)
+
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    data = get_one(qp, filters=dict())
+    data = get_one(campus, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
 
-@application.route('/batch', methods=['POST'])
-async def api_many():
+@application.route('/<campus>/batch', methods=['POST'])
+async def api_many(campus):
     '''
     `/batch` with [POST] handles a batch request to get many departments or a many course listings from the database.
     This batch request is meant to simulate hitting the api route with this data N times. It expects a mandatory list of
@@ -76,14 +84,20 @@ async def api_many():
                 'time': {'start':'8:30 AM', 'end':'9:40 PM'}
             }
         }
+
+    :param campus: (str) Campus to retrieve data from
+
     :return: 200 - Found all entries and returned data successfully to the user.
     :return: 404 - Could not find one or more entries.
     '''
+    if campus not in CAMPUS_LIST:
+        return 'Error! Could not find campus in database', 404
+
     raw = await request.get_json()
     data = []
 
     for course in raw['courses']:
-        d = get_one(course, filters=raw['filters'] if ('filters' in raw) else dict())
+        d = get_one(campus, course, filters=raw['filters'] if ('filters' in raw) else dict())
         if not d:  # null case from get_one (invalid param or filter)
             return 'Error! Could not find one or more course selectors in database', 404
         data.append(d)
@@ -92,15 +106,19 @@ async def api_many():
     return json, 200
 
 
-def get_one(data: dict, filters: dict, db=database):
+def get_one(campus: str, data: dict, filters: dict):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
 
+    :param campus: (str) Campus to retrieve data from
     :param data: (dict) The query param or the POST body dict
     :param filters: (dict) A optional dictionary of filters to be passed to filter_courses()
+
     :return: course: (dict) A singular course listing from the database (if it passes filters)
     '''
+    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+
     data_dept = data['dept']
     if data_dept in db.tables():
         table = db.table(f'{data_dept}')
@@ -207,7 +225,10 @@ def filter_courses(filters, course):
 def get_key(key):
     '''
     This is the key parser for the course names
+
+    :param campus: (str) The campus to retrieve data from
     :param key: (str) The unparsed string containing the course name
+
     :return match_obj.groups(): (list) the string for the regex match
     '''
     k = key.split(' ')
@@ -218,16 +239,23 @@ def get_key(key):
     return match_obj.groups()
 
 
-@application.route('/list', methods=['GET'])
-async def api_list(db=database):
+@application.route('/<campus>/list', methods=['GET'])
+async def api_list(campus):
     '''
     `/list` with [GET] handles a single request to list department or course keys from the database
     It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
     However, if `course` is also selected, it will return only the data of that course within the department.
+
+    :param campus: (str) The campus to retrieve data from
+
     :return: 200 - Found entry and returned keys successfully to the user.
     :return: 404 - Could not find entry
-    :return:
     '''
+    if campus not in CAMPUS_LIST:
+        return 'Error! Could not find campus in database', 404
+
+    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
@@ -243,12 +271,20 @@ async def api_list(db=database):
     return 'Error! Could not list', 404
 
 
-@application.route('/urls', methods=['GET'])
-async def api_list_url(db=database):
+@application.route('/<campus>/urls', methods=['GET'])
+async def api_list_url(campus):
     '''
     `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
+
+    :param campus: (str) The campus to retrieve data from
+
     :return: 200 - Should always return
     '''
+    if campus not in CAMPUS_LIST:
+        return 'Error! Could not find campus in database', 404
+
+    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+
     data = defaultdict(list)
 
     for dept in db.tables():
@@ -261,12 +297,12 @@ async def api_list_url(db=database):
 
 def generate_url(dept: str, course: str):
     '''
-    This is a helper
+    This is a helper for the /urls route
     :param dept:
     :param course:
     :return:
     '''
-    return {"dept":f"{dept}", "course":f"{course}"}
+    return {"dept":dept, "course":course}
 
 
 if __name__ == '__main__':
