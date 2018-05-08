@@ -6,4 +6,5 @@ schedule.html
 static/README.md
 
 # pytest cache and others
+__pycache__/
 .pytest_cache/
