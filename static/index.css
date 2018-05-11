@@ -1,4 +1,4 @@
-html, body { height: 100%; }
+.scroll-lock { height: 100% !important; }
 
 .menu.sidebar { background: #f3f3f3; background: -webkit-linear-gradient(to right, #f3f3f3, #fff); background: linear-gradient(to right, #f3f3f3, #fff); }
 

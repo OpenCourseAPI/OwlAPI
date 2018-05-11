@@ -1,8 +1,8 @@
 # OwlAPI
-This is an ~~unofficial~~ API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
+This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
 
 #### Contributors
-[**Kishan Emens**](https://github.com/phi-line), [Byron White](https://github.com/BoomSyrup), [Joshua Fan](https://github.com/joshuaptfan), [John Schwarz](https://github.com/TryExceptElse)
+[**Kishan Emens**](https://github.com/phi-line), [John Schwarz](https://github.com/TryExceptElse), [Byron White](https://github.com/BoomSyrup), [Joshua Fan](https://github.com/joshuaptfan)
 
 If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
 
@@ -10,7 +10,7 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 [Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 ## Data overview
-OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. Below the various data points are listed and described:
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. Below the various data points are listed and described:
 
 ### JSON data
 ```
@@ -33,12 +33,20 @@ wait_seats | Waitlist slots left in the course
 
 On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
+### Campus selector
+Before any of the endpoints below, you must select which campus' data you'd like the query. Before the endpoint type `/fh` or `/da` for Foothill and De Anza respectively.
+
+> `GET /fh/list?dept=CS`
+```
+2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
+```
+
 ## Endpoints
 ### Get single
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
-> `GET /single?dept=CS&course=2C`
+> `GET /fh/single?dept=CS&course=2C`
 ```
 {"40407":
   [
@@ -62,14 +70,16 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/single" data-request-body="?dept=CS&course=2C"></div></div>
+You can view an example of the `/single` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/single).
+
+<div id="interact"><div data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2C"></div></div>
 
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
 
-> `POST /batch`
+> `POST /fh/batch`
 ```
 {
   "courses": [
@@ -80,7 +90,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
 
 ### Filters
 Additionally, in the `POST /batch` body you can specify any number of filters to narrow the results. Add the filter key to the post body and then apply the appropriate filter. Multiple options can be selected by changing the value from a `0` to a `1`.
@@ -89,7 +99,7 @@ Be careful because too many filters may result in zero sections returned from th
 #### Filter by status
 Filter by the availability of a course (Open, Waitlist, Full). The example below shows how you can filter only `open` and `waitlist` sections.
 
-> `POST /batch`
+> `POST /fh/batch`
 ```
 {
   "courses": [{"dept":"CS", "course":"1A"}]
@@ -97,13 +107,13 @@ Filter by the availability of a course (Open, Waitlist, Full). The example below
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></div></div>
 
 
 #### Filter by type
 Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` and `hybrid` sections.
 
-> `POST /batch`
+> `POST /fh/batch`
 ```
 {
   "courses": [{"dept":"CS", "course":"1A"}]
@@ -111,13 +121,13 @@ Filter by the format of the course (In Person, Online, Hybrid). The example belo
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></div></div>
 
 
 #### Filter by days
 Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The example below shows how you can filter only `M` and `W` sections.
 
-> `POST /batch`
+> `POST /fh/batch`
 ```
 {
   "courses": [{"dept":"CS", "course":"1A"}]
@@ -125,13 +135,13 @@ Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The e
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></div></div>
 
 
 #### Filter by time
 Filter by a specified time interval (7:30 AM - 12:00 PM). The example below shows how you can filter only morning sections.
 
-> `POST /batch`
+> `POST /fh/batch`
 ```
 {
   "courses": [{"dept":"CS", "course":"1A"}]
@@ -139,30 +149,30 @@ Filter by a specified time interval (7:30 AM - 12:00 PM). The example below show
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></div></div>
+<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></div></div>
 
 
 ### List
 `GET /list` handles a single request to list department or course keys from the database
 It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
 
-> `GET /list`
+> `GET /fh/list`
 ```
 IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR, PHOT, ITRN, DMS, AHS, EMTP, ATHL, APEL, HIST, HORT, GEOG, SPED, ALCB, RT, MDIA, ENGR, THTR, NCSV, NCBS, ACTG, NCEL, KINS, DANC, HUMN, DA, JAPN, CRLP, VITI, BIOL, BUSI, PSE, _default, ECON, RSPT, ART, NCBH, PHT, LA, CS, LINC, MUS, EMS, PHED, ENGL, VT, HLTH, APPT, MATH, COMM, NCP, GID, LIBR, APSM, PHDA, PHIL, WMN, NANO, PSYC, ESLL, SOC, APIW, PHYS
 ```
 
-> `GET /list?dept=CS`
+> `GET /fh/list?dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/list" data-request-body="?dept=CS"></div></div>
+<div id="interact"><div data-request-type="GET" data-request-url="/fh/list" data-request-body="?dept=CS"></div></div>
 
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
 
-> `GET /urls`
+> `GET /fh/urls`
 ```
 "CS": [
   {
@@ -184,7 +194,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 "MATH": [...]
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/urls" data-request-body=""></div></div>
+<div id="interact"><div data-request-type="GET" data-request-url="/fh/urls" data-request-body=""></div></div>
 
 ## Setup
 ### Local setup
