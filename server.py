@@ -20,7 +20,7 @@ DB_ROOT = 'db/'
 
 CAMPUS_LIST = ['fh', 'da']
 
-COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
+COURSE_PATTERN = '[F|D]0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
