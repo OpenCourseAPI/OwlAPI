@@ -135,7 +135,7 @@ def get_one(data: dict, filters: dict):
         return course if course else dict()
 
 
-def filter_courses(filters, course):
+def filter_courses(filters: ty.Dict[str], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -164,22 +164,29 @@ def filter_courses(filters, course):
     :param course: (dict) the mutable course listing
     :return: None
     """
-    def status_filter(course_key):
+    # Nested functions filter courses by taking a course key and
+    # returning a boolean indicating whether they should be included
+    # or excluded. True if they are to be included, False if excluded.
+
+    def status_filter(course_key) -> bool:
         # {'open':0, 'waitlist':0, 'full':0}
         if 'status' not in filters:
             return True
+        # Create 'mask' of course statuses that are to be included.
         status_mask = {k for (k, v) in filters['status'].items() if v}
+        # Return True only if course status is in mask.
         return course[course_key][0]['status'].lower() in status_mask
 
-    def type_filter(course_key):
+    def type_filter(course_key) -> bool:
         # {'standard':1, 'online':1, 'hybrid':0}
         if 'types' not in filters:
             return True
+        # Get course section
         section = get_key(course[course_key][0]['course'])
         mask = {TYPE_ALIAS[k] for (k, v) in filters['types'].items() if v}
         return section[1] in mask
 
-    def day_filter(course_key):
+    def day_filter(course_key) -> bool:
         # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
         if 'days' in filters:
             # create set of days that are allowed by passed filters
@@ -193,7 +200,7 @@ def filter_courses(filters, course):
                     return False
         return True
 
-    def time_filter(course_key):
+    def time_filter(course_key) -> bool:
         # {'start':'8:30 AM', 'end':'9:40 PM'}
         if 'time' in filters:
             f_range = MayaInterval(
@@ -208,7 +215,7 @@ def filter_courses(filters, course):
                         return False
         return True
 
-    def filter_all(k):
+    def filter_all(k) -> bool:
         return all((status_filter(k), type_filter(k),
                    day_filter(k), time_filter(k)))
 
@@ -278,9 +285,10 @@ async def api_list_url():
 
 def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
     """
-    This is a helper
-    :param dept:
-    :param course:
+    This is a helper function that generates a url string from a passed
+    department and course.
+    :param dept: str identifier for department
+    :param course: str
     :return: dict[str, str]
     """
     return {"dept": f"{dept}", "course": f"{course}"}
