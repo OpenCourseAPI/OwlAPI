@@ -3,17 +3,17 @@ from os.path import join, dirname, abspath
 from unittest import TestCase
 from tinydb import TinyDB
 
-from sys import path
-path.append(dirname(dirname(abspath(__file__))))
 from server import generate_url, get_one
 
-DB_ROOT = '../test/test_db/'
+DB_ROOT = 'test/test_db/'
 test_database = TinyDB(join(DB_ROOT, 'database.json'))
+
+import test.test_db.string_data as strings
 
 class TestGenerateURL(TestCase):
     def test_sample_url_can_be_generated(self):
         self.assertEqual(
-            {'dept': 'test_dept', 'course': 'test_course'},
+            strings.test_sample_url_can_be_generated_data,
             generate_url('test_dept', 'test_course')
         )
 
