@@ -247,9 +247,7 @@ def get_key(key):
     """
     This is the key parser for the course names
 
-    :param campus: (str) The campus to retrieve data from
     :param key: (str) The unparsed string containing the course name
-
     :return match_obj.groups(): (list) the string for the regex match
     """
     k = key.split(' ')
