@@ -5,6 +5,7 @@ __pycache__/
 schedule.html
 static/README.md
 
-# pytest cache and others
-__pycache__/
+# pytest
 .pytest_cache/
+test/test_db/data.py
+

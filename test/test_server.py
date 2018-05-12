@@ -1,49 +1,49 @@
-from os.path import join, dirname, abspath
+from os.path import join
 
-from unittest import TestCase
+from unittest import TestCase, skip
 from tinydb import TinyDB
 
 from server import generate_url, get_one
 
-DB_ROOT = 'test/test_db/'
-test_database = TinyDB(join(DB_ROOT, 'database.json'))
+import test.test_db.data as test_data
+from settings import TEST_DIR
 
-import test.test_db.string_data as strings
+test_database = TinyDB(join(TEST_DIR, 'test_db', 'fh_database.json'))
+
 
 class TestGenerateURL(TestCase):
     def test_sample_url_can_be_generated(self):
         self.assertEqual(
-            strings.test_sample_url_can_be_generated_data,
+            test_data.test_sample_url_can_be_generated_data,
             generate_url('test_dept', 'test_course')
         )
 
-class TestGetOne(TestCase):
-    def test_get_one_dept(self):
-        data = {'dept': 'CS'}
-        dept = test_database.table(f"{data['dept']}").all()
 
+class TestGetOne(TestCase):
+    @skip("too large")
+    def test_get_one_dept(self):
+        data = {'dept': 'CS'} # floof.li/single?dept=CS
+
+        result = get_one(db=test_database, data=data, filters=dict())
         self.assertEqual(
-            dept,
-            get_one(data=data, filters=dict(), db=test_database)
+            test_data.test_get_one_dept_data,
+            result
+        )
+
+    def test_get_one_dept_returns_right_n_courses(self):
+        data = {'dept': 'CS'}
+
+        result = get_one(db=test_database, data=data, filters=dict())
+        self.assertEqual(
+            len(test_data.test_get_one_dept_data[0]),
+            len(result[0])
         )
 
     def test_get_one_dept_and_course(self):
         data = {'dept': 'CS', 'course': '2A'}
-        dept = test_database.table(f"{data['dept']}").all()
-        course = next((e[f"{data['course']}"] for e in dept if f"{data['course']}" in e))
 
+        result = get_one(db=test_database, data=data, filters=dict())
         self.assertEqual(
-            course,
-            get_one(data=data, filters=dict(), db=test_database)
-        )
-
-class TestGetMany(TestCase):
-    def test_get_two_dept(self):
-        data = {'courses': [{'dept': 'CS'},{'dept': 'MATH'}]}
-        depts = {'courses' [test_database.table(f"{data['courses'][0]['dept']}").all()]}
-        depts['courses'].append(test_database.table(f"{data['courses'][1]['dept']}").all())
-
-        self.assertEqual(
-            depts,
-            get_one(data=data, filters=dict(), db=test_database)
+            test_data.test_get_one_dept_and_course_data,
+            result
         )
