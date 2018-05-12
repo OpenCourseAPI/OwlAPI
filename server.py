@@ -17,7 +17,7 @@ DB_ROOT = 'db/'
 
 CAMPUS_LIST = ['fh', 'da']
 
-COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
+COURSE_PATTERN = '[F|H]0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
@@ -26,6 +26,7 @@ try:
     database = TinyDB(join(DB_ROOT, 'database.json'))
 except FileNotFoundError:
     database = dict()
+
 
 @application.route('/')
 async def idx():
@@ -55,7 +56,8 @@ async def api_one(campus):
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    data = get_one(campus, qp, filters=dict())
+    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    data = get_one(db, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else ('Error! Could not find given selectors in database', 404)
 
@@ -93,31 +95,27 @@ async def api_many(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
+    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
     raw = await request.get_json()
-    data = []
 
-    for course in raw['courses']:
-        d = get_one(campus, course, filters=raw['filters'] if ('filters' in raw) else dict())
-        if not d:  # null case from get_one (invalid param or filter)
-            return 'Error! Could not find one or more course selectors in database', 404
-        data.append(d)
+    data = get_many(db=db, raw=raw)
 
     json = jsonify({'courses': data})
     return json, 200
 
 
-def get_one(campus: str, data: dict, filters: dict):
+def get_one(db: TinyDB, data: dict, filters: dict):
     '''
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
 
-    :param campus: (str) Campus to retrieve data from
+    :param db: (TinyDB) Database to retrieve data from
     :param data: (dict) The query param or the POST body dict
     :param filters: (dict) A optional dictionary of filters to be passed to filter_courses()
 
     :return: course: (dict) A singular course listing from the database (if it passes filters)
     '''
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    # db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
 
     data_dept = data['dept']
     if data_dept in db.tables():
@@ -137,6 +135,18 @@ def get_one(campus: str, data: dict, filters: dict):
         except StopIteration:
             return dict()
         return course if course else dict()
+
+
+def get_many(db: TinyDB, raw: dict()):
+    data = []
+
+    for course in raw['courses']:
+        d = get_one(db, course, filters=raw['filters'] if ('filters' in raw) else dict())
+        if not d:  # null case from get_one (invalid param or filter)
+            return 'Error! Could not find one or more course selectors in database', 404
+        data.append(d)
+
+    return data
 
 
 def filter_courses(filters, course):
