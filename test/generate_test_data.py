@@ -4,10 +4,10 @@ from tinydb import TinyDB
 
 from sys import path
 
-DB_ROOT = 'test/test_db'
-test_database = TinyDB(join(DB_ROOT, 'database.json'))
+TEST_DIR = 'test_db'
+test_database = TinyDB(join(TEST_DIR, 'fh_database.json'))
 
-with open (join(DB_ROOT, 'string_data.py'), 'w') as file:
+with open (join(TEST_DIR, 'data.py'), 'w') as file:
     # test_sample_url_can_be_generated
     data = {'dept': 'test_dept', 'course': 'test_course'}
 
@@ -26,13 +26,15 @@ with open (join(DB_ROOT, 'string_data.py'), 'w') as file:
     dept = test_database.table(f"{data['dept']}").all()
 
     course = next((e[f"{data['course']}"] for e in dept if f"{data['course']}" in e))
+
     file.write (f"test_get_one_dept_and_course_data = {course}\n")
 
     # test_get_two_dept
-    data = {'courses': [{'dept': 'CS'},{'dept': 'MATH'}]}
+    data = [{'dept': 'CS'}, {'dept': 'MATH'}]
+    filters = dict()
 
-    depts = {'courses': [test_database.table(f"{data['courses'][0]['dept']}").all()]}
-
-    depts['courses'].append(test_database.table(f"{data['courses'][1]['dept']}").all())
+    depts = []
+    for i in data:
+        depts.append(test_database.table(i['dept']).all())
 
     file.write (f"test_get_two_dept_data = {depts}\n")

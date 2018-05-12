@@ -98,9 +98,12 @@ async def api_many(campus):
     db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
     raw = await request.get_json()
 
-    data = get_many(db=db, raw=raw)
+    data = raw['courses']
+    filters = raw['filters'] if ('filters' in raw) else dict()
 
-    json = jsonify({'courses': data})
+    courses = get_many(db=db, data=data, filters=filters)
+
+    json = jsonify({'courses': courses})
     return json, 200
 
 
@@ -137,16 +140,16 @@ def get_one(db: TinyDB, data: dict, filters: dict):
         return course if course else dict()
 
 
-def get_many(db: TinyDB, raw: dict()):
-    data = []
+def get_many(db: TinyDB, data: dict(), filters: dict()):
+    ret = []
 
-    for course in raw['courses']:
-        d = get_one(db, course, filters=raw['filters'] if ('filters' in raw) else dict())
+    for course in data:
+        d = get_one(db, course, filters=filters)
         if not d:  # null case from get_one (invalid param or filter)
             return 'Error! Could not find one or more course selectors in database', 404
-        data.append(d)
+        ret.append(d)
 
-    return data
+    return ret
 
 
 def filter_courses(filters, course):
