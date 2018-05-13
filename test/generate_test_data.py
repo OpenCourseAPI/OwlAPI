@@ -30,11 +30,21 @@ with open (join(TEST_DIR, 'data.py'), 'w') as file:
     file.write (f"test_get_one_dept_and_course_data = {course}\n")
 
     # test_get_two_dept
-    data = [{'dept': 'CS'}, {'dept': 'MATH'}]
+    data = {'courses': [{'dept': 'CS'}, {'dept': 'MATH'}]}
     filters = dict()
 
     depts = []
-    for i in data:
+    for i in data['courses']:
+        depts.append(test_database.table(i['dept']).all())
+
+    file.write (f"test_get_two_dept_data = {depts}\n")
+
+    # test_filter_status
+    data = {'courses': [{'dept': 'MATH'}]}
+    filters = dict()
+
+    depts = []
+    for i in data['courses']:
         depts.append(test_database.table(i['dept']).all())
 
     file.write (f"test_get_two_dept_data = {depts}\n")

@@ -15,7 +15,7 @@ application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
 
-CAMPUS_LIST = ['fh', 'da']
+CAMPUS_LIST = ['fh', 'da', 'test']
 
 COURSE_PATTERN = '[F|H]0*(\d*\w?)\.?\d*([YWH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
