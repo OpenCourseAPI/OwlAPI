@@ -30,12 +30,12 @@ status     | Status of the course (Online / Waitlist)
 wait_cap   | Waitlist capacity
 wait_seats | Waitlist slots left in the course
 ```
-### Note
-> Online - W [fh] / Z [da]
-
-> Hybrid - Y [both]
-
-> Honors - H [both]
+#### Course variant format
+```
+Online     | W (Foothill) / Z (De Anza)
+Hybrid     | Y
+Honors     | H
+```
 
 On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
