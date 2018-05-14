@@ -17,10 +17,11 @@ DB_ROOT = 'db/'
 
 CAMPUS_LIST = ['fh', 'da']
 
-COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
+COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
-TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
+FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
+DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 
 @application.route('/')
@@ -178,7 +179,7 @@ def filter_courses(filters, course):
             if type_mask:
                 did_pop = False
                 for type in type_mask:
-                    if section[1] == TYPE_ALIAS[type]:
+                    if section[1] == FH_TYPE_ALIAS[type] || section[1] == DA_TYPE_ALIAS[type]:
                         did_pop = True
                         break
 
