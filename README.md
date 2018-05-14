@@ -26,10 +26,16 @@ start      | First date for the section
 end        | Last date for the course
 units      | Number of course units
 seats      | Seats left in the course
+status     | Status of the course (Online / Waitlist)
 wait_cap   | Waitlist capacity
 wait_seats | Waitlist slots left in the course
 ```
-> W (Online) / Y (Hybrid) / H (Honors)
+### Note
+> Online - W [fh] / Z [da]
+
+> Hybrid - Y [both]
+
+> Honors - H [both]
 
 On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
