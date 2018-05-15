@@ -179,7 +179,7 @@ def filter_courses(filters, course):
             if type_mask:
                 did_pop = False
                 for type in type_mask:
-                    if section[1] == FH_TYPE_ALIAS[type] || section[1] == DA_TYPE_ALIAS[type]:
+                    if section[1] == FH_TYPE_ALIAS[type] or section[1] == DA_TYPE_ALIAS[type]:
                         did_pop = True
                         break
 
