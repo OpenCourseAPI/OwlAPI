@@ -5,7 +5,7 @@ from tinydb import TinyDB
 from sys import path
 
 TEST_DIR = 'test_db'
-test_database = TinyDB(join(TEST_DIR, 'fh_database.json'))
+test_database = TinyDB(join(TEST_DIR, 'test_database.json'))
 
 with open (join(TEST_DIR, 'data.py'), 'w') as file:
     # test_sample_url_can_be_generated
