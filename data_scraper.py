@@ -14,7 +14,7 @@ HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
            'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
 DB_ROOT = 'db/'
 
-COURSE_PATTERN = 'F0*(\d*\w?)\.?\d*([YWH])?'
+COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 
 def main():
     if not exists(DB_ROOT):
