@@ -38,13 +38,3 @@ with open (join(TEST_DIR, 'data.py'), 'w') as file:
         depts.append(test_database.table(i['dept']).all())
 
     file.write (f"test_get_two_dept_data = {depts}\n")
-
-    # test_filter_status
-    data = {'courses': [{'dept': 'MATH'}]}
-    filters = dict()
-
-    depts = []
-    for i in data['courses']:
-        depts.append(test_database.table(i['dept']).all())
-
-    file.write (f"test_get_two_dept_data = {depts}\n")
