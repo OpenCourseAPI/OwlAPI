@@ -151,7 +151,7 @@ function updateModal(modal, button, response) {
 function toggleModal(modal, state) {
   state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
 
-  state ? document.body.parentElement.classList.add('scroll-lock') : document.body.parentElement.classList.remove('scroll-lock');
-
-  state ? document.body.classList.add('scroll-lock') : document.body.classList.remove('scroll-lock');
+  // state ? document.body.parentElement.classList.add('scroll-lock') : document.body.parentElement.classList.remove('scroll-lock');
+  //
+  // state ? document.body.classList.add('scroll-lock') : document.body.classList.remove('scroll-lock');
 }
