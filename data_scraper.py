@@ -94,12 +94,15 @@ def parse(content, db):
                 try:
                     key = get_key(f'{cols[0] if cols[0] else cols[1]}')[0]
                     data = dict(zip(HEADERS, cols))
-                    crn = data['CRN']
 
+                    crn = data['CRN']
                     if len(s[key][crn]) > 0:
                         comb = set(s[key][crn][0].items()) ^ set(data.items())
                         if len(comb) == 0:
                             continue
+
+                    data['units'] = data['units'].lstrip()
+
                     s[key][crn].append(data)
                 except KeyError:
                     continue
