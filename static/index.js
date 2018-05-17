@@ -45,6 +45,17 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 }, false);
 
+window.addEventListener('wheel', function (e) {
+  var activeModal = document.querySelector('.modal.is-active');
+  if (activeModal) {
+    var content = activeModal.querySelector('.modal-content');
+    if (e.target.className == 'modal-background' ||
+      (e.deltaY < 0 && content.scrollTop == 0) ||
+      (e.deltaY > 0 && content.scrollTop == content.scrollHeight - content.clientHeight))
+      e.preventDefault();
+  }
+}, false);
+
 function whenAvailable(name, callback) {
   var interval = 10; // ms
   window.setTimeout(function() {
