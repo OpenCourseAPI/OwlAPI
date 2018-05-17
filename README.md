@@ -46,6 +46,9 @@ On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPort
 ### Campus selector
 Before any of the endpoints below, you must select which campus' data you'd like the query. Before the endpoint type `/fh` or `/da` for Foothill and De Anza respectively.
 
+Alternatively, if either campus' data cannot be accessed, a debug campus has been put into production. Use the
+campus selector `test` to grab this older copy of Foothill data.
+
 > `GET /fh/list?dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
