@@ -23,11 +23,6 @@ DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
 DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
-try:
-    database = TinyDB(join(DB_ROOT, 'database.json'))
-except FileNotFoundError:
-    database = dict()
-
 
 @application.route('/')
 async def idx():
