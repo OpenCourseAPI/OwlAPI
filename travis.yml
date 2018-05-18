@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.6"  # 3.6 development branch
+
+install:
+  - pip install pipenv
+  - pipenv install -d --system
+
+script:
+  - pipenv shell
+  - python -m pytest test
