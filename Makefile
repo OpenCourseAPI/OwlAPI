@@ -7,8 +7,8 @@ help:
 
 setup:
 	pip install pipenv
-	pipenv install --system
+	pipenv install --three
 
 test:
 	python test/generate_test_data.py
-	pipenv run pytest test
+	python -m pytest test
