@@ -111,6 +111,9 @@ async def api_many(campus):
     filters = raw['filters'] if ('filters' in raw) else dict()
 
     courses = get_many(db=db, data=data, filters=filters)
+    if not courses:  # null case from get_one (invalid param or filter)
+        return 'Error! Could not find one or more course selectors ' \
+               'in database', 404
 
     json = jsonify({'courses': courses})
     return json, 200
@@ -128,7 +131,6 @@ def get_one(db: TinyDB, data: dict, filters: dict):
     :return: course: (dict) A singular course listing from the database
                     (if it passes filters)
     """
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
 
     data_dept = data['dept']
     if data_dept in db.tables():
@@ -157,14 +159,13 @@ def get_many(db: TinyDB, data: dict(), filters: dict()):
     for course in data:
         d = get_one(db, course, filters=filters)
         if not d:  # null case from get_one (invalid param or filter)
-            return 'Error! Could not find one or more course selectors ' \
-                   'in database', 404
+            continue
         ret.append(d)
 
     return ret
 
 
-def filter_courses(filters: ty.Dict[str], course):
+def filter_courses(filters: ty.Dict[str, object], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -257,7 +258,7 @@ def filter_courses(filters: ty.Dict[str], course):
                    day_filter(k), time_filter(k)))
 
     # remove each key that is evaluated false by filter_all
-    for key in itr.filterfalse(filter_all, course.keys.copy()):
+    for key in itr.filterfalse(filter_all, set(course.keys())):
         del course[key]
 
 
