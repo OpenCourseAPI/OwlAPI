@@ -56,6 +56,22 @@ window.addEventListener('wheel', function (e) {
   }
 }, false);
 
+window.addEventListener('touchstart', function (e) {
+  window.lastTouchY = e.changedTouches[0].clientY;
+}, false);
+
+window.addEventListener('touchmove', function (e) {
+  var activeModal = document.querySelector('.modal.is-active');
+  if (activeModal) {
+    var content = activeModal.querySelector('.modal-content');
+    if (e.target.className == 'modal-background' ||
+      (e.changedTouches[0].clientY - lastTouchY > 0 && content.scrollTop == 0) ||
+      (e.changedTouches[0].clientY - lastTouchY < 0 && content.scrollTop == content.scrollHeight - content.clientHeight))
+      e.preventDefault();
+    window.lastTouchY = e.changedTouches[0].clientY;
+  }
+}, { passive: false });
+
 function whenAvailable(name, callback) {
   var interval = 10; // ms
   window.setTimeout(function() {
