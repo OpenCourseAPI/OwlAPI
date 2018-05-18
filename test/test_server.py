@@ -84,7 +84,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            4,
+            40,
             len(result[0].keys())
         )
 
