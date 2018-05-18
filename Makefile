@@ -11,7 +11,7 @@ setup:
 	pipenv install --three
 
 activate:
-	pipenv shell -c
+	pipenv shell
 
 test:
 	python test/generate_test_data.py
