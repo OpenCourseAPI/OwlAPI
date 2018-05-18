@@ -8,7 +8,7 @@ help:
 
 setup:
 	pip install pipenv
-	pipenv install --dev --three
+	pipenv install --three
 
 activate:
 	pipenv shell -c
@@ -17,4 +17,4 @@ test:
 	python test/generate_test_data.py
 	pipenv run -- pytest test
 
-.PHONY: help activate test
+full: help activate test
