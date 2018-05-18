@@ -1,11 +1,36 @@
+# language: python
+# python:
+#   - "3.6"
+# env:
+#   global:
+#     - PIPENV_VENV_IN_PROJECT=1
+#     - PIPENV_IGNORE_VIRTUALENVS=1
+# # command to install dependencies
+# install: make setup
+# # # command to run tests
+# script: make test
+
+sudo: false
+dist: trusty
 language: python
 python:
   - "3.6"
+  - "2.7"
 env:
   global:
-    - PIPENV_VENV_IN_PROJECT=1
-    - PIPENV_IGNORE_VIRTUALENVS=1
-# command to install dependencies
-install: make setup
-# # command to run tests
-script: make test
+    - GIT_ASK_YESNO='false'
+    - PYTHONIOENCODING='utf-8'
+  matrix:
+    - TEST_SUITE='not install'
+    - TEST_SUITE='install'
+      PYTEST_ADDOPTS='--cache-clear'
+
+install:
+  - "pip install --upgrade pip"
+  - "pip install -e . --upgrade --upgrade-strategy=only-if-needed"
+  - "pipenv install --dev"
+  - 'pip install -e "$(pwd)" --upgrade'
+  - 'pipenv install --system --dev'
+
+script:
+  - 'pipenv run time pytest -v -n 4 -m "$TEST_SUITE" test'
