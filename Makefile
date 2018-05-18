@@ -14,6 +14,7 @@ activate:
 	pipenv shell -c
 
 test:
+	python test/generate_test_data.py
 	pipenv run -- pytest test
 
 .PHONY: help activate test
