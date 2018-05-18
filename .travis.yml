@@ -8,4 +8,7 @@ env:
 # command to install dependencies
 install: make setup
 # # command to run tests
-script: make test
+script:
+  -	pipenv shell
+  -	python test/generate_test_data.py
+  -	python -m pytest test

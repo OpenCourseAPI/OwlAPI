@@ -10,5 +10,6 @@ setup:
 	pipenv install --three
 
 test:
+	pipenv shell
 	python test/generate_test_data.py
 	python -m pytest test
