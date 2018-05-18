@@ -45,6 +45,17 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 }, false);
 
+window.addEventListener('wheel', function (e) {
+  var activeModal = document.querySelector('.modal.is-active');
+  if (activeModal) {
+    var content = activeModal.querySelector('.modal-content');
+    if (e.target.className == 'modal-background' ||
+      (e.deltaY < 0 && content.scrollTop == 0) ||
+      (e.deltaY > 0 && content.scrollTop == content.scrollHeight - content.clientHeight))
+      e.preventDefault();
+  }
+}, false);
+
 function whenAvailable(name, callback) {
   var interval = 10; // ms
   window.setTimeout(function() {
@@ -150,8 +161,4 @@ function updateModal(modal, button, response) {
 
 function toggleModal(modal, state) {
   state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
-
-  state ? document.body.parentElement.classList.add('scroll-lock') : document.body.parentElement.classList.remove('scroll-lock');
-
-  state ? document.body.classList.add('scroll-lock') : document.body.classList.remove('scroll-lock');
 }
