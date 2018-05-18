@@ -14,6 +14,7 @@ activate:
 	pipenv shell
 
 test:
+	pipenv shell
 	python test/generate_test_data.py
 	pipenv run -- pytest test
 

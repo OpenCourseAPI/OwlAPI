@@ -8,4 +8,4 @@ env:
 # command to install dependencies
 install: make setup
 # # command to run tests
-script: make full
+script: make test
