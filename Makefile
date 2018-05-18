@@ -5,7 +5,7 @@ help:
 	@echo "    make test        run the test suite"
 	@echo "    exit             leave virtual environment"
 
-init:
+setup:
     pip install pipenv
     pipenv install --dev
 
