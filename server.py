@@ -2,13 +2,14 @@ from os.path import join
 from collections import defaultdict
 from re import match
 
-# private lib
-from crossdomain import add_cors_headers
-
 # 3rd party
 from quart import Quart, jsonify, request, render_template
 from tinydb import TinyDB
 from maya import when, MayaInterval
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 application = Quart(__name__)
 application.after_request(add_cors_headers)
