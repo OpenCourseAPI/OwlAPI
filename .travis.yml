@@ -4,5 +4,4 @@ python:
 # command to install dependencies
 install: make setup
 # # command to run tests
-script:
-  - make test
+script: make test

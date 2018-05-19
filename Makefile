@@ -8,6 +8,7 @@ help:
 setup:
     pip install pipenv
     pipenv install --dev
+		pipenv shell
 
 test:
     pipenv run pytest test
