@@ -2,5 +2,5 @@ init:
 	pip install pipenv --upgrade
 	pipenv install --dev --skip-lock
 
-test:
-   pipenv run pytest test
+ci:
+	pipenv run py.test -n 8 --boxed --junitxml=report.xml
