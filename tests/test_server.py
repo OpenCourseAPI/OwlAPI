@@ -5,7 +5,7 @@ from tinydb import TinyDB
 
 from server import generate_url, get_one, get_many, filter_courses
 
-import test.test_db.data as test_data
+import tests.test_db.data as test_data
 from settings import TEST_DIR
 
 test_database = TinyDB(join(TEST_DIR, 'test_db', 'test_database.json'))
@@ -84,7 +84,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            4,
+            40,
             len(result[0].keys())
         )
 

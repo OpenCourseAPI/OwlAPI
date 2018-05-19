@@ -4,7 +4,7 @@ from tinydb import TinyDB
 
 from sys import path
 
-TEST_DIR = 'test_db'
+TEST_DIR = 'tests/test_db'
 test_database = TinyDB(join(TEST_DIR, 'test_database.json'))
 
 with open (join(TEST_DIR, 'data.py'), 'w') as file:
