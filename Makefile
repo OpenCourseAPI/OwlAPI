@@ -3,4 +3,5 @@ init:
 	pipenv install --dev --skip-lock
 
 ci:
-	pipenv run py.test -n 8 --boxed --junitxml=report.xml
+	pipenv run python tests/generate_test_data.py
+	pipenv run pytest tests
