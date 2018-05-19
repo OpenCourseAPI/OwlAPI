@@ -7,5 +7,5 @@ static/README.md
 
 # pytest
 .pytest_cache/
-test/test_db/data.py
+tests/test_db/data.py
 !test_database.json
