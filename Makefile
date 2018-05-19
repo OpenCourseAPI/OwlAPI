@@ -1,6 +1,6 @@
 init:
-		pip install pipenv --upgrade
-		pipenv install --dev --skip-lock
+	pip install pipenv --upgrade
+	pipenv install --dev --skip-lock
 
 test:
-    pipenv run pytest test
+   pipenv run pytest test
