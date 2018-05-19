@@ -3,7 +3,7 @@ from os.path import join
 from unittest import TestCase, skip
 from tinydb import TinyDB
 
-from server import generate_url, get_one, get_many, filter_courses
+from OwlAPI.server import generate_url, get_one, get_many, filter_courses
 
 import tests.test_db.data as test_data
 from settings import TEST_DIR
