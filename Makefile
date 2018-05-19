@@ -6,9 +6,8 @@ help:
 	@echo "    exit             leave virtual environment"
 
 setup:
-    pip install pipenv
-    pipenv install --dev
-		pipenv shell
+		pip install pipenv --upgrade
+		pipenv install --dev --skip-lock
 
 test:
     pipenv run pytest test
