@@ -1,14 +1,3 @@
-# sudo: false
-# language: python
-# python:
-#   - "3.6"
-# # command to install dependencies
-# install:
-#   - make init
-#
-# # # command to run tests
-# script:
-#   - make test
 sudo: false
 language: python
 python:
