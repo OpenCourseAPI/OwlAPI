@@ -5,7 +5,7 @@ from tinydb import TinyDB
 
 from OwlAPI.server import generate_url, get_one, get_many, filter_courses
 
-import tests.test_db.data as test_data
+import OwlAPI.tests.test_db.data as test_data
 from OwlAPI.settings import TEST_DIR
 
 test_database = TinyDB(join(TEST_DIR, 'test_db', 'test_database.json'))
