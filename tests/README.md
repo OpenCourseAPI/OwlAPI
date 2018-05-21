@@ -9,7 +9,7 @@
 ### Running Tests:
 
 * Generate the test data automatically from `test_database.json` by running
-    `generate_test_data.py` from this folder
+    `tests/generate_test_data.py` from root
 
-* Call pytest on the `test/` directory. Example: `python3.6 -m pytest test`
+* Call pytest on the `tests/` directory. Example: `python3.6 -m pytest tests`
     or use your preferred IDE with pytest support, such as Pycharm

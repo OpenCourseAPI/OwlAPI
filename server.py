@@ -2,9 +2,6 @@ from os.path import join
 from collections import defaultdict
 from re import match
 
-# private lib
-from crossdomain import add_cors_headers
-
 import itertools as itr
 import typing as ty
 
@@ -12,6 +9,10 @@ import typing as ty
 from quart import Quart, jsonify, request, render_template
 from tinydb import TinyDB
 from maya import when, MayaInterval
+
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 application = Quart(__name__)
 application.after_request(add_cors_headers)
@@ -138,7 +139,10 @@ def get_one(db: TinyDB, data: dict, filters: dict):
         entries = table.all()
 
         if 'course' not in data:
-            return entries
+
+          
+          
+          return entries
 
         data_course = data['course']
 
