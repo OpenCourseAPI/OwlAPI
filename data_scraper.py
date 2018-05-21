@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
 SCHEDULE = 'schedule.html'
-TERM_CODES = {'fh': '201841', 'da': '201842'}
+TERM_CODES = {'fh': '201911', 'da': '201912'}
 HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
            'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
 DB_ROOT = 'db/'
@@ -20,19 +20,16 @@ def main():
     if not exists(DB_ROOT):
         makedirs(DB_ROOT, exist_ok=True)
 
-    for term in TERM_CODES.keys():
+    for term in TERM_CODES.values():
         temp_path = join(DB_ROOT, 'temp.json')
         temp = TinyDB(temp_path)
 
-        content = mine(TERM_CODES[term])
+        content = mine(term)
         parse(content, db=temp)
 
         rename(temp_path, join(DB_ROOT, f'{term}_database.json')) and remove(temp_path)
-
-    fh_db = TinyDB(join(DB_ROOT, 'fh_database.json'))
-    da_db = TinyDB(join(DB_ROOT, 'da_database.json'))
-    print('Foothill', fh_db.tables())
-    print('De Anza', da_db.tables())
+        db = TinyDB(join(DB_ROOT, f'{term}_database.json'))
+        print(term, db.tables())
 
 
 def mine(term, write=False):
