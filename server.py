@@ -19,7 +19,7 @@ application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
 
-CAMPUS_LIST = ['fh', 'da', 'test']
+CAMPUS_LIST = {'fh':'201911', 'da':'201912', 'test':'test'}
 
 COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
@@ -61,7 +61,7 @@ async def api_one(campus):
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
     data = get_one(db, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else (
@@ -105,7 +105,7 @@ async def api_many(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
     raw = await request.get_json()
 
     data = raw['courses']
@@ -303,7 +303,7 @@ async def api_list(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
 
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
@@ -330,7 +330,7 @@ async def api_list_url(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{campus}_database.json'))
+    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
 
     data = defaultdict(list)
 
