@@ -59,33 +59,33 @@ campus selector `test` to grab this older copy of Foothill data.
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
-> `GET /fh/single?dept=CS&course=2C`
+> `GET /fh/single?dept=CS&course=2A`
 ```
-{"40407":
-  [
-    {"CRN": "40407",
-      "campus": "FH",
-      "course": "C S F002C01Y",
-      "days": "TTh",
-      "desc": "ADV DATA  STRUCT/ALGRM IN C++",
-      "end": "06/29/2018",
-      "instructor": "Staff",
-      "room": "5607",
-      "seats": "31",
-      "start": "04/09/2018",
-      "status": "Open",
-      "time": "01:30 PM-03:20 PM",
-      "units": "  4.50",
-      "wait_cap": "10",
-      "wait_seats": "10"},
+{"10116":
+	[
+    { "CRN": "10116",
+    	"campus": "FH",
+    	"course": "C S F002A01W",
+    	"days": "TBA",
+    	"desc": "OBJ-ORIENT PROG METHOD IN C++",
+    	"end": "08/12/2018",
+    	"instructor": "Venkataraman",
+    	"room": "ONLINE",
+    	"seats": "34",
+    	"start": "07/02/2018",
+    	"status": "Open",
+    	"time": "TBA",
+    	"units": "4.50",
+    	"wait_cap": "10",
+    	"wait_seats": "10" },
     {...}
-  ]
+	]
 }
 ```
 
 You can view an example of the `/single` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/single).
 
-<div id="interact"><div data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2C"></div></div>
+<div id="interact"><div data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2A"></div></div>
 
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
