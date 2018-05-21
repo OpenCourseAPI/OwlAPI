@@ -5,7 +5,7 @@ from tinydb import TinyDB
 
 from server import generate_url, get_one, get_many, filter_courses
 
-import test.test_db.data as test_data
+from .test_db import data as test_data
 from settings import TEST_DIR
 
 test_database = TinyDB(join(TEST_DIR, 'test_db', 'test_database.json'))
