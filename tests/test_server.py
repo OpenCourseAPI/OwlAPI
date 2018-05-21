@@ -3,10 +3,10 @@ from os.path import join
 from unittest import TestCase, skip
 from tinydb import TinyDB
 
-from OwlAPI.server import generate_url, get_one, get_many, filter_courses
+from server import generate_url, get_one, get_many, filter_courses
 
-import OwlAPI.tests.test_db.data as test_data
-from OwlAPI.settings import TEST_DIR
+from .test_db import data as test_data
+from settings import TEST_DIR
 
 test_database = TinyDB(join(TEST_DIR, 'test_db', 'test_database.json'))
 
