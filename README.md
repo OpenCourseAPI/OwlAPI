@@ -257,7 +257,7 @@ User=user
 Group=nginx
 WorkingDirectory=/home/user/OwlAPI
 Environment="PATH=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/"
-ExecStart=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/gunicorn --workers 3 --worker-class quart.worker.GunicornWorker --bind 0.0.0.0:8000 -m 007 server:application
+ExecStart=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 -m 007 server:application
 
 [Install]
 WantedBy=multi-user.target
