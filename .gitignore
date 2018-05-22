@@ -3,7 +3,7 @@ __pycache__/
 *.DS_Store
 *.json
 schedule.html
-static/README.md
+frontend/static/README.md
 
 # pytest
 .pytest_cache/

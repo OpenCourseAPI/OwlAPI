@@ -11,10 +11,10 @@ If you would like to contribute follow this [guide](https://github.com/FoothillC
 
 
 #### Dependencies:
-> [Quart](https://gitlab.com/pgjones/quart), [TinyDB](https://github.com/msiemens/tinydb), [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
+> [**Flask**](https://github.com/pallets/flask), [**TinyDB**](https://github.com/msiemens/tinydb), [**BeautifulSoup4**](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 ## Data overview
-OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. Below the various data points are listed and described:
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
 
 ### JSON data
 ```
@@ -41,9 +41,7 @@ Hybrid     | Y
 Honors     | H
 ```
 
-On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
-
-### Campus selector
+#### Campus selector
 Before any of the endpoints below, you must select which campus' data you'd like the query. Before the endpoint type `/fh` or `/da` for Foothill and De Anza respectively.
 
 Alternatively, if either campus' data cannot be accessed, a debug campus has been put into production. Use the
@@ -83,9 +81,12 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
+<span id="interact"><span data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2A"></span></span>
+
+`/single` returns a JSON format with the keys as the CRN for the course, and the values as a list. The list is necessary to account for hybrid classes or classes with labs, that have two or more listings per CRN.
+
 You can view an example of the `/single` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/single).
 
-<div id="interact"><div data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2A"></div></div>
 
 ### Get batch
 `POST /batch` handles a batch request to get many departments or many sections from the database.
@@ -103,7 +104,12 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></div></div>
+<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></span></span>
+
+`/batch` returns a JSON format with the initial key as `courses` and a value containing a list of courses. The courses are formatted in the same way as found in the `/single` response.
+
+You can view an example of the `/batch` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/batch).
+
 
 ### Filters
 Additionally, in the `POST /batch` body you can specify any number of filters to narrow the results. Add the filter key to the post body and then apply the appropriate filter. Multiple options can be selected by changing the value from a `0` to a `1`.
@@ -120,8 +126,7 @@ Filter by the availability of a course (Open, Waitlist, Full). The example below
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></div></div>
-
+<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></span></span>
 
 #### Filter by type
 Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` and `hybrid` sections.
@@ -134,8 +139,7 @@ Filter by the format of the course (In Person, Online, Hybrid). The example belo
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></div></div>
-
+<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></span></span>
 
 #### Filter by days
 Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The example below shows how you can filter only `M` and `W` sections.
@@ -148,7 +152,7 @@ Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The e
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></div></div>
+<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></span></span>
 
 
 #### Filter by time
@@ -162,7 +166,7 @@ Filter by a specified time interval (7:30 AM - 12:00 PM). The example below show
 }
 ```
 
-<div id="interact"><div data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></div></div>
+<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></span></span>
 
 
 ### List
@@ -179,7 +183,7 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/fh/list" data-request-body="?dept=CS"></div></div>
+<span id="interact"><span data-request-type="GET" data-request-url="/fh/list" data-request-body=""></span></span>
 
 
 ### URLs
@@ -207,7 +211,8 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 "MATH": [...]
 ```
 
-<div id="interact"><div data-request-type="GET" data-request-url="/fh/urls" data-request-body=""></div></div>
+<span id="interact"><span data-request-type="GET" data-request-url="/fh/urls" data-request-body=""></span></span>
+
 
 ## Setup
 ### Local setup
