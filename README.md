@@ -60,24 +60,24 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 > `GET /fh/single?dept=CS&course=2A`
 ```
 {"10116":
-	[
+  [
     { "CRN": "10116",
-    	"campus": "FH",
-    	"course": "C S F002A01W",
-    	"days": "TBA",
-    	"desc": "OBJ-ORIENT PROG METHOD IN C++",
-    	"end": "08/12/2018",
-    	"instructor": "Venkataraman",
-    	"room": "ONLINE",
-    	"seats": "34",
-    	"start": "07/02/2018",
-    	"status": "Open",
-    	"time": "TBA",
-    	"units": "4.50",
-    	"wait_cap": "10",
-    	"wait_seats": "10" },
+      "campus": "FH",
+      "course": "C S F002A01W",
+      "days": "TBA",
+      "desc": "OBJ-ORIENT PROG METHOD IN C++",
+      "end": "08/12/2018",
+      "instructor": "Venkataraman",
+      "room": "ONLINE",
+      "seats": "34",
+      "start": "07/02/2018",
+      "status": "Open",
+      "time": "TBA",
+      "units": "4.50",
+      "wait_cap": "10",
+      "wait_seats": "10" },
     {...}
-	]
+  ]
 }
 ```
 
