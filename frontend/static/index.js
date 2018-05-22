@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
       var url = f.firstChild.dataset.requestUrl;
       var data = f.firstChild.dataset.requestBody;
 
-      var el = document.createElement("div");
+      var el = document.createElement("span");
       el.innerHTML = generate_data(type, url, data);
 
       f.replaceChild(el, f.firstChild);
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
             updateMenu(section.id);
         },
         offset: function() {
-          return section.scrollTop + 3;
+          return section.scrollTop + 20;
         }
       });
       var waypointUp = new Waypoint({
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function(){
             updateMenu(section.id);
         },
         offset: function() {
-          return section.scrollTop - 3;
+          return section.scrollTop - 20;
         }
       });
     });
@@ -94,7 +94,7 @@ function generate_data(type, url, data) {
                                 `<textarea class="input" id="data">${data}</textarea>`
 
   return `
-          <div class="field has-addons text">
+          <span class="field has-addons text">
             <p class="control">
               <a class="button is-medium is-static left" id="type">${type}</a>
             </p>
@@ -102,19 +102,19 @@ function generate_data(type, url, data) {
             <p class="control is-expanded">
               ${input}
             </p>
-            <div class="control" onclick="request_submit(this.parentElement)">
+            <span class="control" onclick="request_submit(this.parentElement)">
               <a class="button is-medium is-dark has-text-white right faa-parent animated-hover" id="button">
                 <span>Send</span>
                 <span class="icon is-small has-text-white faa-pulse animated-hover">
                   <i class="fas fa-paper-plane"></i>
                 </span>
               </a>
-            </div>
-            <div class="modal" id="modal" aria-hidden="true">
-              <div class="modal-background" onclick="toggleModal(this.parentElement, false)"></div>
-              <div class="modal-content"></div>
-            </div>
-          </div>
+            </span>
+            <span class="modal" id="modal" aria-hidden="true">
+              <span class="modal-background" onclick="toggleModal(this.parentElement, false)"></span>
+              <span class="modal-content"></span>
+            </span>
+          </span>
          `
 }
 
