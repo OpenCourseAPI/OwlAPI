@@ -10,11 +10,11 @@ name = "pypi"
 requests = "*"
 "beautifulsoup4" = "*"
 tinydb = "*"
-quart = "*"
 "html5lib" = "*"
 gunicorn = "*"
 maya = "*"
 pytest = "*"
+Flask = "*"
 
 
 [dev-packages]

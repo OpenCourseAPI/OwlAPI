@@ -3,15 +3,16 @@ from collections import defaultdict
 from re import match
 
 # 3rd party
-from quart import Quart, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
+# Quart config
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-application = Quart(__name__)
+application = Flask(__name__, template_folder="frontend/templates", static_folder='frontend/static')
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
@@ -26,12 +27,12 @@ DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 
 @application.route('/')
-async def idx():
-    return await render_template('index.html')
+def idx():
+    return render_template('index.html')
 
 
 @application.route('/<campus>/single', methods=['GET'])
-async def api_one(campus):
+def api_one(campus):
     '''
     `/single` with [GET] handles a single request to get a whole department or a whole course listing from the database
     It expects a mandatory query parameter `dept` and an optionally `course`.
@@ -60,7 +61,7 @@ async def api_one(campus):
 
 
 @application.route('/<campus>/batch', methods=['POST'])
-async def api_many(campus):
+def api_many(campus):
     '''
     `/batch` with [POST] handles a batch request to get many departments or a many course listings from the database.
     This batch request is meant to simulate hitting the api route with this data N times. It expects a mandatory list of
@@ -93,7 +94,7 @@ async def api_many(campus):
         return 'Error! Could not find campus in database', 404
 
     db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
-    raw = await request.get_json()
+    raw = request.get_json()
 
     data = raw['courses']
     filters = raw['filters'] if ('filters' in raw) else dict()
@@ -249,7 +250,7 @@ def get_key(key):
 
 
 @application.route('/<campus>/list', methods=['GET'])
-async def api_list(campus):
+def api_list(campus):
     '''
     `/list` with [GET] handles a single request to list department or course keys from the database
     It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
@@ -281,7 +282,7 @@ async def api_list(campus):
 
 
 @application.route('/<campus>/urls', methods=['GET'])
-async def api_list_url(campus):
+def api_list_url(campus):
     '''
     `/urls` with [GET] returns a tree of all departments, their courses, and the courses' endpoints to hit.
 
@@ -315,4 +316,4 @@ def generate_url(dept: str, course: str):
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', debug=True)
+    application.run(host='0.0.0.0', debug=True, threaded=True)
