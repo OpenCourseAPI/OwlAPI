@@ -165,7 +165,7 @@ def get_many(db: TinyDB, data: dict(), filters: dict()):
     return ret
 
 
-def filter_courses(filters: ty.Dict[str, object], course):
+def filter_courses(filters: ty.Dict[str, ty.Any], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -234,7 +234,7 @@ def filter_courses(filters: ty.Dict[str, object], course):
                 course_days = {x for x in days_match.groups() if x} if \
                     days_match else {}
                 # Return False if course day is not in mask.
-                if not course_days < mask:
+                if not course_days <= mask:
                     return False
         return True
 
