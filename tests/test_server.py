@@ -5,10 +5,17 @@ from tinydb import TinyDB
 
 from server import generate_url, get_one, get_many, filter_courses
 
-from .test_db import data as test_data
-from settings import TEST_DIR
+import settings
 
-test_database = TinyDB(join(TEST_DIR, 'test_db', 'test_database.json'))
+# Try to get generated data.
+try:
+    from .test_db import data as test_data
+except ImportError as e:
+    raise ImportError('Test Data could not be imported. If the data.py file '
+                      'does not exist, it can be generated using the '
+                      'generate_test_data.py script') from e
+
+test_database = TinyDB(join(settings.TEST_DB_DIR, 'test_database.json'))
 
 
 class TestGenerateURL(TestCase):
@@ -97,6 +104,28 @@ class TestFilters(TestCase):
             1,
             len(result[0].keys())
         )
+
+    def test_filter_days_will_return_multiple_courses_with_all_days_set(self):
+        data = {
+            'courses': [{
+                'dept': 'DANC',
+                'course': '14'
+            }],
+            'filters': {
+                'days': {
+                    'M': 1,
+                    'T': 1,
+                    'W': 1,
+                    'Th': 1,
+                    'F': 1,
+                    'S': 1,
+                    'U': 1
+                }
+            }
+        }
+
+        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        self.assertGreater(len(result[0].keys()), 1)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC','course':'14'}], 'filters': {'time':{'start':'7:30 AM', 'end':'12:00 PM'}}}

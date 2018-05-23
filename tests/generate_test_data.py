@@ -1,13 +1,11 @@
 from os.path import join, dirname, abspath
-
 from tinydb import TinyDB
 
-from sys import path
+import settings
 
-TEST_DIR = 'tests/test_db'
-test_database = TinyDB(join(TEST_DIR, 'test_database.json'))
+test_database = TinyDB(join(settings.TEST_DB_DIR, 'test_database.json'))
 
-with open (join(TEST_DIR, 'data.py'), 'w') as file:
+with open (join(settings.TEST_DB_DIR, 'data.py'), 'w') as file:
     # test_sample_url_can_be_generated
     data = {'dept': 'test_dept', 'course': 'test_course'}
 
