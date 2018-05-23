@@ -105,7 +105,7 @@ class TestFilters(TestCase):
             len(result[0].keys())
         )
 
-    def test_filter_days_will_return_multiple_courses_with_all_days_set(self):
+    def test_filter_days_will_return_correct_n_courses_with_all_days_set(self):
         data = {
             'courses': [{
                 'dept': 'DANC',
@@ -125,7 +125,7 @@ class TestFilters(TestCase):
         }
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
-        self.assertGreater(len(result[0].keys()), 1)
+        self.assertEqual(len(result[0].keys()), 3)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC','course':'14'}], 'filters': {'time':{'start':'7:30 AM', 'end':'12:00 PM'}}}
