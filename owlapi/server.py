@@ -15,7 +15,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-application = Flask(__name__, template_folder="frontend/templates", static_folder='frontend/static')
+application = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
@@ -130,6 +130,7 @@ def get_one(db: TinyDB, data: dict, filters: dict):
     :param data: (dict) The query param or the POST body dict
     :param filters: (dict) A optional dictionary of filters to be
                     passed to filter_courses()
+
     :return: course: (dict) A singular course listing from the database
                     (if it passes filters)
     """
@@ -140,9 +141,6 @@ def get_one(db: TinyDB, data: dict, filters: dict):
         entries = table.all()
 
         if 'course' not in data:
-
-          
-          
           return entries
 
         data_course = data['course']
@@ -200,6 +198,7 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
                     `time` - filter by a specified time interval
                             (8:30 AM - 9:40 PM)
     :param course: (dict) the mutable course listing
+
     :return: None
     """
     # Nested functions filter courses by taking a course key and
@@ -299,7 +298,6 @@ def api_list(campus):
     :return: 200 - Found entry and returned keys successfully
                 to the user.
     :return: 404 - Could not find entry
-    :return:
     """
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
@@ -328,7 +326,7 @@ def api_list_url(campus):
     courses, and the courses' endpoints to hit.
 
     :param campus: (str) The campus to retrieve data from
-    
+
     :return: 200 - Should always return
     """
     if campus not in CAMPUS_LIST:
@@ -352,6 +350,7 @@ def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
     department and course for the /urls route.
     :param dept: str identifier for department
     :param course: str
+    
     :return: dict[str, str]
     """
     return {"dept": f"{dept}", "course": f"{course}"}
