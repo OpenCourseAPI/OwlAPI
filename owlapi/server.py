@@ -15,7 +15,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-application = Flask(__name__, template_folder="frontend/templates", static_folder='frontend/static')
+application = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
@@ -141,8 +141,8 @@ def get_one(db: TinyDB, data: dict, filters: dict):
 
         if 'course' not in data:
 
-          
-          
+
+
           return entries
 
         data_course = data['course']
@@ -328,7 +328,7 @@ def api_list_url(campus):
     courses, and the courses' endpoints to hit.
 
     :param campus: (str) The campus to retrieve data from
-    
+
     :return: 200 - Should always return
     """
     if campus not in CAMPUS_LIST:
