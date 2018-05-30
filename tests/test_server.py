@@ -1,11 +1,10 @@
 from os.path import join
+from unittest import TestCase
 
-from unittest import TestCase, skip
 from tinydb import TinyDB
 
-from owlapi.server import generate_url, get_one, get_many, filter_courses
-
 import settings
+from server import generate_url, get_one, get_many
 
 # Try to get generated data.
 try:
@@ -76,7 +75,8 @@ class TestGetMany(TestCase):
 
 class TestFilters(TestCase):
     def test_filters_status_returns_n_courses(self):
-        data = {'courses': [{'dept':'CS', 'course':'1A'}], 'filters': {'status': {'open':0, 'waitlist':1, 'full':0}}}
+        data = {'courses': [{'dept':'CS', 'course':'1A'}],
+                'filters': {'status': {'open':0, 'waitlist':1, 'full':0}}}
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
@@ -86,7 +86,8 @@ class TestFilters(TestCase):
         )
 
     def test_filters_type_returns_n_courses(self):
-        data = {'courses':[{'dept':'CS','course':'1A'}], 'filters':{'types':{'standard':0, 'online':1, 'hybrid':0}}}
+        data = {'courses':[{'dept':'CS', 'course':'1A'}],
+                'filters':{'types':{'standard':0, 'online':1, 'hybrid':0}}}
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
@@ -96,7 +97,8 @@ class TestFilters(TestCase):
         )
 
     def test_filters_days_returns_n_courses(self):
-        data = {'courses':[{'dept':'DANC','course':'14'}], 'filters':{'days':{'M':1, 'T':0, 'W':0, 'Th':0, 'F':0, 'S':0, 'U':0}}}
+        data = {'courses':[{'dept':'DANC', 'course':'14'}],
+                'filters':{'days':{'M':1, 'T':0, 'W':0, 'Th':0, 'F':0, 'S':0, 'U':0}}}
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
@@ -128,7 +130,8 @@ class TestFilters(TestCase):
         self.assertEqual(len(result[0].keys()), 3)
 
     def test_filters_time_returns_n_courses(self):
-        data = {'courses':[{'dept':'DANC','course':'14'}], 'filters': {'time':{'start':'7:30 AM', 'end':'12:00 PM'}}}
+        data = {'courses':[{'dept':'DANC', 'course':'14'}],
+                'filters': {'time':{'start':'7:30 AM', 'end':'12:00 PM'}}}
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 

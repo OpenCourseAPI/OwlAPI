@@ -14,7 +14,8 @@ tinydb = "*"
 gunicorn = "*"
 maya = "*"
 pytest = "*"
-Flask = "*"
+flask = "*"
+pylint = "*"
 
 
 [dev-packages]
