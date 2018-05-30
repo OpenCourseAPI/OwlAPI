@@ -22,7 +22,7 @@ DB_ROOT = 'db/'
 
 CAMPUS_LIST = {'fh':'201911', 'da':'201912', 'test':'test'}
 
-COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWZH])?'
+COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
@@ -350,7 +350,7 @@ def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
     department and course for the /urls route.
     :param dept: str identifier for department
     :param course: str
-    
+
     :return: dict[str, str]
     """
     return {"dept": f"{dept}", "course": f"{course}"}
