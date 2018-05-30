@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-DB_DIR = '../db'
+from settings import DB_DIR
 
 SCHEDULE = 'schedule.html'
 TERM_CODES = {'fh': '201911', 'da': '201912'}
@@ -28,7 +28,9 @@ def main():
         content = mine(term)
         parse(content, db=temp)
 
-        rename(temp_path, join(DB_DIR, f'{term}_database.json')) and remove(temp_path)
+        if rename(temp_path, join(DB_DIR, f'{term}_database.json')):
+            remove(temp_path)
+
         db = TinyDB(join(DB_DIR, f'{term}_database.json'))
         print(term, db.tables())
 
@@ -81,7 +83,7 @@ def parse(content, db):
         dept_desc = t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
-        s = defaultdict(lambda: defaultdict(list))  # key: list()
+        s = defaultdict(lambda: defaultdict(list))
         for r in rows:
             cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 

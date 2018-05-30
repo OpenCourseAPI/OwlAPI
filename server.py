@@ -15,7 +15,8 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
-application = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
+application = Flask(__name__,
+                    template_folder="../frontend/templates", static_folder='../frontend/static')
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
@@ -114,8 +115,7 @@ def api_many(campus):
 
     courses = get_many(db=db, data=data, filters=filters)
     if not courses:  # null case from get_one (invalid param or filter)
-        return 'Error! Could not find one or more course selectors ' \
-               'in database', 404
+        return 'Error! Could not find one or more course selectors in database', 404
 
     json = jsonify({'courses': courses})
     return json, 200
@@ -135,13 +135,14 @@ def get_one(db: TinyDB, data: dict, filters: dict):
                     (if it passes filters)
     """
 
+    course = dict()
     data_dept = data['dept']
     if data_dept in db.tables():
         table = db.table(f'{data_dept}')
         entries = table.all()
 
         if 'course' not in data:
-          return entries
+            return entries
 
         data_course = data['course']
 
@@ -153,7 +154,8 @@ def get_one(db: TinyDB, data: dict, filters: dict):
 
         except StopIteration:
             return dict()
-        return course if course else dict()
+
+    return course
 
 
 def get_many(db: TinyDB, data: dict(), filters: dict()):
