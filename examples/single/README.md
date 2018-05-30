@@ -30,7 +30,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
   <body>
     <div id="input" class="content">
       <button onclick="submitRequest(this.parentElement)">GET</button>
-      <span>https://floof.li/single</span>
+      <span>https://floof.li/fh/single</span>
       <input id="data" type="text" value="?dept=CS&course=2C">
     </div>
     <pre id="output" class="content"></pre>
@@ -40,7 +40,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
       var data = input.querySelector('#data');
       var output = document.querySelector('#output');
 
-      var url = new URL("https://floof.li/single" + data.value);
+      var url = new URL("https://floof.li/fh/single" + data.value);
 
       fetch(url, {
           method: 'GET'
