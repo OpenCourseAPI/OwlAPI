@@ -46,8 +46,10 @@ class DataModel:
             raise ValueError(f'Passed path is not a directory: {db_dir}')
         self.db_dir: str = db_dir
         self.quarter_instances = weakref.WeakValueDictionary()
+        self.schools = {quarter.school_name: quarter.school
+                        for quarter in self.quarters}
 
-    def register_quarter(self, quarter: QuarterView):
+    def register_quarter(self, quarter: 'QuarterView'):
         """
         Stores weak reference to passed quarter so that in the future,
         the program can avoid creating duplicates of the same quarter.
@@ -64,7 +66,7 @@ class DataModel:
         self.quarter_instances[quarter.name] = quarter
 
     @property
-    def quarters(self) -> ty.Iterable[QuarterView]:
+    def quarters(self) -> ty.Iterable['QuarterView']:
         """
         Returns generator yielding quarter
         :return:
@@ -97,7 +99,7 @@ class SchoolView:
         self.name = name
 
     @property
-    def quarters(self) -> ty.Iterable[QuarterView]:
+    def quarters(self) -> ty.Iterable['QuarterView']:
         """
         Iterates over and yields views for each quarter that is
         associated with school.
@@ -237,13 +239,13 @@ class QuarterView:
 
     @property
     def school(self) -> SchoolView:
-        return SchoolView(self.model, self.name)
+        return SchoolView(self.model, self.school_name)
 
     @property
     def path(self) -> str:
         return os.path.join(self.model.db_dir, self.name)
 
-    def __getitem__(self, dept_name: str) -> DepartmentView:
+    def __getitem__(self, dept_name: str) -> 'DepartmentView':
         return self.db
 
     def __repr__(self) -> str:
