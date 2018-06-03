@@ -14,7 +14,7 @@ except ImportError as e:
                       'does not exist, it can be generated using the '
                       'generate_test_data.py script') from e
 
-test_database = TinyDB(join(settings.TEST_DB_DIR, 'test_database.json'))
+test_database = TinyDB(join(settings.TEST_RESOURCES_DIR, 'test_database.json'))
 
 
 class TestGenerateURL(TestCase):

@@ -6,7 +6,7 @@ from tinydb import TinyDB
 # No guarantees can be made about .path when this script is used, so
 # use of settings.py is somewhat difficult.
 TESTS_DIR = os.path.join(os.path.dirname(__file__))
-TEST_DB_DIR = os.path.join(TESTS_DIR, 'test_db')
+TEST_DATA_DIR = os.path.join(TESTS_DIR, 'test_db')
 TEST_RESOURCES_DIR = os.path.abspath(
     os.path.join(TESTS_DIR, '..', 'test_resources'))
 TEST_DATABASE_PATH = os.path.join(TEST_RESOURCES_DIR, 'test_database.json')
@@ -14,7 +14,7 @@ test_database = TinyDB(TEST_DATABASE_PATH)
 
 
 def generate_data_py():
-    with open(os.path.join(TEST_DB_DIR, 'data.py'), 'w') as file:
+    with open(os.path.join(TEST_DATA_DIR, 'data.py'), 'w') as file:
         # test_sample_url_can_be_generated
         data = {'dept': 'test_dept', 'course': 'test_course'}
 
