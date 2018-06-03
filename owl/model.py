@@ -6,11 +6,14 @@ import tinydb
 import typing as ty
 import string
 import weakref
+import maya
 
 DB_EXT = '.json'
+FH = 'FH'
+DA = 'DA'
 SCHOOL_NAMES_BY_CODE = {
-    '1': 'FH',
-    '2': 'DA'
+    '1': FH,
+    '2': DA
 }
 QUARTER_NAMES_BY_CODE = {
     1: 'summer',
@@ -18,6 +21,41 @@ QUARTER_NAMES_BY_CODE = {
     3: 'winter',
     4: 'spring'
 }
+DAYS = 'M', 'T', 'W', 'Th', 'F', 'S', 'U'
+DAYS_DECREASING_LEN = sorted(DAYS, key=lambda day: -len(day))
+
+STANDARD_TYPE = 'standard'
+ONLINE_TYPE = 'online'
+HYBRID_TYPE = 'hybrid'
+
+SCHOOL_TYPE_CODES = {
+    FH: {'W': ONLINE_TYPE, 'Y': HYBRID_TYPE},
+    DA: {'Z': ONLINE_TYPE, 'Y': HYBRID_TYPE}
+}
+
+# Section fields
+COURSE_ID_KEY = 'course'
+CRN_KEY = 'CRN'
+DESCRIPTION_KEY = 'desc'
+STATUS_KEY = 'status'
+DAYS_KEY = 'days'
+TIME_KEY = 'time'
+START_KEY = 'start'
+END_KEY = 'end'
+ROOM_KEY = 'room'
+CAMPUS_KEY = 'campus'
+UNITS_KEY = 'units'
+INSTRUCTOR_KEY = 'instructor'
+SEATS_KEY = 'seats'
+WAIT_SEATS_KEY = 'wait_seats'
+WAIT_CAP_KEY = 'wait_cap'
+
+# section keywords
+ONLINE = 'ONLINE'
+OPEN = 'Open'
+WAITLIST = 'Waitlist'
+FULL = 'Full'
+TBA = 'TBA'
 
 # Type aliases
 
@@ -31,6 +69,15 @@ SECTION_ENTRY_T = ty.Dict[COURSE_FIELD_T, COURSE_VALUE_T]
 SECTION_DATA_T = ty.List[SECTION_ENTRY_T]
 COURSE_DATA_T = ty.Dict[CRN_T, SECTION_DATA_T]
 DEPT_DATA_T = ty.Dict[COURSE_ID_T, COURSE_DATA_T]
+
+
+class DataError(Exception):
+    """
+    Raised when accessed data cannot be handled.
+    Distinct from ValueError because ValueError indicates invalid data
+    has been passed, while DataError indicates data that has been
+    retrieved from model.
+    """
 
 
 class DataModel:
@@ -120,6 +167,10 @@ class SchoolView:
         """
         return {name: quarter for name, quarter in self.model.quarters if
                 quarter.school_name == self.name}
+
+    @property
+    def type_codes(self) -> ty.Dict[str, str]:
+        return SCHOOL_TYPE_CODES[self.name]
 
     def __repr__(self) -> str:
         return f'SchoolView[{self.name}]'
@@ -345,6 +396,10 @@ class CourseQuarterView:
     def sections(self):
         return self.Sections(self)
 
+    def __repr__(self) -> str:
+        return f'CourseQuarterView[dept: {self.department.name}, ' \
+               f'course: {self.name}]'
+
     class Sections:
         """
         Helper class for accessing sections within Course
@@ -352,24 +407,209 @@ class CourseQuarterView:
         def __init__(self, course: 'CourseQuarterView'):
             self.course = course
 
-        def __getitem__(self, section_name: str):
-            return SectionQuarterView(
-                self.course,
-                section_name,
-                self.course.data[section_name]
-            )
+        def __getitem__(self, section_name: str) -> 'SectionQuarterView':
+            # If section cannot be found, raise a more readable
+            # key error.
+            try:
+                data = self.course.data[section_name]
+            except KeyError as e:
+                raise KeyError(f'No Section exists in {self} with id: '
+                               f'{repr(section_name)}') from e
+
+            # Get Section from data
+            section = SectionQuarterView(self.course, data)
+            assert section.crn == section_name, \
+                f'section crn: {section.crn} does not match that requested: ' \
+                + section_name
+            return section
+
+        def __repr__(self):
+            return f'{self.course}.Sections'
 
 
 class SectionQuarterView:
+    # All these fields should be equal if multiple entries exist.
+    EQUAL_FIELDS = (
+        COURSE_ID_KEY, CRN_KEY, DESCRIPTION_KEY, STATUS_KEY, UNITS_KEY,
+        INSTRUCTOR_KEY, SEATS_KEY, WAIT_SEATS_KEY, WAIT_CAP_KEY
+    )
+
     def __init__(
             self,
             course: CourseQuarterView,
-            name: str,
             data: SECTION_DATA_T
     ):
         self.course = course
-        self.name = name
         self.data = data
+
+        # Sanity check; Ensure assumptions made about data are true
+        for field_name in self.EQUAL_FIELDS:
+            if not all(entry[field_name] == self.data[0][field_name] for
+                       entry in self.data):
+                raise ValueError(
+                    f'{self}: {field_name} fields do not match in data')
+
+    @property
+    def course_id(self) -> str:
+        """
+        Returns full identity of section, as listed in database under
+        the key 'course' (a somewhat misleading field name).
+        :return: str
+        """
+        return self.data[0][COURSE_ID_KEY]
+
+    @property
+    def crn(self) -> str:
+        return self.data[0][CRN_KEY]
+
+    @property
+    def description(self) -> str:
+        return self.data[0][DESCRIPTION_KEY]
+
+    @property
+    def section_type(self) -> str:
+        return self.school.type_codes.get(self.course_id[-1], STANDARD_TYPE)
+
+    @property
+    def days(self) -> ty.Set[str]:
+        """
+        Gets set of days during which class/section meets.
+        :return: Set[str]
+        :raises DataError if non-online entry has 'TBA' or other value
+                    in 'days' field.
+        """
+        days = set()
+        for entry in self.data:
+            days |= self._unpack_entry_days(entry)
+        return days
+
+    def _unpack_entry_days(self, entry: SECTION_ENTRY_T) -> ty.Set[str]:
+        if entry[ROOM_KEY] == ONLINE:
+            return set()
+        s = entry[DAYS_KEY]
+        if s == TBA:
+            raise DataError(f'{self} Entry days have not yet been entered')
+        days = set()
+        for day_code in DAYS_DECREASING_LEN:
+            if day_code in s:
+                s = s.replace(day_code, '')
+                days.add(day_code)
+        return days
+
+    @property
+    def start_date(self) -> maya.MayaDT:
+        return maya.when(self.data[0][START_KEY])
+
+    @property
+    def end_date(self) -> maya.MayaDT:
+        return maya.when(self.data[0][END_KEY])
+
+    @property
+    def durations(self) -> ty.List['ClassDuration']:
+        """
+        Gets list of meeting durations, for times over the week that
+        a section meets in person.
+        :return: List[ClassDuration]
+        :raises DataError if unexpected values, such as 'TBA' are found
+                    in data entries that are not online.
+        """
+        durations = []
+        for entry in self.data:
+            room = entry[ROOM_KEY]
+            if room == ONLINE:
+                continue
+            start_s, end_s = entry[TIME_KEY].split('-')
+            start, end = maya.when(start_s), maya.when(end_s)
+            for day in self._unpack_entry_days(entry):
+                durations.append(ClassDuration(day, room, start, end))
+        return durations
+
+    @property
+    def rooms(self) -> ty.Set['str']:
+        rooms = set()
+        [rooms.add(duration.room) for duration in self.durations]
+        return rooms
+
+    @property
+    def status(self) -> str:
+        return self.data[0][STATUS_KEY]
+
+    @property
+    def campus(self) -> str:
+        return self.data[0][CAMPUS_KEY]
+
+    @property
+    def units(self) -> float:
+        return float(self.data[0][UNITS_KEY])
+
+    @property
+    def instructor_name(self) -> str:
+        return self.data[0][INSTRUCTOR_KEY]
+
+    @property
+    def open_seats_available(self) -> int:
+        return int(self.data[0][SEATS_KEY])
+
+    @property
+    def waitlist_seats_available(self) -> int:
+        return int(self.data[0][WAIT_SEATS_KEY])
+
+    @property
+    def waitlist_capacity(self) -> int:
+        return int(self.data[0][WAIT_CAP_KEY])
+
+    @property
+    def school_name(self) -> str:
+        return self.quarter.school_name
+
+    @property
+    def school(self) -> SchoolView:
+        return self.quarter.school
+
+    @property
+    def _online_data(self) -> SECTION_ENTRY_T or None:
+        for entry in self.data:
+            if entry[ROOM_KEY] == ONLINE:
+                return entry
+
+    @property
+    def _offline_data(self) -> SECTION_ENTRY_T or None:
+        for entry in self.data:
+            if entry[ROOM_KEY] != ONLINE:
+                return entry
+
+    @property
+    def department(self) -> DepartmentQuarterView:
+        return self.course.department
+
+    @property
+    def quarter(self) -> QuarterView:
+        return self.department.quarter
+
+    @property
+    def model(self) -> DataModel:
+        return self.quarter.model
+
+    def __repr__(self) -> str:
+        return f'SectionQuarterView[cid: {self.course_id}, crn: {self.crn}]'
+
+
+class ClassDuration:
+    """
+    Class storing data about a specific meeting time for a class, on a
+    specific day.
+    """
+    def __init__(
+            self,
+            day: str,
+            room: str,
+            start: maya.MayaDT,
+            end: maya.MayaDT
+    ):
+        self.day = day
+        self.room = room
+        self.start = start
+        self.end = end
 
 
 class InstructorView:
