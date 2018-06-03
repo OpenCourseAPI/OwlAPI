@@ -86,7 +86,7 @@ class DataModel:
         """
         if quarter.model is not self:
             raise ValueError(
-                f'Passed quarter {quarter} has owl {quarter.owl}, '
+                f'Passed quarter {quarter} has model {quarter.model}, '
                 f'cannot register it with {self}')
         if quarter.name in self.quarter_instances:
             raise ValueError(f'Passed quarter {quarter} is a duplicate of '
@@ -99,7 +99,7 @@ class DataModel:
 
 # The reason that the classes below are considered views is that they
 # do not contain their own data, and multiple instances may be able to
-# be created that all refer to the same data in the owl.
+# be created that all refer to the same data in the model.
 
 
 class SchoolView:
@@ -133,24 +133,24 @@ class QuarterView:
     """
     # In order to avoid loading into memory many duplicates of the same
     # database file, QuarterViews will throw an exception if a
-    # duplicate QuarterView is created using the same owl + name.
+    # duplicate QuarterView is created using the same model + name.
     #
-    # To get a QuarterView of a specific quarter, in a specific owl,
+    # To get a QuarterView of a specific quarter, in a specific model,
     # get_quarter() factory method is intended to be used, rather than
     # the constructor.
     #
-    # The get_quarter() method will check if the owl has a previously
+    # The get_quarter() method will check if the model has a previously
     # stored weak reference to a QuarterView with the same name, and
     # return it if it exists. Otherwise, it creates a new QuarterView,
     # which during its __init__ method, registers itself with
-    # the owl.
+    # the model.
 
     def __init__(self, model: DataModel, name: str):
         """
         Instantiates a new QuarterView.
         When instantiated, QuarterView will attempt to register
-        itself with its associated owl. If a duplicate QuarterView
-        exists (with the same owl and name) a ValueError is raised.
+        itself with its associated model. If a duplicate QuarterView
+        exists (with the same model and name) a ValueError is raised.
         :param model: DataModel
         :param name: str
         :raises ValueError if QuarterView is a duplicate.
@@ -164,7 +164,7 @@ class QuarterView:
             raise ValueError(f'Invalid Quarter number: {self.quarter_number}'
                              f'for {self}')
 
-        # Register QuarterView with owl. If QuarterView is a
+        # Register QuarterView with model. If QuarterView is a
         # duplicate, then something has gone wrong, and an exception
         # is raised by the method.
         model.register_quarter(self)
@@ -177,7 +177,7 @@ class QuarterView:
     @classmethod
     def get_quarter(cls, model: DataModel, name: str) -> 'QuarterView':
         """
-        Returns the quarter of the passed name in the passed owl.
+        Returns the quarter of the passed name in the passed model.
         If a QuarterView exists that has already been instantiated
         with the passed name, the pre-existing QuarterView will be
         returned.
@@ -202,7 +202,7 @@ class QuarterView:
         if not self._db:
             if not os.path.exists(self.path):
                 raise ValueError(
-                    f'Path does not exist for {self} in {self.owl}')
+                    f'Path does not exist for {self} in {self.model}')
             self._db = tinydb.TinyDB(self.path)
         return self._db
 
@@ -309,6 +309,21 @@ class DepartmentQuarterView:
     @property
     def model(self):
         return self.quarter.model
+
+
+class CourseQuarterView:
+    """
+    View onto course data for a single quarter.
+    """
+    def __init__(
+            self,
+            department: DepartmentQuarterView,
+            name: str,
+            data: COURSE_DATA_T
+    ):
+        self.department = department
+        self.name = name
+        self.data = data
 
 
 class InstructorView:
