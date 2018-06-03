@@ -340,6 +340,9 @@ class QuarterView:
         def db(self) -> tinydb.TinyDB:
             return self.quarter.db
 
+        def __repr__(self) -> str:
+            return f'{self.quarter}.Departments'
+
 
 class DepartmentQuarterView:
     """
@@ -363,6 +366,10 @@ class DepartmentQuarterView:
     def courses(self):
         return self.Courses(self)
 
+    def __repr__(self) -> str:
+        return f'DepartmentQuarterView[dept: {self.name}, ' \
+               f'qtr: {self.quarter.name}]'
+
     class Courses:
         """
         Helper class for accessing courses within department.
@@ -371,11 +378,18 @@ class DepartmentQuarterView:
             self.department = department
 
         def __getitem__(self, course_name: str):
-            return CourseQuarterView(
-                self.department,
-                course_name,
-                self.department.data[course_name]
-            )
+            try:
+                return CourseQuarterView(
+                    self.department,
+                    course_name,
+                    self.department.data[course_name]
+                )
+            except KeyError as e:
+                raise KeyError(f'No course found named: {course_name} in '
+                               f'{self}') from e
+
+        def __repr__(self) -> str:
+            return f'{self.department}.Courses'
 
 
 class CourseQuarterView:
@@ -526,6 +540,12 @@ class SectionQuarterView:
 
     @property
     def rooms(self) -> ty.Set['str']:
+        """
+        Gets set of rooms in which class meets.
+        Set will be empty if course is online.
+        :return: Set[str]
+        :raises DataError if unexpected values are found in data.
+        """
         rooms = set()
         [rooms.add(duration.room) for duration in self.durations]
         return rooms
@@ -547,6 +567,10 @@ class SectionQuarterView:
         return self.data[0][INSTRUCTOR_KEY]
 
     @property
+    def instructor(self) -> InstructorView:
+        return InstructorView(self.model, self.instructor_name)
+
+    @property
     def open_seats_available(self) -> int:
         return int(self.data[0][SEATS_KEY])
 
@@ -565,18 +589,6 @@ class SectionQuarterView:
     @property
     def school(self) -> SchoolView:
         return self.quarter.school
-
-    @property
-    def _online_data(self) -> SECTION_ENTRY_T or None:
-        for entry in self.data:
-            if entry[ROOM_KEY] == ONLINE:
-                return entry
-
-    @property
-    def _offline_data(self) -> SECTION_ENTRY_T or None:
-        for entry in self.data:
-            if entry[ROOM_KEY] != ONLINE:
-                return entry
 
     @property
     def department(self) -> DepartmentQuarterView:
