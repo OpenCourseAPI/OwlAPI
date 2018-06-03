@@ -170,6 +170,14 @@ class SchoolView:
 
     @property
     def type_codes(self) -> ty.Dict[str, str]:
+        """
+        Gets dictionary of course section type codes that are specific
+        to individual schools.
+        :return: Dict[
+                        str (course section id suffix),
+                        str (course section type)
+                    ]
+        """
         return SCHOOL_TYPE_CODES[self.name]
 
     def __repr__(self) -> str:
@@ -306,10 +314,19 @@ class QuarterView:
 
     @property
     def path(self) -> str:
+        """
+        Gets path to database file which contains quarter data.
+        :return: str path
+        """
         return os.path.join(self.model.db_dir, self.name) + DB_EXT
 
     @property
     def departments(self) -> 'Departments':
+        """
+        Gets helper class that provides methods for accessing
+        departments and associated information.
+        :return: QuarterView.Departments
+        """
         return self.Departments(self)
 
     def __repr__(self) -> str:
@@ -364,6 +381,11 @@ class DepartmentQuarterView:
 
     @property
     def courses(self):
+        """
+        Gets helper class instance for accessing courses
+        within department.
+        :return: DepartmentQuarterView.Courses
+        """
         return self.Courses(self)
 
     def __repr__(self) -> str:
@@ -408,6 +430,11 @@ class CourseQuarterView:
 
     @property
     def sections(self):
+        """
+        Gets helper class instance for accessing sections
+        within course.
+        :return: CourseQuarterView.Sections
+        """
         return self.Sections(self)
 
     def __repr__(self) -> str:
@@ -468,29 +495,59 @@ class SectionQuarterView:
         """
         Returns full identity of section, as listed in database under
         the key 'course' (a somewhat misleading field name).
+        'Course' field usually contains department 2-4 letter code,
+        Followed by a number indicating Campus, Course id,
+        section index, and section type.
+
+        ex: "ACTG F067.03W"
+             ^^^^ ^^^^ ^^^
+             1111 2333 445
+
+            1: Department code
+            2: School
+            3: Course id
+            4: Section index
+            5: Section type ('standard', 'hybrid', or 'online)
+
         :return: str
         """
         return self.data[0][COURSE_ID_KEY]
 
     @property
     def crn(self) -> str:
+        """
+        Gets course registration number for course.
+        :return: str of digits of length 5.
+        """
         return self.data[0][CRN_KEY]
 
     @property
     def description(self) -> str:
+        """
+        Gets description of course.
+        This usually takes the form of an all-capital course title,
+        ex: "ADVANCED TAX ACCOUNTING I"
+        Database spelling may vary.
+        :return: str description.
+        """
         return self.data[0][DESCRIPTION_KEY]
 
     @property
     def section_type(self) -> str:
+        """
+        Returns type of course section.
+        :return: str 'standard', 'hybrid' or 'online'
+        """
         return self.school.type_codes.get(self.course_id[-1], STANDARD_TYPE)
 
     @property
     def days(self) -> ty.Set[str]:
         """
         Gets set of days during which class/section meets.
-        :return: Set[str]
+        example result: {'T', 'Th', 'F'}
         :raises DataError if non-online entry has 'TBA' or other value
                     in 'days' field.
+        :return: Set[str]
         """
         days = set()
         for entry in self.data:
@@ -498,24 +555,55 @@ class SectionQuarterView:
         return days
 
     def _unpack_entry_days(self, entry: SECTION_ENTRY_T) -> ty.Set[str]:
+        """
+        Gets set of days that are listed in passed entry.
+        example result: {'T', 'Th', 'F'}
+        :param entry: SECTION_ENTRY_T (Dict[str, str])
+        :raises DataError if non-online entry has 'TBA' or other value
+                    in 'days' field.
+        :return: Set[str]
+        """
         if entry[ROOM_KEY] == ONLINE:
+            # If entry is online, entry will not have a valid room.
+            # (usually 'TBA')
+            # Return empty set, since no in-persons meetings are in
+            # this entry.
             return set()
         s = entry[DAYS_KEY]
         if s == TBA:
+            # If days are 'TBA' and class is not online, raise an
+            # exception rather than trying to handle odd edge case.
             raise DataError(f'{self} Entry days have not yet been entered')
+        # Iterate over days in order of longest to shortest,
+        # removing day codes from temporary string as they are found.
+        # This is so that a day with a longer code, ex: 'Th' will be
+        # found and removed from the string before 'T'
+        # otherwise, the day code 'Th' would produce result: {'T'} and
+        # then be unable to parse the remaining 'h'.
         days = set()
         for day_code in DAYS_DECREASING_LEN:
             if day_code in s:
                 s = s.replace(day_code, '')
                 days.add(day_code)
+        if s:
+            raise DataError(f'Could not parse {entry[DAYS_KEY]}, '
+                            f'unknown day code: {s})')
         return days
 
     @property
     def start_date(self) -> maya.MayaDT:
+        """
+        Gets start date of class.
+        :return: MayaDT
+        """
         return maya.when(self.data[0][START_KEY])
 
     @property
     def end_date(self) -> maya.MayaDT:
+        """
+        Gets end date of class.
+        :return: MayaDT
+        """
         return maya.when(self.data[0][END_KEY])
 
     @property
@@ -541,7 +629,7 @@ class SectionQuarterView:
     @property
     def rooms(self) -> ty.Set['str']:
         """
-        Gets set of rooms in which class meets.
+        Gets set of rooms (or occasionally other locations) in which
         Set will be empty if course is online.
         :return: Set[str]
         :raises DataError if unexpected values are found in data.
@@ -552,54 +640,108 @@ class SectionQuarterView:
 
     @property
     def status(self) -> str:
+        """
+        Gets status of course section.
+        :return: str 'OPEN', 'WAITLIST', 'FULL'
+        """
         return self.data[0][STATUS_KEY]
 
     @property
     def campus(self) -> str:
+        """
+        Returns campus code for campus.
+        (Not the same thing as 'school').
+        :return: str (ex: 'FH')
+        """
         return self.data[0][CAMPUS_KEY]
 
     @property
     def units(self) -> float:
+        """
+        Gets number of units of course section.
+        :return: float
+        """
         return float(self.data[0][UNITS_KEY])
 
     @property
     def instructor_name(self) -> str:
+        """
+        Gets name of instructor.
+        :return: str
+        """
         return self.data[0][INSTRUCTOR_KEY]
 
     @property
     def instructor(self) -> InstructorView:
+        """
+        Gets data view of instructor for this course section.
+        :return: InstanceView
+        """
         return InstructorView(self.model, self.instructor_name)
 
     @property
     def open_seats_available(self) -> int:
+        """
+        Gets number of open seats in course section.
+        :return: int
+        """
         return int(self.data[0][SEATS_KEY])
 
     @property
     def waitlist_seats_available(self) -> int:
+        """
+        Gets number of open waitlist seats in course section.
+        :return: int
+        """
         return int(self.data[0][WAIT_SEATS_KEY])
 
     @property
     def waitlist_capacity(self) -> int:
+        """
+        Gets overall capacity of waitlist, both open and filled.
+        :return: int
+        """
         return int(self.data[0][WAIT_CAP_KEY])
 
     @property
     def school_name(self) -> str:
+        """
+        Gets name of school
+        :return: str, (ex: 'DA')
+        """
         return self.quarter.school_name
 
     @property
     def school(self) -> SchoolView:
+        """
+        Gets course section's school data view.
+        :return: SchoolView
+        """
         return self.quarter.school
 
     @property
     def department(self) -> DepartmentQuarterView:
+        """
+        Gets view of data for department that course section is under.
+        :return: DepartmentQuarterView
+        """
         return self.course.department
 
     @property
     def quarter(self) -> QuarterView:
+        """
+        Gets view of data for quarter that course section
+        occurs within.
+        :return: QuarterView
+        """
         return self.department.quarter
 
     @property
     def model(self) -> DataModel:
+        """
+        Gets data model.
+        :return: DataModel
+        """
         return self.quarter.model
 
     def __repr__(self) -> str:
