@@ -8,7 +8,7 @@ from server import generate_url, get_one, get_many
 
 # Try to get generated data.
 try:
-    from .test_db import data as test_data
+    from tests.test_db import data as test_data
 except ImportError as e:
     raise ImportError('Test Data could not be imported. If the data.py file '
                       'does not exist, it can be generated using the '
