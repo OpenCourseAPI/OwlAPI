@@ -2,10 +2,11 @@
 This module contains the data model used by server.py.
 """
 import os
-import tinydb
 import typing as ty
 import string
 import weakref
+
+import tinydb
 import maya
 
 DB_EXT = '.json'
@@ -672,7 +673,7 @@ class SectionQuarterView:
         return self.data[0][INSTRUCTOR_KEY]
 
     @property
-    def instructor(self) -> InstructorView:
+    def instructor(self) -> 'InstructorView':
         """
         Gets data view of instructor for this course section.
         :return: InstanceView
