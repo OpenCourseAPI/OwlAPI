@@ -30,9 +30,7 @@ DEPT_ID_T = str
 SECTION_ENTRY_T = ty.Dict[COURSE_FIELD_T, COURSE_VALUE_T]
 SECTION_DATA_T = ty.List[SECTION_ENTRY_T]
 COURSE_DATA_T = ty.Dict[CRN_T, SECTION_DATA_T]
-DEPT_DATA_T = ty.Dict[str, ty.Dict[COURSE_ID_T, COURSE_DATA_T]]
-# todo: Identify this ^^^ str here and what it means.
-QTR_DATA_T = ty.Dict[DEPT_ID_T, DEPT_DATA_T]
+DEPT_DATA_T = ty.Dict[COURSE_ID_T, COURSE_DATA_T]
 
 
 class DataModel:
@@ -260,7 +258,7 @@ class QuarterView:
         return os.path.join(self.model.db_dir, self.name) + DB_EXT
 
     @property
-    def departments(self):
+    def departments(self) -> 'Departments':
         return self.Departments(self)
 
     def __repr__(self) -> str:
@@ -284,11 +282,11 @@ class QuarterView:
                     f'Passed department name: {dept_name} does not'
                     f'exist in {self}.')
 
-            dept_data: DEPT_DATA_T = self.db.table(dept_name).all()
+            dept_data: DEPT_DATA_T = self.db.table(dept_name).all()[0]
             return DepartmentQuarterView(self.quarter, dept_name, dept_data)
 
         @property
-        def db(self):
+        def db(self) -> tinydb.TinyDB:
             return self.quarter.db
 
 
@@ -297,7 +295,7 @@ class DepartmentQuarterView:
     View onto data of a department's data for a specific quarter.
     """
 
-    def __init__(self, quarter: QuarterView, name: str, data: DEPT_DATA_T):
+    def __init__(self, quarter: 'QuarterView', name: str, data: DEPT_DATA_T):
         self.quarter = quarter
         self.name = name
         self.data = data
@@ -310,6 +308,24 @@ class DepartmentQuarterView:
     def model(self):
         return self.quarter.model
 
+    @property
+    def courses(self):
+        return self.Courses(self)
+
+    class Courses:
+        """
+        Helper class for accessing courses within department.
+        """
+        def __init__(self, department: 'DepartmentQuarterView'):
+            self.department = department
+
+        def __getitem__(self, course_name: str):
+            return CourseQuarterView(
+                self.department,
+                course_name,
+                self.department.data[course_name]
+            )
+
 
 class CourseQuarterView:
     """
@@ -317,11 +333,41 @@ class CourseQuarterView:
     """
     def __init__(
             self,
-            department: DepartmentQuarterView,
+            department: 'DepartmentQuarterView',
             name: str,
             data: COURSE_DATA_T
     ):
         self.department = department
+        self.name = name
+        self.data = data
+
+    @property
+    def sections(self):
+        return self.Sections(self)
+
+    class Sections:
+        """
+        Helper class for accessing sections within Course
+        """
+        def __init__(self, course: 'CourseQuarterView'):
+            self.course = course
+
+        def __getitem__(self, section_name: str):
+            return SectionQuarterView(
+                self.course,
+                section_name,
+                self.course.data[section_name]
+            )
+
+
+class SectionQuarterView:
+    def __init__(
+            self,
+            course: CourseQuarterView,
+            name: str,
+            data: SECTION_DATA_T
+    ):
+        self.course = course
         self.name = name
         self.data = data
 
