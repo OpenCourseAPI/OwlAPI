@@ -9,3 +9,6 @@ frontend/static/README.md
 .pytest_cache/
 tests/test_db/data.py
 !test_database.json
+
+# Generated test files
+test_resources/data_model_test_dir*
