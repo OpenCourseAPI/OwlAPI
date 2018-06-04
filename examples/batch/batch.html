@@ -9,12 +9,74 @@
         display: grid;
         grid-template-rows: auto;
       }
+      span, button, input, pre { font: 1.2em monospace; }
+      input {
+        width: 25vw;
+        border: 0;
+        border-bottom: 1px dashed black;
+      }
+
+      label.dept, label.course, label.status { grid-column: 1 / 2; }
+
+      input, select { grid-column: 2 / 3; }
+
+      button
+
+      .input {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        grid-gap: 16px;
+      }
+
+      .content { margin:0 auto; }
     </style>
   </head>
   <body>
+    <div class="content">
+      <div id="input" class="input">
+        <label for="dept" class="dept-field">Department</label>
+        <input id="dept" type="text" value="CS">
 
+        <label for="course" class="course-field">Course</label>
+        <input id="course" type="text" value="2A">
+
+        <label for="status" class="status-field">Status</label>
+        <select>
+         <option value="open" selected>Open</option>
+         <option value="waitlist">Waitlist</option>
+         <option value="full">Full</option>
+        </select>
+
+
+      </div>
+      <button onclick="submitRequest()">POST</button>
+      <span>https://floof.li/fh/batch</span>
+    </div>
+    <pre id="output" class="output content"></pre>
   </body>
   <script>
+    function submitRequest(input) {
+      var input = document .querySelector('#input');
 
+
+
+      var output = document.querySelector('#output');
+
+      var url = new URL("https://floof.li/fh/single" + data.value);
+
+      fetch(url, {
+          method: 'GET'
+        })
+        .then(response => {
+          return Promise.resolve(response.json());
+        })
+        .then(json => {
+          console.log(json);
+          output.innerHTML = JSON.stringify(json, null, 2);
+        })
+        .catch(err => {
+          console.log(err);
+      });
+    }
   </script>
 </html>
