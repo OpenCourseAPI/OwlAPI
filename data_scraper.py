@@ -1,6 +1,6 @@
+from collections import defaultdict
 from os import makedirs, rename, remove
 from os.path import join, exists
-from collections import defaultdict
 from re import match
 
 # 3rd party
@@ -8,27 +8,30 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
+from settings import DB_DIR
+
 SCHEDULE = 'schedule.html'
 TERM_CODES = {'fh': '201911', 'da': '201912'}
 HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
            'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
-DB_ROOT = 'db/'
 
-COURSE_PATTERN = '[FD]0*(\d*\w?)\.?\d*([YWZH])?'
+COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 
 def main():
-    if not exists(DB_ROOT):
-        makedirs(DB_ROOT, exist_ok=True)
+    if not exists(DB_DIR):
+        makedirs(DB_DIR, exist_ok=True)
 
     for term in TERM_CODES.values():
-        temp_path = join(DB_ROOT, 'temp.json')
+        temp_path = join(DB_DIR, 'temp.json')
         temp = TinyDB(temp_path)
 
         content = mine(term)
         parse(content, db=temp)
 
-        rename(temp_path, join(DB_ROOT, f'{term}_database.json')) and remove(temp_path)
-        db = TinyDB(join(DB_ROOT, f'{term}_database.json'))
+        if rename(temp_path, join(DB_DIR, f'{term}_database.json')):
+            remove(temp_path)
+
+        db = TinyDB(join(DB_DIR, f'{term}_database.json'))
         print(term, db.tables())
 
 
@@ -53,11 +56,12 @@ def mine(term, write=False):
 
     data = [('termcode', f'{term}'), ]
 
-    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', headers=headers, data=data)
+    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList',
+    headers=headers, data=data)
     res.raise_for_status()
 
     if write:
-        with open(f'{SCHEDULE}', "wb") as file:
+        with open(f'{join(DB_DIR, SCHEDULE)}', "wb") as file:
             for chunk in res.iter_content(chunk_size=512):
                 if chunk:
                     file.write(chunk)
@@ -79,7 +83,7 @@ def parse(content, db):
         dept_desc = t['dept-desc']
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
-        s = defaultdict(lambda: defaultdict(list))  # key: list()
+        s = defaultdict(lambda: defaultdict(list))
         for r in rows:
             cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 
@@ -93,9 +97,9 @@ def parse(content, db):
                     data = dict(zip(HEADERS, cols))
 
                     crn = data['CRN']
-                    if len(s[key][crn]) > 0:
+                    if s[key][crn]:
                         comb = set(s[key][crn][0].items()) ^ set(data.items())
-                        if len(comb) == 0:
+                        if not comb:
                             continue
 
                     data['units'] = data['units'].lstrip()
