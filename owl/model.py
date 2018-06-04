@@ -5,6 +5,7 @@ import os
 import typing as ty
 import string
 import weakref
+import re
 
 import tinydb
 import maya
@@ -22,8 +23,7 @@ QUARTER_NAMES_BY_CODE = {
     3: 'winter',
     4: 'spring'
 }
-DAYS = 'M', 'T', 'W', 'Th', 'F', 'S', 'U'
-DAYS_DECREASING_LEN = sorted(DAYS, key=lambda day: -len(day))
+DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 STANDARD_TYPE = 'standard'
 ONLINE_TYPE = 'online'
@@ -253,8 +253,8 @@ class QuarterView:
     def db(self) -> tinydb.TinyDB:
         """
         Database getter;
-        Database will only be created when this property is accessed,
-        and then stored for future uses.
+        Database will only be created when this property is first
+        accessed, and will then stored for future uses.
         :return: TinyDB
         """
         if not self._db:
@@ -550,10 +550,8 @@ class SectionQuarterView:
                     in 'days' field.
         :return: Set[str]
         """
-        days = set()
-        for entry in self.data:
-            days |= self._unpack_entry_days(entry)
-        return days
+        return {day for entry in self.data
+                for day in self._unpack_entry_days(entry)}
 
     def _unpack_entry_days(self, entry: SECTION_ENTRY_T) -> ty.Set[str]:
         """
@@ -575,20 +573,10 @@ class SectionQuarterView:
             # If days are 'TBA' and class is not online, raise an
             # exception rather than trying to handle odd edge case.
             raise DataError(f'{self} Entry days have not yet been entered')
-        # Iterate over days in order of longest to shortest,
-        # removing day codes from temporary string as they are found.
-        # This is so that a day with a longer code, ex: 'Th' will be
-        # found and removed from the string before 'T'
-        # otherwise, the day code 'Th' would produce result: {'T'} and
-        # then be unable to parse the remaining 'h'.
-        days = set()
-        for day_code in DAYS_DECREASING_LEN:
-            if day_code in s:
-                s = s.replace(day_code, '')
-                days.add(day_code)
-        if s:
-            raise DataError(f'Could not parse {entry[DAYS_KEY]}, '
-                            f'unknown day code: {s})')
+        matches = re.match(DAYS_PATTERN, entry[DAYS_KEY])
+        if not matches:
+            raise DataError(f'Could not parse days string: {entry[DAYS_KEY]}')
+        days = set(matches.groups()) - {None}
         return days
 
     @property
@@ -635,9 +623,7 @@ class SectionQuarterView:
         :return: Set[str]
         :raises DataError if unexpected values are found in data.
         """
-        rooms = set()
-        [rooms.add(duration.room) for duration in self.durations]
-        return rooms
+        return {duration.room for duration in self.durations}
 
     @property
     def status(self) -> str:
