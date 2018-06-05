@@ -8,20 +8,14 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR
+from settings import DB_DIR, CURRENT_TERM_CODES, COURSE_PATTERN, HEADERS, SCHEDULE
 
-SCHEDULE = 'schedule.html'
-TERM_CODES = {'fh': '201911', 'da': '201912'}
-HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
-           'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
-
-COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 
 def main():
     if not exists(DB_DIR):
         makedirs(DB_DIR, exist_ok=True)
 
-    for term in TERM_CODES.values():
+    for term in CURRENT_TERM_CODES.values():
         temp_path = join(DB_DIR, 'temp.json')
         temp = TinyDB(temp_path)
 
@@ -37,7 +31,7 @@ def main():
 
 def mine(term, write=False):
     '''
-    Mine will hit the database for foothill's class listings and write it to a file.
+    Mine will hit the database for foothill's class listings
     :param term: (str) the term to mine
     :param write: (bool) write to file?
     :return res.content: (json) the html body
