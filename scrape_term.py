@@ -1,7 +1,7 @@
-from collections import defaultdict
 from os import makedirs, rename, remove
 from os.path import join, exists
 from re import match
+from collections import defaultdict
 
 # 3rd party
 import requests
