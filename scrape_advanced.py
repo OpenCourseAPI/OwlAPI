@@ -5,35 +5,37 @@ from collections import defaultdict
 
 from selenium_login import scrape_cookies, kill_driver
 from scrape_term import get_key
-from settings import DB_DIR, ADVANCED_HEADERS, PAST_TERM_CODES, SCHEDULE
+from settings import OLD_DB_DIR, ADVANCED_HEADERS, PAST_TERM_CODES, SCHEDULE
 
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
+
 def main():
-    if not exists(DB_DIR):
-        makedirs(DB_DIR, exist_ok=True)
+    if not exists(OLD_DB_DIR):
+        makedirs(OLD_DB_DIR, exist_ok=True)
 
     cookies = scrape_cookies()
     try:
         for term in PAST_TERM_CODES.values():
-            temp_path = join(DB_DIR, 'temp.json')
+            temp_path = join(OLD_DB_DIR, 'temp.json')
             temp = TinyDB(temp_path)
 
-            content = mine(term, cookies)
+            content = mine(term, cookies, write=False)
             advanced_parse(content, db=temp)
 
-            if rename(temp_path, join(DB_DIR, f'old_{term}_database.json')):
+            if rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json')):
                 remove(temp_path)
 
-            db = TinyDB(join(DB_DIR, f'old_{term}_database.json'))
+            db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
             print(term, db.tables())
     except KeyboardInterrupt:
         kill_driver()
     finally:
         kill_driver()
+
 
 def mine(term, cookies, write=False):
     '''
@@ -162,39 +164,6 @@ def mine(term, cookies, write=False):
       ('path', '1'),
     ]
 
-    # data = [
-    #   ('rsts', 'dummy'),
-    #   ('crn', 'dummy'),
-    #   ('term_in', f'{term}'),
-    #   ('sel_subj', 'dummy'),
-    #   ('sel_subj', 'ACTG'),
-    #   ('sel_day', 'dummy'),
-    #   ('sel_schd', 'dummy'),
-    #   ('sel_insm', 'dummy'),
-    #   ('sel_camp', 'dummy'),
-    #   ('sel_camp', '%'),
-    #   ('sel_levl', 'dummy'),
-    #   ('sel_sess', 'dummy'),
-    #   ('sel_sess', '%'),
-    #   ('sel_instr', 'dummy'),
-    #   ('sel_instr', '%'),
-    #   ('sel_ptrm', 'dummy'),
-    #   ('sel_ptrm', '%'),
-    #   ('sel_attr', 'dummy'),
-    #   ('sel_crse', ''),
-    #   ('sel_title', ''),
-    #   ('sel_from_cred', ''),
-    #   ('sel_to_cred', ''),
-    #   ('begin_hh', '0'),
-    #   ('begin_mi', '0'),
-    #   ('begin_ap', 'a'),
-    #   ('end_hh', '0'),
-    #   ('end_mi', '0'),
-    #   ('end_ap', 'a'),
-    #   ('SUB_BTN', 'Section Search'),
-    #   ('path', '1'),
-    # ]
-
     res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced',
                         headers=headers, cookies=cookies, data=data)
     res.raise_for_status()
@@ -206,6 +175,10 @@ def mine(term, cookies, write=False):
                     file.write(chunk)
 
     return res.content
+
+
+class BlankRow(Exception):
+    pass
 
 
 def advanced_parse(content, db):
@@ -220,26 +193,45 @@ def advanced_parse(content, db):
     table = soup.find('table', {'class': 'datadisplaytable'})
     table_rows = table.find_all('tr')
 
-    for tr in table_rows:
-        cols = tr.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
+    table_headers = list()
+    start_idx = 0
+    for i, tr in enumerate(table_rows):
+        header_cols = tr.find_all('th', {'class': 'ddheader'})
+        for th in header_cols:
+            table_headers.append(get_parsed_text(th))
+        if table_headers:
+            start_idx = i
+            break
 
-        if cols and len(cols) >= len(ADVANCED_HEADERS):
-            s = defaultdict(lambda: defaultdict(list))
+    for tr in table_rows[start_idx:]:
+        try:
+            cols = tr.find_all('td', {'class': 'dddefault'})
 
-            for i, c in enumerate(cols):
-                a = c.find('a')
-                cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
+            if len(cols) > 0:
+                s = defaultdict(lambda: defaultdict(list))
 
-            data = dict(zip(ADVANCED_HEADERS, cols))
+                num_blank = 0
+                for i, c in enumerate(cols):
+                    a = c.find('a')
+                    cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
+                    if cols[i].isspace():
+                        num_blank += 1
 
-            subject = data['subject']
-            key = data['course']
-            crn = data['CRN']
+                if num_blank > len(cols) - num_blank:
+                    raise BlankRow
 
-            s[key][crn].append(data)
+                data = dict(zip(table_headers, cols))
 
-            j = dict(s)
-            db.table(f'{subject}').insert(j)
+                subject = data['Subj']
+                key = data['Crse']
+                crn = data['CRN']
+
+                s[key][crn].append(data)
+
+                j = dict(s)
+                db.table(f'{subject}').insert(j)
+        except BlankRow:
+            continue
 
 
 def get_parsed_text(tag):

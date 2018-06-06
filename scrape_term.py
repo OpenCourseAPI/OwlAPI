@@ -78,8 +78,8 @@ def parse(content, db):
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
         s = defaultdict(lambda: defaultdict(list))
-        for r in rows:
-            cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
+        for tr in rows:
+            cols = tr.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 
             if cols:
                 for i, c in enumerate(cols):
