@@ -208,9 +208,19 @@ class Request:
 
         @property
         def user_string(self) -> str:
+            """
+            Issue representation as a string that may be presented to
+            the user of the api.
+            :return: str
+            """
             return f'{self.field_name}: {self.msg}'
 
         def __repr__(self):
+            """
+            Issue representation as a string intended for display to
+            a developer.
+            :return: str
+            """
             return f'Issue[field: {self.field_name}, msg: {self.msg}]'
 
 
