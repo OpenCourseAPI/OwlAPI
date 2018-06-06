@@ -9,16 +9,6 @@ and without requiring error code lookups.
 
 import typing as ty
 
-# fields
-DEPARTMENT_KEY = 'dept'
-COURSE_KEY = 'course'
-QUARTER_KEY = 'quarter'
-
-# Argument keywords
-ANY = 'any'
-ALL = 'all'
-LATEST = 'latest'
-
 
 class RequestException(Exception):
     """
@@ -51,7 +41,7 @@ class Request:
                     'This can be done with the wrap_request_arguments '
                     'decorator.')
             for k, v in req_args.unused().items():
-                self.issues.append(Request.Issue(k, 'Unused argument.'))
+                self.issues.append(Request.Issue(repr(k), 'Unused argument.'))
 
         if self._check_for_unused_args:
             check_for_unused_args()
@@ -85,6 +75,7 @@ class Request:
         else:
             issues = field.validate(v)
             self.issues += issues
+            v = field.modify(v)
         super().__setattr__(k, v)
 
     def raise_issues(self) -> None:
@@ -95,7 +86,8 @@ class Request:
         """
         user_msg = '\n'.join(issue.user_string for issue in self.issues)
         raise RequestException(
-            'Issues were encountered during request initialization',
+            'Issues were encountered during request initialization: '
+            f'{self.issues}',
             user_msg=f'The Following issues were encountered'
                      f'while creating request: {user_msg}'
         )
@@ -189,7 +181,7 @@ class Request:
             :param value: Any
             :return: Any
             """
-            return self.modifier(value)
+            return self.modifier(value) if self.modifier else value
 
         def issue(self, msg: str) -> 'Request.Issue':
             """
@@ -236,6 +228,10 @@ class RequestArguments(dict):
     def __getitem__(self, k):
         self.retrieved.add(k)
         return super().__getitem__(k)
+
+    def get(self, k, d=None):
+        self.retrieved.add(k)
+        return super().get(k, d)
 
     def unused(self) -> ty.Dict[ty.Any, ty.Any]:
         """
