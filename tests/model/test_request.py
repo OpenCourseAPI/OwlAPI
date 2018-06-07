@@ -64,3 +64,13 @@ class TestRequestField(TestCase):
     def test_field_returns_issue_when_invalid_value_passed(self):
         field = owl.request.Request.Field(t=int, valid=(2,))
         self.assertEqual(1, len(field.validate(3)))
+
+    def test_custom_validator_can_add_issue_successfully(self):
+        def must_exceed_5(x):
+            if x > 5:
+                return []
+            else:
+                return ['Value was not greater than 5']
+
+        field = owl.request.Request.Field(t=int, validator=must_exceed_5)
+        self.assertEqual(1, len(field.validate(4)))

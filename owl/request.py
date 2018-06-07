@@ -106,7 +106,8 @@ class Request:
                 valid: ty.Container[ty.Any] = (),
                 default=None,
                 type_coercion=True,
-                modifier: ty.Callable[[ty.Any], ty.Any] = None
+                modifier: ty.Callable[[ty.Any], ty.Any] = None,
+                validator: ty.Callable[[ty.Any], ty.List[str]] = None
         ) -> None:
             self.name: str = '<Unnamed Field>'  # Set externally by Request
             self.type = t
@@ -114,6 +115,7 @@ class Request:
             self.default = default
             self.type_coercion = type_coercion
             self.modifier = modifier
+            self.validator = validator
 
         def validate(self, value: ty.Any) -> ty.List['Request.Issue']:
             """
@@ -172,6 +174,9 @@ class Request:
                 issue = validate_value(value)
                 if issue:
                     issues.append(issue)
+
+            if self.validator:
+                issues += (self.issue(msg) for msg in self.validator(value))
 
             return issues
 
