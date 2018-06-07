@@ -40,7 +40,6 @@ def get_cookies(cookies_list):
     cookies_dict = {}
     for cookie in cookies_list:
         cookies_dict[cookie['name']] = cookie['value']
-    print(cookies_dict)
     return cookies_dict
 
 

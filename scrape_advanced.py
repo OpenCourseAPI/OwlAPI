@@ -4,35 +4,44 @@ from re import compile
 from collections import defaultdict
 
 from selenium_login import scrape_cookies, kill_driver
-from scrape_term import get_key
-from settings import OLD_DB_DIR, ADVANCED_HEADERS, PAST_TERM_CODES, SCHEDULE
+from settings import OLD_DB_DIR, SCHEDULE
 
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
+CAMPUS_RANGE = (1, 2)
+YEAR_RANGE = (8, 0)
+QUARTER_RANGE = (4, 1)
 
 def main():
     if not exists(OLD_DB_DIR):
         makedirs(OLD_DB_DIR, exist_ok=True)
 
+    codes = generate_term_codes()
+    print(codes)
+
     cookies = scrape_cookies()
+    print(cookies)
+
+    temp_path = join(OLD_DB_DIR, 'temp.json')
+
     try:
-        for term in PAST_TERM_CODES.values():
-            temp_path = join(OLD_DB_DIR, 'temp.json')
+        for term in codes:
             temp = TinyDB(temp_path)
 
             content = mine(term, cookies, write=False)
-            advanced_parse(content, db=temp)
+            if not advanced_parse(content,db=temp):
+                continue
 
-            if rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json')):
-                remove(temp_path)
+            rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json'))
 
             db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
             print(term, db.tables())
     except KeyboardInterrupt:
         kill_driver()
+        remove(temp_path)
     finally:
         kill_driver()
 
@@ -190,48 +199,62 @@ def advanced_parse(content, db):
     '''
     soup = BeautifulSoup(content, 'html5lib')
 
-    table = soup.find('table', {'class': 'datadisplaytable'})
-    table_rows = table.find_all('tr')
+    try:
+        table = soup.find('table', {'class': 'datadisplaytable'})
+        table_rows = table.find_all('tr')
 
-    table_headers = list()
-    start_idx = 0
-    for i, tr in enumerate(table_rows):
-        header_cols = tr.find_all('th', {'class': 'ddheader'})
-        for th in header_cols:
-            table_headers.append(get_parsed_text(th))
-        if table_headers:
-            start_idx = i
-            break
+        table_headers = list()
+        start_idx = 0
+        for i, tr in enumerate(table_rows):
+            header_cols = tr.find_all('th', {'class': 'ddheader'})
+            for th in header_cols:
+                table_headers.append(get_parsed_text(th))
+            if table_headers:
+                start_idx = i
+                break
 
-    for tr in table_rows[start_idx:]:
-        try:
-            cols = tr.find_all('td', {'class': 'dddefault'})
+        for tr in table_rows[start_idx:]:
+            try:
+                cols = tr.find_all('td', {'class': 'dddefault'})
 
-            if len(cols) > 0:
-                s = defaultdict(lambda: defaultdict(list))
+                if len(cols) > 0:
+                    s = defaultdict(lambda: defaultdict(list))
 
-                num_blank = 0
-                for i, c in enumerate(cols):
-                    a = c.find('a')
-                    cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
-                    if cols[i].isspace():
-                        num_blank += 1
+                    num_blank = 0
+                    for i, c in enumerate(cols):
+                        a = c.find('a')
+                        cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
+                        if cols[i].isspace():
+                            num_blank += 1
 
-                if num_blank > len(cols) - num_blank:
-                    raise BlankRow
+                    if num_blank > len(cols) - num_blank:
+                        raise BlankRow
 
-                data = dict(zip(table_headers, cols))
+                    data = dict(zip(table_headers, cols))
 
-                subject = data['Subj']
-                key = data['Crse']
-                crn = data['CRN']
+                    subject = data['Subj']
+                    key = data['Crse']
+                    crn = data['CRN']
 
-                s[key][crn].append(data)
+                    s[key][crn].append(data)
 
-                j = dict(s)
-                db.table(f'{subject}').insert(j)
-        except BlankRow:
-            continue
+                    j = dict(s)
+                    db.table(f'{subject}').insert(j)
+            except BlankRow:
+                continue
+    except AttributeError as e:
+        print(e)
+        return False
+    return True
+
+
+def generate_term_codes():
+    codes = []
+    for i in range(YEAR_RANGE[0], YEAR_RANGE[1], -1):
+        for j in range(QUARTER_RANGE[0], QUARTER_RANGE[1], -1):
+            for k in range(CAMPUS_RANGE[0], CAMPUS_RANGE[1], 1):
+                codes.append(f'201{i}{j}{k}')
+    return codes
 
 
 def get_parsed_text(tag):
