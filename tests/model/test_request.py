@@ -4,7 +4,6 @@ import owl.request
 
 
 class TestRequest(TestCase):
-
     def test_request_can_be_constructed_using_correct_args(self):
         self.ExampleRequest(a='foo', b='bar')
         # no checks needed here.
@@ -43,6 +42,30 @@ class TestRequest(TestCase):
         request = CapitalizingRequest({'a': 'foo'})
         self.assertEqual('FOO', request.test_field)
 
+    def test_sub_request_field_propagates_issues(self):
+        self.assertRaises(
+            owl.request.RequestException,
+            lambda: SuperRequest({'a': {'b': 5}})
+        )
+
+    def test_that_raising_of_sub_request_issues_is_delayed(self):
+        class Super2Request(owl.request.Request):
+            sub_request_a = owl.request.Request.SubRequestField(SubRequest)
+            sub_request_b = owl.request.Request.SubRequestField(SubRequest)
+
+            def unpack(self, request_args: 'owl.request.RequestArguments'):
+                self.sub_request_a = request_args.get('a')
+                self.sub_request_b = request_args.get('b')
+
+        try:
+            Super2Request({'a': {'b': 6}, 'b': {'b': 5}})
+        except owl.request.RequestException as e:
+            self.assertEqual(2, len(e.issues))
+
+    def test_sub_request_field_does_not_raise_issues_with_correct_args(self):
+        req = SuperRequest({'a': {'b': 'foo'}})
+        self.assertEqual('foo', req.sub_request.test_field)
+
     class ExampleRequest(owl.request.Request):
         test_field_1 = owl.request.Request.Field(t=str, valid=('foo', 'bar'))
         test_field_2 = owl.request.Request.Field(t=str, valid=('foo', 'bar'))
@@ -74,3 +97,20 @@ class TestRequestField(TestCase):
 
         field = owl.request.Request.Field(t=int, validator=must_exceed_5)
         self.assertEqual(1, len(field.validate(4)))
+
+
+#########
+
+
+class SubRequest(owl.request.Request):
+    test_field = owl.request.Request.Field(t=str)
+
+    def unpack(self, request_args: 'owl.request.RequestArguments'):
+        self.test_field = request_args.get('b')
+
+
+class SuperRequest(owl.request.Request):
+    sub_request = owl.request.Request.SubRequestField(SubRequest)
+
+    def unpack(self, request_args: 'owl.request.RequestArguments'):
+        self.sub_request = request_args.get('a')

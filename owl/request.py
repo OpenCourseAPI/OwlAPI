@@ -16,9 +16,15 @@ class RequestException(ValueError):
     RequestException may be given a string to return to the caller
     as part of a 400 error.
     """
-    def __init__(self, *args, user_msg='Bad Request'):
+    def __init__(
+            self,
+            *args,
+            user_msg='Bad Request',
+            issues: ty.List['Request.Issue'] = ()
+    ) -> None:
         super().__init__(*args)
         self.user_msg = user_msg
+        self.issues = issues
 
 
 class Request:
@@ -29,6 +35,7 @@ class Request:
     def __init__(self, *args, **kwargs):
         self.issues: ty.List['Request.Issue'] = []
         self.checked_fields: ty.Dict[str, 'Request.Field'] = {}
+        self.has_parent: bool = kwargs.pop('__has_parent', False)
 
         req_args = RequestArguments(*args, **kwargs)
         self.unpack(req_args)
@@ -45,7 +52,10 @@ class Request:
 
         if self._check_for_unused_args:
             check_for_unused_args()
-        if self._raise_issues_after_unpacking and self.issues:
+        if all((
+                self._raise_issues_after_unpacking,
+                self.issues,
+                not self.has_parent)):
             self.raise_issues()
 
     def unpack(self, request_args: 'RequestArguments') -> None:
@@ -89,7 +99,8 @@ class Request:
             'Issues were encountered during request initialization: '
             f'{self.issues}',
             user_msg=f'The Following issues were encountered'
-                     f'while creating request: {user_msg}'
+                     f'while creating request: {user_msg}',
+            issues=self.issues
         )
 
     def __repr__(self) -> str:
@@ -105,7 +116,7 @@ class Request:
                 t: ty.TypeVar = object,
                 valid: ty.Container[ty.Any] = (),
                 default=None,
-                type_coercion=True,
+                type_coercion=False,
                 modifier: ty.Callable[[ty.Any], ty.Any] = None,
                 validator: ty.Callable[[ty.Any], ty.List[str]] = None
         ) -> None:
@@ -126,18 +137,24 @@ class Request:
             """
             issues = []
 
+            try:
+                modified_v = self.modify(value)
+            except (ValueError, TypeError):
+                modified_v = value
+
+            if self.type_coercion:
+                try:
+                    coerced_value = self.type(modified_v)
+                except (ValueError, TypeError):
+                    coerced_value = modified_v
+            else:
+                coerced_value = modified_v
+
             def validate_type(v: ty.Any) -> 'Request.Issue' or None:
-                if isinstance(value, self.type):
+                if isinstance(coerced_value, self.type):
                     return None
 
                 if self.type_coercion:
-                    try:
-                        coerced_value = self.type(value)
-                    except (ValueError, TypeError):
-                        pass
-                    else:
-                        if isinstance(coerced_value, self.type):
-                            return None
                     return self.issue(
                         f'Cannot coerce passed value: {v} of type: '
                         f'{type(v).__name__} to expected '
@@ -148,18 +165,13 @@ class Request:
                     f'{v} has type: {type(v).__name__}.')
 
             def validate_value(v: ty.Any) -> 'Request.Issue' or None:
-                try:
-                    modified_v = self.modify(v)
-                except (ValueError, TypeError):
-                    modified_v = v
-
-                if modified_v not in self.valid_values:
-                    if modified_v == v:
+                if coerced_value not in self.valid_values:
+                    if coerced_value == v:
                         return self.issue(
                             f'Passed value: {v} is not valid. List of valid'
                             f'Values: {self.valid_values}.')
                     return self.issue(
-                        f'Passed value: {v}, (modified to {modified_v})'
+                        f'Passed value: {v}, (modified to {coerced_value})'
                         f'is not valid. List of valid values: '
                         f'{self.valid_values}.'
                     )
@@ -176,7 +188,8 @@ class Request:
                     issues.append(issue)
 
             if self.validator:
-                issues += (self.issue(msg) for msg in self.validator(value))
+                issues += (self.issue(msg) for msg in
+                           self.validator(coerced_value))
 
             return issues
 
@@ -201,6 +214,16 @@ class Request:
 
         def __repr__(self) -> str:
             return f'Request.Field[{self.name}, type: {self.type.__name__}]'
+
+    class SubRequestField(Field):
+        def __init__(self, t):
+            super().__init__(
+                t,
+                modifier=lambda args: t(args, __has_parent=True),
+                validator=lambda request:
+                    [f'Sub-Field {repr(issue.field_name)}: {issue.msg}'
+                     for issue in request.issues]
+            )
 
     class Issue:
         """
