@@ -10,7 +10,7 @@ and without requiring error code lookups.
 import typing as ty
 
 
-class RequestException(Exception):
+class RequestException(ValueError):
     """
     Exception raised when a request has received bad data.
     RequestException may be given a string to return to the caller
@@ -58,7 +58,7 @@ class Request:
         raise NotImplementedError(
             'unpack() should be overridden by subclasses.')
 
-    def __setattr__(self, k: ty.Any, v: ty.Any):
+    def __setattr__(self, k: ty.Any, v: ty.Any) -> None:
         """
         If attribute assigned to has same key as a Request.Field
         instance owned by the class, the assigned value is first
@@ -207,7 +207,7 @@ class Request:
         Class detailing a specific issue found with a request.
         """
 
-        def __init__(self, field_name: str, msg: str):
+        def __init__(self, field_name: str, msg: str) -> None:
             self.field_name = field_name
             self.msg = msg
 
@@ -220,7 +220,7 @@ class Request:
             """
             return f'{self.field_name}: {self.msg}'
 
-        def __repr__(self):
+        def __repr__(self) -> str:
             """
             Issue representation as a string intended for display to
             a developer.
