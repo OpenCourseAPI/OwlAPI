@@ -1,3 +1,4 @@
+import sys
 from os import makedirs, rename, remove
 from os.path import join, exists
 from re import compile
@@ -12,8 +13,8 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
 CAMPUS_RANGE = (1, 2)
-YEAR_RANGE = (8, 0)
-QUARTER_RANGE = (4, 1)
+YEAR_RANGE = (0, 8)
+QUARTER_RANGE = (1, 4)
 
 def main():
     if not exists(OLD_DB_DIR):
@@ -29,16 +30,20 @@ def main():
 
     try:
         for term in codes:
+            sys.stdout.write(f'[{term}] | Scraping…\r')
+            sys.stdout.flush()
+
             temp = TinyDB(temp_path)
 
             content = mine(term, cookies, write=False)
-            if not advanced_parse(content,db=temp):
+            if not advanced_parse(content, db=temp, term=term):
                 continue
 
             rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json'))
 
             db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
-            print(term, db.tables())
+            print(f'[{term}] | ', db.tables())
+
     except KeyboardInterrupt:
         kill_driver()
         remove(temp_path)
@@ -190,7 +195,7 @@ class BlankRow(Exception):
     pass
 
 
-def advanced_parse(content, db):
+def advanced_parse(content, db, term=''):
     '''
     Advanced parse takes the content from the request and then populates the database with the data
     :param content: (html) The html containing the courses
@@ -243,16 +248,16 @@ def advanced_parse(content, db):
             except BlankRow:
                 continue
     except AttributeError as e:
-        print(e)
+        print(f'[{term}] | ERROR: {e}')
         return False
     return True
 
 
 def generate_term_codes():
     codes = []
-    for i in range(YEAR_RANGE[0], YEAR_RANGE[1], -1):
-        for j in range(QUARTER_RANGE[0], QUARTER_RANGE[1], -1):
-            for k in range(CAMPUS_RANGE[0], CAMPUS_RANGE[1], 1):
+    for i in range(YEAR_RANGE[0], YEAR_RANGE[1] + 1):
+        for j in range(QUARTER_RANGE[0], QUARTER_RANGE[1] + 1):
+            for k in range(CAMPUS_RANGE[0], CAMPUS_RANGE[1] + 1):
                 codes.append(f'201{i}{j}{k}')
     return codes
 
