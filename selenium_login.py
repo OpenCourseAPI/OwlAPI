@@ -20,13 +20,13 @@ def scrape_cookies():
 
     try:
         driver.execute_script("doLogin()")
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 3).until(
             EC.title_is("MyPortal / Foothill-De Anza College District")
         )
 
         driver.get("https://myportal.fhda.edu/render.UserLayoutRootNode.uP?uP_tparam=utf&utf=%2fcp%2fip%2flogin%3fsys%3dsctssb%26url%3dhttps%3A%2F%2Fbanssb.fhda.edu%2FPROD%2Fbwskfcls.p_sel_crse_search")
 
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 3).until(
             EC.presence_of_element_located((By.ID, "ssbbackurl"))
         )
     finally:

@@ -4,13 +4,15 @@ from os.path import join, exists
 from re import compile
 from collections import defaultdict
 
-from selenium_login import scrape_cookies, kill_driver
-from settings import OLD_DB_DIR, SCHEDULE, ADVANCED_FORM_DATA
-
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
+
+from selenium_login import scrape_cookies, kill_driver
+from settings import OLD_DB_DIR, SCHEDULE, ADVANCED_FORM_DATA
+
+from colorama import init, Fore, Style
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
@@ -22,23 +24,23 @@ def main():
         makedirs(OLD_DB_DIR, exist_ok=True)
 
     codes = generate_term_codes()
-    print(codes)
+    print(f'Loaded {len(codes)} term codes')
+
+    print_c(f'Scraping session cookie…\r')
 
     cookies = scrape_cookies()
-    print(cookies)
+    print(f"Scraped session cookie {cookies['CPSESSID']}", end=f"\n{'-'*79}\n")
 
     temp_path = join(OLD_DB_DIR, 'temp.json')
 
     try:
         for term in codes:
-            sys.stdout.write(f'[{term}] | Scraping…\r')
-            sys.stdout.flush()
+            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] Scraping…\r")
 
             temp = TinyDB(temp_path)
 
-            dept_data = mine_dept_data(term, cookies, write=False)
-            sys.stdout.write(f'[{term}] | Mining Depts… {[dept[1] for dept in dept_data]}\r')
-            sys.stdout.flush()
+            dept_data = mine_dept_data(term, write=False)
+            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] Parsing {len(dept_data)} departments…\r")
 
             content = mine_table_data(term, dept_data, cookies, write=False)
             if not advanced_parse(content, db=temp, term=term):
@@ -47,7 +49,9 @@ def main():
             rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json'))
 
             db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
-            print(f'[{term}] | ', db.tables())
+
+            num_courses = sum([len(db.table(t).all()) for t in db.tables()])
+            print_c(f" [{term}] [{color(Fore.GREEN, 'SUCCESS')}] Mined {num_courses} courses\n")
 
     except KeyboardInterrupt:
         kill_driver()
@@ -56,22 +60,19 @@ def main():
         kill_driver()
 
 
-def mine_dept_data(term, cookies, write=False):
-    import requests
-
+def mine_dept_data(term, write=False):
+    '''
+    Mine dept data will grab the department IDs for a given quarter.
+    :param term: (str) the term to mine
+    :param write: (bool) write to file?
+    :return data (list(tuple)) the html body
+    '''
     data = [('p_calling_proc', 'bwckschd.p_disp_dyn_sched'), ('p_term', f'{term}')]
 
     res = requests.post('https://banssb.fhda.edu/PROD/bwckgens.p_proc_term_date', data=data)
     res.raise_for_status()
 
-    if write:
-        with open(f'{join(OLD_DB_DIR, SCHEDULE)}', "wb") as file:
-            for chunk in res.iter_content(chunk_size=512):
-                if not chunk:
-                    break
-
-                file.write(chunk)
-                file.flush()
+    write and write_to_file(res)
 
     soup = BeautifulSoup(res.content, "html5lib")
     select = soup.find('select', {'id': 'subj_id'})
@@ -89,7 +90,6 @@ def mine_table_data(term, dept_data, cookies, write=False):
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
-
     data = [('rsts', 'dummy'), ('crn', 'dummy'), ('term_in', f'{term}'), ('sel_subj', 'dummy')]
 
     data.extend(dept_data)
@@ -99,20 +99,9 @@ def mine_table_data(term, dept_data, cookies, write=False):
     res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced', cookies=cookies, data=data)
     res.raise_for_status()
 
-    if write:
-        with open(f'{join(OLD_DB_DIR, SCHEDULE)}', "wb") as file:
-            for chunk in res.iter_content(chunk_size=512):
-                if not chunk:
-                    break
-
-                file.write(chunk)
-                file.flush()
+    write and write_to_file(res)
 
     return res.content
-
-
-class BlankRow(Exception):
-    pass
 
 
 def advanced_parse(content, db, term=''):
@@ -168,7 +157,7 @@ def advanced_parse(content, db, term=''):
             except BlankRow:
                 continue
     except AttributeError as e:
-        print(f'[{term}] | ERROR: {e}')
+        print(f" [{term}] [{color(Fore.RED, 'ERROR!!')}] {e}")
         return False
     return True
 
@@ -182,11 +171,36 @@ def generate_term_codes():
     return codes
 
 
+class BlankRow(Exception):
+    pass
+
+
 def get_parsed_text(tag):
     text = tag.get_text()
     p = compile(r'<.*?>')
     return p.sub('', text)
 
 
+def print_c(message):
+    sys.stdout.write('\x1b[2K')
+    sys.stdout.write(message)
+    sys.stdout.flush()
+
+
+def color(c, word):
+    return f'{c}{word}{Style.RESET_ALL}'
+
+
+def write_to_file(res):
+    with open(f'{join(OLD_DB_DIR, SCHEDULE)}', "wb") as file:
+        for chunk in res.iter_content(chunk_size=512):
+            if not chunk:
+                break
+
+            file.write(chunk)
+            file.flush()
+
+
 if __name__ == '__main__':
+    init()
     main()
