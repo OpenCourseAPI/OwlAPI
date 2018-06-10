@@ -82,7 +82,7 @@ class DataError(Exception):
 
 
 class DataModel:
-    def __init__(self, db_dir: str):
+    def __init__(self, db_dir: str) -> None:
         """
         Initializer for DataModel that uses the passed db_dir path
         to find database tables and store cached values.
@@ -203,7 +203,7 @@ class QuarterView:
     # which during its __init__ method, registers itself with
     # the model.
 
-    def __init__(self, model: DataModel, name: str):
+    def __init__(self, model: DataModel, name: str) -> None:
         """
         Instantiates a new QuarterView.
         When instantiated, QuarterView will attempt to register
@@ -757,6 +757,6 @@ class InstructorView:
     """
     Class handling access of instructor data.
     """
-    def __init__(self, model: DataModel, name: str):
+    def __init__(self, model: DataModel, name: str) -> None:
         self.model: DataModel = model
         self.name: str = name
