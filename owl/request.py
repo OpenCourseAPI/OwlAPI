@@ -9,16 +9,6 @@ and without requiring error code lookups.
 
 import typing as ty
 
-# fields
-DEPARTMENT_KEY = 'dept'
-COURSE_KEY = 'course'
-QUARTER_KEY = 'quarter'
-
-# Argument keywords
-ANY = 'any'
-ALL = 'all'
-LATEST = 'latest'
-
 
 class RequestException(Exception):
     """
@@ -51,7 +41,7 @@ class Request:
                     'This can be done with the wrap_request_arguments '
                     'decorator.')
             for k, v in req_args.unused().items():
-                self.issues.append(Request.Issue(k, 'Unused argument.'))
+                self.issues.append(Request.Issue(repr(k), 'Unused argument.'))
 
         if self._check_for_unused_args:
             check_for_unused_args()
@@ -85,6 +75,7 @@ class Request:
         else:
             issues = field.validate(v)
             self.issues += issues
+            v = field.modify(v)
         super().__setattr__(k, v)
 
     def raise_issues(self) -> None:
@@ -95,7 +86,8 @@ class Request:
         """
         user_msg = '\n'.join(issue.user_string for issue in self.issues)
         raise RequestException(
-            'Issues were encountered during request initialization',
+            'Issues were encountered during request initialization: '
+            f'{self.issues}',
             user_msg=f'The Following issues were encountered'
                      f'while creating request: {user_msg}'
         )
@@ -114,7 +106,8 @@ class Request:
                 valid: ty.Container[ty.Any] = (),
                 default=None,
                 type_coercion=True,
-                modifier: ty.Callable[[ty.Any], ty.Any] = None
+                modifier: ty.Callable[[ty.Any], ty.Any] = None,
+                validator: ty.Callable[[ty.Any], ty.List[str]] = None
         ) -> None:
             self.name: str = '<Unnamed Field>'  # Set externally by Request
             self.type = t
@@ -122,6 +115,7 @@ class Request:
             self.default = default
             self.type_coercion = type_coercion
             self.modifier = modifier
+            self.validator = validator
 
         def validate(self, value: ty.Any) -> ty.List['Request.Issue']:
             """
@@ -181,6 +175,9 @@ class Request:
                 if issue:
                     issues.append(issue)
 
+            if self.validator:
+                issues += (self.issue(msg) for msg in self.validator(value))
+
             return issues
 
         def modify(self, value: ty.Any) -> ty.Any:
@@ -189,7 +186,7 @@ class Request:
             :param value: Any
             :return: Any
             """
-            return self.modifier(value)
+            return self.modifier(value) if self.modifier else value
 
         def issue(self, msg: str) -> 'Request.Issue':
             """
@@ -216,9 +213,19 @@ class Request:
 
         @property
         def user_string(self) -> str:
+            """
+            Issue representation as a string that may be presented to
+            the user of the api.
+            :return: str
+            """
             return f'{self.field_name}: {self.msg}'
 
         def __repr__(self):
+            """
+            Issue representation as a string intended for display to
+            a developer.
+            :return: str
+            """
             return f'Issue[field: {self.field_name}, msg: {self.msg}]'
 
 
@@ -236,6 +243,10 @@ class RequestArguments(dict):
     def __getitem__(self, k):
         self.retrieved.add(k)
         return super().__getitem__(k)
+
+    def get(self, k, d=None):
+        self.retrieved.add(k)
+        return super().get(k, d)
 
     def unused(self) -> ty.Dict[ty.Any, ty.Any]:
         """
