@@ -749,8 +749,15 @@ class ClassDuration:
     ):
         self.day = day
         self.room = room
-        self.start = start
-        self.end = end
+        self.interval = maya.MayaInterval(start, end)
+
+    @property
+    def start(self):
+        return self.interval.start
+
+    @property
+    def end(self):
+        return self.interval.end
 
 
 class InstructorView:
