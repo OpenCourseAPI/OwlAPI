@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
 from selenium_login import scrape_cookies, kill_driver
-from settings import OLD_DB_DIR, SCHEDULE, ADVANCED_FORM_DATA
+from settings import OLD_DB_DIR, ADVANCED_FORM_DATA
 
 from colorama import init, Fore, Style
 
@@ -22,6 +22,9 @@ QUARTER_RANGE = (1, 4)
 def main():
     if not exists(OLD_DB_DIR):
         makedirs(OLD_DB_DIR, exist_ok=True)
+
+    if not exists(join(OLD_DB_DIR, 'html')):
+        makedirs(join(OLD_DB_DIR, 'html'), exist_ok=True)
 
     codes = generate_term_codes()
     print(f'Loaded {len(codes)} term codes')
@@ -42,16 +45,25 @@ def main():
             dept_data = mine_dept_data(term, write=False)
             print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] Parsing {len(dept_data)} departments…\r")
 
-            content = mine_table_data(term, dept_data, cookies, write=False)
-            if not advanced_parse(content, db=temp, term=term):
-                continue
+            failed = False
+            for idx, variant in enumerate(ADVANCED_FORM_DATA):
+                content = mine_table_data(term, variant, dept_data, cookies, write=True)
+                if advanced_parse(content, db=temp, term=term):
+                    break
+                elif idx == len(ADVANCED_FORM_DATA) - 1:
+                    failed = True
 
-            rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json'))
+            if rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json')):
+                remove(temp_path)
 
             db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
 
             num_courses = sum([len(db.table(t).all()) for t in db.tables()])
-            print_c(f" [{term}] [{color(Fore.GREEN, 'SUCCESS')}] Mined {num_courses} courses\n")
+
+            if failed:
+                print_c(f" [{term}] [{color(Fore.RED, 'ERROR!!')}] Payload failed…\n")
+            else:
+                print_c(f" [{term}] [{color(Fore.GREEN, 'SUCCESS')}] Mined {num_courses} courses\n")
 
     except KeyboardInterrupt:
         kill_driver()
@@ -72,7 +84,7 @@ def mine_dept_data(term, write=False):
     res = requests.post('https://banssb.fhda.edu/PROD/bwckgens.p_proc_term_date', data=data)
     res.raise_for_status()
 
-    write and write_to_file(res)
+    write and write_to_file(res, term)
 
     soup = BeautifulSoup(res.content, "html5lib")
     select = soup.find('select', {'id': 'subj_id'})
@@ -82,7 +94,7 @@ def mine_dept_data(term, write=False):
     return data
 
 
-def mine_table_data(term, dept_data, cookies, write=False):
+def mine_table_data(term, payload, dept_data, cookies, write=False):
     '''
     Mine will hit the database for foothill's class listings
     :param term: (str) the term to mine
@@ -90,16 +102,18 @@ def mine_table_data(term, dept_data, cookies, write=False):
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
-    data = [('rsts', 'dummy'), ('crn', 'dummy'), ('term_in', f'{term}'), ('sel_subj', 'dummy')]
+    data = [('rsts', 'dummy'), ('crn', 'dummy'), ('term_in', f'{term}')]
+
+    data.extend(payload[0])
 
     data.extend(dept_data)
 
-    data.extend(ADVANCED_FORM_DATA)
+    data.extend(payload[1])
 
     res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced', cookies=cookies, data=data)
     res.raise_for_status()
 
-    write and write_to_file(res)
+    write and write_to_file(res, term)
 
     return res.content
 
@@ -157,7 +171,6 @@ def advanced_parse(content, db, term=''):
             except BlankRow:
                 continue
     except AttributeError as e:
-        print(f" [{term}] [{color(Fore.RED, 'ERROR!!')}] {e}")
         return False
     return True
 
@@ -191,8 +204,9 @@ def color(c, word):
     return f'{c}{word}{Style.RESET_ALL}'
 
 
-def write_to_file(res):
-    with open(f'{join(OLD_DB_DIR, SCHEDULE)}', "wb") as file:
+def write_to_file(res, term):
+
+    with open(f"{join(OLD_DB_DIR, 'html', term+'.html')}", "wb") as file:
         for chunk in res.iter_content(chunk_size=512):
             if not chunk:
                 break
