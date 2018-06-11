@@ -75,6 +75,14 @@ class ModelAccessor:
             quarter: str = LATEST,
             section_filter: owl.filter.SectionFilter = None
     ) -> owl.model.DEPT_DATA_T:
+        """
+        Gets data for a specific department in a single quarter.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param quarter: str (ex: '201812')
+        :param section_filter: filter kwargs
+        :return: DEPT_DATA_T
+        """
         # Find department view
         department_view = self.get_department(school, department, quarter)
 
@@ -96,6 +104,15 @@ class ModelAccessor:
             quarter: str = LATEST,
             section_filter: owl.filter.SectionFilter = None
     ) -> owl.model.COURSE_DATA_T:
+        """
+        Gets data for a specific course in a specific quarter.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param course: str (ex: '1A')
+        :param quarter: str (ex: '201812')
+        :param section_filter: filter kwargs
+        :return: COURSE_DATA_T
+        """
         # Find department view
         department_view = self.get_department(school, department, quarter)
         try:
@@ -115,6 +132,13 @@ class ModelAccessor:
             school: str,
             quarter: str = LATEST,
     ) -> 'owl.model.QuarterView':
+        """
+        Gets QuarterView, throwing readable access errors in the event
+        that a passed value is not found.
+        :param school: str (ex: 'fh')
+        :param quarter: str (ex: '201812')
+        :return: QuarterView
+        """
         try:
             school_view: owl.model.SchoolView = \
                 self.model.schools[school.upper()]
@@ -137,6 +161,13 @@ class ModelAccessor:
             department: str,
             quarter: str = LATEST,
     ) -> owl.model.DepartmentQuarterView:
+        """
+        Gets department view of department data for a specific quarter.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param quarter: str (ex: '201812')
+        :return: DepartmentQuarterView
+        """
         quarter_view = self.get_quarter(school, quarter)
         try:
             department_view = quarter_view.departments[department]
@@ -148,6 +179,12 @@ class ModelAccessor:
     def get_urls(
             self, school: str, quarter: str = LATEST
     ) -> ty.Dict[str, ty.Dict[str, str]]:
+        """
+        Helps list all courses, their names and departments.
+        :param school: str (ex: 'fh')
+        :param quarter: str (ex: '201812')
+        :return: Dict[str, Dict[str, str]]
+        """
         quarter_view = self.get_quarter(school, quarter)
         return {
             department_view.name: {
