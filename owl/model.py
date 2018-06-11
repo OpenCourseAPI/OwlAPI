@@ -493,6 +493,9 @@ class CourseQuarterView:
 
 
 class SectionQuarterView:
+    """
+    View onto course section data in a specific quarter.
+    """
     # All these fields should be equal if multiple entries exist.
     EQUAL_FIELDS = (
         COURSE_ID_KEY, CRN_KEY, DESCRIPTION_KEY, STATUS_KEY, UNITS_KEY,
@@ -775,11 +778,19 @@ class ClassDuration:
         self.interval = maya.MayaInterval(start, end)
 
     @property
-    def start(self):
+    def start(self) -> maya.MayaDT:
+        """
+        Gets start time of class meeting.
+        :return: MayaDT
+        """
         return self.interval.start
 
     @property
-    def end(self):
+    def end(self) -> maya.MayaDT:
+        """
+        Gets end time of class meeting.
+        :return: MayaDT
+        """
         return self.interval.end
 
 

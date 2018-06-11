@@ -34,6 +34,9 @@ class AccessException(ValueError):
 
 
 class ModelAccessor:
+    """
+    Handles access of data from a specific data model.
+    """
     def __init__(self, model: owl.model.DataModel) -> None:
         self.model = model
 
@@ -47,6 +50,18 @@ class ModelAccessor:
             quarter: str = LATEST,
             section_filter: owl.filter.SectionFilter = None
     ) -> ty.Union[owl.model.COURSE_DATA_T, owl.model.DEPT_DATA_T]:
+        """
+        Retrieves data for a department or course, as identified by
+        the api user.
+        If no course is passed, all of the specified department's data
+        is returned.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param course: str (ex: 1A) (optional)
+        :param quarter: str (ex: '201812')
+        :param section_filter: filter kwargs
+        :return: COURSE_DATA_T or DEPT_DATA_T
+        """
         if course == ALL:
             return self.get_department_data(
                 school, department, quarter, section_filter)

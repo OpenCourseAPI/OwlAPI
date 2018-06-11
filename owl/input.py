@@ -1,6 +1,6 @@
 """
-This module contains request classes, which validate and facilitate
-access to data passed by api users in get requests.
+This module contains input classes, which validate data passed by api
+users in requests.
 
 This module also allows more readable results to api users, that list
 any potential issues with their requests, before they are acted on,
@@ -15,6 +15,10 @@ from owl.schema import get_definition
 
 
 class Inputs(flask_inputs.Inputs):
+    """
+    Extends flask_inputs.Input in order to fix issues with validate method.
+    """
+
     def validate(self):
         """Validate incoming request data. Returns True if all data is valid.
         Adds each of the validator's error messages to Inputs.errors if not valid.
