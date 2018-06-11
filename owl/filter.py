@@ -41,7 +41,7 @@ class SectionFilter:
         """
         Determines whether passed course passes filter
         :param section: owl.model.SectionQuarterView
-        :return: bool
+        :return: bool (True if section passes filters)
         """
 
         # Nested functions filter courses by taking a course key and

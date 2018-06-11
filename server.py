@@ -220,7 +220,13 @@ def api_list_url(campus):
 
 
 def _get_section_filter(args):
-    return owl.filter.SectionFilter(args) if args[FILTER_KEY] else None
+    """
+    Produces a SectionFilter from passed arguments
+    :param args: request args
+    :return: SectionFilter or None
+    """
+    return owl.filter.SectionFilter(**args[FILTER_KEY]) \
+        if args[FILTER_KEY] else None
 
 
 if __name__ == '__main__':

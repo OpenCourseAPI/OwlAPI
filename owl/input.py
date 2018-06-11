@@ -20,14 +20,17 @@ class Inputs(flask_inputs.Inputs):
     """
 
     def validate(self):
-        """Validate incoming request data. Returns True if all data is valid.
-        Adds each of the validator's error messages to Inputs.errors if not valid.
+        """
+        Validate incoming request data. Returns True if all data
+        is valid.
+        Adds each of the validator's error messages to Inputs.errors if
+        not valid.
 
         :returns: Boolean
         """
         success = True
 
-        for attribute, form in self._forms.items():
+        for attribute, form in self._forms.items():  # Fixed iterator here.
             if '_input' in form._fields:
                 form.process(self._get_values(attribute, coerse=False))
             else:

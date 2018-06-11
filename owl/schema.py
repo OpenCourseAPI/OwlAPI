@@ -83,6 +83,11 @@ definitions = {
 
 
 def get_definition(definition: str):
+    """
+    Gets schema definition with the passed name.
+    :param definition: str name of definition
+    :return: dict representation of json schema.
+    """
     d = definitions[definition].copy()
     d['definitions'] = definitions
     return d
