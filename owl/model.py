@@ -166,8 +166,20 @@ class SchoolView:
         associated with school.
         :return: QuarterView
         """
-        return {name: quarter for name, quarter in self.model.quarters if
-                quarter.school_name == self.name}
+        return {name: quarter for name, quarter in self.model.quarters.items()
+                if quarter.school_name == self.name}
+
+    @property
+    def latest_quarter(self) -> 'QuarterView':
+        """
+        Gets view of most recent quarter.
+        :return: QuarterView
+        """
+        latest = None
+        for quarter in self.quarters.values():
+            if latest is None or int(quarter.name[:5]) > int(latest.name[:5]):
+                latest = quarter
+        return latest
 
     @property
     def type_codes(self) -> ty.Dict[str, str]:
@@ -411,6 +423,11 @@ class DepartmentQuarterView:
                 raise KeyError(f'No course found named: {course_name} in '
                                f'{self}') from e
 
+        def __iter__(self):
+            for course_name, course_data in self.department.data.items():
+                yield CourseQuarterView(
+                    self.department, course_name, course_data)
+
         def __repr__(self) -> str:
             return f'{self.department}.Courses'
 
@@ -464,6 +481,10 @@ class CourseQuarterView:
                 f'section crn: {section.crn} does not match that requested: ' \
                 + section_name
             return section
+
+        def __iter__(self):
+            for section_data in self.course.data.values():
+                yield SectionQuarterView(self.course, section_data)
 
         def __repr__(self):
             return f'{self.course}.Sections'

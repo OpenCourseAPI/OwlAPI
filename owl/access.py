@@ -49,10 +49,10 @@ class ModelAccessor:
     ) -> ty.Union[owl.model.COURSE_DATA_T, owl.model.DEPT_DATA_T]:
         if course == ALL:
             return self.get_department_data(
-                school, quarter, department, section_filter)
+                school, department, quarter, section_filter)
         else:
             return self.get_course_data(
-                school, quarter, department, course, section_filter)
+                school, department, course, quarter, section_filter)
 
     def get_department_data(
             self,
@@ -69,7 +69,7 @@ class ModelAccessor:
             course_view.name: {
                 section_view.crn: section_view.data for
                 section_view in course_view.sections if
-                section_filter.check(section_view)
+                not section_filter or section_filter.check(section_view)
             }
             for course_view in department_view.courses
         }
@@ -93,7 +93,7 @@ class ModelAccessor:
         return {
             section_view.crn: section_view.data for
             section_view in course_view.sections if
-            section_filter.check(section_view)
+            not section_filter or section_filter.check(section_view)
         }
 
     def _get_department(
@@ -103,12 +103,16 @@ class ModelAccessor:
             quarter: str = LATEST,
     ) -> owl.model.DepartmentQuarterView:
         try:
-            school_view: owl.model.SchoolView = self.model.schools[school]
+            school_view: owl.model.SchoolView = \
+                self.model.schools[school.upper()]
         except KeyError as e:
             raise AccessException(
-                f'No school found with identifier: {school_view}.') from e
+                f'No school found with identifier: {school}.') from e
         try:
-            quarter_view = school_view.quarters[quarter]
+            if quarter == LATEST:
+                quarter_view = school_view.latest_quarter
+            else:
+                quarter_view = school_view.quarters[quarter]
         except KeyError as e:
             raise AccessException(
                 f'No quarter in {school} with name: {quarter}.') from e
