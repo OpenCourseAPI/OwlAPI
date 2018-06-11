@@ -11,7 +11,7 @@ from tinydb import TinyDB
 from colorama import init, Fore, Style
 from selenium_login import scrape_cookies, kill_driver
 
-from settings import OLD_DB_DIR, ADVANCED_FORM_DATA
+from settings import DB_DIR, ADVANCED_FORM_DATA
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
@@ -19,11 +19,11 @@ QUARTER_RANGE = (1, 4)
 
 
 def main():
-    if not exists(OLD_DB_DIR):
-        makedirs(OLD_DB_DIR, exist_ok=True)
+    if not exists(DB_DIR):
+        makedirs(DB_DIR, exist_ok=True)
 
-    if not exists(join(OLD_DB_DIR, 'html')):
-        makedirs(join(OLD_DB_DIR, 'html'), exist_ok=True)
+    if not exists(join(DB_DIR, 'html')):
+        makedirs(join(DB_DIR, 'html'), exist_ok=True)
 
     codes = generate_term_codes()
     print_c(f'Loaded {color(Fore.CYAN, len(codes))} term codes\n')
@@ -237,7 +237,7 @@ def write_to_file(res, term):
     :param term: term code
     :return: None
     """
-    with open(f"{join(OLD_DB_DIR, 'html', term+'.html')}", "wb") as file:
+    with open(f"{join(DB_DIR, 'html', term+'.html')}", "wb") as file:
         for chunk in res.iter_content(chunk_size=512):
             if not chunk:
                 break
