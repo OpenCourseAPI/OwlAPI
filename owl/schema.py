@@ -85,5 +85,4 @@ definitions = {
 def get_definition(definition: str):
     d = definitions[definition].copy()
     d['definitions'] = definitions
-
     return d

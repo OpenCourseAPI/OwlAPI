@@ -112,9 +112,10 @@ class DataModel:
             """
             quarters: ty.Dict[str, 'QuarterView'] = {}
             for file_name in os.listdir(self.db_dir):
-                name, ext = os.path.splitext(file_name)
+                long_name, ext = os.path.splitext(file_name)
                 if ext != DB_EXT:
                     continue  # Ignore non-database files
+                name = long_name[:6]
                 if all(c in string.digits for c in name):
                     quarters[name] = QuarterView.get_quarter(self, name)
             return quarters

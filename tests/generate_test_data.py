@@ -42,9 +42,9 @@ def generate_data_py():
 def generate_data_model_test_files():
     copies = {
         'model_test_dir_a': (
-            '000011',
-            '000012',
-            '000021',
+            '000011_database',
+            '000012_database',
+            '000021_database',
         )
     }
     # create directories
