@@ -33,7 +33,7 @@ def main():
     cookies = scrape_cookies()
     print_c(f"Scraped session cookie {color(Fore.YELLOW, cookies['CPSESSID'])}\n{'-'*79}\n")
 
-    temp_path = join(OLD_DB_DIR, 'temp.json')
+    temp_path = join(DB_DIR, 'temp.json')
 
     try:
         for term in codes:
@@ -42,8 +42,8 @@ def main():
             temp = TinyDB(temp_path)
 
             dept_data = mine_dept_data(term, write=False)
-            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] \
-                      Parsing {len(dept_data)} departments…\r")
+            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] " +
+                     f"Parsing {len(dept_data)} departments…\r")
 
             failed = False
             for idx, variant in enumerate(ADVANCED_FORM_DATA):
@@ -53,10 +53,10 @@ def main():
                 elif idx == len(ADVANCED_FORM_DATA) - 1:
                     failed = True
 
-            if rename(temp_path, join(OLD_DB_DIR, f'old_{term}_database.json')):
+            if rename(temp_path, join(DB_DIR, f'old_{term}_database.json')):
                 remove(temp_path)
 
-            db = TinyDB(join(OLD_DB_DIR, f'old_{term}_database.json'))
+            db = TinyDB(join(DB_DIR, f'old_{term}_database.json'))
 
             num_courses = sum([len(db.table(t).all()) for t in db.tables()])
 
