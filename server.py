@@ -1,11 +1,11 @@
-from os.path import join
-from collections import defaultdict
-
-import typing as ty
+"""
+This module contains functions for receiving user input and formatting
+returned data.
+Retrieval logic of data is done in access.py.
+"""
 
 # 3rd party
 from flask import Flask, jsonify, request, render_template
-from tinydb import TinyDB
 
 # Owl modules
 # The reason for the relatively verbose imports is to avoid names
@@ -32,26 +32,13 @@ application = Flask(
 )
 application.after_request(add_cors_headers)
 
-DB_ROOT = 'db/'
-
-CAMPUS_LIST = {'fh': '201911', 'da': '201912', 'test': 'test'}
-
-COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
-DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
-
-FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
-DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
+CAMPUS_LIST = {'fh', 'da'}
 
 # fields
 DEPARTMENT_KEY = 'dept'
 COURSE_KEY = 'course'
 QUARTER_KEY = 'quarter'
 FILTER_KEY = 'filters'
-
-FILTER_STATUS_KEY = 'status'
-FILTER_TYPES_KEY = 'types'
-FILTER_DAYS_KEY = 'days'
-FILTER_TIME_KEY = 'time'
 
 data_model = owl.model.DataModel(settings.DB_DIR)
 accessor = owl.access.ModelAccessor(data_model)
