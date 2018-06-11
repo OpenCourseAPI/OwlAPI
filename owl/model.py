@@ -11,6 +11,7 @@ import tinydb
 import maya
 
 DB_EXT = '.json'
+DB_SUFFIX = '_database'
 FH = 'FH'
 DA = 'DA'
 SCHOOL_NAMES_BY_CODE = {
@@ -113,7 +114,7 @@ class DataModel:
             quarters: ty.Dict[str, 'QuarterView'] = {}
             for file_name in os.listdir(self.db_dir):
                 long_name, ext = os.path.splitext(file_name)
-                if ext != DB_EXT:
+                if ext != DB_EXT or not long_name.endswith(DB_SUFFIX):
                     continue  # Ignore non-database files
                 name = long_name[:6]
                 if all(c in string.digits for c in name):
@@ -332,7 +333,7 @@ class QuarterView:
         Gets path to database file which contains quarter data.
         :return: str path
         """
-        return os.path.join(self.model.db_dir, self.name) + DB_EXT
+        return os.path.join(self.model.db_dir, self.name) + DB_SUFFIX + DB_EXT
 
     @property
     def departments(self) -> 'Departments':
