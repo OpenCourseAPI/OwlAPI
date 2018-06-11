@@ -1,18 +1,17 @@
 import sys
 from os import makedirs, rename, remove
 from os.path import join, exists
-from re import compile
 from collections import defaultdict
+import re
 
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
-
-from selenium_login import scrape_cookies, kill_driver
-from settings import OLD_DB_DIR, ADVANCED_FORM_DATA
-
 from colorama import init, Fore, Style
+from selenium_login import scrape_cookies, kill_driver
+
+from settings import OLD_DB_DIR, ADVANCED_FORM_DATA
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
@@ -27,12 +26,12 @@ def main():
         makedirs(join(OLD_DB_DIR, 'html'), exist_ok=True)
 
     codes = generate_term_codes()
-    print(f'Loaded {len(codes)} term codes')
+    print_c(f'Loaded {color(Fore.CYAN, len(codes))} term codes\n')
 
     print_c(f'Scraping session cookie…\r')
 
     cookies = scrape_cookies()
-    print(f"Scraped session cookie {cookies['CPSESSID']}", end=f"\n{'-'*79}\n")
+    print_c(f"Scraped session cookie {color(Fore.YELLOW, cookies['CPSESSID'])}\n{'-'*79}\n")
 
     temp_path = join(OLD_DB_DIR, 'temp.json')
 
@@ -43,7 +42,8 @@ def main():
             temp = TinyDB(temp_path)
 
             dept_data = mine_dept_data(term, write=False)
-            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] Parsing {len(dept_data)} departments…\r")
+            print_c(f" [{term}] [{color(Fore.YELLOW, 'MINING…')}] \
+                      Parsing {len(dept_data)} departments…\r")
 
             failed = False
             for idx, variant in enumerate(ADVANCED_FORM_DATA):
@@ -84,7 +84,8 @@ def mine_dept_data(term, write=False):
     res = requests.post('https://banssb.fhda.edu/PROD/bwckgens.p_proc_term_date', data=data)
     res.raise_for_status()
 
-    write and write_to_file(res, term)
+    if write:
+        write_to_file(res, term)
 
     soup = BeautifulSoup(res.content, "html5lib")
     select = soup.find('select', {'id': 'subj_id'})
@@ -110,10 +111,12 @@ def mine_table_data(term, payload, dept_data, cookies, write=False):
 
     data.extend(payload[1])
 
-    res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced', cookies=cookies, data=data)
+    res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced',
+                         cookies=cookies, data=data)
     res.raise_for_status()
 
-    write and write_to_file(res, term)
+    if write:
+        write_to_file(res, term)
 
     return res.content
 
@@ -145,7 +148,7 @@ def advanced_parse(content, db, term=''):
             try:
                 cols = tr.find_all('td', {'class': 'dddefault'})
 
-                if len(cols) > 0:
+                if cols:
                     s = defaultdict(lambda: defaultdict(list))
 
                     num_blank = 0
@@ -190,7 +193,7 @@ class BlankRow(Exception):
 
 def get_parsed_text(tag):
     text = tag.get_text()
-    p = compile(r'<.*?>')
+    p = re.compile(r'<.*?>')
     return p.sub('', text)
 
 

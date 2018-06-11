@@ -18,6 +18,7 @@ def scrape_cookies():
     driver.execute_script(f"document.getElementById('user').value='{os.environ['MP_USER']}'")
     driver.execute_script(f"document.getElementById('pass').value='{os.environ['MP_PASS']}'")
 
+    cookies_list = list()
     try:
         driver.execute_script("doLogin()")
         WebDriverWait(driver, 3).until(
@@ -31,7 +32,8 @@ def scrape_cookies():
         )
     finally:
         cookies_list = driver.get_cookies()
-        return get_cookies(cookies_list)
+
+    return get_cookies(cookies_list)
 
 
 def get_cookies(cookies_list):

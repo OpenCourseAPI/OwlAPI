@@ -5,14 +5,14 @@ from re import match
 import itertools as itr
 import typing as ty
 
-from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
-
 # 3rd party
 from flask import Flask, jsonify, request, render_template
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-# Quart config
+from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
+
+# Flask config
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
