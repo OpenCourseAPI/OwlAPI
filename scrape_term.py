@@ -36,22 +36,9 @@ def mine(term, write=False):
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
-    headers = {
-        'Origin': 'https://banssb.fhda.edu',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'User-Agent': 'FoothillAPI',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'text/html, */*; q=0.01',
-        'Referer': 'https://banssb.fhda.edu/PROD/fhda_opencourses.P_Application',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Connection': 'keep-alive',
-    }
+    data = [('termcode', f'{term}')]
 
-    data = [('termcode', f'{term}'), ]
-
-    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList',
-    headers=headers, data=data)
+    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', data=data)
     res.raise_for_status()
 
     if write:

@@ -47,7 +47,7 @@ def main():
 
             failed = False
             for idx, variant in enumerate(ADVANCED_FORM_DATA):
-                content = mine_table_data(term, variant, dept_data, cookies, write=True)
+                content = mine_table_data(term, variant, dept_data, cookies, write=False)
                 if advanced_parse(content, db=temp, term=term):
                     break
                 elif idx == len(ADVANCED_FORM_DATA) - 1:
@@ -99,6 +99,8 @@ def mine_table_data(term, payload, dept_data, cookies, write=False):
     '''
     Mine will hit the database for foothill's class listings
     :param term: (str) the term to mine
+    :param payload: (str) data payload for request
+    :param dept_data: (str) department data payload
     :param cookies: (dict) cookies to send with POST
     :param write: (bool) write to file?
     :return res.content: (json) the html body
@@ -179,6 +181,11 @@ def advanced_parse(content, db, term=''):
 
 
 def generate_term_codes():
+    """
+    This helper generates a list of term codes based on the ranges set by:
+    YEAR_RANGE, QUARTER_RANGE, CAMPUS_RANGE
+    :return: (list(str)) list of term codes
+    """
     codes = []
     for i in range(YEAR_RANGE[0], YEAR_RANGE[1] + 1):
         for j in range(QUARTER_RANGE[0], QUARTER_RANGE[1] + 1):
@@ -192,23 +199,44 @@ class BlankRow(Exception):
 
 
 def get_parsed_text(tag):
+    """
+    Regex that strips all html tags and their contents
+    :param tag: (str) inner contents of parent tag
+    :return: (str) isolated text
+    """
     text = tag.get_text()
     p = re.compile(r'<.*?>')
     return p.sub('', text)
 
 
 def print_c(message):
+    """
+    Clears last carriage returned line and writes a new one
+    :param message: (str)
+    :return: None
+    """
     sys.stdout.write('\x1b[2K')
     sys.stdout.write(message)
     sys.stdout.flush()
 
 
 def color(c, word):
+    """
+    Format template that inserts a color for a given word
+    :param c: (Color) Color to format to
+    :param word: (str) Word to format
+    :return: (str) Formatted String
+    """
     return f'{c}{word}{Style.RESET_ALL}'
 
 
 def write_to_file(res, term):
-
+    """
+    Writes a bytestream to a nested file directory
+    :param res: response object
+    :param term: term code
+    :return: None
+    """
     with open(f"{join(OLD_DB_DIR, 'html', term+'.html')}", "wb") as file:
         for chunk in res.iter_content(chunk_size=512):
             if not chunk:
