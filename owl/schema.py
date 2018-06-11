@@ -69,6 +69,15 @@ definitions = {
             'filter': {'$ref': '#/definitions/filter'},
         },
         'required': ['courses']
+    },
+    'get_list': {
+        'type': 'object',
+        'properties': {
+            'quarter': {'type': 'string'},
+            'department': {'type': 'string'},
+            'course': {'type': 'string'},
+        },
+        'required': ['department']
     }
 }
 

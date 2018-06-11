@@ -18,3 +18,7 @@ class GetOneInput(flask_inputs.Inputs):
 
 class GetManyInput(flask_inputs.Inputs):
     json = [JsonSchema(schema=get_definition('get_many'))]
+
+
+class GetListInput(flask_inputs.Inputs):
+    json = [JsonSchema(schema=get_definition('get_list'))]

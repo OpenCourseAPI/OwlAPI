@@ -14,7 +14,7 @@ except ImportError as e:
                       'generate_test_data.py script') from e
 
 
-class TestGetOne(TestCase):
+class TestAccessor(TestCase):
     def test_get_one_dept(self):
         accessor = get_accessor('model_test_dir_a')
         result = accessor.get_one('fh', department='CS')

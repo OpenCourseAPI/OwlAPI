@@ -62,7 +62,7 @@ class ModelAccessor:
             section_filter: owl.filter.SectionFilter = None
     ) -> owl.model.DEPT_DATA_T:
         # Find department view
-        department_view = self._get_department(school, department, quarter)
+        department_view = self.get_department(school, department, quarter)
 
         # get data from department view
         return {
@@ -83,7 +83,7 @@ class ModelAccessor:
             section_filter: owl.filter.SectionFilter = None
     ) -> owl.model.COURSE_DATA_T:
         # Find department view
-        department_view = self._get_department(school, department, quarter)
+        department_view = self.get_department(school, department, quarter)
         try:
             course_view = department_view.courses[course]
         except KeyError as e:
@@ -96,12 +96,11 @@ class ModelAccessor:
             not section_filter or section_filter.check(section_view)
         }
 
-    def _get_department(
+    def get_quarter(
             self,
             school: str,
-            department: str,
             quarter: str = LATEST,
-    ) -> owl.model.DepartmentQuarterView:
+    ) -> 'owl.model.QuarterView':
         try:
             school_view: owl.model.SchoolView = \
                 self.model.schools[school.upper()]
@@ -116,6 +115,15 @@ class ModelAccessor:
         except KeyError as e:
             raise AccessException(
                 f'No quarter in {school} with name: {quarter}.') from e
+        return quarter_view
+
+    def get_department(
+            self,
+            school: str,
+            department: str,
+            quarter: str = LATEST,
+    ) -> owl.model.DepartmentQuarterView:
+        quarter_view = self.get_quarter(school, quarter)
         try:
             department_view = quarter_view.departments[department]
         except KeyError as e:
@@ -123,4 +131,27 @@ class ModelAccessor:
                 f'No department in {quarter} with name: {department}.') from e
         return department_view
 
+    def get_urls(
+            self, school: str, quarter: str = LATEST
+    ) -> ty.Dict[str, ty.Dict[str, str]]:
+        quarter_view = self.get_quarter(school, quarter)
+        return {
+            department_view.name: {
+                course_view.name: {
+                    'course': course_view.name,
+                    'dept': course_view.department.name
+                } for course_view in department_view.courses
+            } for department_view in quarter_view.departments
+        }
 
+
+def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
+    """
+    This is a helper function that generates a url string from a passed
+    department and course for the /urls route.
+    :param dept: str identifier for department
+    :param course: str
+
+    :return: dict[str, str]
+    """
+    return {"dept": f"{dept}", "course": f"{course}"}
