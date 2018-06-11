@@ -143,15 +143,3 @@ class ModelAccessor:
                 } for course_view in department_view.courses
             } for department_view in quarter_view.departments
         }
-
-
-def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
-    """
-    This is a helper function that generates a url string from a passed
-    department and course for the /urls route.
-    :param dept: str identifier for department
-    :param course: str
-
-    :return: dict[str, str]
-    """
-    return {"dept": f"{dept}", "course": f"{course}"}
