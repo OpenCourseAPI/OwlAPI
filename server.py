@@ -49,7 +49,7 @@ def idx():
     return render_template('index.html')
 
 
-def basic_checks(input_type = None):
+def basic_checks(input_type=None):
     """
     Wrapper for an api call that handles common exception cases.
     :param input_type:

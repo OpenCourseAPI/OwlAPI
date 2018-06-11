@@ -6,9 +6,10 @@ This module also allows more readable results to api users, that list
 any potential issues with their requests, before they are acted on,
 and without requiring error code lookups.
 """
-import flask_inputs
 from flask_inputs.validators import JsonSchema
 from itertools import chain
+
+import flask_inputs
 
 from owl.schema import get_definition
 

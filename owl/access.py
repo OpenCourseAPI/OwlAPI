@@ -50,9 +50,8 @@ class ModelAccessor:
         if course == ALL:
             return self.get_department_data(
                 school, department, quarter, section_filter)
-        else:
-            return self.get_course_data(
-                school, department, course, quarter, section_filter)
+        return self.get_course_data(
+            school, department, course, quarter, section_filter)
 
     def get_department_data(
             self,
