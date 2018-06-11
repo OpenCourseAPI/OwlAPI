@@ -8,17 +8,40 @@ and without requiring error code lookups.
 """
 import flask_inputs
 from flask_inputs.validators import JsonSchema
+from itertools import chain
 
 from owl.schema import get_definition
 
 
-class GetOneInput(flask_inputs.Inputs):
+class Inputs(flask_inputs.Inputs):
+    def validate(self):
+        """Validate incoming request data. Returns True if all data is valid.
+        Adds each of the validator's error messages to Inputs.errors if not valid.
+
+        :returns: Boolean
+        """
+        success = True
+
+        for attribute, form in self._forms.items():
+            if '_input' in form._fields:
+                form.process(self._get_values(attribute, coerse=False))
+            else:
+                form.process(self._get_values(attribute))
+
+            if not form.validate():
+                success = False
+                self.errors += chain(*form.errors.values())
+
+        return success
+
+
+class GetOneInput(Inputs):
     json = [JsonSchema(schema=get_definition('get_one'))]
 
 
-class GetManyInput(flask_inputs.Inputs):
+class GetManyInput(Inputs):
     json = [JsonSchema(schema=get_definition('get_many'))]
 
 
-class GetListInput(flask_inputs.Inputs):
+class GetListInput(Inputs):
     json = [JsonSchema(schema=get_definition('get_list'))]

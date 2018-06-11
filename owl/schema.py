@@ -3,29 +3,29 @@ definitions = {
     'status_filter': {
         'type': 'object',
         'properties': {
-            'open': {'type': 'int'},
-            'waitlist': {'type': 'int'},
-            'full': {'type': 'int'},
+            'open': {'type': 'number'},
+            'waitlist': {'type': 'number'},
+            'full': {'type': 'number'},
         }
     },
     'type_filter': {
         'type': 'object',
         'properties': {
-            'standard': {'type': 'int'},
-            'online': {'type': 'int'},
-            'hybrid': {'type': 'int'}
+            'standard': {'type': 'number'},
+            'online': {'type': 'number'},
+            'hybrid': {'type': 'number'}
         }
     },
     'day_filter': {
         'type': 'object',
         'properties': {
-            'M': {'type': 'int'},
-            'T': {'type': 'int'},
-            'W': {'type': 'int'},
-            'Th': {'type': 'int'},
-            'F': {'type': 'int'},
-            'S': {'type': 'int'},
-            'U': {'type': 'int'},
+            'M': {'type': 'number'},
+            'T': {'type': 'number'},
+            'W': {'type': 'number'},
+            'Th': {'type': 'number'},
+            'F': {'type': 'number'},
+            'S': {'type': 'number'},
+            'U': {'type': 'number'},
         }
     },
     'time_filter': {
@@ -83,6 +83,7 @@ definitions = {
 
 
 def get_definition(definition: str):
-    d = definitions[definition]
+    d = definitions[definition].copy()
     d['definitions'] = definitions
+    
     return d
