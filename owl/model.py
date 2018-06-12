@@ -78,7 +78,7 @@ class DataError(Exception):
     Raised when accessed data cannot be handled.
     Distinct from ValueError because ValueError indicates invalid data
     has been passed, while DataError indicates data that has been
-    retrieved from model.
+    retrieved from model contains errors.
     """
 
 
