@@ -78,6 +78,13 @@ definitions = {
             'course': {'type': 'string'},
         },
         'required': ['department']
+    },
+    'get_urls': {
+        'type': 'object',
+        'properties': {
+            'quarter': {'type': 'string'}
+        },
+        'additionalProperties': False
     }
 }
 

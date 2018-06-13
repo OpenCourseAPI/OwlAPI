@@ -53,3 +53,7 @@ class GetManyInput(Inputs):
 
 class GetListInput(Inputs):
     json = [JsonSchema(schema=get_definition('get_list'))]
+
+
+class GetUrlsInput(Inputs):
+    json = [JsonSchema(schema=get_definition('get_urls'))]

@@ -39,6 +39,11 @@ class TestAccessor(TestCase):
             result
         )
 
+    def test_get_urls_gets_all_departments(self):
+        accessor = get_accessor('model_test_dir_a')
+        result = accessor.get_urls(school='fh', quarter='000011')
+        self.assertEqual(74, len(result))
+
 
 def get_accessor(dir_name: str):
     return ModelAccessor(DataModel(os.path.join(TEST_RESOURCES_DIR, dir_name)))

@@ -202,10 +202,11 @@ def api_list(campus):
 
 
 @application.route('/<campus>/urls', methods=['GET'])
+@basic_checks(input_type=owl.input.GetUrlsInput)
 def api_list_url(campus):
     """
-    `/urls` with [GET] returns a tree of all departments, their
-    courses, and the courses' endpoints to hit.
+    `/urls` with [GET] returns a tree of all departments in a quarter,
+    their courses, and the courses' endpoints to hit.
 
     :param campus: (str) The campus to retrieve data from
 
@@ -214,7 +215,10 @@ def api_list_url(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    data = accessor.get_urls(request.get())
+    data = accessor.get_urls(
+        school=campus,
+        quarter=request.args.get(QUARTER_KEY, owl.access.LATEST)
+    )
 
     return jsonify(data), 200
 

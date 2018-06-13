@@ -357,7 +357,7 @@ class QuarterView:
         def __getitem__(self, dept_name: str) -> 'DepartmentQuarterView':
             # screen department names that might otherwise access
             # internal tables, defaults, etc.
-            if any(char not in string.ascii_letters for char in dept_name):
+            if not self._valid_name(dept_name):
                 raise ValueError(
                     f'Invalid department name passed: {dept_name}')
             if dept_name not in self.db.tables():
@@ -367,6 +367,16 @@ class QuarterView:
 
             dept_data: DEPT_DATA_T = self.db.table(dept_name).all()[0]
             return DepartmentQuarterView(self.quarter, dept_name, dept_data)
+
+        def __iter__(self) -> ty.Iterable['DepartmentQuarterView']:
+            for dept_name in self.db.tables():
+                if self._valid_name(dept_name):
+                    data: DEPT_DATA_T = self.db.table(dept_name).all()[0]
+                    yield DepartmentQuarterView(self.quarter, dept_name, data)
+
+        @staticmethod
+        def _valid_name(dept_name: str) -> bool:
+            return all(char in string.ascii_letters for char in dept_name)
 
         @property
         def db(self) -> tinydb.TinyDB:
