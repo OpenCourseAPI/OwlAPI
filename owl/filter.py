@@ -30,12 +30,16 @@ class SectionFilter:
             status: ty.Dict[str, int] = None,
             types: ty.Dict[str, int] = None,
             days: ty.Dict[str, int] = None,
-            time: ty.Dict[str, str] = None
+            time: ty.Dict[str, str] = None,
+            instructors: ty.Dict[str, int] = None,
+            conflict_sections: ty.Set[owl.model.SectionQuarterView] = None
     ):
         self.status = status
         self.types = types
         self.days = days
         self.time = time
+        self.instructors = instructors
+        self.conflict_sections = conflict_sections
 
     def check(self, section: owl.model.SectionQuarterView) -> bool:
         """
@@ -85,5 +89,21 @@ class SectionFilter:
                     return False
             return True
 
+        def instructor_filter() -> bool:
+            if not self.instructors:
+                return True
+            return section.instructor_name in \
+                {k for k, v in self.instructors.items() if v}
+
+        def conflict_filter() -> bool:
+            if not self.conflict_sections:
+                return True
+            for conflict_section in self.conflict_sections:
+                if section.conflicts(conflict_section):
+                    return False
+            return True
+
         return all((
-            status_filter(), type_filter(), day_filter(), time_filter()))
+            status_filter(), type_filter(), day_filter(), time_filter(),
+            instructor_filter(), conflict_filter()
+        ))

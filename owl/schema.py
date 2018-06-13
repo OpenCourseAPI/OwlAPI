@@ -6,7 +6,8 @@ definitions = {
             'open': {'type': 'number'},
             'waitlist': {'type': 'number'},
             'full': {'type': 'number'},
-        }
+        },
+        "additionalProperties": False
     },
     'type_filter': {
         'type': 'object',
@@ -14,7 +15,8 @@ definitions = {
             'standard': {'type': 'number'},
             'online': {'type': 'number'},
             'hybrid': {'type': 'number'}
-        }
+        },
+        "additionalProperties": False
     },
     'day_filter': {
         'type': 'object',
@@ -26,13 +28,28 @@ definitions = {
             'F': {'type': 'number'},
             'S': {'type': 'number'},
             'U': {'type': 'number'},
-        }
+        },
+        "additionalProperties": False
     },
     'time_filter': {
         'type': 'object',
         'properties': {
             'start': {'type': 'string'},
             'end': {'type': 'string'},
+        },
+        "additionalProperties": False
+    },
+    'instructor_filter': {
+        'type': 'object',
+        'properties': {},
+        "additionalProperties": {
+            "type": 'number'
+        }
+    },
+    'conflict_filter': {
+        'type': 'array',
+        'items': {
+            '$ref': '#/definitions/get_section'
         }
     },
     'filter': {
@@ -42,7 +59,20 @@ definitions = {
             'type': {'$ref': '#/definitions/type_filter'},
             'days': {'$ref': '#/definitions/day_filter'},
             'time': {'$ref': '#/definitions/time_filter'},
+            'instructor': {'$ref': '#/definitions/instructor_filter'},
+            'conflict_sections': {'$ref': '#/definitions/conflict_filter'}
         },
+        "additionalProperties": False
+    },
+    'get_section': {
+        'type': 'object',
+        'properties': {
+            'quarter': {'type': 'string'},
+            'department': {'type': 'string'},
+            'course': {'type': 'string'},
+            'section': {'type': 'string'},
+        },
+        'required': ['department', 'course', 'section']
     },
     'get_one': {
         'type': 'object',
@@ -52,7 +82,8 @@ definitions = {
             'course': {'type': 'string'},
             'filter': {'$ref': '#/definitions/filter'},
         },
-        'required': ['department']
+        'required': ['department'],
+        "additionalProperties": False
     },
     'get_many': {
         'type': 'object',
@@ -60,15 +91,13 @@ definitions = {
             'courses': {
                 'type': 'array',
                 'items': {
-                    'type': 'object',
-                    'additionalProperties': {
-                        '$ref': '#/definitions/get_one'
-                    }
+                    '$ref': '#/definitions/get_one'
                 }
             },
             'filter': {'$ref': '#/definitions/filter'},
         },
-        'required': ['courses']
+        'required': ['courses'],
+        "additionalProperties": False
     },
     'get_list': {
         'type': 'object',
@@ -77,7 +106,8 @@ definitions = {
             'department': {'type': 'string'},
             'course': {'type': 'string'},
         },
-        'required': ['department']
+        'required': ['department'],
+        "additionalProperties": False
     },
     'get_urls': {
         'type': 'object',

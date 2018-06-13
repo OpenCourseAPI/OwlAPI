@@ -35,10 +35,13 @@ application.after_request(add_cors_headers)
 CAMPUS_LIST = {'fh', 'da'}
 
 # fields
+SCHOOL_KEY = 'school'
 DEPARTMENT_KEY = 'dept'
 COURSE_KEY = 'course'
 QUARTER_KEY = 'quarter'
+SECTION_KEY = 'section'
 FILTER_KEY = 'filters'
+FILTER_CONFLICTS_KEY = 'conflict_sections'
 
 data_model = owl.model.DataModel(settings.DB_DIR)
 accessor = owl.access.ModelAccessor(data_model)
@@ -229,8 +232,26 @@ def _get_section_filter(args):
     :param args: request args
     :return: SectionFilter or None
     """
-    return owl.filter.SectionFilter(**args[FILTER_KEY]) \
-        if args[FILTER_KEY] else None
+    if not args[FILTER_KEY]:
+        return None
+    filter_kwargs = args.copy()
+    try:
+        conflict_sections = filter_kwargs[FILTER_CONFLICTS_KEY]
+    except KeyError:
+        pass
+    else:
+        # replace filter conflicts identifiers with set of
+        # section views.
+        filter_kwargs[FILTER_CONFLICTS_KEY] = {
+            accessor.get_section(
+                school=section_identifiers[SCHOOL_KEY],
+                quarter=section_identifiers[QUARTER_KEY],
+                department=section_identifiers[DEPARTMENT_KEY],
+                course=section_identifiers[COURSE_KEY],
+                section=section_identifiers[SECTION_KEY]
+            ) for section_identifiers in conflict_sections
+        }
+    return owl.filter.SectionFilter(**filter_kwargs)
 
 
 if __name__ == '__main__':

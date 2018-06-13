@@ -6,6 +6,7 @@ import typing as ty
 import string
 import weakref
 import re
+import itertools as itr
 
 import tinydb
 import maya
@@ -615,6 +616,22 @@ class SectionQuarterView:
         days = set(matches.groups()) - {None}
         return days
 
+    def conflicts(self, other: 'SectionQuarterView') -> bool:
+        """
+        Checks whether this section has any overlapping class meetings
+        with another passed section.
+        :param other: SectionQuarterView
+        :return: bool
+        """
+        # There may be a more computationally efficient way to do this,
+        # if this becomes a highly used function, optimization should
+        # be looked into.
+        for own_duration, other_duration in \
+                itr.product(self.durations, other.durations):
+            if own_duration.intersects(other_duration):
+                return False
+        return True
+
     @property
     def start_date(self) -> maya.MayaDT:
         """
@@ -786,6 +803,16 @@ class ClassDuration:
         self.day = day
         self.room = room
         self.interval = maya.MayaInterval(start, end)
+
+    def intersects(self, other: 'ClassDuration') -> bool:
+        """
+        Checks whether the ClassDuration overlaps with another passed
+        ClassDuration.
+        :param other: ClassDuration
+        :return: bool
+        """
+        return self.day == other.day and \
+            self.interval.intersects(other.interval)
 
     @property
     def start(self) -> maya.MayaDT:
