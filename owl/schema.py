@@ -43,19 +43,7 @@ definitions = {
         'type': 'object',
         'properties': {},
         "additionalProperties": {
-            "type": "object",
-            "required": [
-                "age",
-                "gender"
-            ],
-            "properties": {
-                "age": {
-                    "type": "string"
-                },
-                "gender": {
-                    "type": "string"
-                }
-            }
+            "type": 'number'
         }
     },
     'conflict_filter': {
@@ -83,7 +71,6 @@ definitions = {
             'department': {'type': 'string'},
             'course': {'type': 'string'},
             'section': {'type': 'string'},
-            'filter': {'$ref': '#/definitions/filter'},
         },
         'required': ['department', 'course', 'section']
     },
@@ -95,7 +82,8 @@ definitions = {
             'course': {'type': 'string'},
             'filter': {'$ref': '#/definitions/filter'},
         },
-        'required': ['department']
+        'required': ['department'],
+        "additionalProperties": False
     },
     'get_many': {
         'type': 'object',
@@ -103,15 +91,13 @@ definitions = {
             'courses': {
                 'type': 'array',
                 'items': {
-                    'type': 'object',
-                    'additionalProperties': {
-                        '$ref': '#/definitions/get_one'
-                    }
+                    '$ref': '#/definitions/get_one'
                 }
             },
             'filter': {'$ref': '#/definitions/filter'},
         },
-        'required': ['courses']
+        'required': ['courses'],
+        "additionalProperties": False
     },
     'get_list': {
         'type': 'object',
@@ -120,7 +106,8 @@ definitions = {
             'department': {'type': 'string'},
             'course': {'type': 'string'},
         },
-        'required': ['department']
+        'required': ['department'],
+        "additionalProperties": False
     }
 }
 
