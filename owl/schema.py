@@ -6,7 +6,8 @@ definitions = {
             'open': {'type': 'number'},
             'waitlist': {'type': 'number'},
             'full': {'type': 'number'},
-        }
+        },
+        "additionalProperties": False
     },
     'type_filter': {
         'type': 'object',
@@ -14,7 +15,8 @@ definitions = {
             'standard': {'type': 'number'},
             'online': {'type': 'number'},
             'hybrid': {'type': 'number'}
-        }
+        },
+        "additionalProperties": False
     },
     'day_filter': {
         'type': 'object',
@@ -26,13 +28,40 @@ definitions = {
             'F': {'type': 'number'},
             'S': {'type': 'number'},
             'U': {'type': 'number'},
-        }
+        },
+        "additionalProperties": False
     },
     'time_filter': {
         'type': 'object',
         'properties': {
             'start': {'type': 'string'},
             'end': {'type': 'string'},
+        },
+        "additionalProperties": False
+    },
+    'instructor_filter': {
+        'type': 'object',
+        'properties': {},
+        "additionalProperties": {
+            "type": "object",
+            "required": [
+                "age",
+                "gender"
+            ],
+            "properties": {
+                "age": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    'conflict_filter': {
+        'type': 'array',
+        'items': {
+            '$ref': '#/definitions/get_section'
         }
     },
     'filter': {
@@ -42,7 +71,21 @@ definitions = {
             'type': {'$ref': '#/definitions/type_filter'},
             'days': {'$ref': '#/definitions/day_filter'},
             'time': {'$ref': '#/definitions/time_filter'},
+            'instructor': {'$ref': '#/definitions/instructor_filter'},
+            'conflict_sections': {'$ref': '#/definitions/conflict_filter'}
         },
+        "additionalProperties": False
+    },
+    'get_section': {
+        'type': 'object',
+        'properties': {
+            'quarter': {'type': 'string'},
+            'department': {'type': 'string'},
+            'course': {'type': 'string'},
+            'section': {'type': 'string'},
+            'filter': {'$ref': '#/definitions/filter'},
+        },
+        'required': ['department', 'course', 'section']
     },
     'get_one': {
         'type': 'object',

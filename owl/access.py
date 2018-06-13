@@ -114,13 +114,7 @@ class ModelAccessor:
         :return: COURSE_DATA_T
         """
         # Find department view
-        department_view = self.get_department(school, department, quarter)
-        try:
-            course_view = department_view.courses[course]
-        except KeyError as e:
-            raise AccessException(
-                f'No course in {department} with name: {course}.') from e
-
+        course_view = self.get_course(school, department, course, quarter)
         return {
             section_view.crn: section_view.data for
             section_view in course_view.sections if
@@ -175,6 +169,37 @@ class ModelAccessor:
             raise AccessException(
                 f'No department in {quarter} with name: {department}.') from e
         return department_view
+
+    def get_course(
+            self,
+            school: str,
+            department: str,
+            course: str,
+            quarter: str = LATEST,
+    ) -> owl.model.CourseQuarterView:
+        department_view = self.get_department(school, department, quarter)
+        try:
+            course_view = department_view.courses[course]
+        except KeyError as e:
+            raise AccessException(
+                f'No course in {department} with name: {course}.') from e
+        return course_view
+
+    def get_section(
+            self,
+            school: str,
+            department: str,
+            course: str,
+            section: str,
+            quarter: str = LATEST,
+    ) -> owl.model.SectionQuarterView:
+        course_view = self.get_course(school, department, course, quarter)
+        try:
+            course_view = course_view.courses[course]
+        except KeyError as e:
+            raise AccessException(
+                f'No section in {course} with name: {section}.') from e
+        return course_view
 
     def get_urls(
             self, school: str, quarter: str = LATEST
