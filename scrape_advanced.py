@@ -11,13 +11,12 @@ from tinydb import TinyDB
 from colorama import init, Fore, Style
 from selenium_login import scrape_cookies, kill_driver
 
-from settings import DB_DIR, ADVANCED_FORM_DATA
+from settings import DB_DIR, ADVANCED_FORM_DATA, PREFIXES
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
 QUARTER_RANGE = (1, 4)
 
-PREFIX = 'old'
 DEBUG = False
 
 
@@ -31,8 +30,8 @@ def main():
     codes = generate_term_codes()
     print_c(f'Loaded {color(Fore.CYAN, len(codes))} term codes\n')
 
+    prefix = PREFIXES[0] if not DEBUG else PREFIXES[1]
     if DEBUG:
-        PREFIX = 'debug'
         codes = codes[:5]
 
     print_c(f'Scraping session cookie…\r')
@@ -60,10 +59,10 @@ def main():
                 elif idx == len(ADVANCED_FORM_DATA) - 1:
                     failed = True
 
-            if rename(temp_path, join(DB_DIR, f'{PREFIX}_{term}_database.json')):
+            if rename(temp_path, join(DB_DIR, f'{prefix}_{term}_database.json')):
                 remove(temp_path)
 
-            db = TinyDB(join(DB_DIR, f'{PREFIX}_{term}_database.json'))
+            db = TinyDB(join(DB_DIR, f'{prefix}_{term}_database.json'))
 
             num_courses = sum([len(db.table(t).all()) for t in db.tables()])
 
