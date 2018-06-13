@@ -1,8 +1,7 @@
 from unittest import TestCase
 
-import os
+from .test_model import get_test_data_dir
 
-from settings import TEST_RESOURCES_DIR
 from owl.model import DataModel
 from owl.access import ModelAccessor
 
@@ -16,34 +15,38 @@ except ImportError as e:
 
 class TestAccessor(TestCase):
     def test_get_one_dept(self):
-        accessor = get_accessor('model_test_dir_a')
-        result = accessor.get_one('fh', department='CS')
-        self.assertEqual(
-            test_data.test_get_one_dept_data[0],
-            result
-        )
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            accessor = get_accessor(data_dir)
+            result = accessor.get_one('fh', department='CS')
+            self.assertEqual(
+                test_data.test_get_one_dept_data[0],
+                result
+            )
 
     def test_get_one_dept_returns_n_courses(self):
-        accessor = get_accessor('model_test_dir_a')
-        result = accessor.get_one(school='fh', department='CS')
-        self.assertEqual(
-            len(test_data.test_get_one_dept_data[0].keys()),
-            len(result.keys())
-        )
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            accessor = get_accessor(data_dir)
+            result = accessor.get_one(school='fh', department='CS')
+            self.assertEqual(
+                len(test_data.test_get_one_dept_data[0].keys()),
+                len(result.keys())
+            )
 
     def test_get_one_dept_and_course(self):
-        accessor = get_accessor('model_test_dir_a')
-        result = accessor.get_one(school='fh', department='CS', course='2A')
-        self.assertEqual(
-            test_data.test_get_one_dept_and_course_data,
-            result
-        )
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            accessor = get_accessor(data_dir)
+            result = accessor.get_one(school='fh', department='CS', course='2A')
+            self.assertEqual(
+                test_data.test_get_one_dept_and_course_data,
+                result
+            )
 
     def test_get_urls_gets_all_departments(self):
-        accessor = get_accessor('model_test_dir_a')
-        result = accessor.get_urls(school='fh', quarter='000011')
-        self.assertEqual(74, len(result))
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            accessor = get_accessor(data_dir)
+            result = accessor.get_urls(school='fh', quarter='000011')
+            self.assertEqual(74, len(result))
 
 
 def get_accessor(dir_name: str):
-    return ModelAccessor(DataModel(os.path.join(TEST_RESOURCES_DIR, dir_name)))
+    return ModelAccessor(DataModel(dir_name))
