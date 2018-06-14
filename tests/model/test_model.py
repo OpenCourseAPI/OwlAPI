@@ -167,7 +167,6 @@ class TestDataModel(TestCase):
                     self.assertEqual(maya.when('11:50AM'), duration.end)
 
     def test_section_rooms_are_found_correctly(self):
-
         with get_test_data_dir('model_test_dir_a') as data_dir:
             data = DataModel(data_dir)
             quarter = data.quarters['000011']
@@ -326,6 +325,29 @@ class TestDataModel(TestCase):
             self.assertLess(elapsed3, elapsed1 / 4)
             self.assertEqual(urls1, urls2)
             self.assertEqual(urls1, urls3)
+
+
+class TestCourseDuration(TestCase):
+    def test_durations_intersect_returns_true_with_intersection(self):
+        a = ClassDuration(
+            'M', '1234', maya.when('8:30 AM'), maya.when('10:30 AM'))
+        b = ClassDuration(
+            'M', '5678', maya.when('9:00 AM'), maya.when('11:00 AM'))
+        self.assertTrue(a.intersects(b))
+
+    def test_durations_intersect_returns_false_with_differing_days(self):
+        a = ClassDuration(
+            'M', '1234', maya.when('8:30 AM'), maya.when('10:30 AM'))
+        b = ClassDuration(
+            'T', '5678', maya.when('9:00 AM'), maya.when('11:00 AM'))
+        self.assertFalse(a.intersects(b))
+
+    def test_durations_intersect_returns_false_with_differing_times(self):
+        a = ClassDuration(
+            'M', '1234', maya.when('8:30 AM'), maya.when('10:30 AM'))
+        b = ClassDuration(
+            'M', '5678', maya.when('2:00 PM'), maya.when('4:00 PM'))
+        self.assertFalse(a.intersects(b))
 
 
 def get_test_data_dir(dir_name: str) -> tempfile.TemporaryDirectory:

@@ -900,7 +900,7 @@ class InstructorView:
         self.name: str = name
 
 
-def _hash_args(args: ty.Tuple[ty.Any], kwargs: ty.Dict[str, ty.Any]) -> int:
+def _hash_args(args: ty.Tuple, kwargs: ty.Dict[str, ty.Any]) -> int:
     """
     Produces a hash int from passed tuple of args and dictionary
     of kwargs.
