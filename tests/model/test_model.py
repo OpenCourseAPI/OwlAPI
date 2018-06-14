@@ -336,6 +336,24 @@ class TestDataModel(TestCase):
             self.assertEqual(maya.when('04/09/2018'), duration.start)
             self.assertEqual(maya.when('06/29/2018'), duration.end)
 
+    def test_caching_improves_quarter_primary_start_and_end_date_access(self):
+        # start: "04/09/2018", "end": "06/29/2018"
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            data = DataModel(data_dir)
+            quarter = data.quarters['000011']
+
+            def time_calendar_date():
+                t0 = time.time()
+                duration = quarter.primary_duration
+                tf = time.time()
+                return duration, tf - t0
+
+            duration1, elapsed1 = time_calendar_date()
+            duration2, elapsed2 = time_calendar_date()
+            duration3, elapsed3 = time_calendar_date()
+            self.assertLess(elapsed2, elapsed1 / 4)
+            self.assertLess(elapsed3, elapsed1 / 4)
+
 
 class TestCourseDuration(TestCase):
     def test_durations_intersect_returns_true_with_intersection(self):
@@ -358,6 +376,9 @@ class TestCourseDuration(TestCase):
         b = ClassDuration(
             'M', '5678', maya.when('2:00 PM'), maya.when('4:00 PM'))
         self.assertFalse(a.intersects(b))
+
+
+# todo: more rigorously test _hash_args
 
 
 def get_test_data_dir(dir_name: str) -> tempfile.TemporaryDirectory:
