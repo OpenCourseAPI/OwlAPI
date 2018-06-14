@@ -683,7 +683,7 @@ class SectionQuarterView:
         :param other: SectionQuarterView
         :return: bool
         """
-        # There may be a more computationally efficient way to do this,
+        # There may be a more computationally efficient way to do this;
         # if this becomes a highly used function, optimization should
         # be looked into.
         for own_duration, other_duration in \
@@ -900,7 +900,14 @@ class InstructorView:
         self.name: str = name
 
 
-def _hash_args(args, kwargs):
+def _hash_args(args: ty.Tuple[ty.Any], kwargs: ty.Dict[str, ty.Any]) -> int:
+    """
+    Produces a hash int from passed tuple of args and dictionary
+    of kwargs.
+    :param args: Tuple[Any]
+    :param kwargs: Dict[str, Any]
+    :return: int
+    """
     arg_hash: int = hash(args)
     kwargs_hash: int = hash(repr(sorted(kwargs.items())))
     return hash((arg_hash, kwargs_hash))

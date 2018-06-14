@@ -177,6 +177,14 @@ class ModelAccessor:
             course: str,
             quarter: str = LATEST,
     ) -> owl.model.CourseQuarterView:
+        """
+        Gets view of data for a specific course in a specific quarter.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param course: str (ex: '1A')
+        :param quarter: str (ex: '201812')
+        :return: CourseQuarterView
+        """
         department_view = self.get_department(school, department, quarter)
         try:
             course_view = department_view.courses[course]
@@ -193,13 +201,22 @@ class ModelAccessor:
             section: str,
             quarter: str = LATEST,
     ) -> owl.model.SectionQuarterView:
+        """
+        Gets view of data for a specific section in a specific quarter.
+        :param school: str (ex: 'fh')
+        :param department: str (ex: 'CS')
+        :param course: str (ex: '1A')
+        :param quarter: str (ex: '201812')
+        :param section: str (ex: '12345')
+        :return: SectionQuarterView
+        """
         course_view = self.get_course(school, department, course, quarter)
         try:
-            course_view = course_view.courses[course]
+            section_view = course_view.sections[section]
         except KeyError as e:
             raise AccessException(
                 f'No section in {course} with name: {section}.') from e
-        return course_view
+        return section_view
 
     def get_urls(
             self, school: str, quarter: str = LATEST
