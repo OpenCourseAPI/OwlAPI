@@ -13,6 +13,7 @@ import maya
 
 DB_EXT = '.json'
 DB_SUFFIX = '_database'
+CACHE_TABLE_NAME = 'cache_'
 FH = 'FH'
 DA = 'DA'
 SCHOOL_NAMES_BY_CODE = {
@@ -83,6 +84,32 @@ class DataError(Exception):
     """
 
 
+def quarter_cache(f):
+    def wrapper(self: 'QuarterView', *args, **kwargs):
+        cache_data = self.db.table(CACHE_TABLE_NAME).get(doc_id=1) or {}
+        arg_hash = str(_hash_args(args, kwargs))
+        # Get method cache dictionary
+        try:
+            method_cache = cache_data[f.__name__]
+        except KeyError:
+            method_cache = cache_data[f.__name__] = dict()
+        # Get result cache dictionary
+        try:
+            cached_result = method_cache[arg_hash]
+        except KeyError:
+            cached_result = method_cache[arg_hash] = \
+                f(self, *args, **kwargs)
+            try:
+                self.db.table(CACHE_TABLE_NAME).update(cache_data, doc_ids=[1])
+            except KeyError:
+                self.db.table(CACHE_TABLE_NAME).insert(cache_data)
+        # Update stored table
+        return cached_result
+
+    wrapper.__name__ = f.__name__ + '_cache_wrapper'
+    return wrapper
+
+
 class DataModel:
     def __init__(self, db_dir: str) -> None:
         """
@@ -122,6 +149,7 @@ class DataModel:
                     quarters[name] = QuarterView.get_quarter(self, name)
             return quarters
 
+        self.clear_cache()  # Clears caches, since data may now be changed.
         self.quarters = find_quarters()
         self.schools = {quarter.school_name: quarter.school
                         for quarter in self.quarters.values()}
@@ -141,6 +169,10 @@ class DataModel:
             raise ValueError(f'Passed quarter {quarter} is a duplicate of '
                              f'an existing quarter in {self}.')
         self.quarter_instances[quarter.name] = quarter
+
+    def clear_cache(self):
+        for quarter in self.quarters.values():
+            quarter.clear_cache()
 
     def __repr__(self) -> str:
         return f'DataModel[{self.db_dir}]'
@@ -263,6 +295,34 @@ class QuarterView:
             return model.quarter_instances[name]
         except KeyError:
             return cls(model, name)
+
+    def clear_cache(self):
+        self.db.purge_table(CACHE_TABLE_NAME)
+
+    @property
+    @quarter_cache
+    def urls(self):
+        """
+        Gets urls dictionary for quarter.
+        Returns in format:
+        {
+            CS: {
+                1A: {
+                    'course': '1A'
+                    'dept': 'CS'
+                }
+            }
+        }
+        :return: Dict[str, Dict[str, Dict[str, str]]]
+        """
+        return {
+            department_view.name: {
+                course_view.name: {
+                    'course': course_view.name,
+                    'dept': course_view.department.name
+                } for course_view in department_view.courses
+            } for department_view in self.departments
+        }
 
     @property
     def db(self) -> tinydb.TinyDB:
@@ -838,3 +898,9 @@ class InstructorView:
     def __init__(self, model: DataModel, name: str) -> None:
         self.model: DataModel = model
         self.name: str = name
+
+
+def _hash_args(args, kwargs):
+    arg_hash: int = hash(args)
+    kwargs_hash: int = hash(repr(sorted(kwargs.items())))
+    return hash((arg_hash, kwargs_hash))

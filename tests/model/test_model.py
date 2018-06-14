@@ -1,5 +1,6 @@
 import os
 import tempfile
+import time
 
 from distutils.dir_util import copy_tree
 from unittest import TestCase
@@ -306,6 +307,25 @@ class TestDataModel(TestCase):
             course = dept.courses['1B']
             section = course.sections['40067']
             self.assertEqual(15, section.waitlist_capacity)
+
+    def test_quarter_cache_increases_url_access_speed_after_first_access(self):
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            data = DataModel(data_dir)
+            quarter = data.quarters['000011']
+
+            def time_urls():
+                t0 = time.time()
+                urls = quarter.urls
+                tf = time.time()
+                return urls, tf - t0
+
+            urls1, elapsed1 = time_urls()
+            urls2, elapsed2 = time_urls()
+            urls3, elapsed3 = time_urls()
+            self.assertLess(elapsed2, elapsed1 / 4)
+            self.assertLess(elapsed3, elapsed1 / 4)
+            self.assertEqual(urls1, urls2)
+            self.assertEqual(urls1, urls3)
 
 
 def get_test_data_dir(dir_name: str) -> tempfile.TemporaryDirectory:

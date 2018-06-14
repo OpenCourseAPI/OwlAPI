@@ -35,7 +35,8 @@ class TestAccessor(TestCase):
     def test_get_one_dept_and_course(self):
         with get_test_data_dir('model_test_dir_a') as data_dir:
             accessor = get_accessor(data_dir)
-            result = accessor.get_one(school='fh', department='CS', course='2A')
+            result = accessor.get_one(
+                school='fh', department='CS', course='2A')
             self.assertEqual(
                 test_data.test_get_one_dept_and_course_data,
                 result

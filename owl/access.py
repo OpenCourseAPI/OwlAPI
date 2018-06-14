@@ -211,11 +211,4 @@ class ModelAccessor:
         :return: Dict[str, Dict[str, str]]
         """
         quarter_view = self.get_quarter(school, quarter)
-        return {
-            department_view.name: {
-                course_view.name: {
-                    'course': course_view.name,
-                    'dept': course_view.department.name
-                } for course_view in department_view.courses
-            } for department_view in quarter_view.departments
-        }
+        return quarter_view.urls
