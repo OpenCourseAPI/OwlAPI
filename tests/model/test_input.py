@@ -5,7 +5,7 @@ import owl.input
 
 class TestInput(TestCase):
     def test_get_one_allows_proper_input(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -15,7 +15,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_get_one_raises_issues_when_extra_arguments_are_received(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -26,7 +26,7 @@ class TestInput(TestCase):
         self.assertTrue(inputs.errors)
 
     def test_get_one_disallows_input_without_department(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'course': '1A',
         })
@@ -35,7 +35,7 @@ class TestInput(TestCase):
         self.assertEqual(1, len(inputs.errors))
 
     def test_filter_can_accept_status_argument(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -48,7 +48,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_filter_can_accept_type_argument(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -61,7 +61,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_filter_can_accept_days_argument(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -74,7 +74,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_filter_can_accept_instructor_argument(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -87,7 +87,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_filter_can_accept_all_arguments(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -118,7 +118,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_filter_does_not_accept_extra_arguments(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'CS',
             'course': '1A',
@@ -131,7 +131,7 @@ class TestInput(TestCase):
         self.assertTrue(inputs.errors)
 
     def test_get_many_allows_proper_input(self):
-        request = NotRequest({
+        request = PseudoRequest({
             'courses': [
                 {
                     'quarter': '000011',
@@ -153,7 +153,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_get_many_raises_issues_when_extra_arguments_are_received(self):
-        request = NotRequest({
+        request = PseudoRequest({
             'courses': [
                 {
                     'quarter': '000011',
@@ -176,7 +176,7 @@ class TestInput(TestCase):
         self.assertTrue(inputs.errors)
 
     def test_get_list_accepts_expected_arguments(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'MATH',
             'course': '1A',
@@ -186,7 +186,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_get_list_does_not_accept_unexpected_arguments(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'department': 'MATH',
             'course': '1A',
@@ -197,7 +197,7 @@ class TestInput(TestCase):
         self.assertTrue(inputs.errors)
 
     def test_get_urls_accepts_valid_input(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
         })
         inputs = owl.input.GetUrlsInput(raw)
@@ -205,7 +205,7 @@ class TestInput(TestCase):
         self.assertFalse(inputs.errors)
 
     def test_get_urls_does_not_accept_extra_arguments(self):
-        raw = NotRequest({
+        raw = PseudoRequest({
             'quarter': '000011',
             'Unneeded': 'CS',
         })
@@ -214,6 +214,6 @@ class TestInput(TestCase):
         self.assertTrue(inputs.errors)
 
 
-class NotRequest:
+class PseudoRequest:
     def __init__(self, args):
         self.json = args
