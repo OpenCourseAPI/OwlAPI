@@ -66,5 +66,12 @@ def serializable(clz):
     return clz
 
 
-def _get_type_key(clz: ty.Type):
+def _get_type_key(clz: ty.Type) -> ty.Any:
+    """
+    Gets key used for storing passed type in dictionary of
+    serializable types. Should return a unique value for each passed
+    type.
+    :param clz: Type
+    :return: ty.Any
+    """
     return clz.__name__
