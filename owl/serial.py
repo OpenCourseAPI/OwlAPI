@@ -27,9 +27,16 @@ class Encoder(JSONEncoder):
 
 
 def hook(o: ty.Any) -> ty.Any:
+    """
+    Hook taking the default-deserialized object (usually a dictionary)
+    and, if the object is recognized as an encoded serializable of
+    another type, re-creates the type instance.
+    :param o: Any type deserializable by default.
+    :return: Any
+    """
     try:
-        k = o[TYPE_KEY]
-    except KeyError:
+        k = o.pop(TYPE_KEY)
+    except (KeyError, AttributeError):
         return o
     else:
         object_type = serializable_types[k]
