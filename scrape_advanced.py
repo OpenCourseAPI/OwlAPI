@@ -2,6 +2,7 @@ import sys
 from os import makedirs, rename, remove
 from os.path import join, exists
 from collections import defaultdict
+from itertools import product
 import re
 
 # 3rd party
@@ -10,14 +11,55 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 from colorama import init, Fore, Style
 from selenium_login import scrape_cookies, kill_driver
+from selenium.common.exceptions import TimeoutException
 
-from settings import DB_DIR, ADVANCED_FORM_DATA, PREFIXES
+from settings import DB_DIR
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
 QUARTER_RANGE = (1, 4)
 
-DEBUG = False
+DEBUG = True
+
+PREFIXES = ('old', 'debug')
+
+ADVANCED_FORM_DATA = [
+    [
+        [('sel_subj', 'dummy'), ('sel_day', 'dummy'), ('sel_schd', 'dummy'),
+         ('sel_insm', 'dummy'), ('sel_camp', 'dummy'), ('sel_levl', 'dummy'),
+         ('sel_sess', 'dummy'), ('sel_instr', 'dummy'), ('sel_ptrm', 'dummy'),
+         ('sel_attr', 'dummy')],
+        [('sel_crse', ''), ('sel_title', ''), ('sel_from_cred', ''),
+         ('sel_to_cred', ''), ('sel_camp', '%'), ('sel_sess', '%'),
+         ('sel_instr', '%'), ('sel_ptrm', '%'), ('begin_hh', '0'),
+         ('begin_mi', '0'), ('begin_ap', 'a'), ('end_hh', '0'), ('end_mi', '0'),
+         ('end_ap', 'a'), ('SUB_BTN', 'Section Search'), ('path', '1')]
+    ],
+    [
+        [('sel_subj', 'dummy'), ('sel_day', 'dummy'), ('sel_schd', 'dummy'),
+         ('sel_insm', 'dummy'), ('sel_camp', 'dummy'), ('sel_levl', 'dummy'),
+         ('sel_sess', 'dummy'), ('sel_instr', 'dummy'), ('sel_ptrm', 'dummy'),
+         ('sel_attr', 'dummy')],
+        [('sel_crse', ''), ('sel_title', ''),  ('sel_schd', '%'),
+         ('sel_from_cred', ''), ('sel_to_cred', ''), ('sel_camp', '%'),
+         ('sel_instr', '%'), ('sel_sess', '%'), ('sel_ptrm', '%'),
+         ('sel_attr', '%'), ('begin_hh', '0'), ('begin_mi', '0'),
+         ('begin_ap', 'a'), ('end_hh', '0'), ('end_mi', '0'),
+         ('end_ap', 'a'), ('SUB_BTN', 'Section Search'), ('path', '1')]
+    ],
+    [
+        [('sel_subj', 'dummy'), ('sel_day', 'dummy'), ('sel_schd', 'dummy'),
+         ('sel_insm', 'dummy'), ('sel_camp', 'dummy'), ('sel_levl', 'dummy'),
+         ('sel_sess', 'dummy'), ('sel_instr', 'dummy'), ('sel_ptrm', 'dummy'),
+         ('sel_attr', 'dummy')],
+        [('sel_crse', ''), ('sel_title', ''), ('sel_schd', '%'),
+         ('sel_from_cred', ''), ('sel_to_cred', ''), ('sel_camp', '%'),
+         ('sel_levl', '%'), ('sel_ptrm', '%'), ('sel_instr', '%'),
+         ('sel_sess', '%'), ('sel_attr', '%'), ('begin_hh', '0'),
+         ('begin_mi', '0'), ('begin_ap', 'a'), ('end_hh', '0'), ('end_mi', '0'),
+         ('end_ap', 'a'), ('SUB_BTN', 'Section Search'), ('path', '1')]
+    ]
+]
 
 
 def main():
@@ -71,7 +113,8 @@ def main():
             else:
                 print_c(f" [{term}] [{color(Fore.GREEN, 'SUCCESS')}] Mined {num_courses} courses\n")
 
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, TimeoutException) as e:
+        print_c(f"{color(Fore.GREEN, e)}\n")
         kill_driver()
         remove(temp_path)
     finally:
@@ -140,53 +183,58 @@ def advanced_parse(content, db, term=''):
     :return: None
     '''
     soup = BeautifulSoup(content, 'html5lib')
+    table_rows = None
 
     try:
         table = soup.find('table', {'class': 'datadisplaytable'})
         table_rows = table.find_all('tr')
-
-        table_headers = list()
-        start_idx = 0
-        for i, tr in enumerate(table_rows):
-            header_cols = tr.find_all('th', {'class': 'ddheader'})
-            for th in header_cols:
-                table_headers.append(get_parsed_text(th))
-            if table_headers:
-                start_idx = i
-                break
-
-        for tr in table_rows[start_idx:]:
-            try:
-                cols = tr.find_all('td', {'class': 'dddefault'})
-
-                if cols:
-                    s = defaultdict(lambda: defaultdict(list))
-
-                    num_blank = 0
-                    for i, c in enumerate(cols):
-                        a = c.find('a')
-                        cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
-                        if cols[i].isspace():
-                            num_blank += 1
-
-                    if num_blank > len(cols) - num_blank:
-                        raise BlankRow
-
-                    data = dict(zip(table_headers, cols))
-
-                    subject = data['Subj']
-                    key = data['Crse']
-                    crn = data['CRN']
-
-                    s[key][crn].append(data)
-
-                    j = dict(s)
-                    db.table(f'{subject}').insert(j)
-            except BlankRow:
-                continue
     except AttributeError as e:
         return False
+
+    table_headers = list()
+    start_idx = 0
+    for i, tr in enumerate(table_rows):
+        header_cols = tr.find_all('th', {'class': 'ddheader'})
+        for th in header_cols:
+            table_headers.append(get_parsed_text(th))
+        if table_headers:
+            start_idx = i
+            break
+
+    for tr in table_rows[start_idx:]:
+        parse_row(tr, table_headers, db)
     return True
+
+
+def parse_row(tr, th, db):
+    try:
+        cols = tr.find_all('td', {'class': 'dddefault'})
+
+        if cols:
+            s = defaultdict(lambda: defaultdict(list))
+
+            num_blank = 0
+            for i, c in enumerate(cols):
+                a = c.find('a')
+                cols[i] = get_parsed_text(a) if a else get_parsed_text(cols[i])
+                if cols[i].isspace():
+                    num_blank += 1
+
+            if num_blank > len(cols) - num_blank:
+                raise BlankRow
+
+            data = dict(zip(th, cols))
+
+            subject = data['Subj']
+            key = data['Crse']
+            crn = data['CRN']
+
+            s[key][crn].append(data)
+            j = dict(s)
+
+            db.table(f'{subject}').insert(j)
+    except BlankRow:
+        return
 
 
 def generate_term_codes():
@@ -195,11 +243,10 @@ def generate_term_codes():
     YEAR_RANGE, QUARTER_RANGE, CAMPUS_RANGE
     :return: (list(str)) list of term codes
     """
-    codes = []
-    for i in range(YEAR_RANGE[0], YEAR_RANGE[1] + 1):
-        for j in range(QUARTER_RANGE[0], QUARTER_RANGE[1] + 1):
-            for k in range(CAMPUS_RANGE[0], CAMPUS_RANGE[1] + 1):
-                codes.append(f'201{i}{j}{k}')
+    i = range(YEAR_RANGE[0], YEAR_RANGE[1] + 1)
+    j = range(QUARTER_RANGE[0], QUARTER_RANGE[1] + 1)
+    k = range(CAMPUS_RANGE[0], CAMPUS_RANGE[1] + 1)
+    codes = [f'201{x[0]}{x[1]}{x[2]}' for x in product(i, j, k)]
     return codes
 
 
@@ -256,5 +303,5 @@ def write_to_file(res, term):
 
 
 if __name__ == '__main__':
-    init()
+    init() #colorama
     main()
