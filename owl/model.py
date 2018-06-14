@@ -7,9 +7,12 @@ import string
 import weakref
 import re
 import itertools as itr
+import json
 
 import tinydb
 import maya
+
+import owl.serial
 
 DB_EXT = '.json'
 DB_SUFFIX = '_database'
@@ -95,16 +98,17 @@ def quarter_cache(f):
             method_cache = cache_data[f.__name__] = dict()
         # Get result cache dictionary
         try:
-            cached_result = method_cache[arg_hash]
+            result = json.loads(method_cache[arg_hash],
+                                object_hook=owl.serial.hook)
         except KeyError:
-            cached_result = method_cache[arg_hash] = \
-                f(self, *args, **kwargs)
+            result = f(self, *args, **kwargs)
+            method_cache[arg_hash] = json.dumps(result, cls=owl.serial.Encoder)
             try:
                 self.db.table(CACHE_TABLE_NAME).update(cache_data, doc_ids=[1])
             except KeyError:
                 self.db.table(CACHE_TABLE_NAME).insert(cache_data)
         # Update stored table
-        return cached_result
+        return result
 
     wrapper.__name__ = f.__name__ + '_cache_wrapper'
     return wrapper
@@ -388,6 +392,42 @@ class QuarterView:
     def school(self) -> SchoolView:
         return SchoolView(self.model, self.school_name)
 
+    # Since the vast majority of classes are of the primary duration,
+    # it is not necessary to check all sections
+    # Assuming 75% of classes are of primary duration, sampling
+    # 4*2*3 (24) sections has only a (1-0.75)^24 (3.5e-15) chance of
+    # returning an incorrect value, assuming random sampling.
+    #
+    # Reducing the samples taken reduces response time by ~80 times,
+    # And keeps response times comfortably under 1s.
+    DEPARTMENTS_SAMPLED = 4
+    COURSE_SAMPLES = 2
+    SECTION_SAMPLES = 3
+
+    @property
+    @quarter_cache
+    def primary_duration(self):
+        """
+        Gets duration of quarter for full-length classes.
+        :return: CalendarDuration
+        """
+        greatest_calendar_duration = None
+        greatest_delta: float = 0
+        for i, department in enumerate(self.departments):
+            for j, course in enumerate(department.courses):
+                for k, section in enumerate(course.sections):
+                    duration: 'CalendarDuration' = section.calendar_duration
+                    if duration.interval.duration > greatest_delta:
+                        greatest_delta = duration.interval.duration
+                        greatest_calendar_duration = duration
+                    if k == self.SECTION_SAMPLES:
+                        break
+                if j == self.COURSE_SAMPLES:
+                    break
+            if i == self.DEPARTMENTS_SAMPLED:
+                break
+        return greatest_calendar_duration
+
     @property
     def path(self) -> str:
         """
@@ -570,7 +610,7 @@ class SectionQuarterView:
     # All these fields should be equal if multiple entries exist.
     EQUAL_FIELDS = (
         COURSE_ID_KEY, CRN_KEY, DESCRIPTION_KEY, STATUS_KEY, UNITS_KEY,
-        INSTRUCTOR_KEY, SEATS_KEY, WAIT_SEATS_KEY, WAIT_CAP_KEY
+        SEATS_KEY, WAIT_SEATS_KEY, WAIT_CAP_KEY
     )
 
     def __init__(
@@ -586,7 +626,9 @@ class SectionQuarterView:
             if not all(entry[field_name] == self.data[0][field_name] for
                        entry in self.data):
                 raise ValueError(
-                    f'{self}: {field_name} fields do not match in data')
+                    f'{self}: {field_name} fields do not match in data: '
+                    f'{[entry[field_name] for entry in self.data]}'
+                )
 
     @property
     def course_id(self) -> str:
@@ -729,6 +771,14 @@ class SectionQuarterView:
         return durations
 
     @property
+    def calendar_duration(self) -> 'CalendarDuration':
+        """
+        Gets calendar duration of section.
+        :return: CalendarDuration
+        """
+        return CalendarDuration(self.start_date, self.end_date)
+
+    @property
     def rooms(self) -> ty.Set['str']:
         """
         Gets set of rooms (or occasionally other locations) in which
@@ -764,20 +814,24 @@ class SectionQuarterView:
         return float(self.data[0][UNITS_KEY])
 
     @property
-    def instructor_name(self) -> str:
+    def instructor_names(self) -> ty.Set[str]:
         """
-        Gets name of instructor.
-        :return: str
+        Gets names of instructors for this section.
+        This will usually be a set containing a single name, but
+        some classes will have different class sessions taught by
+        different instructors.
+        :return: Set[str]
         """
-        return self.data[0][INSTRUCTOR_KEY]
+        return {entry[INSTRUCTOR_KEY] for entry in self.data}
 
     @property
-    def instructor(self) -> 'InstructorView':
+    def instructors(self) -> ty.Set['InstructorView']:
         """
         Gets data view of instructor for this course section.
         :return: InstanceView
         """
-        return InstructorView(self.model, self.instructor_name)
+        return {InstructorView(self.model, name) for
+                name in self.instructor_names}
 
     @property
     def open_seats_available(self) -> int:
@@ -845,7 +899,41 @@ class SectionQuarterView:
         return self.quarter.model
 
     def __repr__(self) -> str:
-        return f'SectionQuarterView[cid: {self.course_id}, crn: {self.crn}]'
+        return f'SectionQuarterView[dept: {self.department.name}, cid: ' \
+               f'{self.course_id}, crn: {self.crn}]'
+
+
+@owl.serial.serializable
+class CalendarDuration:
+    """
+    Class storing data about a class calendar duration.
+    """
+    def __init__(self, start: maya.MayaDT, end: maya.MayaDT):
+        self.interval = maya.MayaInterval(start, end)
+
+    @classmethod
+    def from_serializable(cls, d: ty.Dict[str, str]) -> 'CalendarDuration':
+        return cls(start=maya.when(d['start']), end=maya.when(d['end']))
+
+    @property
+    def as_serializable(self) -> ty.Dict[str, str]:
+        return {'start': self.start.iso8601(), 'end': self.end.iso8601()}
+
+    @property
+    def start(self) -> maya.MayaDT:
+        """
+        Gets start date.
+        :return: MayaDT
+        """
+        return self.interval.start
+
+    @property
+    def end(self) -> maya.MayaDT:
+        """
+        Gets end date.
+        :return: MayaDT
+        """
+        return self.interval.end
 
 
 class ClassDuration:

@@ -271,14 +271,14 @@ class TestDataModel(TestCase):
             section = course.sections['40067']
             self.assertEqual(5, section.units)
 
-    def test_section_instructor_name_returns_correctly(self):
+    def test_section_instructor_names_return_correctly(self):
         with get_test_data_dir('model_test_dir_a') as data_dir:
             data = DataModel(data_dir)
             quarter = data.quarters['000011']
             dept = quarter.departments['ACTG']
             course = dept.courses['1B']
             section = course.sections['40067']
-            self.assertEqual('Drake', section.instructor_name)
+            self.assertIn('Drake', section.instructor_names)
 
     def test_section_seats_return_correctly_when_on_waitlist_status(self):
         with get_test_data_dir('model_test_dir_a') as data_dir:
@@ -325,6 +325,16 @@ class TestDataModel(TestCase):
             self.assertLess(elapsed3, elapsed1 / 4)
             self.assertEqual(urls1, urls2)
             self.assertEqual(urls1, urls3)
+
+    def test_quarter_primary_start_and_end_dates_are_accurate(self):
+        # start: "04/09/2018", "end": "06/29/2018"
+        with get_test_data_dir('model_test_dir_a') as data_dir:
+            data = DataModel(data_dir)
+            quarter = data.quarters['000011']
+
+            duration = quarter.primary_duration
+            self.assertEqual(maya.when('04/09/2018'), duration.start)
+            self.assertEqual(maya.when('06/29/2018'), duration.end)
 
 
 class TestCourseDuration(TestCase):
