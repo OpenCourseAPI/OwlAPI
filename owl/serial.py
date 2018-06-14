@@ -17,7 +17,16 @@ class Encoder(JSONEncoder):
     """
     Encodes object as json
     """
-    def default(self, o):
+    def default(self, o: ty.Any) -> ty.Any:
+        """
+        Handles the default serialization case, wherein an object is
+        not by default serializable.
+        If the object is recognized as a custom serializable object,
+        it is converted into a serializable object.
+        Otherwise the superclass JSONEncoder default method is used.
+        :param o: Any
+        :return: Any serializable
+        """
         k = _get_type_key(type(o))
         if k in serializable_types:
             d = o.as_serializable
