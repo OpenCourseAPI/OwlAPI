@@ -10,6 +10,6 @@ DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 
 SCHEDULE = 'schedule.html'
-HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
-           'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
-CURRENT_TERM_CODES = CAMPUS_LIST = {'fh': '201911', 'da': '201912', 'test': 'test'}
+HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end', 'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
+
+CAMPUS_LIST = {'fh': '201911', 'da': '201912', 'test': 'test'}

@@ -8,7 +8,9 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR, CURRENT_TERM_CODES, COURSE_PATTERN, HEADERS, SCHEDULE
+from settings import DB_DIR, COURSE_PATTERN, HEADERS, SCHEDULE
+
+CURRENT_TERM_CODES = {'fh': '201911', 'da': '201912'}
 
 
 def main():
