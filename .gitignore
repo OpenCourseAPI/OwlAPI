@@ -2,7 +2,7 @@ __pycache__/
 .idea/
 *.DS_Store
 *.json
-schedule.html
+db/html/
 frontend/static/README.md
 
 # pytest

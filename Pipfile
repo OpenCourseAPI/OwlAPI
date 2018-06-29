@@ -16,6 +16,8 @@ maya = "*"
 pytest = "*"
 flask = "*"
 pylint = "*"
+selenium = "*"
+colorama = "*"
 
 
 [dev-packages]

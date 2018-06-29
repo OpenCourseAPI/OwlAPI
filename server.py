@@ -10,7 +10,9 @@ from flask import Flask, jsonify, request, render_template
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-# Quart config
+from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
+
+# Flask config
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
@@ -20,11 +22,6 @@ application = Flask(__name__,
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
-
-CAMPUS_LIST = {'fh':'201911', 'da':'201912', 'test':'test'}
-
-COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
-DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
 DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}

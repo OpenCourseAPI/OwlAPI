@@ -1,27 +1,23 @@
-from collections import defaultdict
 from os import makedirs, rename, remove
 from os.path import join, exists
 from re import match
+from collections import defaultdict
 
 # 3rd party
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR
+from settings import DB_DIR, COURSE_PATTERN, HEADERS, SCHEDULE
 
-SCHEDULE = 'schedule.html'
-TERM_CODES = {'fh': '201911', 'da': '201912'}
-HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end',
-           'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
+CURRENT_TERM_CODES = {'fh': '201911', 'da': '201912'}
 
-COURSE_PATTERN = r'[FD]0*(\d*\w?)\.?\d*([YWZH])?'
 
 def main():
     if not exists(DB_DIR):
         makedirs(DB_DIR, exist_ok=True)
 
-    for term in TERM_CODES.values():
+    for term in CURRENT_TERM_CODES.values():
         temp_path = join(DB_DIR, 'temp.json')
         temp = TinyDB(temp_path)
 
@@ -37,27 +33,14 @@ def main():
 
 def mine(term, write=False):
     '''
-    Mine will hit the database for foothill's class listings and write it to a file.
+    Mine will hit the database for foothill's class listings
     :param term: (str) the term to mine
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
-    headers = {
-        'Origin': 'https://banssb.fhda.edu',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'User-Agent': 'FoothillAPI',
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'text/html, */*; q=0.01',
-        'Referer': 'https://banssb.fhda.edu/PROD/fhda_opencourses.P_Application',
-        'X-Requested-With': 'XMLHttpRequest',
-        'Connection': 'keep-alive',
-    }
+    data = [('termcode', f'{term}')]
 
-    data = [('termcode', f'{term}'), ]
-
-    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList',
-    headers=headers, data=data)
+    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', data=data)
     res.raise_for_status()
 
     if write:
@@ -84,8 +67,8 @@ def parse(content, db):
 
         rows = t.find_all('tr', {'class': 'CourseRow'})
         s = defaultdict(lambda: defaultdict(list))
-        for r in rows:
-            cols = r.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
+        for tr in rows:
+            cols = tr.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
 
             if cols:
                 for i, c in enumerate(cols):
