@@ -4,6 +4,8 @@ Future development should take place at the Open Course API group.
 </pre>
 
 # OwlAPI
+[![Build Status](https://travis-ci.com/OpenCourseAPI/OwlAPI.svg?branch=master)](https://travis-ci.com/OpenCourseAPI/OwlAPI)
+
 This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI now has a home at [floof.li](https://floof.li).
 
 #### Contributors:
