@@ -1,8 +1,3 @@
-<pre>
-OwlAPI has moved locations to <a href="https://github.com/OpenCourseAPI/OwlAPI">here</a>.
-Future development should take place at the Open Course API group.
-</pre>
-
 # OwlAPI
 [![Build Status](https://travis-ci.com/OpenCourseAPI/OwlAPI.svg?branch=master)](https://travis-ci.com/OpenCourseAPI/OwlAPI)
 
