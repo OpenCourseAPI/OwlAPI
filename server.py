@@ -18,7 +18,7 @@ def add_cors_headers(response):
     return response
 
 application = Flask(__name__,
-                    template_folder="../frontend/templates", static_folder='../frontend/static')
+                    template_folder="frontend/templates", static_folder='frontend/static')
 application.after_request(add_cors_headers)
 
 DB_ROOT = 'db/'
