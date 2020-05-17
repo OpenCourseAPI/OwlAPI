@@ -10,7 +10,7 @@ from tinydb import TinyDB
 
 from settings import DB_DIR, COURSE_PATTERN, HEADERS, SCHEDULE
 
-CURRENT_TERM_CODES = {'fh': '202111', 'da': '201912'}
+CURRENT_TERM_CODES = {'fh': '202111', 'da': '202112'}
 
 
 def main():
