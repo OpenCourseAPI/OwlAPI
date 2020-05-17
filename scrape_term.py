@@ -10,7 +10,7 @@ from tinydb import TinyDB
 
 from settings import DB_DIR, COURSE_PATTERN, HEADERS, SCHEDULE
 
-CURRENT_TERM_CODES = {'fh': '201911', 'da': '201912'}
+CURRENT_TERM_CODES = {'fh': '202111', 'da': '201912'}
 
 
 def main():
@@ -40,7 +40,7 @@ def mine(term, write=False):
     '''
     data = [('termcode', f'{term}')]
 
-    res = requests.post('https://banssb.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', data=data)
+    res = requests.post('https://ssb-prod.ec.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', data=data)
     res.raise_for_status()
 
     if write:
