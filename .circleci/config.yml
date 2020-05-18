@@ -13,17 +13,18 @@ jobs:
       - type: shell
         shell: /bin/sh
         pwd: /
-        command: sudo apt update && sudo apt install git -y && git --version
-      - run: sudo apt update
-      - run: sudo apt-get install rsync
+        command: sudo apt update && sudo apt install git -y && git --version && sudo apt-get install rsync
 
       - add_ssh_keys:
           fingerprints:
             - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
 
       - checkout
-      - restore_cache:
-         key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      # - restore_cache:
+      #    keys:
+      #     - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      #     - deps9-{{ .Branch }}
+      #     - deps9
       - run:
           name: install dependencies
           command: |
