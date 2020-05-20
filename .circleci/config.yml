@@ -10,6 +10,11 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
+      - type: shell
+        shell: /bin/sh
+        pwd: /
+        command: sudo apt update && sudo apt install git -y && git --version && sudo apt-get install rsync
+
       - add_ssh_keys:
           fingerprints:
             - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
@@ -21,7 +26,7 @@ jobs:
       #     - deps9-{{ .Branch }}
       #     - deps9
       - run:
-          name: Installing Python Dependencies
+          name: install dependencies
           command: |
             sudo pip install pipenv
             pipenv install
@@ -31,3 +36,7 @@ jobs:
             - ".venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.7/site-packages"
+
+      - run: ssh-keyscan -H 23.239.23.178 >> ~/.ssh/known_hosts
+
+      - run: rsync -avce ssh root@23.239.23.178:/
