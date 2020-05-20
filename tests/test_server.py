@@ -27,7 +27,7 @@ class TestGenerateURL(TestCase):
 
 class TestGetOne(TestCase):
     def test_get_one_dept(self):
-        data = {'dept': 'CS'}  # floof.li/single?dept=CS
+        data = {'dept': 'CS'}  # opencourse.dev/single?dept=CS
 
         result = get_one(db=test_database, data=data, filters=dict())
         self.assertEqual(

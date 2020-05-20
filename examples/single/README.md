@@ -1,6 +1,6 @@
 ## Simple data request
 
-The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page. We will be hitting OwlAPI's [`/single`](https://floof.li/#get-single) endpoint to retrieve a single entry from the database. It is the most basic interaction you can make to the API.
+The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page. We will be hitting OwlAPI's [`/single`](https://opencourse.dev/#get-single) endpoint to retrieve a single entry from the database. It is the most basic interaction you can make to the API.
 
 ```
 <!DOCTYPE html>
@@ -30,7 +30,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
   <body>
     <div id="input" class="content">
       <button onclick="submitRequest(this.parentElement)">GET</button>
-      <span>https://floof.li/fh/single</span>
+      <span>https://opencourse.dev/fh/single</span>
       <input id="data" type="text" value="?dept=CS&course=2C">
     </div>
     <pre id="output" class="content"></pre>
@@ -40,7 +40,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
       var data = input.querySelector('#data');
       var output = document.querySelector('#output');
 
-      var url = new URL("https://floof.li/fh/single" + data.value);
+      var url = new URL("https://opencourse.dev/fh/single" + data.value);
 
       fetch(url, {
           method: 'GET'
@@ -63,7 +63,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
 
 ### Overview
 
-In this example, we have an input field where we can enter in valid query parameters to the [`/single`](https://floof.li/#get-single) endpoint. Upon hitting the `GET` button, the JavaScript code uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make a request to [floof.li](https://floof.li) with the query params attached. Upon receiving a response, it pretty prints the JSON data to the output container.
+In this example, we have an input field where we can enter in valid query parameters to the [`/single`](https://opencourse.dev/#get-single) endpoint. Upon hitting the `GET` button, the JavaScript code uses the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make a request to [opencourse.dev](https://opencourse.dev) with the query params attached. Upon receiving a response, it pretty prints the JSON data to the output container.
 
 ### HTML template
 
@@ -76,7 +76,7 @@ We are using a barebones `<body>` for simple input and output. It has a text fie
 <body>
   <div id="input" class="content">
     <button onclick="submitRequest(this.parentElement)">GET</button>
-    <span>https://floof.li/single</span>
+    <span>https://opencourse.dev/single</span>
     <input id="data" type="text" value="?dept=CS&course=2C">
   </div>
   <pre id="output" class="content"></pre>
@@ -124,7 +124,7 @@ function submitRequest(input) {
   var data = input.querySelector('#data');
   var output = document.querySelector('#output');
 
-  var url = new URL("https://floof.li/single" + data.value);
+  var url = new URL("https://opencourse.dev/single" + data.value);
 
   fetch(url, {
       method: 'GET'

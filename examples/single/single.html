@@ -25,7 +25,7 @@
   <body>
     <div id="input" class="content">
       <button onclick="submitRequest(this.parentElement)">GET</button>
-      <span>https://floof.li/fh/single</span>
+      <span>https://opencourse.dev/fh/single</span>
       <input id="data" type="text" value="?dept=CS&course=2A">
     </div>
     <pre id="output" class="content"></pre>
@@ -35,7 +35,7 @@
       var data = input.querySelector('#data');
       var output = document.querySelector('#output');
 
-      var url = new URL("https://floof.li/fh/single" + data.value);
+      var url = new URL("https://opencourse.dev/fh/single" + data.value);
 
       fetch(url, {
           method: 'GET'

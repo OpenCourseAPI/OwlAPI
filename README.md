@@ -16,7 +16,7 @@ If you would like to contribute follow this [guide](https://github.com/OpenCours
 > [**Flask**](https://github.com/pallets/flask), [**TinyDB**](https://github.com/msiemens/tinydb), [**BeautifulSoup4**](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 ## Data overview
-OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. On [floof.li](https://floof.li), seat data is synced every 5 minutes with MyPortal.
+OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. On [opencourse.dev](https://opencourse.dev), seat data is synced every 5 minutes with MyPortal.
 
 ### JSON data
 ```
