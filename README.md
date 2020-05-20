@@ -6,7 +6,7 @@ This is an unofficial API that serves course data from Foothill DeAnza MyPortal 
 #### Contributors:
 > [**Kishan Emens**](https://github.com/phi-line), [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup), [Madhav Varshney](https://github.com/madhavarshney)
 
-If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
+If you would like to contribute follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md).
 
 #### Applications powered by OwlAPI:
 > [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register), [SchedOWL](https://github.com/FoothillCSClub/SchedOwl)
@@ -87,7 +87,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 
 `/single` returns a JSON format with the keys as the CRN for the course, and the values as a list. The list is necessary to account for hybrid classes or classes with labs, that have two or more listings per CRN.
 
-You can view an example of the `/single` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/single).
+You can view an example of the `/single` route [here](https://github.com/OpenCourseAPI/OwlAPI/tree/master/examples/single).
 
 
 ### Get batch
@@ -110,7 +110,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 
 `/batch` returns a JSON format with the initial key as `courses` and a value containing a list of courses. The courses are formatted in the same way as found in the `/single` response.
 
-You can view an example of the `/batch` route [here](https://github.com/FoothillCSClub/OwlAPI/tree/master/examples/batch).
+You can view an example of the `/batch` route [here](https://github.com/OpenCourseAPI/OwlAPI/tree/master/examples/batch).
 
 
 ### Filters
