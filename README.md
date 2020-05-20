@@ -3,12 +3,15 @@
 
 This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI currently lives at [opencourse.dev](https://opencourse.dev).
 
+### Lead Maintainers:
+> [**Madhav Varshney**](https://github.com/madhavarshney), [**Kishan Emens**](https://github.com/phi-line)
+
 #### Contributors:
-> [**Kishan Emens**](https://github.com/phi-line), [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup), [Madhav Varshney](https://github.com/madhavarshney)
+> [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup)
 
 If you would like to contribute follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md).
 
-#### Applications powered by OwlAPI:
+### Applications powered by OwlAPI:
 > [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register), [SchedOWL](https://github.com/FoothillCSClub/SchedOwl)
 
 
