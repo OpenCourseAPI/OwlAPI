@@ -38,5 +38,5 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
 
       - run: ssh-keyscan -H 23.239.23.178 >> ~/.ssh/known_hosts
-
-      - run: rsync -avce ssh root@23.239.23.178:/
+      # - run: rsync -avce ssh . root@23.239.23.178:/opt/owlapi/
+      - run: ssh root@23.239.23.178 "cd /opt/OwlAPI && git pull && pipenv install && sudo service OwlAPI restart"
