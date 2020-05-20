@@ -4,7 +4,7 @@
 This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI is homeless.
 
 #### Contributors:
-> [**Kishan Emens**](https://github.com/phi-line), [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup)
+> [**Kishan Emens**](https://github.com/phi-line), [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup), [Madhav Varshney](https://github.com/madhavarshney)
 
 If you would like to contribute follow this [guide](https://github.com/FoothillCSClub/OwlAPI/blob/master/CONTRIBUTING.md).
 
