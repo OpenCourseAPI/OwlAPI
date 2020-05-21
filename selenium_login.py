@@ -1,3 +1,6 @@
+# NOTE: With the latest updates to fhda, this script is currently in a broken state
+#       Since `scrape_advanced.py` does not require selenium anymore, use it directly
+
 import os
 
 from selenium import webdriver
