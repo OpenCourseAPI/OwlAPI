@@ -13,16 +13,27 @@ SSB_LOGIN_URL = SSB_URL + '/ssomanager/saml/login?' + urlencode({
 
 TRACE = False
 
+"""
+This method simulates the API requests that would be made
+if we were logging in through a browser. It follows redirects,
+parses HTML pages with <form> elements, and directly sends POST requests.
+
+:param session: (requests.Session) The session to login and store cookies in
+"""
 def login(session):
     i = 0
     next_url = SSB_LOGIN_URL
     last_url = ''
     data = []
+    res = None
 
     while True:
-        # Send a POST request to the next URL with specified data
-        # TODO: Use GET instead of POST for SSB_LOGIN_URL; this seems to work for now
-        res = session.post(next_url, data)
+        if i == 0:
+            # Send a GET request to the first login page
+            res = session.get(next_url)
+        else:
+            # Send a POST request to the next URL with specified data
+            res = session.post(next_url, data)
         res.raise_for_status()
 
         # Debug / trace logging
@@ -36,7 +47,7 @@ def login(session):
         if last_url.path == LOGIN_TARGET_PATH:
             break
 
-        # Parse the HTML page for forms
+        # Parse the HTML page for a <form>
         soup = BeautifulSoup(res.content, 'html5lib')
         form = soup.find('form')
         next_url = form.attrs['action']
@@ -53,12 +64,15 @@ def login(session):
 
         if i == 0:
             # On the first page, use the specified login data
-            # TODO: gracefully exit with error message when environment variables are not present
-            data = [
-                ('j_username', environ['MP_USER']),
-                ('j_password', environ['MP_PASS']),
-                ('_eventId_proceed', ''),
-            ]
+            try:
+                data = [
+                    ('j_username', environ['MP_USER']),
+                    ('j_password', environ['MP_PASS']),
+                    ('_eventId_proceed', ''),
+                ]
+            except KeyError:
+                print('[ERROR] Login - username or password not specified. Use the env variables MP_USER and MP_PASS.\n')
+                raise
         else:
             # Subsequent HTML pages have an autosubmitting <form>
             # Emulate auto-submission and use <input> element values for the data
@@ -68,8 +82,6 @@ def login(session):
                     data.append((input_el.attrs['name'], input_el.attrs['value']))
 
         i += 1
-
-    return session
 
 
 if __name__ == '__main__':
