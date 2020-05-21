@@ -10,10 +10,9 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 from colorama import init, Fore, Style
-from selenium_login import scrape_cookies, kill_driver
-from selenium.common.exceptions import TimeoutException
 
-from settings import DB_DIR
+from settings import DB_DIR, SSB_URL
+from emulate_login import login
 
 CAMPUS_RANGE = (1, 2)
 YEAR_RANGE = (1, 8)
@@ -78,8 +77,8 @@ def main():
 
     print_c(f'Scraping session cookie…\r')
 
-    cookies = scrape_cookies()
-    print_c(f"Scraped session cookie {color(Fore.YELLOW, cookies['CPSESSID'])}\n{'-'*79}\n")
+    session = requests.session()
+    login(session)
 
     temp_path = join(DB_DIR, 'temp.json')
 
@@ -95,7 +94,7 @@ def main():
 
             failed = False
             for idx, variant in enumerate(ADVANCED_FORM_DATA):
-                content = mine_table_data(term, variant, dept_data, cookies, write=False)
+                content = mine_table_data(session, term, variant, dept_data, write=False)
                 if advanced_parse(content, db=temp, term=term):
                     break
                 elif idx == len(ADVANCED_FORM_DATA) - 1:
@@ -113,12 +112,9 @@ def main():
             else:
                 print_c(f" [{term}] [{color(Fore.GREEN, 'SUCCESS')}] Mined {num_courses} courses\n")
 
-    except (KeyboardInterrupt, TimeoutException) as e:
+    except (KeyboardInterrupt) as e:
         print_c(f"{color(Fore.GREEN, e)}\n")
-        kill_driver()
         remove(temp_path)
-    finally:
-        kill_driver()
 
 
 def mine_dept_data(term, write=False):
@@ -130,7 +126,7 @@ def mine_dept_data(term, write=False):
     '''
     data = [('p_calling_proc', 'bwckschd.p_disp_dyn_sched'), ('p_term', f'{term}')]
 
-    res = requests.post('https://banssb.fhda.edu/PROD/bwckgens.p_proc_term_date', data=data)
+    res = requests.post(SSB_URL + '/PROD/bwckgens.p_proc_term_date', data=data)
     res.raise_for_status()
 
     if write:
@@ -144,13 +140,13 @@ def mine_dept_data(term, write=False):
     return data
 
 
-def mine_table_data(term, payload, dept_data, cookies, write=False):
+def mine_table_data(session, term, payload, dept_data, write=False):
     '''
     Mine will hit the database for foothill's class listings
+    :param session: (session) an instance of requests.session()
     :param term: (str) the term to mine
     :param payload: (str) data payload for request
     :param dept_data: (str) department data payload
-    :param cookies: (dict) cookies to send with POST
     :param write: (bool) write to file?
     :return res.content: (json) the html body
     '''
@@ -165,8 +161,7 @@ def mine_table_data(term, payload, dept_data, cookies, write=False):
 
     data.extend(payload[1])
 
-    res = requests.post('https://banssb.fhda.edu/PROD/bwskfcls.P_GetCrse_Advanced',
-                         cookies=cookies, data=data)
+    res = session.post(SSB_URL + '/PROD/bwskfcls.P_GetCrse_Advanced', data=data)
     res.raise_for_status()
 
     if write:

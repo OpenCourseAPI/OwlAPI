@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR, COURSE_PATTERN, HEADERS, SCHEDULE
+from settings import DB_DIR, SSB_URL, COURSE_PATTERN, HEADERS, SCHEDULE
 
 CURRENT_TERM_CODES = {'fh': '202111', 'da': '202112'}
 
@@ -40,7 +40,7 @@ def mine(term, write=False):
     '''
     data = [('termcode', f'{term}')]
 
-    res = requests.post('https://ssb-prod.ec.fhda.edu/PROD/fhda_opencourses.P_GetCourseList', data=data)
+    res = requests.post(SSB_URL + '/PROD/fhda_opencourses.P_GetCourseList', data=data)
     res.raise_for_status()
 
     if write:
