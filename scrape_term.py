@@ -62,6 +62,7 @@ def parse(content, db):
 
     tables = soup.find_all('table', {'class': 'TblCourses'})
     for t in tables:
+        # TODO: verify whether replacing spaces yields correct dept names in all scenarios
         dept = t['dept'].replace(' ', '')
         dept_desc = t['dept-desc']
 
@@ -73,7 +74,7 @@ def parse(content, db):
             if cols:
                 for i, c in enumerate(cols):
                     a = c.find('a')
-                    cols[i] = a.get_text() if a else cols[i].get_text()
+                    cols[i] = (a.get_text() if a else cols[i].get_text()).strip()
 
                 try:
                     key = get_key(f'{cols[0] if cols[0] else cols[1]}')[0]
