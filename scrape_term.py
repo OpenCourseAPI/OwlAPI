@@ -69,15 +69,19 @@ def parse(content, db):
         rows = t.find_all('tr', {'class': 'CourseRow'})
         s = defaultdict(lambda: defaultdict(list))
         for tr in rows:
-            cols = tr.find_all(lambda tag: tag.name == 'td' and not tag.get_text().isspace())
+            cols = tr.find_all(lambda tag: tag.name == 'td')
 
             if cols:
+                # The first <td> is a field that is not relevant to us
+                # it is either empty or contains a "flag" icon
+                cols.pop(0)
+
                 for i, c in enumerate(cols):
                     a = c.find('a')
                     cols[i] = (a.get_text() if a else cols[i].get_text()).strip()
 
                 try:
-                    key = get_key(f'{cols[0] if cols[0] else cols[1]}')[0]
+                    key = get_key(cols[0])[0]
                     data = dict(zip(HEADERS, cols))
 
                     crn = data['CRN']
