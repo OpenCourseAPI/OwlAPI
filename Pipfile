@@ -25,4 +25,4 @@ colorama = "*"
 
 [requires]
 
-python_version = "3.x"
+python_version = "3.7"
