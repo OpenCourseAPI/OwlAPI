@@ -12,6 +12,6 @@ DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 SCHEDULE = 'schedule.html'
 HEADERS = ('course', 'CRN', 'desc', 'status', 'days', 'time', 'start', 'end', 'room', 'campus', 'units', 'instructor', 'seats', 'wait_seats', 'wait_cap')
 
-CAMPUS_LIST = {'fh': '202111', 'da': '202112', 'test': 'test'}
+CAMPUS_LIST = {'fh': '202121', 'da': '202122', 'test': 'test'}
 
 SSB_URL = 'https://ssb-prod.ec.fhda.edu'
