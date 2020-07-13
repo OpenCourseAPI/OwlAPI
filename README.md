@@ -84,7 +84,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
       "wait_cap": "10",
       "wait_seats": "10",
     },
-    {...}
+    { "...": "..." }
   ]
 }
 ```
@@ -222,10 +222,10 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
         "course": "2C",
         "dept": "CS"
       },
-      {...}
+      "...": "..."
     }
   ],
-  "MATH": [...]
+  "MATH": [{ "...": "..." }]
 }
 ```
 
