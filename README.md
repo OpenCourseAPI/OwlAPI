@@ -64,10 +64,11 @@ campus selector `test` to grab this older copy of Foothill data.
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
 > `GET /fh/single?dept=CS&course=2A`
-```
-{"10116":
-  [
-    { "CRN": "10116",
+```json
+{
+  "10116": [
+    {
+      "CRN": "10116",
       "campus": "FH",
       "course": "C S F002A01W",
       "days": "TBA",
@@ -81,7 +82,8 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
       "time": "TBA",
       "units": "4.50",
       "wait_cap": "10",
-      "wait_seats": "10" },
+      "wait_seats": "10",
+    },
     {...}
   ]
 }
@@ -100,12 +102,12 @@ This batch request is meant to simulate hitting the api route with this data N t
 It expects a mandatory list of objects containing keys `dept` and `course`.
 
 > `POST /fh/batch`
-```
+```json
 {
   "courses": [
-    {"dept":"CS", "course":"1A"},
-    {"dept":"MATH", "course":"1A"},
-    {"dept":"ENGL", "course":"1A"}
+    { "dept": "CS", "course": "2A" },
+    { "dept": "MATH", "course": "1A" },
+    { "dept": "ENGL", "course": "1A" }
   ]
 }
 ```
@@ -125,10 +127,12 @@ Be careful because too many filters may result in zero sections returned from th
 Filter by the availability of a course (Open, Waitlist, Full). The example below shows how you can filter only `open` and `waitlist` sections.
 
 > `POST /fh/batch`
-```
+```json
 {
-  "courses": [{"dept":"CS", "course":"1A"}]
-  "filters": {"status": {"open":1, "waitlist":1, "full":0}}
+  "courses": [{ "dept": "CS", "course": "2A" }],
+  "filters": {
+    "status": { "open": 1, "waitlist": 1, "full": 0 }
+  }
 }
 ```
 
@@ -138,10 +142,12 @@ Filter by the availability of a course (Open, Waitlist, Full). The example below
 Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` and `hybrid` sections.
 
 > `POST /fh/batch`
-```
+```json
 {
-  "courses": [{"dept":"CS", "course":"1A"}]
-  "filters": {"types":{"standard":0, "online":1, "hybrid":1}}
+  "courses": [{ "dept": "CS", "course": "2A" }],
+  "filters": {
+    "types": { "standard": 0, "online": 1, "hybrid": 1 }
+  }
 }
 ```
 
@@ -151,10 +157,12 @@ Filter by the format of the course (In Person, Online, Hybrid). The example belo
 Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The example below shows how you can filter only `M` and `W` sections.
 
 > `POST /fh/batch`
-```
+```json
 {
-  "courses": [{"dept":"CS", "course":"1A"}]
-  "filters": {"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}
+  "courses": [{ "dept": "CS", "course": "2A" }],
+  "filters": {
+    "days": { "M": 1, "T": 0, "W": 1, "Th": 0, "F": 0, "S": 0, "U": 0 }
+  }
 }
 ```
 
@@ -165,10 +173,12 @@ Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The e
 Filter by a specified time interval (7:30 AM - 12:00 PM). The example below shows how you can filter only morning sections.
 
 > `POST /fh/batch`
-```
+```json
 {
-  "courses": [{"dept":"CS", "course":"1A"}]
-  "filters": {"time":{"start":"7:30 AM", "end":"12:00 PM"}}
+  "courses": [{ "dept": "CS", "course": "2A" }],
+  "filters": {
+    "time": { "start": "7:30 AM", "end": "12:00 PM" }
+  }
 }
 ```
 
@@ -196,25 +206,27 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
 
 > `GET /fh/urls`
-```
-"CS": [
-  {
-    "2A": {
-      "course": "2A",
-      "dept": "CS"
-    },
-    "2B": {
-      "course": "2B",
-      "dept": "CS"
-    },
-    "2C": {
-      "course": "2C",
-      "dept": "CS"
-    },
-    {...}
-  }
-],
-"MATH": [...]
+```json
+{
+  "CS": [
+    {
+      "2A": {
+        "course": "2A",
+        "dept": "CS"
+      },
+      "2B": {
+        "course": "2B",
+        "dept": "CS"
+      },
+      "2C": {
+        "course": "2C",
+        "dept": "CS"
+      },
+      {...}
+    }
+  ],
+  "MATH": [...]
+}
 ```
 
 <span id="interact"><span data-request-type="GET" data-request-url="/fh/urls" data-request-body=""></span></span>
@@ -253,7 +265,7 @@ This service is the main driver which runs the API. Gunicorn is used to serve Py
 > `sudo vi /etc/systemd/system/OwlAPI.service`
 
 **Paste in this sample config changing `user`**
-```
+```ini
 [Unit]
 Description=Gunicorn instance to serve OwlAPI
 After=network.target
@@ -282,7 +294,7 @@ This service runs in the background to refresh the database on a timed interval.
 > `sudo vi /etc/systemd/system/refreshDB.service`
 
 **Paste in this sample config changing `user`**
-```
+```ini
 [Unit]
 Description=Timer job to refresh OwlAPI database
 After=network.target
@@ -302,7 +314,7 @@ WantedBy=multi-user.target
 **Create a file named refeshDB.timer**
 > `sudo vi /etc/systemd/system/refeshDB.timer`
 
-```
+```ini
 [Unit]
 Description=Timer set to call refreshDB service
 

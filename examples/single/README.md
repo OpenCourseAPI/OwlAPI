@@ -2,7 +2,7 @@
 
 The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page. We will be hitting OwlAPI's [`/single`](https://opencourse.dev/#get-single) endpoint to retrieve a single entry from the database. It is the most basic interaction you can make to the API.
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -72,7 +72,7 @@ Firstly, let's cover the HTML template used in this example. In order to use HTM
 Most current browsers will render content that is declared with this DOCTYPE in "standards mode" which means that your application should be more cross-browser compliant. The DOCTYPE is also designed to degrade gracefully; browsers that don't understand it will ignore it, and use "quirks mode" to display their content.
 
 We are using a barebones `<body>` for simple input and output. It has a text field to enter in the request parameters for the `GET`, and a button to submit the request:
-```
+```html
 <body>
   <div id="input" class="content">
     <button onclick="submitRequest(this.parentElement)">GET</button>
@@ -90,7 +90,7 @@ A `<pre>` container will hold our output from the web request.
 Now, let's cover the CSS used to format our template. It uses
 
 The `<style>` in this example is simple:
-```
+```html
 <style>
   body, html {
     display: grid;
@@ -119,7 +119,7 @@ In this example, we want to make a request based on the input field's query para
 Upon receiving a response back from the server, we want to display the JSON data back to the user in a success. In the case of a failure, we want to display an error message back to the user.
 
 The method `sumbitRequest()` is given as follows:
-```
+```js
 function submitRequest(input) {
   var data = input.querySelector('#data');
   var output = document.querySelector('#output');
