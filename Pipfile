@@ -1,12 +1,9 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 requests = "*"
 "beautifulsoup4" = "*"
 tinydb = "*"
@@ -17,12 +14,9 @@ pytest = "*"
 flask = "*"
 pylint = "*"
 colorama = "*"
-
+snapshottest = "*"
 
 [dev-packages]
 
-
-
 [requires]
-
 python_version = "3.8"
