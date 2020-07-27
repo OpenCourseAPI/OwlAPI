@@ -7,3439 +7,3843 @@ from snapshottest import Snapshot
 
 snapshots = Snapshot()
 
-snapshots['TestGetOne::test_get_one_dept 1'] = [
-    {
-        '10': {
-            '20748': [
+snapshots['TestGetOne::test_get_one_dept 1'] = {
+    '10': [
+        {
+            'CRN': 20748,
+            'course': 'C S F010.01Z',
+            'dept': 'CS',
+            'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
+            'end': '12/11/2020',
+            'seats': 14,
+            'section': '10',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20748',
                     'campus': 'FH',
-                    'course': 'C S F010.01Z',
                     'days': 'TTh',
-                    'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                    'end': '12/11/2020',
                     'instructor': 'Riordan',
                     'room': 'ONLINE',
-                    'seats': '14',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '06:00 PM-07:50 PM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': '06:00 PM-07:50 PM'
                 },
                 {
-                    'CRN': '20748',
                     'campus': 'FH',
-                    'course': 'C S F010.01Z',
                     'days': 'TBA',
-                    'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                    'end': '12/11/2020',
                     'instructor': 'Riordan',
                     'room': 'ONLINE',
-                    'seats': '14',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20749': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20749,
+            'course': 'C S F010.02W',
+            'dept': 'CS',
+            'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '10',
+            'start': '09/21/2020',
+            'status': 'Full',
+            'time': [
                 {
-                    'CRN': '20749',
                     'campus': 'FH',
-                    'course': 'C S F010.02W',
                     'days': 'TBA',
-                    'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                    'end': '12/11/2020',
                     'instructor': 'Lamble',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Full',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '0'
-                }
-            ]
-        },
-        '1A': {
-            '20267': [
-                {
-                    'CRN': '20267',
-                    'campus': 'FH',
-                    'course': 'C S F001A03W',
-                    'days': 'TBA',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
-                    'instructor': 'Cecil',
-                    'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '4'
+                    'time': 'TBA'
                 }
             ],
-            '20268': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 0
+        }
+    ],
+    '1A': [
+        {
+            'CRN': 20743,
+            'course': 'C S F001A01Z',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+            'end': '12/11/2020',
+            'seats': 19,
+            'section': '1A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20268',
                     'campus': 'FH',
-                    'course': 'C S F001A04W',
+                    'days': 'TTh',
+                    'instructor': 'Mazloom',
+                    'room': 'ONLINE',
+                    'time': '10:00 AM-11:50 AM'
+                },
+                {
+                    'campus': 'FH',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
+                    'instructor': 'Mazloom',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21639,
+            'course': 'C S F001A02W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+            'end': '12/11/2020',
+            'seats': 34,
+            'section': '1A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
+                    'instructor': 'Weusijana',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20267,
+            'course': 'C S F001A03W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '1A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
+                    'instructor': 'Cecil',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 4
+        },
+        {
+            'CRN': 20268,
+            'course': 'C S F001A04W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+            'end': '12/11/2020',
+            'seats': 37,
+            'section': '1A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
                     'instructor': 'Ibrahim',
                     'room': 'ONLINE',
-                    'seats': '37',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20371': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20371,
+            'course': 'C S F001A05W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+            'end': '12/11/2020',
+            'seats': 25,
+            'section': '1A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20371',
                     'campus': 'FH',
-                    'course': 'C S F001A05W',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
                     'instructor': 'Krishnamurthy',
                     'room': 'ONLINE',
-                    'seats': '25',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20743': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '1B': [
+        {
+            'CRN': 20339,
+            'course': 'C S F001B01Z',
+            'dept': 'CS',
+            'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+            'end': '12/11/2020',
+            'seats': 31,
+            'section': '1B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20743',
                     'campus': 'FH',
-                    'course': 'C S F001A01Z',
                     'days': 'TTh',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
-                    'instructor': 'Mazloom',
-                    'room': 'ONLINE',
-                    'seats': '19',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '10:00 AM-11:50 AM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
-                },
-                {
-                    'CRN': '20743',
-                    'campus': 'FH',
-                    'course': 'C S F001A01Z',
-                    'days': 'TBA',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
-                    'instructor': 'Mazloom',
-                    'room': 'ONLINE',
-                    'seats': '19',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
-                }
-            ],
-            '21639': [
-                {
-                    'CRN': '21639',
-                    'campus': 'FH',
-                    'course': 'C S F001A02W',
-                    'days': 'TBA',
-                    'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                    'end': '12/11/2020',
-                    'instructor': 'Weusijana',
-                    'room': 'ONLINE',
-                    'seats': '34',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
-                }
-            ]
-        },
-        '1B': {
-            '20339': [
-                {
-                    'CRN': '20339',
-                    'campus': 'FH',
-                    'course': 'C S F001B01Z',
-                    'days': 'TTh',
-                    'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                    'end': '12/11/2020',
                     'instructor': 'Mansouri Samani',
                     'room': 'ONLINE',
-                    'seats': '31',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '06:00 PM-07:50 PM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': '06:00 PM-07:50 PM'
                 },
                 {
-                    'CRN': '20339',
                     'campus': 'FH',
-                    'course': 'C S F001B01Z',
                     'days': 'TBA',
-                    'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                    'end': '12/11/2020',
                     'instructor': 'Mansouri Samani',
                     'room': 'ONLINE',
-                    'seats': '31',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20463': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20744,
+            'course': 'C S F001B02W',
+            'dept': 'CS',
+            'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+            'end': '12/11/2020',
+            'seats': 26,
+            'section': '1B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20463',
                     'campus': 'FH',
-                    'course': 'C S F001B03W',
                     'days': 'TBA',
-                    'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                    'end': '12/11/2020',
-                    'instructor': 'Pham',
-                    'room': 'ONLINE',
-                    'seats': '4',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
-                }
-            ],
-            '20744': [
-                {
-                    'CRN': '20744',
-                    'campus': 'FH',
-                    'course': 'C S F001B02W',
-                    'days': 'TBA',
-                    'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                    'end': '12/11/2020',
                     'instructor': 'Weusijana',
                     'room': 'ONLINE',
-                    'seats': '26',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
         },
-        '1C': {
-            '20270': [
+        {
+            'CRN': 20463,
+            'course': 'C S F001B03W',
+            'dept': 'CS',
+            'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+            'end': '12/11/2020',
+            'seats': 4,
+            'section': '1B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20270',
                     'campus': 'FH',
-                    'course': 'C S F001C02W',
                     'days': 'TBA',
-                    'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
-                    'end': '12/11/2020',
+                    'instructor': 'Pham',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '1C': [
+        {
+            'CRN': 20270,
+            'course': 'C S F001C02W',
+            'dept': 'CS',
+            'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '1C',
+            'start': '09/21/2020',
+            'status': 'Full',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
                     'instructor': 'Mazloom',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Full',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '0'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '22A': {
-            '20751': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 0
+        }
+    ],
+    '22A': [
+        {
+            'CRN': 20751,
+            'course': 'C S F022A01W',
+            'dept': 'CS',
+            'desc': 'JAVASCRIPT FOR PROGRAMMERS',
+            'end': '12/11/2020',
+            'seats': 20,
+            'section': '22A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20751',
                     'campus': 'FH',
-                    'course': 'C S F022A01W',
                     'days': 'TBA',
-                    'desc': 'JAVASCRIPT FOR PROGRAMMERS',
-                    'end': '12/11/2020',
                     'instructor': 'Weusijana',
                     'room': 'ONLINE',
-                    'seats': '20',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '2A': {
-            '20269': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '2A': [
+        {
+            'CRN': 20269,
+            'course': 'C S F002A01Z',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+            'end': '12/11/2020',
+            'seats': 31,
+            'section': '2A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20269',
                     'campus': 'FH',
-                    'course': 'C S F002A01Z',
                     'days': 'TTh',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
                     'instructor': 'Venkataraman',
                     'room': 'ONLINE',
-                    'seats': '31',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '08:00 AM-09:50 AM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': '08:00 AM-09:50 AM'
                 },
                 {
-                    'CRN': '20269',
                     'campus': 'FH',
-                    'course': 'C S F002A01Z',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
                     'instructor': 'Venkataraman',
                     'room': 'ONLINE',
-                    'seats': '31',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20325': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20372,
+            'course': 'C S F002A02W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '2A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
                 {
-                    'CRN': '20325',
                     'campus': 'FH',
-                    'course': 'C S F002A04W',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
-                    'instructor': 'Pham',
-                    'room': 'ONLINE',
-                    'seats': '37',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
-                }
-            ],
-            '20372': [
-                {
-                    'CRN': '20372',
-                    'campus': 'FH',
-                    'course': 'C S F002A02W',
-                    'days': 'TBA',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
                     'instructor': 'Harden',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '1'
+                    'time': 'TBA'
                 }
             ],
-            '20745': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 1
+        },
+        {
+            'CRN': 20745,
+            'course': 'C S F002A03W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+            'end': '12/11/2020',
+            'seats': 26,
+            'section': '2A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20745',
                     'campus': 'FH',
-                    'course': 'C S F002A03W',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
                     'instructor': 'Cecil',
                     'room': 'ONLINE',
-                    'seats': '26',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '21642': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20325,
+            'course': 'C S F002A04W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+            'end': '12/11/2020',
+            'seats': 37,
+            'section': '2A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21642',
                     'campus': 'FH',
-                    'course': 'C S F002A05W',
                     'days': 'TBA',
-                    'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                    'end': '12/11/2020',
+                    'instructor': 'Pham',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21642,
+            'course': 'C S F002A05W',
+            'dept': 'CS',
+            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '2A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
                     'instructor': 'Dhagat',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '8'
-                }
-            ]
-        },
-        '2B': {
-            '20417': [
-                {
-                    'CRN': '20417',
-                    'campus': 'FH',
-                    'course': 'C S F002B01W',
-                    'days': 'TBA',
-                    'desc': 'INTERM SOFTWARE DESIGN C++',
-                    'end': '12/11/2020',
-                    'instructor': 'Venkataraman',
-                    'room': 'ONLINE',
-                    'seats': '27',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '21644': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 8
+        }
+    ],
+    '2B': [
+        {
+            'CRN': 20417,
+            'course': 'C S F002B01W',
+            'dept': 'CS',
+            'desc': 'INTERM SOFTWARE DESIGN C++',
+            'end': '12/11/2020',
+            'seats': 27,
+            'section': '2B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21644',
                     'campus': 'FH',
-                    'course': 'C S F002B02W',
                     'days': 'TBA',
-                    'desc': 'INTERM SOFTWARE DESIGN C++',
-                    'end': '12/11/2020',
+                    'instructor': 'Venkataraman',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21644,
+            'course': 'C S F002B02W',
+            'dept': 'CS',
+            'desc': 'INTERM SOFTWARE DESIGN C++',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '2B',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
                     'instructor': 'Harden',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '4'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '2C': {
-            '20326': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 4
+        }
+    ],
+    '2C': [
+        {
+            'CRN': 20326,
+            'course': 'C S F002C01W',
+            'dept': 'CS',
+            'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
+            'end': '12/11/2020',
+            'seats': 12,
+            'section': '2C',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20326',
                     'campus': 'FH',
-                    'course': 'C S F002C01W',
                     'days': 'TBA',
-                    'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
-                    'end': '12/11/2020',
                     'instructor': 'Venkataraman',
                     'room': 'ONLINE',
-                    'seats': '12',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '30A': {
-            '20327': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '30A': [
+        {
+            'CRN': 20327,
+            'course': 'C S F030A01W',
+            'dept': 'CS',
+            'desc': 'INTRODUCTION TO LINUX',
+            'end': '12/11/2020',
+            'seats': 12,
+            'section': '30A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20327',
                     'campus': 'FH',
-                    'course': 'C S F030A01W',
                     'days': 'TBA',
-                    'desc': 'INTRODUCTION TO LINUX',
-                    'end': '12/11/2020',
                     'instructor': 'Murphy',
                     'room': 'ONLINE',
-                    'seats': '12',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '30B': {
-            '20600': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '30B': [
+        {
+            'CRN': 20600,
+            'course': 'C S F030B01W',
+            'dept': 'CS',
+            'desc': 'LINUX SHELL PROGRAMMING',
+            'end': '12/11/2020',
+            'seats': 30,
+            'section': '30B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20600',
                     'campus': 'FH',
-                    'course': 'C S F030B01W',
                     'days': 'TBA',
-                    'desc': 'LINUX SHELL PROGRAMMING',
-                    'end': '12/11/2020',
                     'instructor': 'Murphy',
                     'room': 'ONLINE',
-                    'seats': '30',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '31A': {
-            '20338': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '31A': [
+        {
+            'CRN': 20338,
+            'course': 'C S F031A01W',
+            'dept': 'CS',
+            'desc': 'INTRO DATABASE MGMT SYSTEMS',
+            'end': '12/11/2020',
+            'seats': 4,
+            'section': '31A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20338',
                     'campus': 'FH',
-                    'course': 'C S F031A01W',
                     'days': 'TBA',
-                    'desc': 'INTRO DATABASE MGMT SYSTEMS',
-                    'end': '12/11/2020',
                     'instructor': 'Meade',
                     'room': 'ONLINE',
-                    'seats': '4',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '3A': {
-            '20674': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '3A': [
+        {
+            'CRN': 20674,
+            'course': 'C S F003A01Z',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 28,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20674',
                     'campus': 'FH',
-                    'course': 'C S F003A01Z',
                     'days': 'MW',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Murphy',
                     'room': 'ONLINE',
-                    'seats': '28',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '06:00 PM-07:50 PM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': '06:00 PM-07:50 PM'
                 },
                 {
-                    'CRN': '20674',
                     'campus': 'FH',
-                    'course': 'C S F003A01Z',
                     'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Murphy',
                     'room': 'ONLINE',
-                    'seats': '28',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '20747': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21646,
+            'course': 'C S F003A02W',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
                 {
-                    'CRN': '20747',
                     'campus': 'FH',
-                    'course': 'C S F003A03W',
                     'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
-                    'instructor': 'Murphy',
-                    'room': 'ONLINE',
-                    'seats': '23',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '25',
-                    'wait_seats': '25'
-                }
-            ],
-            '20889': [
-                {
-                    'CRN': '20889',
-                    'campus': 'FH',
-                    'course': 'C S F003A04W',
-                    'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
-                    'instructor': 'Meade',
-                    'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '9'
-                }
-            ],
-            '21646': [
-                {
-                    'CRN': '21646',
-                    'campus': 'FH',
-                    'course': 'C S F003A02W',
-                    'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Mazloom',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 },
                 {
-                    'CRN': '21646',
                     'campus': '',
-                    'course': 'C S F003A02W',
                     'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Mazloom',
                     'room': '',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '21650': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 20747,
+            'course': 'C S F003A03W',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 23,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21650',
                     'campus': 'FH',
-                    'course': 'C S F003A05W',
                     'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
+                    'instructor': 'Murphy',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 25,
+            'wait_seats': 25
+        },
+        {
+            'CRN': 20889,
+            'course': 'C S F003A04W',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
+                    'instructor': 'Meade',
+                    'room': 'ONLINE',
+                    'time': 'TBA'
+                }
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 9
+        },
+        {
+            'CRN': 21650,
+            'course': 'C S F003A05W',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 7,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
+                {
+                    'campus': 'FH',
+                    'days': 'TBA',
                     'instructor': 'Lai',
                     'room': 'ONLINE',
-                    'seats': '7',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '21825': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21825,
+            'course': 'C S F003A06Z',
+            'dept': 'CS',
+            'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '3A',
+            'start': '09/21/2020',
+            'status': 'Full',
+            'time': [
                 {
-                    'CRN': '21825',
                     'campus': 'FH',
-                    'course': 'C S F003A06Z',
                     'days': 'MW',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Yang',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Full',
-                    'time': '01:30 PM-03:20 PM',
-                    'units': '4.50',
-                    'wait_cap': '0',
-                    'wait_seats': '0'
+                    'time': '01:30 PM-03:20 PM'
                 },
                 {
-                    'CRN': '21825',
                     'campus': 'FH',
-                    'course': 'C S F003A06Z',
                     'days': 'TBA',
-                    'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Yang',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Full',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '0',
-                    'wait_seats': '0'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '3B': {
-            '20845': [
+            ],
+            'units': 4.5,
+            'wait_cap': 0,
+            'wait_seats': 0
+        }
+    ],
+    '3B': [
+        {
+            'CRN': 20845,
+            'course': 'C S F003B01W',
+            'dept': 'CS',
+            'desc': 'INTERMED SOFTWARE DESGN PYTHON',
+            'end': '12/11/2020',
+            'seats': 15,
+            'section': '3B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '20845',
                     'campus': 'FH',
-                    'course': 'C S F003B01W',
                     'days': 'TBA',
-                    'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Trinh',
                     'room': 'ONLINE',
-                    'seats': '15',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
             ],
-            '21145': [
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        },
+        {
+            'CRN': 21145,
+            'course': 'C S F003B02Z',
+            'dept': 'CS',
+            'desc': 'INTERMED SOFTWARE DESGN PYTHON',
+            'end': '12/11/2020',
+            'seats': 9,
+            'section': '3B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21145',
                     'campus': 'FH',
-                    'course': 'C S F003B02Z',
                     'days': 'MW',
-                    'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Yang',
                     'room': 'ONLINE',
-                    'seats': '9',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': '10:00 AM-11:50 AM',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': '10:00 AM-11:50 AM'
                 },
                 {
-                    'CRN': '21145',
                     'campus': 'FH',
-                    'course': 'C S F003B02Z',
                     'days': 'TBA',
-                    'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Yang',
                     'room': 'ONLINE',
-                    'seats': '9',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '3C': {
-            '21164': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '3C': [
+        {
+            'CRN': 21164,
+            'course': 'C S F003C01W',
+            'dept': 'CS',
+            'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
+            'end': '12/11/2020',
+            'seats': 20,
+            'section': '3C',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21164',
                     'campus': 'FH',
-                    'course': 'C S F003C01W',
                     'days': 'TBA',
-                    'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
-                    'end': '12/11/2020',
                     'instructor': 'Lamble',
                     'room': 'ONLINE',
-                    'seats': '20',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '48A': {
-            '21818': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '48A': [
+        {
+            'CRN': 21818,
+            'course': 'C S F048A01W',
+            'dept': 'CS',
+            'desc': 'DATA VISUALIZATION',
+            'end': '12/11/2020',
+            'seats': 0,
+            'section': '48A',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': [
                 {
-                    'CRN': '21818',
                     'campus': 'FH',
-                    'course': 'C S F048A01W',
                     'days': 'TBA',
-                    'desc': 'DATA VISUALIZATION',
-                    'end': '12/11/2020',
                     'instructor': 'Lankester',
                     'room': 'ONLINE',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '5'
+                    'time': 'TBA'
                 },
                 {
-                    'CRN': '21818',
                     'campus': '',
-                    'course': 'C S F048A01W',
                     'days': 'TBA',
-                    'desc': 'DATA VISUALIZATION',
-                    'end': '12/11/2020',
                     'instructor': 'Lankester',
                     'room': '',
-                    'seats': '0',
-                    'start': '09/21/2020',
-                    'status': 'Waitlist',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '5'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '50A': {
-            '21652': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 5
+        }
+    ],
+    '50A': [
+        {
+            'CRN': 21652,
+            'course': 'C S F050A01W',
+            'dept': 'CS',
+            'desc': 'NETWORK BASICS (CCNA)',
+            'end': '12/11/2020',
+            'seats': 6,
+            'section': '50A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21652',
                     'campus': 'FH',
-                    'course': 'C S F050A01W',
                     'days': 'TBA',
-                    'desc': 'NETWORK BASICS (CCNA)',
-                    'end': '12/11/2020',
                     'instructor': 'Staff',
                     'room': 'ONLINE',
-                    'seats': '6',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '53A': {
-            '21653': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '53A': [
+        {
+            'CRN': 21653,
+            'course': 'C S F053A01W',
+            'dept': 'CS',
+            'desc': 'CYBERSECURITY FUNDAMENTALS',
+            'end': '12/11/2020',
+            'seats': 17,
+            'section': '53A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21653',
                     'campus': 'FH',
-                    'course': 'C S F053A01W',
                     'days': 'TBA',
-                    'desc': 'CYBERSECURITY FUNDAMENTALS',
-                    'end': '12/11/2020',
                     'instructor': 'Ryan',
                     'room': 'ONLINE',
-                    'seats': '17',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '55A': {
-            '21162': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '55A': [
+        {
+            'CRN': 21162,
+            'course': 'C S F055A01W',
+            'dept': 'CS',
+            'desc': 'INTRO CLOUD COMPUTNG AWS',
+            'end': '12/11/2020',
+            'seats': 11,
+            'section': '55A',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21162',
                     'campus': 'FH',
-                    'course': 'C S F055A01W',
                     'days': 'TBA',
-                    'desc': 'INTRO CLOUD COMPUTNG AWS',
-                    'end': '12/11/2020',
                     'instructor': 'Sandor',
                     'room': 'ONLINE',
-                    'seats': '11',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        },
-        '55B': {
-            '21654': [
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
+        }
+    ],
+    '55B': [
+        {
+            'CRN': 21654,
+            'course': 'C S F055B01W',
+            'dept': 'CS',
+            'desc': 'DATABASE ESSENTIALS AWS',
+            'end': '12/11/2020',
+            'seats': 14,
+            'section': '55B',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': [
                 {
-                    'CRN': '21654',
                     'campus': 'FH',
-                    'course': 'C S F055B01W',
                     'days': 'TBA',
-                    'desc': 'DATABASE ESSENTIALS AWS',
-                    'end': '12/11/2020',
                     'instructor': 'Murphy',
                     'room': 'ONLINE',
-                    'seats': '14',
-                    'start': '09/21/2020',
-                    'status': 'Open',
-                    'time': 'TBA',
-                    'units': '4.50',
-                    'wait_cap': '10',
-                    'wait_seats': '10'
+                    'time': 'TBA'
                 }
-            ]
-        }
-    }
-]
-
-snapshots['TestGetOne::test_get_one_dept_and_course 1'] = {
-    '20269': [
-        {
-            'CRN': '20269',
-            'campus': 'FH',
-            'course': 'C S F002A01Z',
-            'days': 'TTh',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Venkataraman',
-            'room': 'ONLINE',
-            'seats': '31',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': '08:00 AM-09:50 AM',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '10'
-        },
-        {
-            'CRN': '20269',
-            'campus': 'FH',
-            'course': 'C S F002A01Z',
-            'days': 'TBA',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Venkataraman',
-            'room': 'ONLINE',
-            'seats': '31',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': 'TBA',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '10'
-        }
-    ],
-    '20325': [
-        {
-            'CRN': '20325',
-            'campus': 'FH',
-            'course': 'C S F002A04W',
-            'days': 'TBA',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Pham',
-            'room': 'ONLINE',
-            'seats': '37',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': 'TBA',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '10'
-        }
-    ],
-    '20372': [
-        {
-            'CRN': '20372',
-            'campus': 'FH',
-            'course': 'C S F002A02W',
-            'days': 'TBA',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Harden',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '1'
-        }
-    ],
-    '20745': [
-        {
-            'CRN': '20745',
-            'campus': 'FH',
-            'course': 'C S F002A03W',
-            'days': 'TBA',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Cecil',
-            'room': 'ONLINE',
-            'seats': '26',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': 'TBA',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '10'
-        }
-    ],
-    '21642': [
-        {
-            'CRN': '21642',
-            'campus': 'FH',
-            'course': 'C S F002A05W',
-            'days': 'TBA',
-            'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-            'end': '12/11/2020',
-            'instructor': 'Dhagat',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '4.50',
-            'wait_cap': '10',
-            'wait_seats': '8'
+            ],
+            'units': 4.5,
+            'wait_cap': 10,
+            'wait_seats': 10
         }
     ]
 }
 
+snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
+    {
+        'CRN': 20269,
+        'course': 'C S F002A01Z',
+        'dept': 'CS',
+        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+        'end': '12/11/2020',
+        'seats': 31,
+        'section': '2A',
+        'start': '09/21/2020',
+        'status': 'Open',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TTh',
+                'instructor': 'Venkataraman',
+                'room': 'ONLINE',
+                'time': '08:00 AM-09:50 AM'
+            },
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Venkataraman',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 4.5,
+        'wait_cap': 10,
+        'wait_seats': 10
+    },
+    {
+        'CRN': 20372,
+        'course': 'C S F002A02W',
+        'dept': 'CS',
+        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+        'end': '12/11/2020',
+        'seats': 0,
+        'section': '2A',
+        'start': '09/21/2020',
+        'status': 'Waitlist',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Harden',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 4.5,
+        'wait_cap': 10,
+        'wait_seats': 1
+    },
+    {
+        'CRN': 20745,
+        'course': 'C S F002A03W',
+        'dept': 'CS',
+        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+        'end': '12/11/2020',
+        'seats': 26,
+        'section': '2A',
+        'start': '09/21/2020',
+        'status': 'Open',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Cecil',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 4.5,
+        'wait_cap': 10,
+        'wait_seats': 10
+    },
+    {
+        'CRN': 20325,
+        'course': 'C S F002A04W',
+        'dept': 'CS',
+        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+        'end': '12/11/2020',
+        'seats': 37,
+        'section': '2A',
+        'start': '09/21/2020',
+        'status': 'Open',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Pham',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 4.5,
+        'wait_cap': 10,
+        'wait_seats': 10
+    },
+    {
+        'CRN': 21642,
+        'course': 'C S F002A05W',
+        'dept': 'CS',
+        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+        'end': '12/11/2020',
+        'seats': 0,
+        'section': '2A',
+        'start': '09/21/2020',
+        'status': 'Waitlist',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Dhagat',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 4.5,
+        'wait_cap': 10,
+        'wait_seats': 8
+    }
+]
+
 snapshots['TestGetMany::test_get_many_dept 1'] = [
-    [
-        {
-            '10': {
-                '20748': [
+    {
+        '10': [
+            {
+                'CRN': 20748,
+                'course': 'C S F010.01Z',
+                'dept': 'CS',
+                'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20748',
                         'campus': 'FH',
-                        'course': 'C S F010.01Z',
                         'days': 'TTh',
-                        'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                        'end': '12/11/2020',
                         'instructor': 'Riordan',
                         'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-07:50 PM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': '06:00 PM-07:50 PM'
                     },
                     {
-                        'CRN': '20748',
                         'campus': 'FH',
-                        'course': 'C S F010.01Z',
                         'days': 'TBA',
-                        'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                        'end': '12/11/2020',
                         'instructor': 'Riordan',
                         'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20749': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20749,
+                'course': 'C S F010.02W',
+                'dept': 'CS',
+                'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
                     {
-                        'CRN': '20749',
                         'campus': 'FH',
-                        'course': 'C S F010.02W',
                         'days': 'TBA',
-                        'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
-                        'end': '12/11/2020',
                         'instructor': 'Lamble',
                         'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '1A': {
-                '20267': [
-                    {
-                        'CRN': '20267',
-                        'campus': 'FH',
-                        'course': 'C S F001A03W',
-                        'days': 'TBA',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
-                        'instructor': 'Cecil',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '4'
+                        'time': 'TBA'
                     }
                 ],
-                '20268': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 0
+            }
+        ],
+        '1A': [
+            {
+                'CRN': 20743,
+                'course': 'C S F001A01Z',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+                'end': '12/11/2020',
+                'seats': 19,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20268',
                         'campus': 'FH',
-                        'course': 'C S F001A04W',
+                        'days': 'TTh',
+                        'instructor': 'Mazloom',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-11:50 AM'
+                    },
+                    {
+                        'campus': 'FH',
                         'days': 'TBA',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
+                        'instructor': 'Mazloom',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21639,
+                'course': 'C S F001A02W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+                'end': '12/11/2020',
+                'seats': 34,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Weusijana',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20267,
+                'course': 'C S F001A03W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Cecil',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 4
+            },
+            {
+                'CRN': 20268,
+                'course': 'C S F001A04W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+                'end': '12/11/2020',
+                'seats': 37,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
                         'instructor': 'Ibrahim',
                         'room': 'ONLINE',
-                        'seats': '37',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20371': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20371,
+                'course': 'C S F001A05W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
+                'end': '12/11/2020',
+                'seats': 25,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20371',
                         'campus': 'FH',
-                        'course': 'C S F001A05W',
                         'days': 'TBA',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
                         'instructor': 'Krishnamurthy',
                         'room': 'ONLINE',
-                        'seats': '25',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20743': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '1B': [
+            {
+                'CRN': 20339,
+                'course': 'C S F001B01Z',
+                'dept': 'CS',
+                'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+                'end': '12/11/2020',
+                'seats': 31,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20743',
                         'campus': 'FH',
-                        'course': 'C S F001A01Z',
                         'days': 'TTh',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
-                        'instructor': 'Mazloom',
-                        'room': 'ONLINE',
-                        'seats': '19',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-11:50 AM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '20743',
-                        'campus': 'FH',
-                        'course': 'C S F001A01Z',
-                        'days': 'TBA',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
-                        'instructor': 'Mazloom',
-                        'room': 'ONLINE',
-                        'seats': '19',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21639': [
-                    {
-                        'CRN': '21639',
-                        'campus': 'FH',
-                        'course': 'C S F001A02W',
-                        'days': 'TBA',
-                        'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
-                        'end': '12/11/2020',
-                        'instructor': 'Weusijana',
-                        'room': 'ONLINE',
-                        'seats': '34',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '1B': {
-                '20339': [
-                    {
-                        'CRN': '20339',
-                        'campus': 'FH',
-                        'course': 'C S F001B01Z',
-                        'days': 'TTh',
-                        'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                        'end': '12/11/2020',
                         'instructor': 'Mansouri Samani',
                         'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-07:50 PM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': '06:00 PM-07:50 PM'
                     },
                     {
-                        'CRN': '20339',
                         'campus': 'FH',
-                        'course': 'C S F001B01Z',
                         'days': 'TBA',
-                        'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                        'end': '12/11/2020',
                         'instructor': 'Mansouri Samani',
                         'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20463': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20744,
+                'course': 'C S F001B02W',
+                'dept': 'CS',
+                'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+                'end': '12/11/2020',
+                'seats': 26,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20463',
                         'campus': 'FH',
-                        'course': 'C S F001B03W',
                         'days': 'TBA',
-                        'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                        'end': '12/11/2020',
-                        'instructor': 'Pham',
-                        'room': 'ONLINE',
-                        'seats': '4',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20744': [
-                    {
-                        'CRN': '20744',
-                        'campus': 'FH',
-                        'course': 'C S F001B02W',
-                        'days': 'TBA',
-                        'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
-                        'end': '12/11/2020',
                         'instructor': 'Weusijana',
                         'room': 'ONLINE',
-                        'seats': '26',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
-                ]
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
             },
-            '1C': {
-                '20270': [
+            {
+                'CRN': 20463,
+                'course': 'C S F001B03W',
+                'dept': 'CS',
+                'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
+                'end': '12/11/2020',
+                'seats': 4,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20270',
                         'campus': 'FH',
-                        'course': 'C S F001C02W',
                         'days': 'TBA',
-                        'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
-                        'end': '12/11/2020',
+                        'instructor': 'Pham',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '1C': [
+            {
+                'CRN': 20270,
+                'course': 'C S F001C02W',
+                'dept': 'CS',
+                'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1C',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
                         'instructor': 'Mazloom',
                         'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
+                        'time': 'TBA'
                     }
-                ]
-            },
-            '22A': {
-                '20751': [
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 0
+            }
+        ],
+        '22A': [
+            {
+                'CRN': 20751,
+                'course': 'C S F022A01W',
+                'dept': 'CS',
+                'desc': 'JAVASCRIPT FOR PROGRAMMERS',
+                'end': '12/11/2020',
+                'seats': 20,
+                'section': '22A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20751',
                         'campus': 'FH',
-                        'course': 'C S F022A01W',
                         'days': 'TBA',
-                        'desc': 'JAVASCRIPT FOR PROGRAMMERS',
-                        'end': '12/11/2020',
                         'instructor': 'Weusijana',
                         'room': 'ONLINE',
-                        'seats': '20',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
-                ]
-            },
-            '2A': {
-                '20269': [
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '2A': [
+            {
+                'CRN': 20269,
+                'course': 'C S F002A01Z',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+                'end': '12/11/2020',
+                'seats': 31,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20269',
                         'campus': 'FH',
-                        'course': 'C S F002A01Z',
                         'days': 'TTh',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
                         'instructor': 'Venkataraman',
                         'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '08:00 AM-09:50 AM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': '08:00 AM-09:50 AM'
                     },
                     {
-                        'CRN': '20269',
                         'campus': 'FH',
-                        'course': 'C S F002A01Z',
                         'days': 'TBA',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
                         'instructor': 'Venkataraman',
                         'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20325': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20372,
+                'course': 'C S F002A02W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
                     {
-                        'CRN': '20325',
                         'campus': 'FH',
-                        'course': 'C S F002A04W',
                         'days': 'TBA',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
-                        'instructor': 'Pham',
-                        'room': 'ONLINE',
-                        'seats': '37',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20372': [
-                    {
-                        'CRN': '20372',
-                        'campus': 'FH',
-                        'course': 'C S F002A02W',
-                        'days': 'TBA',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
                         'instructor': 'Harden',
                         'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '1'
+                        'time': 'TBA'
                     }
                 ],
-                '20745': [
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 1
+            },
+            {
+                'CRN': 20745,
+                'course': 'C S F002A03W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+                'end': '12/11/2020',
+                'seats': 26,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20745',
                         'campus': 'FH',
-                        'course': 'C S F002A03W',
                         'days': 'TBA',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
                         'instructor': 'Cecil',
                         'room': 'ONLINE',
-                        'seats': '26',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '21642': [
-                    {
-                        'CRN': '21642',
-                        'campus': 'FH',
-                        'course': 'C S F002A05W',
-                        'days': 'TBA',
-                        'desc': 'OBJ-ORIENT PROG METHOD IN C++',
-                        'end': '12/11/2020',
-                        'instructor': 'Dhagat',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '8'
-                    }
-                ]
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
             },
-            '2B': {
-                '20417': [
+            {
+                'CRN': 20325,
+                'course': 'C S F002A04W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+                'end': '12/11/2020',
+                'seats': 37,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20417',
                         'campus': 'FH',
-                        'course': 'C S F002B01W',
                         'days': 'TBA',
-                        'desc': 'INTERM SOFTWARE DESIGN C++',
-                        'end': '12/11/2020',
-                        'instructor': 'Venkataraman',
-                        'room': 'ONLINE',
-                        'seats': '27',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21644': [
-                    {
-                        'CRN': '21644',
-                        'campus': 'FH',
-                        'course': 'C S F002B02W',
-                        'days': 'TBA',
-                        'desc': 'INTERM SOFTWARE DESIGN C++',
-                        'end': '12/11/2020',
-                        'instructor': 'Harden',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '4'
-                    }
-                ]
-            },
-            '2C': {
-                '20326': [
-                    {
-                        'CRN': '20326',
-                        'campus': 'FH',
-                        'course': 'C S F002C01W',
-                        'days': 'TBA',
-                        'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
-                        'end': '12/11/2020',
-                        'instructor': 'Venkataraman',
-                        'room': 'ONLINE',
-                        'seats': '12',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '30A': {
-                '20327': [
-                    {
-                        'CRN': '20327',
-                        'campus': 'FH',
-                        'course': 'C S F030A01W',
-                        'days': 'TBA',
-                        'desc': 'INTRODUCTION TO LINUX',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '12',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '30B': {
-                '20600': [
-                    {
-                        'CRN': '20600',
-                        'campus': 'FH',
-                        'course': 'C S F030B01W',
-                        'days': 'TBA',
-                        'desc': 'LINUX SHELL PROGRAMMING',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '30',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '31A': {
-                '20338': [
-                    {
-                        'CRN': '20338',
-                        'campus': 'FH',
-                        'course': 'C S F031A01W',
-                        'days': 'TBA',
-                        'desc': 'INTRO DATABASE MGMT SYSTEMS',
-                        'end': '12/11/2020',
-                        'instructor': 'Meade',
-                        'room': 'ONLINE',
-                        'seats': '4',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '3A': {
-                '20674': [
-                    {
-                        'CRN': '20674',
-                        'campus': 'FH',
-                        'course': 'C S F003A01Z',
-                        'days': 'MW',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '28',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-07:50 PM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '20674',
-                        'campus': 'FH',
-                        'course': 'C S F003A01Z',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '28',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20747': [
-                    {
-                        'CRN': '20747',
-                        'campus': 'FH',
-                        'course': 'C S F003A03W',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '23',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '25',
-                        'wait_seats': '25'
-                    }
-                ],
-                '20889': [
-                    {
-                        'CRN': '20889',
-                        'campus': 'FH',
-                        'course': 'C S F003A04W',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Meade',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '9'
-                    }
-                ],
-                '21646': [
-                    {
-                        'CRN': '21646',
-                        'campus': 'FH',
-                        'course': 'C S F003A02W',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Mazloom',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '21646',
-                        'campus': '',
-                        'course': 'C S F003A02W',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Mazloom',
-                        'room': '',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21650': [
-                    {
-                        'CRN': '21650',
-                        'campus': 'FH',
-                        'course': 'C S F003A05W',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Lai',
-                        'room': 'ONLINE',
-                        'seats': '7',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21825': [
-                    {
-                        'CRN': '21825',
-                        'campus': 'FH',
-                        'course': 'C S F003A06Z',
-                        'days': 'MW',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Yang',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '01:30 PM-03:20 PM',
-                        'units': '4.50',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    },
-                    {
-                        'CRN': '21825',
-                        'campus': 'FH',
-                        'course': 'C S F003A06Z',
-                        'days': 'TBA',
-                        'desc': 'OBJECT ORIEN PRGM METH PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Yang',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '3B': {
-                '20845': [
-                    {
-                        'CRN': '20845',
-                        'campus': 'FH',
-                        'course': 'C S F003B01W',
-                        'days': 'TBA',
-                        'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Trinh',
-                        'room': 'ONLINE',
-                        'seats': '15',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21145': [
-                    {
-                        'CRN': '21145',
-                        'campus': 'FH',
-                        'course': 'C S F003B02Z',
-                        'days': 'MW',
-                        'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Yang',
-                        'room': 'ONLINE',
-                        'seats': '9',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-11:50 AM',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '21145',
-                        'campus': 'FH',
-                        'course': 'C S F003B02Z',
-                        'days': 'TBA',
-                        'desc': 'INTERMED SOFTWARE DESGN PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Yang',
-                        'room': 'ONLINE',
-                        'seats': '9',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '3C': {
-                '21164': [
-                    {
-                        'CRN': '21164',
-                        'campus': 'FH',
-                        'course': 'C S F003C01W',
-                        'days': 'TBA',
-                        'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
-                        'end': '12/11/2020',
-                        'instructor': 'Lamble',
-                        'room': 'ONLINE',
-                        'seats': '20',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '48A': {
-                '21818': [
-                    {
-                        'CRN': '21818',
-                        'campus': 'FH',
-                        'course': 'C S F048A01W',
-                        'days': 'TBA',
-                        'desc': 'DATA VISUALIZATION',
-                        'end': '12/11/2020',
-                        'instructor': 'Lankester',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '5'
-                    },
-                    {
-                        'CRN': '21818',
-                        'campus': '',
-                        'course': 'C S F048A01W',
-                        'days': 'TBA',
-                        'desc': 'DATA VISUALIZATION',
-                        'end': '12/11/2020',
-                        'instructor': 'Lankester',
-                        'room': '',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '5'
-                    }
-                ]
-            },
-            '50A': {
-                '21652': [
-                    {
-                        'CRN': '21652',
-                        'campus': 'FH',
-                        'course': 'C S F050A01W',
-                        'days': 'TBA',
-                        'desc': 'NETWORK BASICS (CCNA)',
-                        'end': '12/11/2020',
-                        'instructor': 'Staff',
-                        'room': 'ONLINE',
-                        'seats': '6',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '53A': {
-                '21653': [
-                    {
-                        'CRN': '21653',
-                        'campus': 'FH',
-                        'course': 'C S F053A01W',
-                        'days': 'TBA',
-                        'desc': 'CYBERSECURITY FUNDAMENTALS',
-                        'end': '12/11/2020',
-                        'instructor': 'Ryan',
-                        'room': 'ONLINE',
-                        'seats': '17',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '55A': {
-                '21162': [
-                    {
-                        'CRN': '21162',
-                        'campus': 'FH',
-                        'course': 'C S F055A01W',
-                        'days': 'TBA',
-                        'desc': 'INTRO CLOUD COMPUTNG AWS',
-                        'end': '12/11/2020',
-                        'instructor': 'Sandor',
-                        'room': 'ONLINE',
-                        'seats': '11',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '55B': {
-                '21654': [
-                    {
-                        'CRN': '21654',
-                        'campus': 'FH',
-                        'course': 'C S F055B01W',
-                        'days': 'TBA',
-                        'desc': 'DATABASE ESSENTIALS AWS',
-                        'end': '12/11/2020',
-                        'instructor': 'Murphy',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '4.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            }
-        }
-    ],
-    [
-        {
-            '10': {
-                '20673': [
-                    {
-                        'CRN': '20673',
-                        'campus': 'FH',
-                        'course': 'MATH F010.01V',
-                        'days': 'TTh',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Francisco',
-                        'room': 'ONLINE',
-                        'seats': '10',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '07:30 AM-09:45 AM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20776': [
-                    {
-                        'CRN': '20776',
-                        'campus': 'FH',
-                        'course': 'MATH F010.04W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Martinez',
-                        'room': 'ONLINE',
-                        'seats': '9',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20778': [
-                    {
-                        'CRN': '20778',
-                        'campus': 'FH',
-                        'course': 'MATH F010.06W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Sinclair',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '9'
-                    }
-                ],
-                '20779': [
-                    {
-                        'CRN': '20779',
-                        'campus': 'FH',
-                        'course': 'MATH F010.07Z',
-                        'days': 'T',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-11:15 AM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '20779',
-                        'campus': 'FH',
-                        'course': 'MATH F010.07Z',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20780': [
-                    {
-                        'CRN': '20780',
-                        'campus': 'FH',
-                        'course': 'MATH F010.08W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Sinclair',
-                        'room': 'ONLINE',
-                        'seats': '15',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20781': [
-                    {
-                        'CRN': '20781',
-                        'campus': 'FH',
-                        'course': 'MATH F010.09W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Sinclair',
-                        'room': 'ONLINE',
-                        'seats': '35',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20786': [
-                    {
-                        'CRN': '20786',
-                        'campus': 'FH',
-                        'course': 'MATH F010.10W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '1',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20787': [
-                    {
-                        'CRN': '20787',
-                        'campus': 'FH',
-                        'course': 'MATH F010.11V',
-                        'days': 'MW',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Morriss',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20788': [
-                    {
-                        'CRN': '20788',
-                        'campus': 'FH',
-                        'course': 'MATH F010.12W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '34',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20789': [
-                    {
-                        'CRN': '20789',
-                        'campus': 'FH',
-                        'course': 'MATH F010.13V',
-                        'days': 'TTh',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Munoz',
-                        'room': 'ONLINE',
-                        'seats': '21',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20790': [
-                    {
-                        'CRN': '20790',
-                        'campus': 'FH',
-                        'course': 'MATH F010.14W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '37',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20792': [
-                    {
-                        'CRN': '20792',
-                        'campus': 'FH',
-                        'course': 'MATH F010.17W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Martinez',
-                        'room': 'ONLINE',
-                        'seats': '33',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20793': [
-                    {
-                        'CRN': '20793',
-                        'campus': 'FH',
-                        'course': 'MATH F010.18W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Martinez',
-                        'room': 'ONLINE',
-                        'seats': '39',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20794': [
-                    {
-                        'CRN': '20794',
-                        'campus': 'FH',
-                        'course': 'MATH F010.19W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Mudge',
-                        'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20812': [
-                    {
-                        'CRN': '20812',
-                        'campus': 'FH',
-                        'course': 'MATH F010.20W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Tomutiu',
-                        'room': 'ONLINE',
-                        'seats': '36',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20964': [
-                    {
-                        'CRN': '20964',
-                        'campus': 'FH',
-                        'course': 'MATH F010.02V',
-                        'days': 'MW',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Morriss',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '2'
-                    }
-                ],
-                '20976': [
-                    {
-                        'CRN': '20976',
-                        'campus': 'FH',
-                        'course': 'MATH F010.03W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Martinez',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '7'
-                    }
-                ],
-                '20977': [
-                    {
-                        'CRN': '20977',
-                        'campus': 'FH',
-                        'course': 'MATH F010.05W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Martinez',
-                        'room': 'ONLINE',
-                        'seats': '33',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21000': [
-                    {
-                        'CRN': '21000',
-                        'campus': 'FH',
-                        'course': 'MATH F010.16V',
-                        'days': 'TTh',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Witschorik',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21001': [
-                    {
-                        'CRN': '21001',
-                        'campus': 'FH',
-                        'course': 'MATH F010.21W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Papay',
-                        'room': 'ONLINE',
-                        'seats': '36',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21002': [
-                    {
-                        'CRN': '21002',
-                        'campus': 'FH',
-                        'course': 'MATH F010.22W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Papay',
-                        'room': 'ONLINE',
-                        'seats': '38',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21312': [
-                    {
-                        'CRN': '21312',
-                        'campus': 'FH',
-                        'course': 'MATH F010.23W',
-                        'days': 'TBA',
-                        'desc': 'ELEMENTARY STATISTICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Florero Salinas',
-                        'room': 'ONLINE',
-                        'seats': '37',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '5',
-                        'wait_seats': '5'
-                    }
-                ]
-            },
-            '105': {
-                '20091': [
-                    {
-                        'CRN': '20091',
-                        'campus': 'FH',
-                        'course': 'MATH F105.02W',
-                        'days': 'TBA',
-                        'desc': 'INTERMEDIATE ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Robledo',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '8'
-                    }
-                ],
-                '20811': [
-                    {
-                        'CRN': '20811',
-                        'campus': 'FH',
-                        'course': 'MATH F105.01W',
-                        'days': 'TBA',
-                        'desc': 'INTERMEDIATE ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Tomutiu',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '9'
-                    }
-                ],
-                '20813': [
-                    {
-                        'CRN': '20813',
-                        'campus': 'FH',
-                        'course': 'MATH F105.03W',
-                        'days': 'TBA',
-                        'desc': 'INTERMEDIATE ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Oruganti',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20814': [
-                    {
-                        'CRN': '20814',
-                        'campus': 'FH',
-                        'course': 'MATH F105.05W',
-                        'days': 'TBA',
-                        'desc': 'INTERMEDIATE ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Sukumar',
-                        'room': 'ONLINE',
-                        'seats': '6',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21018': [
-                    {
-                        'CRN': '21018',
-                        'campus': 'FH',
-                        'course': 'MATH F105.04V',
-                        'days': 'MW',
-                        'desc': 'INTERMEDIATE ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Low',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '7'
-                    }
-                ]
-            },
-            '12': {
-                '20277': [
-                    {
-                        'CRN': '20277',
-                        'campus': 'FH',
-                        'course': 'MATH F012.01Z',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS FOR BUSINESS & ECONOM',
-                        'end': '12/11/2020',
-                        'instructor': 'Knobel',
-                        'room': 'ONLINE',
-                        'seats': '30',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-11:50 AM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    },
-                    {
-                        'CRN': '20277',
-                        'campus': 'FH',
-                        'course': 'MATH F012.01Z',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS FOR BUSINESS & ECONOM',
-                        'end': '12/11/2020',
-                        'instructor': 'Knobel',
-                        'room': 'ONLINE',
-                        'seats': '30',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20843': [
-                    {
-                        'CRN': '20843',
-                        'campus': 'FH',
-                        'course': 'MATH F012.02W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS FOR BUSINESS & ECONOM',
-                        'end': '12/11/2020',
-                        'instructor': 'Knobel',
-                        'room': 'ONLINE',
-                        'seats': '25',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '180': {
-                '21380': [
-                    {
-                        'CRN': '21380',
-                        'campus': 'FH',
-                        'course': 'MATH F180.01W',
-                        'days': 'TBA',
-                        'desc': 'QUANTITATIVE REASONING',
-                        'end': '12/11/2020',
-                        'instructor': 'Gray',
-                        'room': 'ONLINE',
-                        'seats': '13',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '5',
-                        'wait_seats': '5'
-                    }
-                ]
-            },
-            '1A': {
-                '20086': [
-                    {
-                        'CRN': '20086',
-                        'campus': 'FH',
-                        'course': 'MATH F001A01V',
-                        'days': 'MW',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Uilecan',
-                        'room': 'ONLINE',
-                        'seats': '28',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '07:30 AM-09:45 AM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20087': [
-                    {
-                        'CRN': '20087',
-                        'campus': 'FH',
-                        'course': 'MATH F001A02V',
-                        'days': 'MW',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Cembellin',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20088': [
-                    {
-                        'CRN': '20088',
-                        'campus': 'FH',
-                        'course': 'MATH F001A03V',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Nghiem',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '2'
-                    }
-                ],
-                '20257': [
-                    {
-                        'CRN': '20257',
-                        'campus': 'FH',
-                        'course': 'MATH F001A04V',
-                        'days': 'MW',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Nghiem',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '3'
-                    }
-                ],
-                '20305': [
-                    {
-                        'CRN': '20305',
-                        'campus': 'FH',
-                        'course': 'MATH F001A07W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Williams',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '8'
-                    }
-                ],
-                '20761': [
-                    {
-                        'CRN': '20761',
-                        'campus': 'FH',
-                        'course': 'MATH F001A05V',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Lam',
-                        'room': 'ONLINE',
-                        'seats': '32',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20762': [
-                    {
-                        'CRN': '20762',
-                        'campus': 'FH',
-                        'course': 'MATH F001A06V',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Ni',
-                        'room': 'ONLINE',
-                        'seats': '23',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21310': [
-                    {
-                        'CRN': '21310',
-                        'campus': 'FH',
-                        'course': 'MATH F001A08W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Lam',
-                        'room': 'ONLINE',
-                        'seats': '28',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '1B': {
-                '20089': [
-                    {
-                        'CRN': '20089',
-                        'campus': 'FH',
-                        'course': 'MATH F001B02W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Litrus',
-                        'room': 'ONLINE',
-                        'seats': '26',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20672': [
-                    {
-                        'CRN': '20672',
-                        'campus': 'FH',
-                        'course': 'MATH F001B01W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Litrus',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20769': [
-                    {
-                        'CRN': '20769',
-                        'campus': 'FH',
-                        'course': 'MATH F001B03V',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Nghiem',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '7'
-                    }
-                ],
-                '20773': [
-                    {
-                        'CRN': '20773',
-                        'campus': 'FH',
-                        'course': 'MATH F001B04W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Williams',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '5'
-                    }
-                ]
-            },
-            '1C': {
-                '20177': [
-                    {
-                        'CRN': '20177',
-                        'campus': 'FH',
-                        'course': 'MATH F001C03W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Litrus',
-                        'room': 'ONLINE',
-                        'seats': '1',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ],
-                '20774': [
-                    {
-                        'CRN': '20774',
-                        'campus': 'FH',
-                        'course': 'MATH F001C01V',
-                        'days': 'MW',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Knobel',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '7'
-                    }
-                ],
-                '20959': [
-                    {
-                        'CRN': '20959',
-                        'campus': 'FH',
-                        'course': 'MATH F001C04W',
-                        'days': 'TBA',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Oruganti',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ],
-                '21675': [
-                    {
-                        'CRN': '21675',
-                        'campus': 'FH',
-                        'course': 'MATH F001C9DV',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Park Lee',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '03:45 PM-06:00 PM',
-                        'units': '5.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '1D': {
-                '20178': [
-                    {
-                        'CRN': '20178',
-                        'campus': 'FH',
-                        'course': 'MATH F001D02V',
-                        'days': 'MW',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Park Lee',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ],
-                '20194': [
-                    {
-                        'CRN': '20194',
-                        'campus': 'FH',
-                        'course': 'MATH F001D01V',
-                        'days': 'TTh',
-                        'desc': 'CALCULUS',
-                        'end': '12/11/2020',
-                        'instructor': 'Park Lee',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '22': {
-                '20798': [
-                    {
-                        'CRN': '20798',
-                        'campus': 'FH',
-                        'course': 'MATH F022.01V',
-                        'days': 'TTh',
-                        'desc': 'DISCRETE MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Morriss',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '9'
-                    }
-                ],
-                '20799': [
-                    {
-                        'CRN': '20799',
-                        'campus': 'FH',
-                        'course': 'MATH F022.02V',
-                        'days': 'MW',
-                        'desc': 'DISCRETE MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Witschorik',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '248A': {
-                '20848': [
-                    {
-                        'CRN': '20848',
-                        'campus': 'FH',
-                        'course': 'MATH F248A3CV',
-                        'days': 'W',
-                        'desc': 'SUPPORT FOR MATH 48A',
-                        'end': '12/11/2020',
-                        'instructor': 'Uilecan',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '2.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20849': [
-                    {
-                        'CRN': '20849',
-                        'campus': 'FH',
-                        'course': 'MATH F248A4CV',
-                        'days': 'Th',
-                        'desc': 'SUPPORT FOR MATH 48A',
-                        'end': '12/11/2020',
-                        'instructor': 'Sukumar',
-                        'room': 'ONLINE',
-                        'seats': '26',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '2.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20850': [
-                    {
-                        'CRN': '20850',
-                        'campus': 'FH',
-                        'course': 'MATH F248A5CV',
-                        'days': 'Th',
-                        'desc': 'SUPPORT FOR MATH 48A',
-                        'end': '12/11/2020',
-                        'instructor': 'Papay',
-                        'room': 'ONLINE',
-                        'seats': '24',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '2.50',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20851': [
-                    {
-                        'CRN': '20851',
-                        'campus': 'FH',
-                        'course': 'MATH F248A6CV',
-                        'days': 'W',
-                        'desc': 'SUPPORT FOR MATH 48A',
-                        'end': '12/11/2020',
-                        'instructor': 'Robledo',
-                        'room': 'ONLINE',
-                        'seats': '1',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '2.50',
-                        'wait_cap': '10',
-                        'wait_seats': '3'
-                    }
-                ]
-            },
-            '2A': {
-                '20258': [
-                    {
-                        'CRN': '20258',
-                        'campus': 'FH',
-                        'course': 'MATH F002A01V',
-                        'days': 'MW',
-                        'desc': 'DIFFERENTIAL EQUATIONS',
-                        'end': '12/11/2020',
-                        'instructor': 'Park Lee',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20472': [
-                    {
-                        'CRN': '20472',
-                        'campus': 'FH',
-                        'course': 'MATH F002A02V',
-                        'days': 'TTh',
-                        'desc': 'DIFFERENTIAL EQUATIONS',
-                        'end': '12/11/2020',
-                        'instructor': 'Park Lee',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ]
-            },
-            '2B': {
-                '20353': [
-                    {
-                        'CRN': '20353',
-                        'campus': 'FH',
-                        'course': 'MATH F002B01V',
-                        'days': 'MW',
-                        'desc': 'LINEAR ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Ryker',
-                        'room': 'ONLINE',
-                        'seats': '11',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '21135': [
-                    {
-                        'CRN': '21135',
-                        'campus': 'FH',
-                        'course': 'MATH F002B02V',
-                        'days': 'TTh',
-                        'desc': 'LINEAR ALGEBRA',
-                        'end': '12/11/2020',
-                        'instructor': 'Nosratieh',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '48A': {
-                '20198': [
-                    {
-                        'CRN': '20198',
-                        'campus': 'FH',
-                        'course': 'MATH F048A02W',
-                        'days': 'TBA',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Ryker',
-                        'room': 'ONLINE',
-                        'seats': '9',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': 'TBA',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20199': [
-                    {
-                        'CRN': '20199',
-                        'campus': 'FH',
-                        'course': 'MATH F048AMVP',
-                        'days': 'MW',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Francisco',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ],
-                '20807': [
-                    {
-                        'CRN': '20807',
-                        'campus': 'FH',
-                        'course': 'MATH F048A3CV',
-                        'days': 'MT',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Uilecan',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20808': [
-                    {
-                        'CRN': '20808',
-                        'campus': 'FH',
-                        'course': 'MATH F048A4CV',
-                        'days': 'TW',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Sukumar',
-                        'room': 'ONLINE',
-                        'seats': '26',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20809': [
-                    {
-                        'CRN': '20809',
-                        'campus': 'FH',
-                        'course': 'MATH F048A5CV',
-                        'days': 'TW',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Papay',
-                        'room': 'ONLINE',
-                        'seats': '24',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20810': [
-                    {
-                        'CRN': '20810',
-                        'campus': 'FH',
-                        'course': 'MATH F048A6CV',
-                        'days': 'MT',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Robledo',
-                        'room': 'ONLINE',
-                        'seats': '1',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '3'
-                    }
-                ],
-                '21676': [
-                    {
-                        'CRN': '21676',
-                        'campus': 'FH',
-                        'course': 'MATH F048AVMP',
-                        'days': 'MW',
-                        'desc': 'PRECALCULUS I',
-                        'end': '12/11/2020',
-                        'instructor': 'Cembellin',
-                        'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '48B': {
-                '20260': [
-                    {
-                        'CRN': '20260',
-                        'campus': 'FH',
-                        'course': 'MATH F048B02V',
-                        'days': 'MW',
-                        'desc': 'PRECALCULUS II',
-                        'end': '12/11/2020',
-                        'instructor': 'Lam',
-                        'room': 'ONLINE',
-                        'seats': '31',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20261': [
-                    {
-                        'CRN': '20261',
-                        'campus': 'FH',
-                        'course': 'MATH F048B03V',
-                        'days': 'TTh',
-                        'desc': 'PRECALCULUS II',
-                        'end': '12/11/2020',
-                        'instructor': 'Zwack',
-                        'room': 'ONLINE',
-                        'seats': '14',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
-                    }
-                ],
-                '20334': [
-                    {
-                        'CRN': '20334',
-                        'campus': 'FH',
-                        'course': 'MATH F048B04V',
-                        'days': 'TTh',
-                        'desc': 'PRECALCULUS II',
-                        'end': '12/11/2020',
                         'instructor': 'Pham',
                         'room': 'ONLINE',
-                        'seats': '29',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '06:00 PM-08:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
-                ]
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
             },
-            '48C': {
-                '20314': [
+            {
+                'CRN': 21642,
+                'course': 'C S F002A05W',
+                'dept': 'CS',
+                'desc': 'OBJ-ORIENT PROG METHOD IN C++',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
                     {
-                        'CRN': '20314',
                         'campus': 'FH',
-                        'course': 'MATH F048C03V',
+                        'days': 'TBA',
+                        'instructor': 'Dhagat',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 8
+            }
+        ],
+        '2B': [
+            {
+                'CRN': 20417,
+                'course': 'C S F002B01W',
+                'dept': 'CS',
+                'desc': 'INTERM SOFTWARE DESIGN C++',
+                'end': '12/11/2020',
+                'seats': 27,
+                'section': '2B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Venkataraman',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21644,
+                'course': 'C S F002B02W',
+                'dept': 'CS',
+                'desc': 'INTERM SOFTWARE DESIGN C++',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2B',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Harden',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 4
+            }
+        ],
+        '2C': [
+            {
+                'CRN': 20326,
+                'course': 'C S F002C01W',
+                'dept': 'CS',
+                'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
+                'end': '12/11/2020',
+                'seats': 12,
+                'section': '2C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Venkataraman',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '30A': [
+            {
+                'CRN': 20327,
+                'course': 'C S F030A01W',
+                'dept': 'CS',
+                'desc': 'INTRODUCTION TO LINUX',
+                'end': '12/11/2020',
+                'seats': 12,
+                'section': '30A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '30B': [
+            {
+                'CRN': 20600,
+                'course': 'C S F030B01W',
+                'dept': 'CS',
+                'desc': 'LINUX SHELL PROGRAMMING',
+                'end': '12/11/2020',
+                'seats': 30,
+                'section': '30B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '31A': [
+            {
+                'CRN': 20338,
+                'course': 'C S F031A01W',
+                'dept': 'CS',
+                'desc': 'INTRO DATABASE MGMT SYSTEMS',
+                'end': '12/11/2020',
+                'seats': 4,
+                'section': '31A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Meade',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '3A': [
+            {
+                'CRN': 20674,
+                'course': 'C S F003A01Z',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 28,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
                         'days': 'MW',
-                        'desc': 'PRECALCULUS III',
-                        'end': '12/11/2020',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-07:50 PM'
+                    },
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21646,
+                'course': 'C S F003A02W',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mazloom',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    },
+                    {
+                        'campus': '',
+                        'days': 'TBA',
+                        'instructor': 'Mazloom',
+                        'room': '',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20747,
+                'course': 'C S F003A03W',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 23,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 25,
+                'wait_seats': 25
+            },
+            {
+                'CRN': 20889,
+                'course': 'C S F003A04W',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Meade',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 9
+            },
+            {
+                'CRN': 21650,
+                'course': 'C S F003A05W',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 7,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Lai',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21825,
+                'course': 'C S F003A06Z',
+                'dept': 'CS',
+                'desc': 'OBJECT ORIEN PRGM METH PYTHON',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '3A',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Yang',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:20 PM'
+                    },
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Yang',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '3B': [
+            {
+                'CRN': 20845,
+                'course': 'C S F003B01W',
+                'dept': 'CS',
+                'desc': 'INTERMED SOFTWARE DESGN PYTHON',
+                'end': '12/11/2020',
+                'seats': 15,
+                'section': '3B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Trinh',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21145,
+                'course': 'C S F003B02Z',
+                'dept': 'CS',
+                'desc': 'INTERMED SOFTWARE DESGN PYTHON',
+                'end': '12/11/2020',
+                'seats': 9,
+                'section': '3B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Yang',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-11:50 AM'
+                    },
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Yang',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '3C': [
+            {
+                'CRN': 21164,
+                'course': 'C S F003C01W',
+                'dept': 'CS',
+                'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
+                'end': '12/11/2020',
+                'seats': 20,
+                'section': '3C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Lamble',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '48A': [
+            {
+                'CRN': 21818,
+                'course': 'C S F048A01W',
+                'dept': 'CS',
+                'desc': 'DATA VISUALIZATION',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Lankester',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    },
+                    {
+                        'campus': '',
+                        'days': 'TBA',
+                        'instructor': 'Lankester',
+                        'room': '',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 5
+            }
+        ],
+        '50A': [
+            {
+                'CRN': 21652,
+                'course': 'C S F050A01W',
+                'dept': 'CS',
+                'desc': 'NETWORK BASICS (CCNA)',
+                'end': '12/11/2020',
+                'seats': 6,
+                'section': '50A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Staff',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '53A': [
+            {
+                'CRN': 21653,
+                'course': 'C S F053A01W',
+                'dept': 'CS',
+                'desc': 'CYBERSECURITY FUNDAMENTALS',
+                'end': '12/11/2020',
+                'seats': 17,
+                'section': '53A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Ryan',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '55A': [
+            {
+                'CRN': 21162,
+                'course': 'C S F055A01W',
+                'dept': 'CS',
+                'desc': 'INTRO CLOUD COMPUTNG AWS',
+                'end': '12/11/2020',
+                'seats': 11,
+                'section': '55A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Sandor',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '55B': [
+            {
+                'CRN': 21654,
+                'course': 'C S F055B01W',
+                'dept': 'CS',
+                'desc': 'DATABASE ESSENTIALS AWS',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '55B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Murphy',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ]
+    },
+    {
+        '10': [
+            {
+                'CRN': 20673,
+                'course': 'MATH F010.01V',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 10,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Francisco',
+                        'room': 'ONLINE',
+                        'time': '07:30 AM-09:45 AM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20964,
+                'course': 'MATH F010.02V',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Morriss',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 2
+            },
+            {
+                'CRN': 20976,
+                'course': 'MATH F010.03W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Martinez',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 7
+            },
+            {
+                'CRN': 20776,
+                'course': 'MATH F010.04W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 9,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Martinez',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20977,
+                'course': 'MATH F010.05W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 33,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Martinez',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20778,
+                'course': 'MATH F010.06W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Sinclair',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 9
+            },
+            {
+                'CRN': 20779,
+                'course': 'MATH F010.07Z',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'T',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-11:15 AM'
+                    },
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20780,
+                'course': 'MATH F010.08W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 15,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Sinclair',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20781,
+                'course': 'MATH F010.09W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 35,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Sinclair',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20786,
+                'course': 'MATH F010.10W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 1,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20787,
+                'course': 'MATH F010.11V',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Morriss',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20788,
+                'course': 'MATH F010.12W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 34,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20789,
+                'course': 'MATH F010.13V',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 21,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Munoz',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20790,
+                'course': 'MATH F010.14W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 37,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21000,
+                'course': 'MATH F010.16V',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Witschorik',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20792,
+                'course': 'MATH F010.17W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 33,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Martinez',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20793,
+                'course': 'MATH F010.18W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 39,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Martinez',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20794,
+                'course': 'MATH F010.19W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 31,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Mudge',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20812,
+                'course': 'MATH F010.20W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 36,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Tomutiu',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21001,
+                'course': 'MATH F010.21W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 36,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Papay',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21002,
+                'course': 'MATH F010.22W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 38,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Papay',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21312,
+                'course': 'MATH F010.23W',
+                'dept': 'MATH',
+                'desc': 'ELEMENTARY STATISTICS',
+                'end': '12/11/2020',
+                'seats': 37,
+                'section': '10',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Florero Salinas',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 5,
+                'wait_seats': 5
+            }
+        ],
+        '105': [
+            {
+                'CRN': 20811,
+                'course': 'MATH F105.01W',
+                'dept': 'MATH',
+                'desc': 'INTERMEDIATE ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '105',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Tomutiu',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 9
+            },
+            {
+                'CRN': 20091,
+                'course': 'MATH F105.02W',
+                'dept': 'MATH',
+                'desc': 'INTERMEDIATE ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '105',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Robledo',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 8
+            },
+            {
+                'CRN': 20813,
+                'course': 'MATH F105.03W',
+                'dept': 'MATH',
+                'desc': 'INTERMEDIATE ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '105',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Oruganti',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21018,
+                'course': 'MATH F105.04V',
+                'dept': 'MATH',
+                'desc': 'INTERMEDIATE ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '105',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
                         'instructor': 'Low',
                         'room': 'ONLINE',
-                        'seats': '16',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': '06:00 PM-08:15 PM'
                     }
                 ],
-                '20429': [
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 7
+            },
+            {
+                'CRN': 20814,
+                'course': 'MATH F105.05W',
+                'dept': 'MATH',
+                'desc': 'INTERMEDIATE ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 6,
+                'section': '105',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20429',
                         'campus': 'FH',
-                        'course': 'MATH F048C04V',
-                        'days': 'TTh',
-                        'desc': 'PRECALCULUS III',
-                        'end': '12/11/2020',
-                        'instructor': 'Zwack',
+                        'days': 'TBA',
+                        'instructor': 'Sukumar',
                         'room': 'ONLINE',
-                        'seats': '19',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '01:30 PM-03:45 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': 'TBA'
                     }
                 ],
-                '20606': [
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '12': [
+            {
+                'CRN': 20277,
+                'course': 'MATH F012.01Z',
+                'dept': 'MATH',
+                'desc': 'CALCULUS FOR BUSINESS & ECONOM',
+                'end': '12/11/2020',
+                'seats': 30,
+                'section': '12',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20606',
                         'campus': 'FH',
-                        'course': 'MATH F048C01V',
                         'days': 'TTh',
-                        'desc': 'PRECALCULUS III',
-                        'end': '12/11/2020',
+                        'instructor': 'Knobel',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-11:50 AM'
+                    },
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Knobel',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20843,
+                'course': 'MATH F012.02W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS FOR BUSINESS & ECONOM',
+                'end': '12/11/2020',
+                'seats': 25,
+                'section': '12',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Knobel',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '180': [
+            {
+                'CRN': 21380,
+                'course': 'MATH F180.01W',
+                'dept': 'MATH',
+                'desc': 'QUANTITATIVE REASONING',
+                'end': '12/11/2020',
+                'seats': 13,
+                'section': '180',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Gray',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 5,
+                'wait_seats': 5
+            }
+        ],
+        '1A': [
+            {
+                'CRN': 20086,
+                'course': 'MATH F001A01V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 28,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Uilecan',
+                        'room': 'ONLINE',
+                        'time': '07:30 AM-09:45 AM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20087,
+                'course': 'MATH F001A02V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Cembellin',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20088,
+                'course': 'MATH F001A03V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Nghiem',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 2
+            },
+            {
+                'CRN': 20257,
+                'course': 'MATH F001A04V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Nghiem',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 3
+            },
+            {
+                'CRN': 20761,
+                'course': 'MATH F001A05V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 32,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Lam',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20762,
+                'course': 'MATH F001A06V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 23,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
                         'instructor': 'Ni',
                         'room': 'ONLINE',
-                        'seats': '35',
-                        'start': '09/21/2020',
-                        'status': 'Open',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '10'
+                        'time': '06:00 PM-08:15 PM'
                     }
                 ],
-                '21016': [
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20305,
+                'course': 'MATH F001A07W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
                     {
-                        'CRN': '21016',
                         'campus': 'FH',
-                        'course': 'MATH F048C02V',
+                        'days': 'TBA',
+                        'instructor': 'Williams',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 8
+            },
+            {
+                'CRN': 21310,
+                'course': 'MATH F001A08W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 28,
+                'section': '1A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Lam',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '1B': [
+            {
+                'CRN': 20672,
+                'course': 'MATH F001B01W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Litrus',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20089,
+                'course': 'MATH F001B02W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 26,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Litrus',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20769,
+                'course': 'MATH F001B03V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Nghiem',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 7
+            },
+            {
+                'CRN': 20773,
+                'course': 'MATH F001B04W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1B',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Williams',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 5
+            }
+        ],
+        '1C': [
+            {
+                'CRN': 20774,
+                'course': 'MATH F001C01V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1C',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
                         'days': 'MW',
-                        'desc': 'PRECALCULUS III',
-                        'end': '12/11/2020',
+                        'instructor': 'Knobel',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 7
+            },
+            {
+                'CRN': 20177,
+                'course': 'MATH F001C03W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 1,
+                'section': '1C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Litrus',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 0
+            },
+            {
+                'CRN': 20959,
+                'course': 'MATH F001C04W',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1C',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Oruganti',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 0
+            },
+            {
+                'CRN': 21675,
+                'course': 'MATH F001C9DV',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1C',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Park Lee',
+                        'room': 'ONLINE',
+                        'time': '03:45 PM-06:00 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '1D': [
+            {
+                'CRN': 20194,
+                'course': 'MATH F001D01V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1D',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Park Lee',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 0
+            },
+            {
+                'CRN': 20178,
+                'course': 'MATH F001D02V',
+                'dept': 'MATH',
+                'desc': 'CALCULUS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '1D',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Park Lee',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 0
+            }
+        ],
+        '22': [
+            {
+                'CRN': 20798,
+                'course': 'MATH F022.01V',
+                'dept': 'MATH',
+                'desc': 'DISCRETE MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '22',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Morriss',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 9
+            },
+            {
+                'CRN': 20799,
+                'course': 'MATH F022.02V',
+                'dept': 'MATH',
+                'desc': 'DISCRETE MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '22',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Witschorik',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '248A': [
+            {
+                'CRN': 20848,
+                'course': 'MATH F248A3CV',
+                'dept': 'MATH',
+                'desc': 'SUPPORT FOR MATH 48A',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '248A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'W',
+                        'instructor': 'Uilecan',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 2.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20849,
+                'course': 'MATH F248A4CV',
+                'dept': 'MATH',
+                'desc': 'SUPPORT FOR MATH 48A',
+                'end': '12/11/2020',
+                'seats': 26,
+                'section': '248A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'Th',
+                        'instructor': 'Sukumar',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 2.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20850,
+                'course': 'MATH F248A5CV',
+                'dept': 'MATH',
+                'desc': 'SUPPORT FOR MATH 48A',
+                'end': '12/11/2020',
+                'seats': 24,
+                'section': '248A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'Th',
+                        'instructor': 'Papay',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 2.5,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20851,
+                'course': 'MATH F248A6CV',
+                'dept': 'MATH',
+                'desc': 'SUPPORT FOR MATH 48A',
+                'end': '12/11/2020',
+                'seats': 1,
+                'section': '248A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'W',
+                        'instructor': 'Robledo',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 2.5,
+                'wait_cap': 10,
+                'wait_seats': 3
+            }
+        ],
+        '2A': [
+            {
+                'CRN': 20258,
+                'course': 'MATH F002A01V',
+                'dept': 'MATH',
+                'desc': 'DIFFERENTIAL EQUATIONS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Park Lee',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20472,
+                'course': 'MATH F002A02V',
+                'dept': 'MATH',
+                'desc': 'DIFFERENTIAL EQUATIONS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2A',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Park Lee',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '2B': [
+            {
+                'CRN': 20353,
+                'course': 'MATH F002B01V',
+                'dept': 'MATH',
+                'desc': 'LINEAR ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 11,
+                'section': '2B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Ryker',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21135,
+                'course': 'MATH F002B02V',
+                'dept': 'MATH',
+                'desc': 'LINEAR ALGEBRA',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '2B',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Nosratieh',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 0
+            }
+        ],
+        '48A': [
+            {
+                'CRN': 20198,
+                'course': 'MATH F048A02W',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 9,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Ryker',
+                        'room': 'ONLINE',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20807,
+                'course': 'MATH F048A3CV',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MT',
+                        'instructor': 'Uilecan',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20808,
+                'course': 'MATH F048A4CV',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 26,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TW',
+                        'instructor': 'Sukumar',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20809,
+                'course': 'MATH F048A5CV',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 24,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TW',
+                        'instructor': 'Papay',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20810,
+                'course': 'MATH F048A6CV',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 1,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MT',
+                        'instructor': 'Robledo',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 3
+            },
+            {
+                'CRN': 20199,
+                'course': 'MATH F048AMVP',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Francisco',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            },
+            {
+                'CRN': 21676,
+                'course': 'MATH F048AVMP',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS I',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '48A',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Cembellin',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '48B': [
+            {
+                'CRN': 20260,
+                'course': 'MATH F048B02V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS II',
+                'end': '12/11/2020',
+                'seats': 31,
+                'section': '48B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Lam',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20261,
+                'course': 'MATH F048B03V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS II',
+                'end': '12/11/2020',
+                'seats': 14,
+                'section': '48B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
                         'instructor': 'Zwack',
                         'room': 'ONLINE',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Waitlist',
-                        'time': '10:00 AM-12:15 PM',
-                        'units': '5.00',
-                        'wait_cap': '10',
-                        'wait_seats': '8'
+                        'time': '10:00 AM-12:15 PM'
                     }
-                ]
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
             },
-            '70R': {
-                '20488': [
+            {
+                'CRN': 20334,
+                'course': 'MATH F048B04V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS II',
+                'end': '12/11/2020',
+                'seats': 29,
+                'section': '48B',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
                     {
-                        'CRN': '20488',
                         'campus': 'FH',
-                        'course': 'MATH F070R01',
-                        'days': 'TBA',
-                        'desc': 'INDEPENDENT STUDY MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Staff',
-                        'room': 'TBA',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '1.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
+                        'days': 'TTh',
+                        'instructor': 'Pham',
+                        'room': 'ONLINE',
+                        'time': '06:00 PM-08:15 PM'
                     }
-                ]
-            },
-            '71R': {
-                '20489': [
-                    {
-                        'CRN': '20489',
-                        'campus': 'FH',
-                        'course': 'MATH F071R01',
-                        'days': 'TBA',
-                        'desc': 'INDEPENDENT STUDY MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Staff',
-                        'room': 'TBA',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '2.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '72R': {
-                '20490': [
-                    {
-                        'CRN': '20490',
-                        'campus': 'FH',
-                        'course': 'MATH F072R01',
-                        'days': 'TBA',
-                        'desc': 'INDEPENDENT STUDY MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Staff',
-                        'room': 'TBA',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '3.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
-            },
-            '73R': {
-                '20491': [
-                    {
-                        'CRN': '20491',
-                        'campus': 'FH',
-                        'course': 'MATH F073R01',
-                        'days': 'TBA',
-                        'desc': 'INDEPENDENT STUDY MATHEMATICS',
-                        'end': '12/11/2020',
-                        'instructor': 'Staff',
-                        'room': 'TBA',
-                        'seats': '0',
-                        'start': '09/21/2020',
-                        'status': 'Full',
-                        'time': 'TBA',
-                        'units': '4.00',
-                        'wait_cap': '0',
-                        'wait_seats': '0'
-                    }
-                ]
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
             }
-        }
-    ]
+        ],
+        '48C': [
+            {
+                'CRN': 20606,
+                'course': 'MATH F048C01V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS III',
+                'end': '12/11/2020',
+                'seats': 35,
+                'section': '48C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Ni',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 21016,
+                'course': 'MATH F048C02V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS III',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '48C',
+                'start': '09/21/2020',
+                'status': 'Waitlist',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Zwack',
+                        'room': 'ONLINE',
+                        'time': '10:00 AM-12:15 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 8
+            },
+            {
+                'CRN': 20314,
+                'course': 'MATH F048C03V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS III',
+                'end': '12/11/2020',
+                'seats': 16,
+                'section': '48C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'MW',
+                        'instructor': 'Low',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            },
+            {
+                'CRN': 20429,
+                'course': 'MATH F048C04V',
+                'dept': 'MATH',
+                'desc': 'PRECALCULUS III',
+                'end': '12/11/2020',
+                'seats': 19,
+                'section': '48C',
+                'start': '09/21/2020',
+                'status': 'Open',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TTh',
+                        'instructor': 'Zwack',
+                        'room': 'ONLINE',
+                        'time': '01:30 PM-03:45 PM'
+                    }
+                ],
+                'units': 5.0,
+                'wait_cap': 10,
+                'wait_seats': 10
+            }
+        ],
+        '70R': [
+            {
+                'CRN': 20488,
+                'course': 'MATH F070R01',
+                'dept': 'MATH',
+                'desc': 'INDEPENDENT STUDY MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '70R',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Staff',
+                        'room': 'TBA',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 1.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '71R': [
+            {
+                'CRN': 20489,
+                'course': 'MATH F071R01',
+                'dept': 'MATH',
+                'desc': 'INDEPENDENT STUDY MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '71R',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Staff',
+                        'room': 'TBA',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 2.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '72R': [
+            {
+                'CRN': 20490,
+                'course': 'MATH F072R01',
+                'dept': 'MATH',
+                'desc': 'INDEPENDENT STUDY MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '72R',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Staff',
+                        'room': 'TBA',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 3.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ],
+        '73R': [
+            {
+                'CRN': 20491,
+                'course': 'MATH F073R01',
+                'dept': 'MATH',
+                'desc': 'INDEPENDENT STUDY MATHEMATICS',
+                'end': '12/11/2020',
+                'seats': 0,
+                'section': '73R',
+                'start': '09/21/2020',
+                'status': 'Full',
+                'time': [
+                    {
+                        'campus': 'FH',
+                        'days': 'TBA',
+                        'instructor': 'Staff',
+                        'room': 'TBA',
+                        'time': 'TBA'
+                    }
+                ],
+                'units': 4.0,
+                'wait_cap': 0,
+                'wait_seats': 0
+            }
+        ]
+    }
 ]
 
 snapshots['TestGetOne::test_get_one_dept_and_honors_course 1'] = {

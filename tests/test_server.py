@@ -79,7 +79,7 @@ class TestFilters(TestCase):
 
         self.assertEqual(
             1,
-            len(result[0].keys())
+            len(result[0])
         )
 
     def test_filters_type_returns_n_courses(self):
@@ -95,7 +95,7 @@ class TestFilters(TestCase):
 
         self.assertEqual(
             4,
-            len(result[0].keys())
+            len(result[0])
         )
 
     def test_filters_days_returns_n_courses(self):
@@ -111,7 +111,7 @@ class TestFilters(TestCase):
 
         self.assertEqual(
             2,
-            len(result[0].keys())
+            len(result[0])
         )
 
     def test_filter_days_will_return_correct_n_courses_with_all_days_set(self):
@@ -140,7 +140,7 @@ class TestFilters(TestCase):
             filters=data['filters'],
         )
 
-        self.assertEqual(len(result[0].keys()), 2)
+        self.assertEqual(len(result[0]), 2)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC', 'course':'14'}],
@@ -155,5 +155,5 @@ class TestFilters(TestCase):
 
         self.assertEqual(
             2,
-            len(result[0].keys())
+            len(result[0])
         )

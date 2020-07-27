@@ -17,6 +17,8 @@ from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR
 # Flask config
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = '*'
     return response
 
 
@@ -117,7 +119,7 @@ def api_many(campus: str):
     if not courses:  # null case from get_one (invalid param or filter)
         return 'Error! Could not find one or more course selectors in database', 404
 
-    json = jsonify({'courses': courses})
+    json = jsonify(courses)
     return json, 200
 
 
@@ -142,8 +144,7 @@ def get_one(campus: str, db: TinyDB, data: dict, filters: dict):
         entries = table.all()
 
         if 'course' not in data:
-            # Convert list of `tinydb.table.Document` back to dicts
-            return [dict(e) for e in entries]
+            return {k: list(v.values()) for d in entries for k, v in d.items()}
 
         data_course = data['course']
 
@@ -156,7 +157,7 @@ def get_one(campus: str, db: TinyDB, data: dict, filters: dict):
         except StopIteration:
             return dict()
 
-    return course
+    return list(course.values())
 
 
 def get_many(campus: str, db: TinyDB, data: dict(), filters: dict()):
@@ -296,13 +297,13 @@ def api_list(campus: str):
     qp = {k: v.upper() for k, v in raw.items()}
 
     if 'dept' not in qp:
-        return jsonify(', '.join(db.tables())), 200
+        return jsonify(list(db.tables())), 200
 
     qp_dept = qp['dept']
     if qp_dept in db.tables():
         table = db.table(f'{qp_dept}')
         keys = set().union(*(d.keys() for d in table.all()))
-        return jsonify(', '.join(keys)), 200
+        return jsonify(list(keys)), 200
 
     return 'Error! Could not list', 404
 
@@ -329,7 +330,7 @@ def api_list_url(campus: str):
         keys = set().union(*(d.keys() for d in table.all()))
         data[f'{dept}'].append({k: generate_url(dept, k) for k in keys})
 
-    return jsonify(data), 200
+    return jsonify({k: {kk: vv for d in v for kk, vv in d.items()} for k, v in data.items()}), 200
 
 
 def generate_url(dept: str, course: str) -> ty.Dict[str, str]:
