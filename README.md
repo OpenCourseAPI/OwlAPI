@@ -235,11 +235,11 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 ## Setup
 ### Local setup
 
-**Install pipenv onto root**
-> `pip install pipenv`
+**Install pipenv**
+> `pip3 install pipenv`
 
 
-**Download all dependencies for Foothill API**
+**Download all dependencies for OwlAPI**
 > `pipenv install`
 
 
@@ -248,10 +248,10 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 
 
 **Run Data Scraper**
-> `python data_scraper.py`
+> `python scrape_term.py`
 
 
-**Start API**
+**Start API Server**
 > `python server.py`
 
 
@@ -304,7 +304,7 @@ User=user
 Type=simple
 WorkingDirectory=/home/user/OwlAPI
 Environment=PATH=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/
-ExecStart=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/python3.6 /home/user/OwlAPI/data_scraper.py
+ExecStart=/home/user/.local/share/virtualenvs/OwlAPI-mya9jbVn/bin/python3.6 /home/user/OwlAPI/scrape_term.py
 StandardError=journal
 
 [Install]
