@@ -29,7 +29,7 @@ DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 @application.route('/')
 def idx():
-    return render_template('index.html')
+    return render_template('docsify.html')
 
 
 @application.route('/<campus>/single', methods=['GET'])

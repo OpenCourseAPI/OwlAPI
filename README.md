@@ -4,48 +4,53 @@
 
 This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI currently lives at [opencourse.dev](https://opencourse.dev).
 
-### Lead Maintainers:
+## About
+
+### Core Team
 > [**Madhav Varshney**](https://github.com/madhavarshney), [**Kishan Emens**](https://github.com/phi-line)
 
-#### Contributors:
+#### Contributors
 > [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup)
 
 If you would like to contribute follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md).
 
-### Applications powered by OwlAPI:
-> [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register), [SchedOWL](https://github.com/FoothillCSClub/SchedOwl)
+### Showcase
+
+Powered by OwlAPI:
+> [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register)
 
 
-#### Dependencies:
+#### Dependencies
 > [**Flask**](https://github.com/pallets/flask), [**TinyDB**](https://github.com/msiemens/tinydb), [**BeautifulSoup4**](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
 
 ## Data overview
-OwlAPI serves data directly from MyPortal. It does not try to filter or add anything new to the format to maintain purity to the original. For now, only the most recent quarter's data is pulled from MyPortal. On [opencourse.dev](https://opencourse.dev), seat data is synced every 2 minutes with MyPortal.
+OwlAPI serves data directly from MyPortal. It parses and cleanses the data in order to make it more usable. For now, only the most recent quarter's data is pulled from MyPortal. On [opencourse.dev](https://opencourse.dev), seat data is synced every 2 minutes with MyPortal.
 
-### JSON data
-```
-CRN        | Course Number
-course     | Course ID (format: [F0*][ID][Section ID][WYH]) see note
-desc       | Short-form course description
-campus     | Campus the section is held at
-days       | Day(s) the section is held on (M, T, W, Th, F, S, U)
-instructor | Professor for the section
-room       | Room the section is held at
-time       | Time for the section
-start      | First date for the section
-end        | Last date for the course
-units      | Number of course units
-seats      | Seats left in the course
-status     | Status of the course (Online / Waitlist)
-wait_cap   | Waitlist capacity
-wait_seats | Waitlist slots left in the course
-```
+### Class schema
+| key | description |
+| --- | ----------- |
+| `CRN`        | Course Number |
+| `course`     | Course ID: `[F0*][ID][Section ID][WYH]` (see note below) |
+| `desc`       | Short-form course description |
+| `campus`     | Campus the section is held at |
+| `days`       | Day(s) the section is held on (M, T, W, Th, F, S, U) |
+| `instructor` | Professor for the section |
+| `room`       | Room the section is held at |
+| `time`       | Time for the section |
+| `start`      | First date for the section |
+| `end`        | Last date for the course |
+| `units`      | Number of course units |
+| `seats`      | Seats left in the course |
+| `status`     | Status of the course (Online / Waitlist) |
+| `wait_cap`   | Waitlist capacity |
+| `wait_seats` | Waitlist slots left in the course |
+
 #### Course variant format
-```
-Online     | W (Foothill) / Z (De Anza)
-Hybrid     | Y
-Honors     | H
-```
+| type   | flag |
+| ------ | ---- |
+| Online | `W` (Foothill) / `Z` (De Anza) |
+| Hybrid | `Y` |
+| Honors | `H` |
 
 ## Endpoints
 #### Campus selector
@@ -54,14 +59,22 @@ Before any of the endpoints below, you must select which campus' data you'd like
 Alternatively, if either campus' data cannot be accessed, a debug campus has been put into production. Use the
 campus selector `test` to grab this older copy of Foothill data.
 
+<!-- playground:hide-start -->
+
 > `GET /fh/list?dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
+<!-- playground:hide-end -->
+
+<!-- playground:api ["GET", "/da/list", "?dept=CIS", "2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A"] -->
+
 ### Get single
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
+
+<!-- playground:hide-start -->
 
 > `GET /fh/single?dept=CS&course=2A`
 ```json
@@ -89,7 +102,30 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 }
 ```
 
-<span id="interact"><span data-request-type="GET" data-request-url="/fh/single" data-request-body="?dept=CS&course=2A"></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["GET", "/fh/single", "?dept=CS&course=2A", {
+  "10116": [
+    {
+      "CRN": "10116",
+      "campus": "FH",
+      "course": "C S F002A01W",
+      "days": "TBA",
+      "desc": "OBJ-ORIENT PROG METHOD IN C++",
+      "end": "08/12/2018",
+      "instructor": "Venkataraman",
+      "room": "ONLINE",
+      "seats": "34",
+      "start": "07/02/2018",
+      "status": "Open",
+      "time": "TBA",
+      "units": "4.50",
+      "wait_cap": "10",
+      "wait_seats": "10"
+    },
+    { "...": "..." }
+  ]
+}] -->
 
 `/single` returns a JSON format with the keys as the CRN for the course, and the values as a list. The list is necessary to account for hybrid classes or classes with labs, that have two or more listings per CRN.
 
@@ -100,6 +136,8 @@ You can view an example of the `/single` route [here](https://github.com/OpenCou
 `POST /batch` handles a batch request to get many departments or many sections from the database.
 This batch request is meant to simulate hitting the api route with this data N times.
 It expects a mandatory list of objects containing keys `dept` and `course`.
+
+<!-- playground:hide-start -->
 
 > `POST /fh/batch`
 ```json
@@ -112,7 +150,15 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 }
 ```
 
-<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"},{"dept":"MATH","course":"1A"},{"dept":"ENGL","course":"1A"}]}'></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["POST", "/fh/batch", {
+  "courses": [
+    { "dept": "CS", "course": "2A" },
+    { "dept": "MATH", "course": "1A" },
+    { "dept": "ENGL", "course": "1A" }
+  ]
+}] -->
 
 `/batch` returns a JSON format with the initial key as `courses` and a value containing a list of courses. The courses are formatted in the same way as found in the `/single` response.
 
@@ -126,6 +172,8 @@ Be careful because too many filters may result in zero sections returned from th
 #### Filter by status
 Filter by the availability of a course (Open, Waitlist, Full). The example below shows how you can filter only `open` and `waitlist` sections.
 
+<!-- playground:hide-start -->
+
 > `POST /fh/batch`
 ```json
 {
@@ -136,10 +184,14 @@ Filter by the availability of a course (Open, Waitlist, Full). The example below
 }
 ```
 
-<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}'></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["POST", "/fh/batch", {"courses":[{"dept":"CS","course":"2A"}], "filters":{"status":{"open":1, "waitlist":1, "full":0}}}] -->
 
 #### Filter by type
 Filter by the format of the course (In Person, Online, Hybrid). The example below shows how you can filter only `online` and `hybrid` sections.
+
+<!-- playground:hide-start -->
 
 > `POST /fh/batch`
 ```json
@@ -151,10 +203,14 @@ Filter by the format of the course (In Person, Online, Hybrid). The example belo
 }
 ```
 
-<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}'></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["POST", "/fh/batch", {"courses":[{"dept":"CS","course":"2A"}], "filters":{"types":{"standard":0, "online":1, "hybrid":1}}}] -->
 
 #### Filter by days
 Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The example below shows how you can filter only `M` and `W` sections.
+
+<!-- playground:hide-start -->
 
 > `POST /fh/batch`
 ```json
@@ -166,11 +222,15 @@ Filter by the days the course should be limited to (M, T, W, Th, F, S, U). The e
 }
 ```
 
-<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}'></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["POST", "/fh/batch", {"courses":[{"dept":"CS","course":"2A"}], "filters":{"days":{"M":1, "T":0, "W":1, "Th":0, "F":0, "S":0, "U":0}}}] -->
 
 
 #### Filter by time
 Filter by a specified time interval (7:30 AM - 12:00 PM). The example below shows how you can filter only morning sections.
+
+<!-- playground:hide-start -->
 
 > `POST /fh/batch`
 ```json
@@ -182,28 +242,42 @@ Filter by a specified time interval (7:30 AM - 12:00 PM). The example below show
 }
 ```
 
-<span id="interact"><span data-request-type="POST" data-request-url="/fh/batch" data-request-body='{"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}'></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["POST", "/fh/batch", {"courses":[{"dept":"CS","course":"2A"}], "filters":{"time":{"start":"7:30 AM", "end":"12:00 PM"}}}] -->
 
 
 ### List
 `GET /list` handles a single request to list department or course keys from the database
 It takes an optional query parameter `dept` which is first checked for existence and then returns the dept keys.
 
+<!-- playground:hide-start -->
+
 > `GET /fh/list`
 ```
 IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR, PHOT, ITRN, DMS, AHS, EMTP, ATHL, APEL, HIST, HORT, GEOG, SPED, ALCB, RT, MDIA, ENGR, THTR, NCSV, NCBS, ACTG, NCEL, KINS, DANC, HUMN, DA, JAPN, CRLP, VITI, BIOL, BUSI, PSE, _default, ECON, RSPT, ART, NCBH, PHT, LA, CS, LINC, MUS, EMS, PHED, ENGL, VT, HLTH, APPT, MATH, COMM, NCP, GID, LIBR, APSM, PHDA, PHIL, WMN, NANO, PSYC, ESLL, SOC, APIW, PHYS
 ```
+
+<!-- playground:hide-end -->
+
+<!-- playground:api ["GET", "/fh/list", "", "IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR, PHOT, ITRN, DMS, AHS, EMTP, ATHL, APEL, HIST, HORT, GEOG, SPED, ALCB, RT, MDIA, ENGR, THTR, NCSV, NCBS, ACTG, NCEL, KINS, DANC, HUMN, DA, JAPN, CRLP, VITI, BIOL, BUSI, PSE, _default, ECON, RSPT, ART, NCBH, PHT, LA, CS, LINC, MUS, EMS, PHED, ENGL, VT, HLTH, APPT, MATH, COMM, NCP, GID, LIBR, APSM, PHDA, PHIL, WMN, NANO, PSYC, ESLL, SOC, APIW, PHYS"] -->
+
+<!-- playground:hide-start -->
 
 > `GET /fh/list?dept=CS`
 ```
 2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A
 ```
 
-<span id="interact"><span data-request-type="GET" data-request-url="/fh/list" data-request-body=""></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["GET", "/fh/list", "?dept=CS", "2C, 49, 30A, 80A, 18, 21B, 50E, 3A, 22A, 50C, 50A, 20A, 2A, 1B, 1A, 81A, 53A, 82A, 30B, 63A, 21A, 53B, 1C, 2B, 10, 31A, 60A"] -->
 
 
 ### URLs
 `GET /urls` returns a tree of all departments, their courses, and the courses' endpoints to hit.
+
+<!-- playground:hide-start -->
 
 > `GET /fh/urls`
 ```json
@@ -229,7 +303,28 @@ IDS, CHLD, ALTW, ANTH, SPAN, CRWR, DH, NCLA, POLI, CHEM, CNSL, GIST, MTEC, ASTR,
 }
 ```
 
-<span id="interact"><span data-request-type="GET" data-request-url="/fh/urls" data-request-body=""></span></span>
+<!-- playground:hide-end -->
+
+<!-- playground:api ["GET", "/fh/urls", "", {
+  "CS": [
+    {
+      "2A": {
+        "course": "2A",
+        "dept": "CS"
+      },
+      "2B": {
+        "course": "2B",
+        "dept": "CS"
+      },
+      "2C": {
+        "course": "2C",
+        "dept": "CS"
+      },
+      "...": "..."
+    }
+  ],
+  "MATH": [{ "...": "..." }]
+}] -->
 
 
 ## Setup
