@@ -1,3 +1,6 @@
+.github-corner {
+  clip-path: polygon(100% 100%, 100% 0, 0 0);
+}
 .github-corner svg {
   fill: black;
 }
@@ -31,7 +34,7 @@
   padding: 0.5em;
   flex: 1;
   font-family: monospace;
-  line-height: 1.5;
+  line-height: 1.5rem;
   border-radius: 4px;
   border: solid 1px #DDD;
   /* border: none;
@@ -40,6 +43,7 @@
 }
 .playground .box .editor {
   max-height: 15em;
+  font-size: 14px;
   display: block;
   width: 100%;
   margin-top: 1em;
@@ -72,7 +76,7 @@
     justify-content: space-between;
   }
   .playground .box input {
-    width: 100%;
+    min-width: 100%;
     flex-shrink: 0;
     margin-right: 0;
     margin-top: 1em;

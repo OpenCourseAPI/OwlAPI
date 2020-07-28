@@ -9,6 +9,9 @@ window.$docsify = {
   loadSidebar: true,
   subMaxLevel: 3,
   auto2top: true,
+  alias: {
+    '/.*/_sidebar.md': '/_sidebar.md',
+  },
   plugins: [
     apiPlayground,
     apiPlaygroundHide,
