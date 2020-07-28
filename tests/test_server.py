@@ -7,7 +7,7 @@ import settings
 from server import generate_url, get_one, get_many
 
 
-test_database = TinyDB(join(settings.TEST_DB_DIR, 'test_database.json'))
+test_database = TinyDB(join(settings.DB_DIR, 'test_database.json'))
 
 
 class TestGenerateURL(TestCase):
@@ -60,7 +60,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            4,
+            5,
             len(result[0].keys())
         )
 
@@ -71,7 +71,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            1,
+            2,
             len(result[0].keys())
         )
 
@@ -95,7 +95,7 @@ class TestFilters(TestCase):
         }
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
-        self.assertEqual(len(result[0].keys()), 3)
+        self.assertEqual(len(result[0].keys()), 2)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC', 'course':'14'}],
@@ -104,6 +104,6 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            1,
+            2,
             len(result[0].keys())
         )

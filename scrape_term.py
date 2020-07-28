@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR, SSB_URL, COURSE_PATTERN, HEADERS, SCHEDULE
+from settings import DB_DIR, SSB_URL, COURSE_PATTERN, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
 
@@ -31,11 +31,11 @@ def main():
         print(term, db.tables())
 
 
-def mine(term, write=False):
+def mine(term, filename=None):
     '''
     Mine will hit the database for foothill's class listings
     :param term: (str) the term to mine
-    :param write: (bool) write to file?
+    :param filename: (str) file to write html to
     :return res.content: (json) the html body
     '''
     data = [('termcode', f'{term}')]
@@ -43,8 +43,8 @@ def mine(term, write=False):
     res = requests.post(SSB_URL + '/PROD/fhda_opencourses.P_GetCourseList', data=data)
     res.raise_for_status()
 
-    if write:
-        with open(f'{join(DB_DIR, SCHEDULE)}', "wb") as file:
+    if filename:
+        with open(f'{join(DB_DIR, filename)}', "wb") as file:
             for chunk in res.iter_content(chunk_size=512):
                 if chunk:
                     file.write(chunk)
