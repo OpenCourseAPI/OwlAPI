@@ -17,24 +17,8 @@ jobs:
   deploy:
     docker:
       - image: circleci/python:3.8
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
-      - restore_cache:
-         keys:
-          - deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - deps-v1-{{ .Branch }}-
-          - deps-v1-
-      - run:
-          name: install dependencies
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache:
-          key: deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
       - add_ssh_keys:
           fingerprints:
             - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
