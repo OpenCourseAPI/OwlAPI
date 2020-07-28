@@ -1,31 +1,9 @@
-.github-corner:hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out;
-}
-@keyframes octocat-wave {
-  0%,
-  100% {
-    transform: rotate(0);
-  }
-  20%,
-  60% {
-    transform: rotate(-25deg);
-  }
-  40%,
-  80% {
-    transform: rotate(10deg);
-  }
-}
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
+.github-corner svg {
+  fill: black;
 }
 
 .playground .response {
-  max-height: 70vh;
+  max-height: 60vh;
   font-size: 15px;
 }
 .playground .response code {
@@ -53,15 +31,15 @@
   padding: 0.5em;
   flex: 1;
   font-family: monospace;
-  border: solid 1px #DDD;
-  border-radius: 4px;
   line-height: 1.5;
+  border-radius: 4px;
+  border: solid 1px #DDD;
   /* border: none;
   border-bottom: solid 1px #DDD; */
   margin-right: 1em;
 }
 .playground .box .editor {
-  max-height: 250px;
+  max-height: 15em;
   display: block;
   width: 100%;
   margin-top: 1em;

@@ -2,17 +2,20 @@ const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
 
 window.$docsify = {
   name: 'Owl API',
-  maxLevel: 3,
-  subMaxLevel: 3,
+  repo: 'OpenCourseAPI/OwlAPI',
+  homepage: 'introduction.md',
   basePath: '/docs/',
+  maxLevel: 3,
   loadSidebar: true,
+  subMaxLevel: 3,
+  auto2top: true,
   plugins: [
     apiPlayground,
     apiPlaygroundHide,
   ],
 };
 
-const codejars = {};
+let codejars = {};
 let idCounter = 0;
 
 function apiPlaygroundHide(hook) {
@@ -63,7 +66,12 @@ function apiPlayground(hook) {
     }));
   });
 
-  hook.ready(() => {
+  hook.doneEach(() => {
+    console.log('hook:doneEach');
+    Object.values(codejars).forEach((editor) => {
+      editor.destroy();
+    });
+    codejars = {};
     document.querySelectorAll('.editor').forEach((el) => {
       codejars[el.dataset.id] = CodeJar(el, Prism.highlightElement);
     });

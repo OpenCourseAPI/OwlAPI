@@ -6,7 +6,7 @@ import itertools as itr
 import typing as ty
 
 # 3rd party
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
@@ -20,6 +20,14 @@ def add_cors_headers(response):
 application = Flask(__name__,
                     template_folder="frontend/templates", static_folder='frontend/static')
 application.after_request(add_cors_headers)
+
+@application.route('/docs/<path:filename>')
+def static_docs(filename):
+    return send_from_directory('docs', filename)
+
+@application.route('/docs/examples/<path:filename>')
+def static_examples(filename):
+    return send_from_directory('examples', filename)
 
 DB_ROOT = 'db/'
 
