@@ -235,7 +235,7 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
             for class_ in course[course_key]:
                 days_match = match(DAYS_PATTERN, class_['days'])
                 course_days = {x for x in days_match.groups() if x} if \
-                    days_match else {}
+                    days_match else set()
                 # Return False if course day is not in mask.
                 if not course_days <= mask:
                     return False
