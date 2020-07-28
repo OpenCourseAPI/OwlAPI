@@ -66,6 +66,7 @@ jobs:
           name: Run tests
           command: |
             mkdir test-results
+            pipenv run python tests/generate_test_data.py
             pipenv run python -m pytest tests --junitxml=test-results/junit.xml
       - store_test_results:
           path: test-results
