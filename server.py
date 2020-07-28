@@ -215,7 +215,7 @@ def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
         # Create 'mask' of course statuses that are to be included.
         status_mask = {k for (k, v) in filters['status'].items() if v}
         # Return True only if course status is in mask.
-        return course[course_key][0]['status'].lower() in status_mask
+        return course[course_key]['status'].lower() in status_mask
 
     def type_filter(course_key) -> bool:
         # {'standard':1, 'online':1, 'hybrid':0}
@@ -228,7 +228,7 @@ def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
                 continue
             types.add(name)
         # Get course flags
-        course_str = course[course_key][0]['course']
+        course_str = course[course_key]['course']
         flags = parse_course_str(course_str)['flags']
         class_type = get_class_type(campus, flags)
         return class_type in types
@@ -238,7 +238,7 @@ def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
         if 'days' in filters:
             # create set of days that are allowed by passed filters
             mask = {k for (k, v) in filters['days'].items() if v}
-            for class_ in course[course_key]:
+            for class_ in course[course_key]['time']:
                 days_match = match(DAYS_PATTERN, class_['days'])
                 course_days = {x for x in days_match.groups() if x} if \
                     days_match else set()
@@ -253,7 +253,7 @@ def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
             f_range = MayaInterval(
                 start=when(filters['time']['start']),
                 end=when(filters['time']['end']))
-            for class_ in course[course_key]:
+            for class_ in course[course_key]['time']:
                 if '-' in class_['time']:
                     data = class_['time'].split('-')
                     class_range = MayaInterval(

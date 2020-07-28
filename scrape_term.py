@@ -6,11 +6,17 @@ from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
+from marshmallow import ValidationError as MarshValidationError
 
+from owl_models import InterimClassDataSchema, ClassDataSchema, ClassTimeSchema
 from utils import parse_course_str, ValidationError, log_info, log_err
 from settings import DB_DIR, SSB_URL, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
+
+classDataSchema = ClassDataSchema()
+classTimeSchema = ClassTimeSchema()
+interimClassDataSchema = InterimClassDataSchema()
 
 
 def main():
@@ -95,13 +101,21 @@ def parse(content, db):
                             f"'{parsed_course['dept']}' != '{dept}'"
                         )
 
+                    data['units'] = data['units'].lstrip()
+                    data['dept'] = dept
+                    data['section'] = parsed_course['section']
+
+                    try:
+                        data = interimClassDataSchema.load(data)
+                    except MarshValidationError as e:
+                        print(e.messages, data)
+                        continue
+
                     crn = data['CRN']
                     if s[key][crn]:
                         comb = set(s[key][crn][0].items()) ^ set(data.items())
                         if not comb:
                             continue
-
-                    data['units'] = data['units'].lstrip()
 
                     s[key][crn].append(data)
                 except KeyError:
@@ -115,8 +129,35 @@ def parse(content, db):
                     print('\n')
                     continue
 
-        j = dict(s)
-        db.table(f'{dept}').insert(j)
+        j = defaultdict(defaultdict)
+
+        for course, section in s.items():
+            for cl in section.values():
+                data = classDataSchema.load(cl[0])
+                classTime = [classTimeSchema.load(c) for c in cl]
+
+                check_integrity(cl, data, classTime)
+
+                data['time'] = classTime
+                j[course][data['CRN']] = data
+
+        db.table(f'{dept}').insert(dict(j))
+
+
+def check_integrity(cl, data, times):
+    dataSets = [set(classDataSchema.load(c).items()) for c in cl]
+    timeSets = [set(t.items()) for t in times]
+
+    if len(cl) > 1:
+        for i in range(len(cl) - 1):
+            comb = dataSets[i] ^ dataSets[i + 1]
+            timeComb = timeSets[i] ^ timeSets[i + 1]
+
+            if comb:
+                print(data['CRN'], len(dataSets), comb)
+
+            # if not timeComb:
+            #     print(data['CRN'], timeComb, comb)
 
 
 if __name__ == "__main__":

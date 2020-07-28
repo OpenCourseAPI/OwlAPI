@@ -16,6 +16,7 @@ pylint = "*"
 colorama = "*"
 snapshottest = "*"
 click = "*"
+marshmallow = "*"
 
 [dev-packages]
 
