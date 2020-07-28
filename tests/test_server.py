@@ -1,6 +1,7 @@
 from os.path import join
-from snapshottest import TestCase
 
+import pytest
+from snapshottest import TestCase
 from tinydb import TinyDB
 
 import settings
@@ -10,6 +11,7 @@ from server import generate_url, get_one, get_many
 test_database = TinyDB(join(settings.DB_DIR, 'test_database.json'))
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGenerateURL(TestCase):
     def test_sample_url_can_be_generated(self):
         self.assertEqual(
@@ -18,6 +20,7 @@ class TestGenerateURL(TestCase):
         )
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGetOne(TestCase):
     def test_get_one_dept(self):
         data = {'dept': 'CS'}  # opencourse.dev/<campus>/single?dept=CS
@@ -33,6 +36,7 @@ class TestGetOne(TestCase):
         self.assertMatchSnapshot(result)
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGetMany(TestCase):
     def test_get_many_dept(self):
         data = {'courses': [{'dept': 'CS'}, {'dept': 'MATH'}]}
@@ -41,6 +45,7 @@ class TestGetMany(TestCase):
         self.assertMatchSnapshot(result)
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestFilters(TestCase):
     def test_filters_status_returns_n_courses(self):
         data = {'courses': [{'dept':'CS', 'course':'1A'}],
