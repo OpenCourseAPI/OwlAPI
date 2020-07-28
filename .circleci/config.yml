@@ -2,45 +2,72 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-# TODO: cleanup a bit
-version: 2
-jobs:
+workflows:
+  version: 2
   build:
-    branches:
-      only:
-        - master
+    jobs:
+      - test
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
+jobs:
+  deploy:
     docker:
       - image: circleci/python:3.8
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
-      - type: shell
-        shell: /bin/sh
-        pwd: /
-        command: sudo apt update && sudo apt install git -y && git --version && sudo apt-get install rsync
-
-      - add_ssh_keys:
-          fingerprints:
-            - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
-
       - checkout
-      # - restore_cache:
-      #    keys:
-      #     - deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-      #     - deps9-{{ .Branch }}
-      #     - deps9
+      - restore_cache:
+         keys:
+          - deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - deps-v1-{{ .Branch }}-
+          - deps-v1-
       - run:
           name: install dependencies
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.7/site-packages"
-
+      - add_ssh_keys:
+          fingerprints:
+            - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
       - run: ssh-keyscan -H 23.239.23.178 >> ~/.ssh/known_hosts
-      # - run: rsync -avce ssh . root@23.239.23.178:/opt/owlapi/
+      # TODO: make this more robust
       - run: ssh root@23.239.23.178 "cd /opt/OwlAPI && git pull && pipenv install && sudo service OwlAPI restart"
+  test:
+    docker:
+      - image: circleci/python:3.8
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - restore_cache:
+         keys:
+          - deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - deps-v1-{{ .Branch }}-
+          - deps-v1-
+      - run:
+          name: Install dependencies
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+      - run:
+          name: Run tests
+          command: |
+            mkdir test-results
+            pipenv run python -m pytest tests --junitxml=test-results/junit.xml
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
