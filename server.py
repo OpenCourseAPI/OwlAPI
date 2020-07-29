@@ -139,12 +139,13 @@ def get_one(db: TinyDB, data: dict, filters: dict):
         entries = table.all()
 
         if 'course' not in data:
-            return entries
+            # Convert list of `tinydb.table.Document` back to dicts
+            return [dict(e) for e in entries]
 
         data_course = data['course']
 
         try:
-            course = next((e[f'{data_course}'] for e in entries
+            course = next((dict(e[f'{data_course}']) for e in entries
                            if f'{data_course}' in e))
             if filters:
                 filter_courses(filters, course)

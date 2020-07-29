@@ -1,78 +1,51 @@
 from os.path import join
-from unittest import TestCase
 
+import pytest
+from snapshottest import TestCase
 from tinydb import TinyDB
 
 import settings
 from server import generate_url, get_one, get_many
 
-# Try to get generated data.
-try:
-    from .test_db import data as test_data
-except ImportError as e:
-    raise ImportError('Test Data could not be imported. If the data.py file '
-                      'does not exist, it can be generated using the '
-                      'generate_test_data.py script') from e
 
-test_database = TinyDB(join(settings.TEST_DB_DIR, 'test_database.json'))
+test_database = TinyDB(join(settings.DB_DIR, 'test_database.json'))
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGenerateURL(TestCase):
     def test_sample_url_can_be_generated(self):
         self.assertEqual(
-            test_data.test_sample_url_can_be_generated_data,
+            {'dept': 'test_dept', 'course': 'test_course'},
             generate_url('test_dept', 'test_course')
         )
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGetOne(TestCase):
     def test_get_one_dept(self):
-        data = {'dept': 'CS'}  # opencourse.dev/single?dept=CS
+        data = {'dept': 'CS'}  # opencourse.dev/<campus>/single?dept=CS
 
         result = get_one(db=test_database, data=data, filters=dict())
-        self.assertEqual(
-            test_data.test_get_one_dept_data,
-            result
-        )
+        self.assertMatchSnapshot(result)
 
-    def test_get_one_dept_returns_n_courses(self):
-        data = {'dept': 'CS'}
-
-        result = get_one(db=test_database, data=data, filters=dict())
-        self.assertEqual(
-            len(test_data.test_get_one_dept_data[0].keys()),
-            len(result[0].keys())
-        )
 
     def test_get_one_dept_and_course(self):
         data = {'dept': 'CS', 'course': '2A'}
 
         result = get_one(db=test_database, data=data, filters=dict())
-        self.assertEqual(
-            test_data.test_get_one_dept_and_course_data,
-            result
-        )
+        self.assertMatchSnapshot(result)
 
 
+@pytest.mark.usefixtures('fix_snapshots')
 class TestGetMany(TestCase):
     def test_get_many_dept(self):
         data = {'courses': [{'dept': 'CS'}, {'dept': 'MATH'}]}
 
         result = get_many(db=test_database, data=data['courses'], filters=dict())
-        self.assertEqual(
-            test_data.test_get_two_dept_data,
-            result
-        )
+        self.assertMatchSnapshot(result)
 
-    def test_get_many_dept_returns_n_courses(self):
-        data = {'courses': [{'dept': 'CS'}, {'dept': 'MATH'}]}
 
-        result = get_many(db=test_database, data=data['courses'], filters=dict())
-        self.assertEqual(
-            len(test_data.test_get_two_dept_data[0]),
-            len(result[0])
-        )
-
+@pytest.mark.usefixtures('fix_snapshots')
 class TestFilters(TestCase):
     def test_filters_status_returns_n_courses(self):
         data = {'courses': [{'dept':'CS', 'course':'1A'}],
@@ -92,7 +65,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            4,
+            5,
             len(result[0].keys())
         )
 
@@ -103,7 +76,7 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            1,
+            2,
             len(result[0].keys())
         )
 
@@ -127,7 +100,7 @@ class TestFilters(TestCase):
         }
 
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
-        self.assertEqual(len(result[0].keys()), 3)
+        self.assertEqual(len(result[0].keys()), 2)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC', 'course':'14'}],
@@ -136,6 +109,6 @@ class TestFilters(TestCase):
         result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
 
         self.assertEqual(
-            1,
+            2,
             len(result[0].keys())
         )
