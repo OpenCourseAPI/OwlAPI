@@ -9,6 +9,11 @@ This is an unofficial API that serves course data from Foothill DeAnza MyPortal 
 
 Read up on the [API docs](/api) to get started! Or, take a look at the [examples](/examples/).
 
+### Showcase
+
+Powered by OwlAPI:
+> [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register)
+
 ### Core Team
 > [**Madhav Varshney**](https://github.com/madhavarshney), [**Kishan Emens**](https://github.com/phi-line)
 
@@ -16,8 +21,3 @@ Read up on the [API docs](/api) to get started! Or, take a look at the [examples
 > [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup)
 
 If you would like to contribute, follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md).
-
-### Showcase
-
-Powered by OwlAPI:
-> [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register)

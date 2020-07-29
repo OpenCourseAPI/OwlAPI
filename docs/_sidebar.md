@@ -1,5 +1,5 @@
 - **Documentation**
-  - [Introduction](introduction.md)
+  - [Introduction](/)
   - [API](api.md)
   - [Setup](setup.md)
 - **Examples**

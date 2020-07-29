@@ -14,24 +14,17 @@ window.$docsify = {
   },
   plugins: [
     apiPlayground,
-    apiPlaygroundHide,
   ],
 };
 
 let codejars = {};
 let idCounter = 0;
 
-function apiPlaygroundHide(hook) {
-  // Invoked each time before parsing the Markdown file.
-  hook.beforeEach(function(content) {
-    const regex = /<!-- playground:hide-start -->([\s\S]*?)<!-- playground:hide-end -->/gim;
-    return content.replace(regex, '');
-  });
-}
-
+// Custom docsify plugin to create API playgrounds
 function apiPlayground(hook) {
-  // Invoked each time after the Markdown file is parsed.
+  // Invoked each time after the Markdown file is parsed
   hook.afterEach(function(html, next) {
+    // Captures array in <!-- playground:api [...] -->
     const regex = /<!-- playground:api ([\s\S]*?) -->/gi;
 
     next(html.replace(regex, (match, capture) => {
@@ -40,29 +33,39 @@ function apiPlayground(hook) {
         JSON.stringify(defaultData, undefined, 2),
         Prism.languages.json,
         'json',
-      ) : '';
+      ) : '[send the request]';
+      const initialInfo = `${defaultData ? ' (sample)' : ''}`;
 
       idCounter++;
 
       return `
-        <div class="playground">
+        <div class="playground" id="playground-${idCounter}">
           <div class="box">
             <div class="split-row">
               <span class="method">${method}</span>
-              <input id="url-input-${idCounter}" value="${method === 'GET' ? url + body : url}"></input>
+              <input value="${method === 'GET' ? url + body : url}"></input>
               <button onclick="sendRequest('${method}', ${idCounter})">
                 Send
               </button>
             </div>
-            <div>
+            <div class="split-view">
               ${method === 'POST'
-                ? `<div class="editor lang-json" data-id="${idCounter}">${JSON.stringify(body, undefined, 2)}</div>`
-                // ? `<textarea rows="10" id="body-input-${idCounter}">${JSON.stringify(body, undefined, 2)}</textarea>`
-                : ''}
+                ? `
+                  <div class="left-pane">
+                    <span class="method">BODY</span>
+                    <div class="editor lang-json" data-id="${idCounter}">${JSON.stringify(body, undefined, 2)}</div>
+                  </div>
+                ` : ''}
+              <div class="right-pane">
+                <div class="info">
+                  <span class="status">RESPONSE</span>
+                  <span class="data">${initialInfo}</span>
+                </div>
+                <pre class="response" data-lang="json">
+                  <code class="lang-json">${sample}</code>
+                </pre>
+              </div>
             </div>
-            <pre class="response" data-lang="json">
-              <code id="response-${idCounter}" class="lang-json">${sample}</code>
-            </pre>
           </div>
         </div>
       `;
@@ -70,21 +73,25 @@ function apiPlayground(hook) {
   });
 
   hook.doneEach(() => {
-    console.log('hook:doneEach');
+    // Destroy previous editors
+    // TODO: verify this is the right hook to destroy
     Object.values(codejars).forEach((editor) => {
       editor.destroy();
     });
     codejars = {};
+    // Create new editors
     document.querySelectorAll('.editor').forEach((el) => {
       codejars[el.dataset.id] = CodeJar(el, Prism.highlightElement);
     });
   });
 }
 
+// Send an API request
 async function sendRequest(method, id) {
-  const urlInput = document.getElementById(`url-input-${id}`);
-  // const bodyInput = document.getElementById(`body-input-${id}`);
-  const display = document.getElementById(`response-${id}`);
+  const playground = document.getElementById(`playground-${id}`);
+  const urlInput = playground.querySelector('input');
+  const info = playground.querySelector('.info .data');
+  const display = playground.querySelector('code');
 
   let response;
 
@@ -99,7 +106,7 @@ async function sendRequest(method, id) {
     try {
       JSON.parse(body);
     } catch (err) {
-      display.textContent = 'Error: Unable to parse JSON\n' + err;
+      display.textContent = 'Error: Unable to parse JSON body\n' + err;
       return;
     }
 
@@ -110,9 +117,11 @@ async function sendRequest(method, id) {
         'Content-Type': 'application/json',
       },
       body,
-      // body: bodyInput.value,
     });
   }
+
+  const { status, statusText } = response;
+  info.innerHTML = status + (statusText ? ` - ${statusText}` : '');
 
   let data = await response.text();
 

@@ -19,16 +19,16 @@ OwlAPI serves data directly from MyPortal. It parses and cleanses the data in or
 ### Contributors
 > [John Schwarz](https://github.com/TryExceptElse), [Joshua Kuan](https://github.com/cwjoshuak), [Joshua Fan](https://github.com/joshuaptfan), [Byron White](https://github.com/BoomSyrup)
 
-If you would like to contribute, follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md).
+If you would like to contribute, follow this [guide](https://github.com/OpenCourseAPI/OwlAPI/blob/master/CONTRIBUTING.md). Thank you!
 
 ### Showcase
 
 Powered by OwlAPI:
 > [**FHDA Class Register**](https://github.com/cwjoshuak/FHDA-Class-Register)
 
-
 ### Dependencies
 > [**Flask**](https://github.com/pallets/flask), [**TinyDB**](https://github.com/msiemens/tinydb), [**BeautifulSoup4**](https://www.crummy.com/software/BeautifulSoup/), [Requests](https://github.com/requests/requests), [Maya](https://github.com/kennethreitz/maya) ✨🍰✨
+
 
 ## License
 

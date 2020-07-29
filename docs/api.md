@@ -67,7 +67,7 @@ It expects a mandatory query parameter `dept` and an optionally `course`.
 
 `/single` returns a JSON format with the keys as the CRN for the course, and the values as a list. The list is necessary to account for hybrid classes or classes with labs, that have two or more listings per CRN.
 
-You can view an example of the `/single` route [here](https://github.com/OpenCourseAPI/OwlAPI/tree/master/examples/single).
+You can view an example of the `/single` route [here](/examples/single/).
 
 
 ### Get batch
@@ -85,7 +85,7 @@ It expects a mandatory list of objects containing keys `dept` and `course`.
 
 `/batch` returns a JSON format with the initial key as `courses` and a value containing a list of courses. The courses are formatted in the same way as found in the `/single` response.
 
-You can view an example of the `/batch` route [here](https://github.com/OpenCourseAPI/OwlAPI/tree/master/examples/batch).
+You can view an example of the `/batch` route [here](/examples/batch/).
 
 
 ### Filters
