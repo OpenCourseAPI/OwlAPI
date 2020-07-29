@@ -24,7 +24,7 @@ jobs:
             - "d0:68:f4:12:a1:92:5f:e8:67:20:17:0c:2c:d8:c8:77"
       - run: ssh-keyscan -H 23.239.23.178 >> ~/.ssh/known_hosts
       # TODO: make this more robust
-      - run: ssh root@23.239.23.178 "cd /opt/OwlAPI && git pull && pipenv install && sudo service OwlAPI restart"
+      - run: ssh root@23.239.23.178 "cd /opt/OwlAPI && git pull && git checkout . && pipenv install && sudo service OwlAPI restart"
   test:
     docker:
       - image: circleci/python:3.8
