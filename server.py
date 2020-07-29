@@ -25,10 +25,6 @@ application.after_request(add_cors_headers)
 def static_docs(filename):
     return send_from_directory('docs', filename)
 
-@application.route('/docs/examples/<path:filename>')
-def static_examples(filename):
-    return send_from_directory('examples', filename)
-
 DB_ROOT = 'db/'
 
 FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
@@ -37,7 +33,7 @@ DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 @application.route('/')
 def idx():
-    return render_template('docsify.html')
+    return render_template('index.html')
 
 
 @application.route('/<campus>/single', methods=['GET'])

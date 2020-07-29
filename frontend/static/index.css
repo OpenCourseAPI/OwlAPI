@@ -1,39 +1,85 @@
-.menu.sidebar { background: #f3f3f3; background: -webkit-linear-gradient(to right, #f3f3f3, #fff); background: linear-gradient(to right, #f3f3f3, #fff); }
+.github-corner {
+  clip-path: polygon(100% 100%, 100% 0, 0 0);
+}
+.github-corner svg {
+  fill: black;
+}
 
-.menu.sidebar { position: fixed; height: 100%; width: 25vw; margin-right: 5vw; padding: 76px 5vw 0 2vw; }
+.playground .response {
+  max-height: 60vh;
+  font-size: 15px;
+}
+.playground .response code {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.playground .box {
+  width: 100%;
+  margin: 1em 0;
+  padding: 1rem 1.5rem;
+  border: 1px solid #EEE;
+  box-shadow: 0 0 128px #EEE;
+  border-radius: 4px;
+}
+.playground .box .split-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.playground .box .method {
+  padding-right: 1em;
+  font-weight: bold;
+}
+.playground .box input, .playground .editor {
+  padding: 0.5em;
+  flex: 1;
+  font-family: monospace;
+  line-height: 1.5rem;
+  border-radius: 4px;
+  border: solid 1px #DDD;
+  /* border: none;
+  border-bottom: solid 1px #DDD; */
+  margin-right: 1em;
+}
+.playground .box .editor {
+  max-height: 15em;
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+}
+.playground .box button:hover {
+  background-color: #4abf8a;
+}
+.playground .box button {
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-block;
+  color: #fff;
+  background-color: #3eaf7c;
+  padding: .4rem 1rem;
+  border-radius: 4px;
+  transition: background-color .1s ease;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #389d70;
+}
 
-.menu-list a:hover:not(.is-active):not(.unselectable) { background: rgba(175,175,175,.9); background: -webkit-linear-gradient(to right, rgba(175,175,175,.9), rgba(175,175,175,.5)); background: linear-gradient(to right, rgba(175,175,175,.9), rgba(175,175,175,.5)); color: #fff; }
-
-.menu-list a.is-active { background: #2f2f2f; background: -webkit-linear-gradient(to right, #2f2f2f,rgba(47,47,47,.5)); background: linear-gradient(to right, #2f2f2f, rgba(47,47,47,.5)); color: #fff; }
-
-.menu-item a.unselectable { pointer-events: none; }
-
-.menu-item a:hover.unselectable { background: transparent; }
-
-.md-html { min-width: 200px; max-width: 790px; margin: 56px auto 0 auto; padding: 20px; }
-
-.page-section { position: relative; height: 6vh; padding-right: 100vw; }
-
-.text { height: 100%; }
-
-p.control { margin-bottom: 0px !important; }
-
-input.input, textarea.input{ font-family: monospace !important; }
-
-a.button, input.input, textarea.input{ height: 100%; padding: .5em !important; font-size: 1em !important; }
-
-a.button.left { border-top-left-radius: 5px; border-bottom-left-radius: 5px; }
-
-a.button.right { border-top-right-radius: 5px !important; border-bottom-right-radius: 5px !important; }
-
-textarea { resize: none; }
-
-textarea.input { width: 100%; }
-
-.modal-card, .modal-content { height: 100% !important; overflow: scroll !important; }
-
-.page-content{ height: 100%; overflow: auto; }
-
-.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-
-.container.footer { max-width: 100%; width: 100%; padding: 1.5rem; -webkit-box-shadow: 0 0 0 1px rgba(10,10,10,.1); box-shadow: 0 0 0 1px rgba(10,10,10,.1); }
+@media (max-width: 480px) {
+  .playground {
+    margin: 0 -15%;
+  }
+  .playground .box .split-row {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .playground .box input {
+    min-width: 100%;
+    flex-shrink: 0;
+    margin-right: 0;
+    margin-top: 1em;
+    order: 1;
+  }
+}

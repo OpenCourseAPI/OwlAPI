@@ -1,180 +1,131 @@
-document.addEventListener('DOMContentLoaded', function(){
-  whenAvailable('#interact', forms => {
-    [].forEach.call(forms, f => {
-      var type = f.firstChild.dataset.requestType;
-      var url = f.firstChild.dataset.requestUrl;
-      var data = f.firstChild.dataset.requestBody;
+const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
 
-      var el = document.createElement("span");
-      el.innerHTML = generate_data(type, url, data);
+window.$docsify = {
+  name: 'Owl API',
+  repo: 'OpenCourseAPI/OwlAPI',
+  homepage: 'introduction.md',
+  basePath: '/docs/',
+  maxLevel: 3,
+  loadSidebar: true,
+  subMaxLevel: 3,
+  auto2top: true,
+  alias: {
+    '/.*/_sidebar.md': '/_sidebar.md',
+  },
+  plugins: [
+    apiPlayground,
+    apiPlaygroundHide,
+  ],
+};
 
-      f.replaceChild(el, f.firstChild);
-    });
+let codejars = {};
+let idCounter = 0;
 
-    var sections = document.querySelectorAll("h3");
-    sections.forEach(section => {
-      var waypointDown = new Waypoint({
-        element: section,
-        handler: function(direction) {
-          if (direction == 'down')
-            updateMenu(section.id);
-        },
-        offset: function() {
-          return section.scrollTop + 20;
-        }
-      });
-      var waypointUp = new Waypoint({
-        element: section,
-        handler: function(direction) {
-          if (direction == 'up')
-            updateMenu(section.id);
-        },
-        offset: function() {
-          return section.scrollTop - 20;
-        }
-      });
-    });
-
-    var numbers = document.querySelectorAll('.token.number');
-    numbers.forEach(n => {
-      n.classList.add('punctuation');
-      n.classList.remove('number');
-    });
-
-    document.querySelector('#footer').classList.remove('is-hidden');
+function apiPlaygroundHide(hook) {
+  // Invoked each time before parsing the Markdown file.
+  hook.beforeEach(function(content) {
+    const regex = /<!-- playground:hide-start -->([\s\S]*?)<!-- playground:hide-end -->/gim;
+    return content.replace(regex, '');
   });
-}, false);
+}
 
-window.addEventListener('wheel', function (e) {
-  var activeModal = document.querySelector('.modal.is-active');
-  if (activeModal) {
-    var content = activeModal.querySelector('.modal-content');
-    if (e.target.className == 'modal-background' ||
-      (e.deltaY < 0 && content.scrollTop == 0) ||
-      (e.deltaY > 0 && content.scrollTop == content.scrollHeight - content.clientHeight))
-      e.preventDefault();
-  }
-}, false);
+function apiPlayground(hook) {
+  // Invoked each time after the Markdown file is parsed.
+  hook.afterEach(function(html, next) {
+    const regex = /<!-- playground:api ([\s\S]*?) -->/gi;
 
-window.addEventListener('touchstart', function (e) {
-  window.lastTouchY = e.changedTouches[0].clientY;
-}, false);
+    next(html.replace(regex, (match, capture) => {
+      const [method, url, body, defaultData = ''] = JSON.parse(capture);
+      const sample = defaultData ? Prism.highlight(
+        JSON.stringify(defaultData, undefined, 2),
+        Prism.languages.json,
+        'json',
+      ) : '';
 
-window.addEventListener('touchmove', function (e) {
-  var activeModal = document.querySelector('.modal.is-active');
-  if (activeModal) {
-    var content = activeModal.querySelector('.modal-content');
-    if (e.target.className == 'modal-background' ||
-      (e.changedTouches[0].clientY - lastTouchY > 0 && content.scrollTop == 0) ||
-      (e.changedTouches[0].clientY - lastTouchY < 0 && content.scrollTop == content.scrollHeight - content.clientHeight))
-      e.preventDefault();
-    window.lastTouchY = e.changedTouches[0].clientY;
-  }
-}, { passive: false });
+      idCounter++;
 
-function whenAvailable(name, callback) {
-  var interval = 10; // ms
-  window.setTimeout(function() {
-    var forms = document.querySelectorAll(name);
-    if (forms.length) {
-        callback(forms);
-    } else {
-        window.setTimeout(arguments.callee, interval);
+      return `
+        <div class="playground">
+          <div class="box">
+            <div class="split-row">
+              <span class="method">${method}</span>
+              <input id="url-input-${idCounter}" value="${method === 'GET' ? url + body : url}"></input>
+              <button onclick="sendRequest('${method}', ${idCounter})">
+                Send
+              </button>
+            </div>
+            <div>
+              ${method === 'POST'
+                ? `<div class="editor lang-json" data-id="${idCounter}">${JSON.stringify(body, undefined, 2)}</div>`
+                // ? `<textarea rows="10" id="body-input-${idCounter}">${JSON.stringify(body, undefined, 2)}</textarea>`
+                : ''}
+            </div>
+            <pre class="response" data-lang="json">
+              <code id="response-${idCounter}" class="lang-json">${sample}</code>
+            </pre>
+          </div>
+        </div>
+      `;
+    }));
+  });
+
+  hook.doneEach(() => {
+    console.log('hook:doneEach');
+    Object.values(codejars).forEach((editor) => {
+      editor.destroy();
+    });
+    codejars = {};
+    document.querySelectorAll('.editor').forEach((el) => {
+      codejars[el.dataset.id] = CodeJar(el, Prism.highlightElement);
+    });
+  });
+}
+
+async function sendRequest(method, id) {
+  const urlInput = document.getElementById(`url-input-${id}`);
+  // const bodyInput = document.getElementById(`body-input-${id}`);
+  const display = document.getElementById(`response-${id}`);
+
+  let response;
+
+  if (method === 'GET') {
+    // Send GET request
+    response = await fetch(urlInput.value);
+  } else if (method === 'POST') {
+    // Get JSON body from codejar editor
+    const body = codejars[id].toString();
+
+    // Validate JSON body
+    try {
+      JSON.parse(body);
+    } catch (err) {
+      display.textContent = 'Error: Unable to parse JSON\n' + err;
+      return;
     }
-  }, interval);
-}
 
-function updateMenu(sectionID) {
-  document.querySelectorAll('.menu-item a.is-active:not(.unselectable)')[0].classList.remove('is-active');
-  document.querySelectorAll(`.menu-item a[href*=${sectionID}]:not(.unselectable)`)[0].classList.add('is-active');
-}
-
-function generate_data(type, url, data) {
-  var input = (type == 'GET') ? `<input class="input is-medium" id="data" type="text" value="${url + data}">` :
-                                `<textarea class="input" id="data">${data}</textarea>`
-
-  return `
-          <span class="field has-addons text">
-            <p class="control">
-              <a class="button is-medium is-static left" id="type">${type}</a>
-            </p>
-            <script type="form/url" data-url=${url}></script>
-            <p class="control is-expanded">
-              ${input}
-            </p>
-            <span class="control" onclick="request_submit(this.parentElement)">
-              <a class="button is-medium is-dark has-text-white right faa-parent animated-hover" id="button">
-                <span>Send</span>
-                <span class="icon is-small has-text-white faa-pulse animated-hover">
-                  <i class="fas fa-paper-plane"></i>
-                </span>
-              </a>
-            </span>
-            <span class="modal" id="modal" aria-hidden="true">
-              <span class="modal-background" onclick="toggleModal(this.parentElement, false)"></span>
-              <span class="modal-content"></span>
-            </span>
-          </span>
-         `
-}
-
-function request_submit(field) {
-  var type = field.querySelector('#type').innerHTML;
-  var url = field.querySelector('script[type="form/url"]').dataset.url;
-  var data = field.querySelector('#data').value;
-
-  var modal = field.querySelector('#modal');
-  var button = field.querySelector('#button');
-  button.classList.add('is-loading');
-
-  if (type == 'GET') {
-    if (!data)
-      data = " ";
-    fetch(data, {
+    // Send POST request
+    response = await fetch(urlInput.value, {
+      method: 'POST',
       headers: {
-        'Accept': 'application/json, application/xml, text/plain, text/html, *.*'
+        'Content-Type': 'application/json',
       },
-        method: 'GET',
-      })
-      .then(response => {
-        button.classList.remove('is-loading');
-        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
-      })
-      .catch(err => {
-        button.classList.remove('is-loading');
-        console.info(err + " url: " + body);
+      body,
+      // body: bodyInput.value,
     });
   }
-  else if (type = 'POST') {
-    fetch(url, {
-        headers: {
-          'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: data
-      })
-      .then(response => {
-        button.classList.remove('is-loading');
-        updateModal(modal, button, response.status == 200 ? response.json() : response.body);
-      })
-      .catch(err => {
-        console.info(err + " url: " + url);
-        button.classList.remove('is-loading');
-    });
+
+  let data = await response.text();
+
+  // Try parsing response as JSON, and fall back to just text
+  try {
+    data = JSON.stringify(JSON.parse(data), undefined, 2);
+    display.textContent = data;
+    // Only syntax highlight if the device is not a mobile
+    // or the data is sufficiently small
+    if (!isMobileDevice || data.length < 4000) {
+      Prism.highlightElement(display);
+    }
+  } catch (err) {
+    display.textContent = data;
   }
-}
-
-function updateModal(modal, button, response) {
-  var res = Promise.resolve(response);
-  var modalContent = modal.querySelector('.modal-content');
-
-  res.then(json => {
-    modalContent.innerHTML = `<pre>${JSON.stringify(json, undefined, 2)}</pre>`;
-    toggleModal(modal, true);
-  });
-}
-
-function toggleModal(modal, state) {
-  state ? modal.classList.add('is-active') : modal.classList.remove('is-active');
 }
