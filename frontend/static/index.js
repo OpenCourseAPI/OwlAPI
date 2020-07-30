@@ -20,51 +20,69 @@ window.$docsify = {
 let codejars = {};
 let idCounter = 0;
 
-// Custom docsify plugin to create API playgrounds
+/**
+ * Custom docsify plugin to create API playgrounds
+ *
+ * Usage - Add a comment as such in your .md file:
+ * <!-- playground:api [<method>, <url>, <body>, <sample>] -->
+ *
+ * Note: the comment can span multiple lines.
+ *
+ * @param {string} method Type of method (currently "GET" or "POST")
+ * @param {string} url The URL to hit
+ * @param {string|Object} body URL search params for "GET", or JSON body for "POST"
+ * @param {string|Object} sample (optional) Sample data to show
+ *
+ * @example <!-- playground:api ["GET", "/cars", "?year=2018" -->
+ * @example <!-- playground:api ["GET", "/cars", "?year=2020", [{ "name": "Something" }]] -->
+ * @example <!-- playground:api ["POST", "/cars/edit", { "id": 2342 }, { "status": "success" }] -->
+ */
 function apiPlayground(hook) {
   // Invoked each time after the Markdown file is parsed
   hook.afterEach(function(html, next) {
     // Captures array in <!-- playground:api [...] -->
     const regex = /<!-- playground:api ([\s\S]*?) -->/gi;
 
+    // Replace "magic" comment with HTML for API playground
     next(html.replace(regex, (match, capture) => {
-      const [method, url, body, defaultData = ''] = JSON.parse(capture);
-      const sample = defaultData ? Prism.highlight(
-        JSON.stringify(defaultData, undefined, 2),
+      const [method, endpoint, body, sampleData = ''] = JSON.parse(capture);
+
+      const url = method === 'GET' ? endpoint + body : endpoint;
+      const info = sampleData ? ' (sample)' : '';
+      // If sample data is provided, apply Prism.js syntax highlighting
+      const sample = sampleData ? Prism.highlight(
+        JSON.stringify(sampleData, undefined, 2),
         Prism.languages.json,
         'json',
       ) : '[send the request]';
-      const initialInfo = `${defaultData ? ' (sample)' : ''}`;
 
       idCounter++;
 
       return `
         <div class="playground" id="playground-${idCounter}">
-          <div class="box">
-            <div class="split-row">
-              <span class="method">${method}</span>
-              <input value="${method === 'GET' ? url + body : url}"></input>
-              <button onclick="sendRequest('${method}', ${idCounter})">
-                Send
-              </button>
-            </div>
-            <div class="split-view">
-              ${method === 'POST'
-                ? `
-                  <div class="left-pane">
-                    <span class="method">BODY</span>
-                    <div class="editor lang-json" data-id="${idCounter}">${JSON.stringify(body, undefined, 2)}</div>
-                  </div>
-                ` : ''}
-              <div class="right-pane">
-                <div class="info">
-                  <span class="status">RESPONSE</span>
-                  <span class="data">${initialInfo}</span>
+          <div class="send-request-row">
+            <span class="label">${method}</span>
+            <input class="url" value="${url}"></input>
+            <button onclick="sendRequest('${method}', ${idCounter})">
+              Send
+            </button>
+          </div>
+          <div class="split-view">
+            ${method === 'POST'
+              ? `
+                <div class="pane post-body">
+                  <span class="label">BODY</span>
+                  <div class="editor lang-json" data-id="${idCounter}">${JSON.stringify(body, undefined, 2)}</div>
                 </div>
-                <pre class="response" data-lang="json">
-                  <code class="lang-json">${sample}</code>
-                </pre>
+              ` : ''}
+            <div class="pane">
+              <div class="info">
+                <span class="label">RESPONSE</span>
+                <span class="data">${info}</span>
               </div>
+              <pre class="response-data" data-lang="json">
+                <code class="lang-json">${sample}</code>
+              </pre>
             </div>
           </div>
         </div>
@@ -87,6 +105,7 @@ function apiPlayground(hook) {
 }
 
 // Send an API request
+// TODO: add loading indication (animation, icon, etc.)
 async function sendRequest(method, id) {
   const playground = document.getElementById(`playground-${id}`);
   const urlInput = playground.querySelector('input');

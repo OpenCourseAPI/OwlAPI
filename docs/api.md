@@ -42,6 +42,39 @@ campus selector `test` to grab this older copy of Foothill data.
 `GET /single` handles a single request to get a whole department or a whole course listing from the database
 It expects a mandatory query parameter `dept` and an optionally `course`.
 
+<!-- playground:api ["GET", "/fh/single", "?dept=CS", [
+  {
+    "1B": {
+      "20339": [
+        {
+          "CRN": "20339",
+          "campus": "FH",
+          "course": "C S F001B01Z",
+          "days": "TTh",
+          "desc": "INTERM SOFTWARE DESIGN IN JAVA",
+          "end": "12/11/2020",
+          "instructor": "Mansouri Samani",
+          "room": "ONLINE",
+          "seats": "30",
+          "start": "09/21/2020",
+          "status": "Open",
+          "time": "06:00 PM-07:50 PM",
+          "units": "4.50",
+          "wait_cap": "10",
+          "wait_seats": "10"
+        },
+        {
+          "...": "..."
+        }
+      ],
+      "20463": ["..."]
+    },
+    "1C": {
+      "...": "..."
+    }
+  }
+]] -->
+
 <!-- playground:api ["GET", "/fh/single", "?dept=CS&course=2A", {
   "10116": [
     {
