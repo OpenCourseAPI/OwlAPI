@@ -37,9 +37,7 @@
 
       var url = new URL("https://opencourse.dev/fh/single" + data.value);
 
-      fetch(url, {
-          method: 'GET'
-        })
+      fetch(url, { method: 'GET' })
         .then(response => {
           return Promise.resolve(response.json());
         })
@@ -49,7 +47,7 @@
         })
         .catch(err => {
           console.log(err);
-      });
+        });
     }
   </script>
 </html>

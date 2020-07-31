@@ -1,6 +1,9 @@
-## Simple data request
+# Simple data request
 
 The best way to get started using OwlAPI is to see a basic example. With Javascript, there are many ways to make web requests. In this example, we aim to make a simple interface to the OwlAPI with an interactable module similar to the one seen on the main docs page. We will be hitting OwlAPI's [`/single`](https://opencourse.dev/#get-single) endpoint to retrieve a single entry from the database. It is the most basic interaction you can make to the API.
+
+<!-- TODO: the following doesn't work due to https://github.com/docsifyjs/docsify/issues/1078 -->
+<!-- [/single API request code](single.html ':include :type=code') -->
 
 ```html
 <!DOCTYPE html>
@@ -31,7 +34,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
     <div id="input" class="content">
       <button onclick="submitRequest(this.parentElement)">GET</button>
       <span>https://opencourse.dev/fh/single</span>
-      <input id="data" type="text" value="?dept=CS&course=2C">
+      <input id="data" type="text" value="?dept=CS&course=2A">
     </div>
     <pre id="output" class="content"></pre>
   </body>
@@ -42,9 +45,7 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
 
       var url = new URL("https://opencourse.dev/fh/single" + data.value);
 
-      fetch(url, {
-          method: 'GET'
-        })
+      fetch(url, { method: 'GET' })
         .then(response => {
           return Promise.resolve(response.json());
         })
@@ -54,12 +55,15 @@ The best way to get started using OwlAPI is to see a basic example. With Javascr
         })
         .catch(err => {
           console.log(err);
-      });
+        });
     }
   </script>
 </html>
 ```
-[Try Example](/#)
+
+### Demo
+
+[/single API request demo](single.html ':include')
 
 ### Overview
 
@@ -126,9 +130,7 @@ function submitRequest(input) {
 
   var url = new URL("https://opencourse.dev/single" + data.value);
 
-  fetch(url, {
-      method: 'GET'
-    })
+  fetch(url, { method: 'GET' })
     .then(response => {
       return Promise.resolve(response.json());
     })
@@ -138,7 +140,7 @@ function submitRequest(input) {
     })
     .catch(err => {
       console.log(err);
-  });
+    });
 }
 ```
 

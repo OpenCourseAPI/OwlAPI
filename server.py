@@ -6,25 +6,31 @@ import itertools as itr
 import typing as ty
 
 # 3rd party
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
 from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
+
+DB_ROOT = 'db/'
+
+FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
+DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 # Flask config
 def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
+
 application = Flask(__name__,
                     template_folder="frontend/templates", static_folder='frontend/static')
 application.after_request(add_cors_headers)
 
-DB_ROOT = 'db/'
 
-FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
-DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
+@application.route('/docs/<path:filename>')
+def static_docs(filename):
+    return send_from_directory('docs', filename)
 
 
 @application.route('/')
