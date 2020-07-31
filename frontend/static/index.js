@@ -17,8 +17,8 @@ window.$docsify = {
   ],
 };
 
+// CodeJar editors currently rendered on the page
 let codejars = {};
-let idCounter = 0;
 
 /**
  * Custom docsify plugin to create API playgrounds
@@ -38,8 +38,19 @@ let idCounter = 0;
  * @example <!-- playground:api ["POST", "/cars/edit", { "id": 2342 }, { "status": "success" }] -->
  */
 function apiPlayground(hook) {
+  let idCounter = 0;
+
+  // Perform cleanup
+  hook.beforeEach((content) => {
+    // Destroy previous editors
+    Object.values(codejars).forEach((editor) => {
+      editor.destroy();
+    });
+    codejars = {};
+  });
+
   // Invoked each time after the Markdown file is parsed
-  hook.afterEach(function(html, next) {
+  hook.afterEach((html, next) => {
     // Captures array in <!-- playground:api [...] -->
     const regex = /<!-- playground:api ([\s\S]*?) -->/gi;
 
@@ -91,12 +102,6 @@ function apiPlayground(hook) {
   });
 
   hook.doneEach(() => {
-    // Destroy previous editors
-    // TODO: verify this is the right hook to destroy
-    Object.values(codejars).forEach((editor) => {
-      editor.destroy();
-    });
-    codejars = {};
     // Create new editors
     document.querySelectorAll('.editor').forEach((el) => {
       codejars[el.dataset.id] = CodeJar(el, Prism.highlightElement);
