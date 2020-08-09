@@ -9,7 +9,7 @@ class ValidationError(Exception):
         self.message = message
         self.details = details
 
-def parse_course_string(raw_class: str):
+def parse_course_str(raw_class: str):
     '''
     This is the key parser for the course names
 

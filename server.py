@@ -10,7 +10,7 @@ from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-from utils import parse_course_string, get_class_type
+from utils import parse_course_str, get_class_type
 from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR
 
 
@@ -228,8 +228,8 @@ def filter_courses(campus, filters: ty.Dict[str, ty.Any], course):
                 continue
             types.add(k)
         # Get course flags
-        course_string = course[course_key][0]['course']
-        flags = parse_course_string(course_string)['flags']
+        course_str = course[course_key][0]['course']
+        flags = parse_course_str(course_str)['flags']
         class_type = get_class_type(campus, flags)
         return class_type in types
 

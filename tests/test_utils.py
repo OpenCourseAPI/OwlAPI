@@ -1,8 +1,8 @@
 from unittest import TestCase
-from utils import parse_course_string, get_class_type
+from utils import parse_course_str, get_class_type
 
-# Handpicked test cases for `parse_course_string()`
-course_string_data = {
+# Handpicked test cases for `parse_course_str()`
+course_str_data = {
     # De Anza
     'ANTH D001L51Z': ('ANTH', '1L', '51Z', {'Z'}),
     'ARTS D001A62Z': ('ARTS', '1A', '62Z', {'Z'}),
@@ -199,9 +199,9 @@ course_string_data = {
 }
 
 class TestParseCourseString(TestCase):
-    def test_parse_course_string_works(self):
-        for raw, expected in course_string_data.items():
-            parsed = parse_course_string(raw)
+    def test_parse_course_str_works(self):
+        for raw, expected in course_str_data.items():
+            parsed = parse_course_str(raw)
             match = (parsed['dept'], parsed['course'], parsed['section'], parsed['flags'])
             self.assertEqual(match, expected, 'Expected and parsed course string data does not match')
 

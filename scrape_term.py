@@ -9,7 +9,7 @@ import click
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from utils import parse_course_string, ValidationError
+from utils import parse_course_str, ValidationError
 from settings import DB_DIR, SSB_URL, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
@@ -83,7 +83,7 @@ def parse(content, db):
                     cols[i] = (a.get_text() if a else cols[i].get_text()).strip()
 
                 try:
-                    parsed_course = parse_course_string(cols[0])
+                    parsed_course = parse_course_str(cols[0])
                     key = parsed_course['course']
                     data = dict(zip(HEADERS, cols))
 
