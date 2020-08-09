@@ -15,6 +15,7 @@ flask = "*"
 pylint = "*"
 colorama = "*"
 snapshottest = "*"
+click = "*"
 
 [dev-packages]
 
