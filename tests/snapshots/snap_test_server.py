@@ -3441,3 +3441,59 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         }
     ]
 ]
+
+snapshots['TestGetOne::test_get_one_dept_and_honors_course 1'] = {
+    '21030': [
+        {
+            'CRN': '21030',
+            'campus': 'FH',
+            'course': 'MUS F02AH01Z',
+            'days': 'TBA',
+            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
+            'end': '12/11/2020',
+            'instructor': 'Barkley',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': 'TBA',
+            'units': '5.00',
+            'wait_cap': '5',
+            'wait_seats': '2'
+        },
+        {
+            'CRN': '21030',
+            'campus': 'FH',
+            'course': 'MUS F02AH01Z',
+            'days': 'MW',
+            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
+            'end': '12/11/2020',
+            'instructor': 'Hartwell',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': '12:00 PM-01:50 PM',
+            'units': '5.00',
+            'wait_cap': '5',
+            'wait_seats': '2'
+        },
+        {
+            'CRN': '21030',
+            'campus': 'FH',
+            'course': 'MUS F02AH01Z',
+            'days': 'TBA',
+            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
+            'end': '12/11/2020',
+            'instructor': 'Carey',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': 'TBA',
+            'units': '5.00',
+            'wait_cap': '5',
+            'wait_seats': '2'
+        }
+    ]
+}

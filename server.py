@@ -10,12 +10,9 @@ from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
+from utils import parse_course_string
+from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR, FH_TYPE_ALIAS, DA_TYPE_ALIAS
 
-DB_ROOT = 'db/'
-
-FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
-DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 # Flask config
 def add_cors_headers(response):
@@ -66,7 +63,7 @@ def api_one(campus):
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
     data = get_one(db, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else (
@@ -110,7 +107,7 @@ def api_many(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
     raw = request.get_json()
 
     data = raw['courses']
@@ -225,14 +222,15 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
         if 'types' not in filters:
             return True
         # Get course section
-        section = get_key(course[course_key][0]['course'])
+        section = parse_course_string(course[course_key][0]['course'])
         mask = set()
         for k, v in filters['types'].items():
             if not v:
                 continue
             mask.add(FH_TYPE_ALIAS[k])
             mask.add(DA_TYPE_ALIAS[k])
-        return section[1] in mask
+        print(section)
+        return True if section[3] & mask else False
 
     def day_filter(course_key) -> bool:
         # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
@@ -272,23 +270,6 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
         del course[key]
 
 
-def get_key(key):
-    """
-    This is the key parser for the course names
-
-    :param campus: (str) The campus to retrieve data from
-    :param key: (str) The unparsed string containing the course name
-
-    :return match_obj.groups(): (list) the string for the regex match
-    """
-    k = key.split(' ')
-    i = 1 if len(k) < 3 else 2
-    section = k[i]
-
-    match_obj = match(COURSE_PATTERN, section)
-    return match_obj.groups()
-
-
 @application.route('/<campus>/list', methods=['GET'])
 def api_list(campus):
     """
@@ -308,7 +289,7 @@ def api_list(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
 
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
@@ -338,7 +319,7 @@ def api_list_url(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
 
     data = defaultdict(list)
 
