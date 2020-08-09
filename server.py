@@ -10,8 +10,8 @@ from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-from utils import parse_course_string
-from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR, FH_TYPE_ALIAS, DA_TYPE_ALIAS
+from utils import parse_course_string, get_class_type
+from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR
 
 
 # Flask config
@@ -64,7 +64,7 @@ def api_one(campus):
     qp = {k: v.upper() for k, v in raw.items()}
 
     db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
-    data = get_one(db, qp, filters=dict())
+    data = get_one(campus, db, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else (
         'Error! Could not find given selectors in database', 404)
@@ -113,7 +113,7 @@ def api_many(campus):
     data = raw['courses']
     filters = raw['filters'] if ('filters' in raw) else dict()
 
-    courses = get_many(db=db, data=data, filters=filters)
+    courses = get_many(campus=campus, db=db, data=data, filters=filters)
     if not courses:  # null case from get_one (invalid param or filter)
         return 'Error! Could not find one or more course selectors in database', 404
 
@@ -121,7 +121,7 @@ def api_many(campus):
     return json, 200
 
 
-def get_one(db: TinyDB, data: dict, filters: dict):
+def get_one(campus: str, db: TinyDB, data: dict, filters: dict):
     """
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
@@ -151,7 +151,7 @@ def get_one(db: TinyDB, data: dict, filters: dict):
             course = next((dict(e[f'{data_course}']) for e in entries
                            if f'{data_course}' in e))
             if filters:
-                filter_courses(filters, course)
+                filter_courses(campus, filters, course)
 
         except StopIteration:
             return dict()
@@ -159,11 +159,11 @@ def get_one(db: TinyDB, data: dict, filters: dict):
     return course
 
 
-def get_many(db: TinyDB, data: dict(), filters: dict()):
+def get_many(campus: str, db: TinyDB, data: dict(), filters: dict()):
     ret = []
 
     for course in data:
-        d = get_one(db, course, filters=filters)
+        d = get_one(campus, db, course, filters=filters)
         if not d:  # null case from get_one (invalid param or filter)
             continue
         ret.append(d)
@@ -171,7 +171,7 @@ def get_many(db: TinyDB, data: dict(), filters: dict()):
     return ret
 
 
-def filter_courses(filters: ty.Dict[str, ty.Any], course):
+def filter_courses(campus, filters: ty.Dict[str, ty.Any], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -221,16 +221,17 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
         # {'standard':1, 'online':1, 'hybrid':0}
         if 'types' not in filters:
             return True
-        # Get course section
-        section = parse_course_string(course[course_key][0]['course'])
-        mask = set()
+        # Compute filters
+        types = set()
         for k, v in filters['types'].items():
             if not v:
                 continue
-            mask.add(FH_TYPE_ALIAS[k])
-            mask.add(DA_TYPE_ALIAS[k])
-        print(section)
-        return True if section[3] & mask else False
+            types.add(k)
+        # Get course flags
+        course_string = course[course_key][0]['course']
+        flags = parse_course_string(course_string)['flags']
+        class_type = get_class_type(campus, flags)
+        return class_type in types
 
     def day_filter(course_key) -> bool:
         # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}

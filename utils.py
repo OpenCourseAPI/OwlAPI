@@ -1,5 +1,7 @@
 from re import match
 
+from settings import COURSE_TYPES_TO_FLAGS
+
 COURSE_NAME_PATTERN = r'[FD]0*(\d*\w?H?)\.?'
 
 class ValidationError(Exception):
@@ -7,21 +9,21 @@ class ValidationError(Exception):
         self.message = message
         self.details = details
 
-def parse_course_string(raw_course: str):
+def parse_course_string(raw_class: str):
     '''
     This is the key parser for the course names
 
-    :param raw_course: (str) The unparsed string containing the course name
+    :param raw_class: (str) The unparsed string containing the course name
     :return match_obj.groups(): (list) the string for the regex match
     '''
-    # Split the raw course string by a space, to seperate different parts
+    # Split the raw course string by a space, to separate different parts
     # ex. 'C S D001A01Z' => ['C', 'S', 'D001A01Z']
-    parts = raw_course.split(' ')
+    parts = raw_class.split(' ')
 
     if len(parts) < 2:
         raise ValidationError(
             'Raw course string is invalid',
-            'At least two space seperated parts cannot be found'
+            'At least two space separated parts could not be found'
         )
 
     # All parts excluding the last one are assumed to be the department name
@@ -63,6 +65,19 @@ def parse_course_string(raw_course: str):
         'dept': dept,
         'course': cleaned_course,
         'section': section,
-        # 'flags': ''.join(flags),
         'flags': flags,
     }
+
+def get_class_type(campus: str, flags: set):
+    class_type = None
+
+    for name, flag in COURSE_TYPES_TO_FLAGS[campus].items():
+        if name != 'standard' and flag in flags:
+            if class_type:
+                raise ValidationError('Class has multiple types in its flags', '')
+            class_type = name
+
+    if not class_type:
+        class_type = 'standard'
+
+    return class_type

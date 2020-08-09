@@ -32,3 +32,9 @@ Hybrid   - hybrid classes that are both online and physical
 Standard - physical classes (or all of the above are N/A, e.g. "Independent Study")
 '''
 DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
+
+COURSE_TYPES_TO_FLAGS = {
+    'fh': FH_TYPE_ALIAS,
+    'da': DA_TYPE_ALIAS,
+    'test': FH_TYPE_ALIAS
+}
