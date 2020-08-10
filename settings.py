@@ -5,7 +5,7 @@ ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_DIR = os.path.join(ROOT_DIR, 'db')
 
 # Regexes
-COURSE_NAME_PATTERN = r'[FD]0*(\d*\w?H?)\.?'
+COURSE_NAME_PATTERN = r'[FD]0*(\d+\w*)\.?'
 DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 # Scraped table headers (for scrape_term.py)

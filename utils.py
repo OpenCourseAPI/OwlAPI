@@ -50,8 +50,14 @@ def parse_course_str(raw_class: str):
 
     if not match_obj or not match_obj.groups():
         raise ValidationError(
-            f"Unable to extract the course ID (ex. '24A') from '{course}'",
-            'Course name regex does not match'
+            f"Whoops, the course (ex. '24A') could not be extracted from '{course}'",
+            'The course name regex does not match'
+        )
+
+    if len(match_obj[0]) < 5:
+        raise ValidationError(
+            f"Whoops, the course (ex. '24A') could not be extracted from '{course}'",
+            'The course name regex does not fully match'
         )
 
     # Cleaned course name, e.g. `4A`
