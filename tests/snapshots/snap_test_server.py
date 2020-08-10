@@ -3497,3 +3497,150 @@ snapshots['TestGetOne::test_get_one_dept_and_honors_course 1'] = {
         }
     ]
 }
+
+snapshots['TestGetOne::test_get_one_dept_and_complex_course 1'] = {
+    '20661': [
+        {
+            'CRN': '20661',
+            'campus': 'FH',
+            'course': 'CHEM F12AL02Z',
+            'days': 'TBA',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Painter',
+            'room': 'ONLINE',
+            'seats': '12',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': 'TBA',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        },
+        {
+            'CRN': '20661',
+            'campus': 'FH',
+            'course': 'CHEM F12AL02Z',
+            'days': 'MW',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Painter',
+            'room': 'ONLINE',
+            'seats': '12',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': '05:30 PM-07:20 PM',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        }
+    ],
+    '20662': [
+        {
+            'CRN': '20662',
+            'campus': 'FH',
+            'course': 'CHEM F12AL03Z',
+            'days': 'TTh',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Armstrong',
+            'room': 'ONLINE',
+            'seats': '9',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': '12:00 PM-01:50 PM',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        },
+        {
+            'CRN': '20662',
+            'campus': '',
+            'course': 'CHEM F12AL03Z',
+            'days': 'TBA',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Armstrong',
+            'room': '',
+            'seats': '9',
+            'start': '09/21/2020',
+            'status': 'Open',
+            'time': 'TBA',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        }
+    ],
+    '20740': [
+        {
+            'CRN': '20740',
+            'campus': 'FH',
+            'course': 'CHEM F12AL04Z',
+            'days': 'TTh',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Armstrong',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': '12:00 PM-01:50 PM',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '7'
+        },
+        {
+            'CRN': '20740',
+            'campus': 'FH',
+            'course': 'CHEM F12AL04Z',
+            'days': 'TBA',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Armstrong',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': 'TBA',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '7'
+        }
+    ],
+    '21149': [
+        {
+            'CRN': '21149',
+            'campus': 'FH',
+            'course': 'CHEM F12AL01Z',
+            'days': 'TBA',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Painter',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': 'TBA',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        },
+        {
+            'CRN': '21149',
+            'campus': 'FH',
+            'course': 'CHEM F12AL01Z',
+            'days': 'MW',
+            'desc': 'ORGANIC CHEMISTRY LABORATORY',
+            'end': '12/11/2020',
+            'instructor': 'Painter',
+            'room': 'ONLINE',
+            'seats': '0',
+            'start': '09/21/2020',
+            'status': 'Waitlist',
+            'time': '05:30 PM-07:20 PM',
+            'units': '2.00',
+            'wait_cap': '8',
+            'wait_seats': '8'
+        }
+    ]
+}

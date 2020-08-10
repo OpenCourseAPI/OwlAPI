@@ -43,6 +43,13 @@ class TestGetOne(TestCase):
         self.assertMatchSnapshot(result)
 
 
+    def test_get_one_dept_and_complex_course(self):
+        data = {'dept': 'CHEM', 'course': '12AL'}
+
+        result = get_one(campus='test', db=test_database, data=data, filters=dict())
+        self.assertMatchSnapshot(result)
+
+
 @pytest.mark.usefixtures('fix_snapshots')
 class TestGetMany(TestCase):
     def test_get_many_dept(self):

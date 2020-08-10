@@ -36,7 +36,7 @@ def idx():
 
 
 @application.route('/<campus>/single', methods=['GET'])
-def api_one(campus):
+def api_one(campus: str):
     """
     `/single` with [GET] handles a single request to get a whole
     department or a whole course listing from the database
@@ -71,7 +71,7 @@ def api_one(campus):
 
 
 @application.route('/<campus>/batch', methods=['POST'])
-def api_many(campus):
+def api_many(campus: str):
     """
     `/batch` with [POST] handles a batch request to get many
     departments or a many course listings from the database.
@@ -171,7 +171,7 @@ def get_many(campus: str, db: TinyDB, data: dict(), filters: dict()):
     return ret
 
 
-def filter_courses(campus, filters: ty.Dict[str, ty.Any], course):
+def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -272,7 +272,7 @@ def filter_courses(campus, filters: ty.Dict[str, ty.Any], course):
 
 
 @application.route('/<campus>/list', methods=['GET'])
-def api_list(campus):
+def api_list(campus: str):
     """
     `/list` with [GET] handles a single request to list department or
     course keys from the database
@@ -308,7 +308,7 @@ def api_list(campus):
 
 
 @application.route('/<campus>/urls', methods=['GET'])
-def api_list_url(campus):
+def api_list_url(campus: str):
     """
     `/urls` with [GET] returns a tree of all departments, their
     courses, and the courses' endpoints to hit.

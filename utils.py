@@ -16,6 +16,27 @@ def parse_course_str(raw_class: str):
     '''
     This is the key parser for the class/course strings
 
+    String Format
+    -------------
+    Underlying assumptions about the format of the string (with the dept removed):
+
+    `F 01A. 01Z`
+    `F 1AHL 01`
+
+    First character   - campus ('F' or 'D')
+    Next 4 characters - course name / ID with leading 0's and possibly a trailing '.'
+    Last characters   - section string (1-3 chars)
+
+    NOTE: As of Fall 2020 data, all strings are between 7-8 chars,
+          and all section strings are between 2-3 chars.
+
+    Components
+    ----------
+    Dept    - Department
+    Course  - Course name / ID (ex. '1AL')
+    Section - Class section (ex. '1HZ')
+    Flags   - Extra flags from the section (ex. {'H', 'Z'})
+
     :param raw_class: (str) The unparsed string, ex. `C S F001A01Z`
     :return: (dict) the parsed data {'dept', 'course', 'section', 'flags'}
     '''
