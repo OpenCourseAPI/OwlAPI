@@ -10,7 +10,7 @@ DAYS_PATTERN = f"^{'(M|T|W|Th|F|S|U)?'*7}$"
 
 # Scraped table headers (for scrape_term.py)
 HEADERS = (
-    'course',
+    'raw_course',
     'CRN',
     'desc',
     'status',

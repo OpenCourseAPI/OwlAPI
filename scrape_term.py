@@ -8,15 +8,11 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 from marshmallow import ValidationError as MarshValidationError
 
-from owl_models import InterimClassDataSchema, ClassDataSchema, ClassTimeSchema
+from owl_models import interimClassDataSchema, classDataSchema, classTimeSchema
 from utils import parse_course_str, ValidationError, log_info, log_err
 from settings import DB_DIR, SSB_URL, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
-
-classDataSchema = ClassDataSchema()
-classTimeSchema = ClassTimeSchema()
-interimClassDataSchema = InterimClassDataSchema()
 
 
 def main():
@@ -93,6 +89,7 @@ def parse(content, db):
                 try:
                     parsed_course = parse_course_str(cols[0])
                     key = parsed_course['course']
+                    section = parsed_course['section']
                     data = dict(zip(HEADERS, cols))
 
                     if parsed_course['dept'] != dept:
@@ -101,9 +98,11 @@ def parse(content, db):
                             f"'{parsed_course['dept']}' != '{dept}'"
                         )
 
-                    data['units'] = data['units'].lstrip()
                     data['dept'] = dept
-                    data['section'] = parsed_course['section']
+                    data['course'] = key
+                    data['section'] = section
+                    data['status'] = data['status'].lower()
+                    data['units'] = data['units'].lstrip()
 
                     try:
                         data = interimClassDataSchema.load(data)

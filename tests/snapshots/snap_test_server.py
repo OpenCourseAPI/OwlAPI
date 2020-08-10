@@ -11,14 +11,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '10': [
         {
             'CRN': 20748,
-            'course': 'C S F010.01Z',
+            'course': '10',
             'dept': 'CS',
             'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
             'end': '12/11/2020',
+            'raw_course': 'C S F010.01Z',
             'seats': 14,
-            'section': '10',
+            'section': '01Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -41,14 +42,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20749,
-            'course': 'C S F010.02W',
+            'course': '10',
             'dept': 'CS',
             'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
             'end': '12/11/2020',
+            'raw_course': 'C S F010.02W',
             'seats': 0,
-            'section': '10',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Full',
+            'status': 'full',
             'time': [
                 {
                     'campus': 'FH',
@@ -66,14 +68,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '1A': [
         {
             'CRN': 20743,
-            'course': 'C S F001A01Z',
+            'course': '1A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001A01Z',
             'seats': 19,
-            'section': '1A',
+            'section': '01Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -96,14 +99,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21639,
-            'course': 'C S F001A02W',
+            'course': '1A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001A02W',
             'seats': 34,
-            'section': '1A',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -119,14 +123,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20267,
-            'course': 'C S F001A03W',
+            'course': '1A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001A03W',
             'seats': 0,
-            'section': '1A',
+            'section': '03W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -142,14 +147,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20268,
-            'course': 'C S F001A04W',
+            'course': '1A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001A04W',
             'seats': 37,
-            'section': '1A',
+            'section': '04W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -165,14 +171,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20371,
-            'course': 'C S F001A05W',
+            'course': '1A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001A05W',
             'seats': 25,
-            'section': '1A',
+            'section': '05W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -190,14 +197,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '1B': [
         {
             'CRN': 20339,
-            'course': 'C S F001B01Z',
+            'course': '1B',
             'dept': 'CS',
             'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001B01Z',
             'seats': 31,
-            'section': '1B',
+            'section': '01Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -220,14 +228,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20744,
-            'course': 'C S F001B02W',
+            'course': '1B',
             'dept': 'CS',
             'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001B02W',
             'seats': 26,
-            'section': '1B',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -243,14 +252,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20463,
-            'course': 'C S F001B03W',
+            'course': '1B',
             'dept': 'CS',
             'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001B03W',
             'seats': 4,
-            'section': '1B',
+            'section': '03W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -268,14 +278,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '1C': [
         {
             'CRN': 20270,
-            'course': 'C S F001C02W',
+            'course': '1C',
             'dept': 'CS',
             'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
             'end': '12/11/2020',
+            'raw_course': 'C S F001C02W',
             'seats': 0,
-            'section': '1C',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Full',
+            'status': 'full',
             'time': [
                 {
                     'campus': 'FH',
@@ -293,14 +304,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '22A': [
         {
             'CRN': 20751,
-            'course': 'C S F022A01W',
+            'course': '22A',
             'dept': 'CS',
             'desc': 'JAVASCRIPT FOR PROGRAMMERS',
             'end': '12/11/2020',
+            'raw_course': 'C S F022A01W',
             'seats': 20,
-            'section': '22A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -318,14 +330,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '2A': [
         {
             'CRN': 20269,
-            'course': 'C S F002A01Z',
+            'course': '2A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENT PROG METHOD IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002A01Z',
             'seats': 31,
-            'section': '2A',
+            'section': '01Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -348,14 +361,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20372,
-            'course': 'C S F002A02W',
+            'course': '2A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENT PROG METHOD IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002A02W',
             'seats': 0,
-            'section': '2A',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -371,14 +385,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20745,
-            'course': 'C S F002A03W',
+            'course': '2A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENT PROG METHOD IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002A03W',
             'seats': 26,
-            'section': '2A',
+            'section': '03W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -394,14 +409,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20325,
-            'course': 'C S F002A04W',
+            'course': '2A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENT PROG METHOD IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002A04W',
             'seats': 37,
-            'section': '2A',
+            'section': '04W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -417,14 +433,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21642,
-            'course': 'C S F002A05W',
+            'course': '2A',
             'dept': 'CS',
             'desc': 'OBJ-ORIENT PROG METHOD IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002A05W',
             'seats': 0,
-            'section': '2A',
+            'section': '05W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -442,14 +459,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '2B': [
         {
             'CRN': 20417,
-            'course': 'C S F002B01W',
+            'course': '2B',
             'dept': 'CS',
             'desc': 'INTERM SOFTWARE DESIGN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002B01W',
             'seats': 27,
-            'section': '2B',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -465,14 +483,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21644,
-            'course': 'C S F002B02W',
+            'course': '2B',
             'dept': 'CS',
             'desc': 'INTERM SOFTWARE DESIGN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002B02W',
             'seats': 0,
-            'section': '2B',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -490,14 +509,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '2C': [
         {
             'CRN': 20326,
-            'course': 'C S F002C01W',
+            'course': '2C',
             'dept': 'CS',
             'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
             'end': '12/11/2020',
+            'raw_course': 'C S F002C01W',
             'seats': 12,
-            'section': '2C',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -515,14 +535,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '30A': [
         {
             'CRN': 20327,
-            'course': 'C S F030A01W',
+            'course': '30A',
             'dept': 'CS',
             'desc': 'INTRODUCTION TO LINUX',
             'end': '12/11/2020',
+            'raw_course': 'C S F030A01W',
             'seats': 12,
-            'section': '30A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -540,14 +561,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '30B': [
         {
             'CRN': 20600,
-            'course': 'C S F030B01W',
+            'course': '30B',
             'dept': 'CS',
             'desc': 'LINUX SHELL PROGRAMMING',
             'end': '12/11/2020',
+            'raw_course': 'C S F030B01W',
             'seats': 30,
-            'section': '30B',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -565,14 +587,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '31A': [
         {
             'CRN': 20338,
-            'course': 'C S F031A01W',
+            'course': '31A',
             'dept': 'CS',
             'desc': 'INTRO DATABASE MGMT SYSTEMS',
             'end': '12/11/2020',
+            'raw_course': 'C S F031A01W',
             'seats': 4,
-            'section': '31A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -590,14 +613,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '3A': [
         {
             'CRN': 20674,
-            'course': 'C S F003A01Z',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A01Z',
             'seats': 28,
-            'section': '3A',
+            'section': '01Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -620,14 +644,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21646,
-            'course': 'C S F003A02W',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A02W',
             'seats': 0,
-            'section': '3A',
+            'section': '02W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -650,14 +675,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20747,
-            'course': 'C S F003A03W',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A03W',
             'seats': 23,
-            'section': '3A',
+            'section': '03W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -673,14 +699,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 20889,
-            'course': 'C S F003A04W',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A04W',
             'seats': 0,
-            'section': '3A',
+            'section': '04W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -696,14 +723,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21650,
-            'course': 'C S F003A05W',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A05W',
             'seats': 7,
-            'section': '3A',
+            'section': '05W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -719,14 +747,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21825,
-            'course': 'C S F003A06Z',
+            'course': '3A',
             'dept': 'CS',
             'desc': 'OBJECT ORIEN PRGM METH PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003A06Z',
             'seats': 0,
-            'section': '3A',
+            'section': '06Z',
             'start': '09/21/2020',
-            'status': 'Full',
+            'status': 'full',
             'time': [
                 {
                     'campus': 'FH',
@@ -751,14 +780,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '3B': [
         {
             'CRN': 20845,
-            'course': 'C S F003B01W',
+            'course': '3B',
             'dept': 'CS',
             'desc': 'INTERMED SOFTWARE DESGN PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003B01W',
             'seats': 15,
-            'section': '3B',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -774,14 +804,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
         },
         {
             'CRN': 21145,
-            'course': 'C S F003B02Z',
+            'course': '3B',
             'dept': 'CS',
             'desc': 'INTERMED SOFTWARE DESGN PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003B02Z',
             'seats': 9,
-            'section': '3B',
+            'section': '02Z',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -806,14 +837,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '3C': [
         {
             'CRN': 21164,
-            'course': 'C S F003C01W',
+            'course': '3C',
             'dept': 'CS',
             'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
             'end': '12/11/2020',
+            'raw_course': 'C S F003C01W',
             'seats': 20,
-            'section': '3C',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -831,14 +863,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '48A': [
         {
             'CRN': 21818,
-            'course': 'C S F048A01W',
+            'course': '48A',
             'dept': 'CS',
             'desc': 'DATA VISUALIZATION',
             'end': '12/11/2020',
+            'raw_course': 'C S F048A01W',
             'seats': 0,
-            'section': '48A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Waitlist',
+            'status': 'waitlist',
             'time': [
                 {
                     'campus': 'FH',
@@ -863,14 +896,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '50A': [
         {
             'CRN': 21652,
-            'course': 'C S F050A01W',
+            'course': '50A',
             'dept': 'CS',
             'desc': 'NETWORK BASICS (CCNA)',
             'end': '12/11/2020',
+            'raw_course': 'C S F050A01W',
             'seats': 6,
-            'section': '50A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -888,14 +922,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '53A': [
         {
             'CRN': 21653,
-            'course': 'C S F053A01W',
+            'course': '53A',
             'dept': 'CS',
             'desc': 'CYBERSECURITY FUNDAMENTALS',
             'end': '12/11/2020',
+            'raw_course': 'C S F053A01W',
             'seats': 17,
-            'section': '53A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -913,14 +948,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '55A': [
         {
             'CRN': 21162,
-            'course': 'C S F055A01W',
+            'course': '55A',
             'dept': 'CS',
             'desc': 'INTRO CLOUD COMPUTNG AWS',
             'end': '12/11/2020',
+            'raw_course': 'C S F055A01W',
             'seats': 11,
-            'section': '55A',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -938,14 +974,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
     '55B': [
         {
             'CRN': 21654,
-            'course': 'C S F055B01W',
+            'course': '55B',
             'dept': 'CS',
             'desc': 'DATABASE ESSENTIALS AWS',
             'end': '12/11/2020',
+            'raw_course': 'C S F055B01W',
             'seats': 14,
-            'section': '55B',
+            'section': '01W',
             'start': '09/21/2020',
-            'status': 'Open',
+            'status': 'open',
             'time': [
                 {
                     'campus': 'FH',
@@ -965,14 +1002,15 @@ snapshots['TestGetOne::test_get_one_dept 1'] = {
 snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
     {
         'CRN': 20269,
-        'course': 'C S F002A01Z',
+        'course': '2A',
         'dept': 'CS',
         'desc': 'OBJ-ORIENT PROG METHOD IN C++',
         'end': '12/11/2020',
+        'raw_course': 'C S F002A01Z',
         'seats': 31,
-        'section': '2A',
+        'section': '01Z',
         'start': '09/21/2020',
-        'status': 'Open',
+        'status': 'open',
         'time': [
             {
                 'campus': 'FH',
@@ -995,14 +1033,15 @@ snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
     },
     {
         'CRN': 20372,
-        'course': 'C S F002A02W',
+        'course': '2A',
         'dept': 'CS',
         'desc': 'OBJ-ORIENT PROG METHOD IN C++',
         'end': '12/11/2020',
+        'raw_course': 'C S F002A02W',
         'seats': 0,
-        'section': '2A',
+        'section': '02W',
         'start': '09/21/2020',
-        'status': 'Waitlist',
+        'status': 'waitlist',
         'time': [
             {
                 'campus': 'FH',
@@ -1018,14 +1057,15 @@ snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
     },
     {
         'CRN': 20745,
-        'course': 'C S F002A03W',
+        'course': '2A',
         'dept': 'CS',
         'desc': 'OBJ-ORIENT PROG METHOD IN C++',
         'end': '12/11/2020',
+        'raw_course': 'C S F002A03W',
         'seats': 26,
-        'section': '2A',
+        'section': '03W',
         'start': '09/21/2020',
-        'status': 'Open',
+        'status': 'open',
         'time': [
             {
                 'campus': 'FH',
@@ -1041,14 +1081,15 @@ snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
     },
     {
         'CRN': 20325,
-        'course': 'C S F002A04W',
+        'course': '2A',
         'dept': 'CS',
         'desc': 'OBJ-ORIENT PROG METHOD IN C++',
         'end': '12/11/2020',
+        'raw_course': 'C S F002A04W',
         'seats': 37,
-        'section': '2A',
+        'section': '04W',
         'start': '09/21/2020',
-        'status': 'Open',
+        'status': 'open',
         'time': [
             {
                 'campus': 'FH',
@@ -1064,14 +1105,15 @@ snapshots['TestGetOne::test_get_one_dept_and_course 1'] = [
     },
     {
         'CRN': 21642,
-        'course': 'C S F002A05W',
+        'course': '2A',
         'dept': 'CS',
         'desc': 'OBJ-ORIENT PROG METHOD IN C++',
         'end': '12/11/2020',
+        'raw_course': 'C S F002A05W',
         'seats': 0,
-        'section': '2A',
+        'section': '05W',
         'start': '09/21/2020',
-        'status': 'Waitlist',
+        'status': 'waitlist',
         'time': [
             {
                 'campus': 'FH',
@@ -1092,14 +1134,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '10': [
             {
                 'CRN': 20748,
-                'course': 'C S F010.01Z',
+                'course': '10',
                 'dept': 'CS',
                 'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
                 'end': '12/11/2020',
+                'raw_course': 'C S F010.01Z',
                 'seats': 14,
-                'section': '10',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1122,14 +1165,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20749,
-                'course': 'C S F010.02W',
+                'course': '10',
                 'dept': 'CS',
                 'desc': 'COMPUTER ARCHITEC/ORGANIZATION',
                 'end': '12/11/2020',
+                'raw_course': 'C S F010.02W',
                 'seats': 0,
-                'section': '10',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1147,14 +1191,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1A': [
             {
                 'CRN': 20743,
-                'course': 'C S F001A01Z',
+                'course': '1A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001A01Z',
                 'seats': 19,
-                'section': '1A',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1177,14 +1222,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21639,
-                'course': 'C S F001A02W',
+                'course': '1A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001A02W',
                 'seats': 34,
-                'section': '1A',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1200,14 +1246,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20267,
-                'course': 'C S F001A03W',
+                'course': '1A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001A03W',
                 'seats': 0,
-                'section': '1A',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1223,14 +1270,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20268,
-                'course': 'C S F001A04W',
+                'course': '1A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001A04W',
                 'seats': 37,
-                'section': '1A',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1246,14 +1294,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20371,
-                'course': 'C S F001A05W',
+                'course': '1A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENTED PROG METHOD JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001A05W',
                 'seats': 25,
-                'section': '1A',
+                'section': '05W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1271,14 +1320,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1B': [
             {
                 'CRN': 20339,
-                'course': 'C S F001B01Z',
+                'course': '1B',
                 'dept': 'CS',
                 'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001B01Z',
                 'seats': 31,
-                'section': '1B',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1301,14 +1351,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20744,
-                'course': 'C S F001B02W',
+                'course': '1B',
                 'dept': 'CS',
                 'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001B02W',
                 'seats': 26,
-                'section': '1B',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1324,14 +1375,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20463,
-                'course': 'C S F001B03W',
+                'course': '1B',
                 'dept': 'CS',
                 'desc': 'INTERM SOFTWARE DESIGN IN JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001B03W',
                 'seats': 4,
-                'section': '1B',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1349,14 +1401,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1C': [
             {
                 'CRN': 20270,
-                'course': 'C S F001C02W',
+                'course': '1C',
                 'dept': 'CS',
                 'desc': 'ADV DATA STRUCT/ALGORMS JAVA',
                 'end': '12/11/2020',
+                'raw_course': 'C S F001C02W',
                 'seats': 0,
-                'section': '1C',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1374,14 +1427,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '22A': [
             {
                 'CRN': 20751,
-                'course': 'C S F022A01W',
+                'course': '22A',
                 'dept': 'CS',
                 'desc': 'JAVASCRIPT FOR PROGRAMMERS',
                 'end': '12/11/2020',
+                'raw_course': 'C S F022A01W',
                 'seats': 20,
-                'section': '22A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1399,14 +1453,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '2A': [
             {
                 'CRN': 20269,
-                'course': 'C S F002A01Z',
+                'course': '2A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENT PROG METHOD IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002A01Z',
                 'seats': 31,
-                'section': '2A',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1429,14 +1484,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20372,
-                'course': 'C S F002A02W',
+                'course': '2A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENT PROG METHOD IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002A02W',
                 'seats': 0,
-                'section': '2A',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1452,14 +1508,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20745,
-                'course': 'C S F002A03W',
+                'course': '2A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENT PROG METHOD IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002A03W',
                 'seats': 26,
-                'section': '2A',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1475,14 +1532,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20325,
-                'course': 'C S F002A04W',
+                'course': '2A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENT PROG METHOD IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002A04W',
                 'seats': 37,
-                'section': '2A',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1498,14 +1556,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21642,
-                'course': 'C S F002A05W',
+                'course': '2A',
                 'dept': 'CS',
                 'desc': 'OBJ-ORIENT PROG METHOD IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002A05W',
                 'seats': 0,
-                'section': '2A',
+                'section': '05W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1523,14 +1582,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '2B': [
             {
                 'CRN': 20417,
-                'course': 'C S F002B01W',
+                'course': '2B',
                 'dept': 'CS',
                 'desc': 'INTERM SOFTWARE DESIGN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002B01W',
                 'seats': 27,
-                'section': '2B',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1546,14 +1606,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21644,
-                'course': 'C S F002B02W',
+                'course': '2B',
                 'dept': 'CS',
                 'desc': 'INTERM SOFTWARE DESIGN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002B02W',
                 'seats': 0,
-                'section': '2B',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1571,14 +1632,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '2C': [
             {
                 'CRN': 20326,
-                'course': 'C S F002C01W',
+                'course': '2C',
                 'dept': 'CS',
                 'desc': 'ADV DATA  STRUCT/ALGRM IN C++',
                 'end': '12/11/2020',
+                'raw_course': 'C S F002C01W',
                 'seats': 12,
-                'section': '2C',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1596,14 +1658,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '30A': [
             {
                 'CRN': 20327,
-                'course': 'C S F030A01W',
+                'course': '30A',
                 'dept': 'CS',
                 'desc': 'INTRODUCTION TO LINUX',
                 'end': '12/11/2020',
+                'raw_course': 'C S F030A01W',
                 'seats': 12,
-                'section': '30A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1621,14 +1684,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '30B': [
             {
                 'CRN': 20600,
-                'course': 'C S F030B01W',
+                'course': '30B',
                 'dept': 'CS',
                 'desc': 'LINUX SHELL PROGRAMMING',
                 'end': '12/11/2020',
+                'raw_course': 'C S F030B01W',
                 'seats': 30,
-                'section': '30B',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1646,14 +1710,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '31A': [
             {
                 'CRN': 20338,
-                'course': 'C S F031A01W',
+                'course': '31A',
                 'dept': 'CS',
                 'desc': 'INTRO DATABASE MGMT SYSTEMS',
                 'end': '12/11/2020',
+                'raw_course': 'C S F031A01W',
                 'seats': 4,
-                'section': '31A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1671,14 +1736,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '3A': [
             {
                 'CRN': 20674,
-                'course': 'C S F003A01Z',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A01Z',
                 'seats': 28,
-                'section': '3A',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1701,14 +1767,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21646,
-                'course': 'C S F003A02W',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A02W',
                 'seats': 0,
-                'section': '3A',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1731,14 +1798,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20747,
-                'course': 'C S F003A03W',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A03W',
                 'seats': 23,
-                'section': '3A',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1754,14 +1822,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20889,
-                'course': 'C S F003A04W',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A04W',
                 'seats': 0,
-                'section': '3A',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1777,14 +1846,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21650,
-                'course': 'C S F003A05W',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A05W',
                 'seats': 7,
-                'section': '3A',
+                'section': '05W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1800,14 +1870,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21825,
-                'course': 'C S F003A06Z',
+                'course': '3A',
                 'dept': 'CS',
                 'desc': 'OBJECT ORIEN PRGM METH PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003A06Z',
                 'seats': 0,
-                'section': '3A',
+                'section': '06Z',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1832,14 +1903,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '3B': [
             {
                 'CRN': 20845,
-                'course': 'C S F003B01W',
+                'course': '3B',
                 'dept': 'CS',
                 'desc': 'INTERMED SOFTWARE DESGN PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003B01W',
                 'seats': 15,
-                'section': '3B',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1855,14 +1927,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21145,
-                'course': 'C S F003B02Z',
+                'course': '3B',
                 'dept': 'CS',
                 'desc': 'INTERMED SOFTWARE DESGN PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003B02Z',
                 'seats': 9,
-                'section': '3B',
+                'section': '02Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1887,14 +1960,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '3C': [
             {
                 'CRN': 21164,
-                'course': 'C S F003C01W',
+                'course': '3C',
                 'dept': 'CS',
                 'desc': 'ADV DATA STRUCT/ALGRTHM PYTHON',
                 'end': '12/11/2020',
+                'raw_course': 'C S F003C01W',
                 'seats': 20,
-                'section': '3C',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1912,14 +1986,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '48A': [
             {
                 'CRN': 21818,
-                'course': 'C S F048A01W',
+                'course': '48A',
                 'dept': 'CS',
                 'desc': 'DATA VISUALIZATION',
                 'end': '12/11/2020',
+                'raw_course': 'C S F048A01W',
                 'seats': 0,
-                'section': '48A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1944,14 +2019,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '50A': [
             {
                 'CRN': 21652,
-                'course': 'C S F050A01W',
+                'course': '50A',
                 'dept': 'CS',
                 'desc': 'NETWORK BASICS (CCNA)',
                 'end': '12/11/2020',
+                'raw_course': 'C S F050A01W',
                 'seats': 6,
-                'section': '50A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1969,14 +2045,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '53A': [
             {
                 'CRN': 21653,
-                'course': 'C S F053A01W',
+                'course': '53A',
                 'dept': 'CS',
                 'desc': 'CYBERSECURITY FUNDAMENTALS',
                 'end': '12/11/2020',
+                'raw_course': 'C S F053A01W',
                 'seats': 17,
-                'section': '53A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -1994,14 +2071,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '55A': [
             {
                 'CRN': 21162,
-                'course': 'C S F055A01W',
+                'course': '55A',
                 'dept': 'CS',
                 'desc': 'INTRO CLOUD COMPUTNG AWS',
                 'end': '12/11/2020',
+                'raw_course': 'C S F055A01W',
                 'seats': 11,
-                'section': '55A',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2019,14 +2097,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '55B': [
             {
                 'CRN': 21654,
-                'course': 'C S F055B01W',
+                'course': '55B',
                 'dept': 'CS',
                 'desc': 'DATABASE ESSENTIALS AWS',
                 'end': '12/11/2020',
+                'raw_course': 'C S F055B01W',
                 'seats': 14,
-                'section': '55B',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2046,14 +2125,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '10': [
             {
                 'CRN': 20673,
-                'course': 'MATH F010.01V',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.01V',
                 'seats': 10,
-                'section': '10',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2069,14 +2149,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20964,
-                'course': 'MATH F010.02V',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.02V',
                 'seats': 0,
-                'section': '10',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2092,14 +2173,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20976,
-                'course': 'MATH F010.03W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.03W',
                 'seats': 0,
-                'section': '10',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2115,14 +2197,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20776,
-                'course': 'MATH F010.04W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.04W',
                 'seats': 9,
-                'section': '10',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2138,14 +2221,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20977,
-                'course': 'MATH F010.05W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.05W',
                 'seats': 33,
-                'section': '10',
+                'section': '05W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2161,14 +2245,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20778,
-                'course': 'MATH F010.06W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.06W',
                 'seats': 0,
-                'section': '10',
+                'section': '06W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2184,14 +2269,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20779,
-                'course': 'MATH F010.07Z',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.07Z',
                 'seats': 0,
-                'section': '10',
+                'section': '07Z',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2214,14 +2300,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20780,
-                'course': 'MATH F010.08W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.08W',
                 'seats': 15,
-                'section': '10',
+                'section': '08W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2237,14 +2324,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20781,
-                'course': 'MATH F010.09W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.09W',
                 'seats': 35,
-                'section': '10',
+                'section': '09W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2260,14 +2348,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20786,
-                'course': 'MATH F010.10W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.10W',
                 'seats': 1,
-                'section': '10',
+                'section': '10W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2283,14 +2372,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20787,
-                'course': 'MATH F010.11V',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.11V',
                 'seats': 0,
-                'section': '10',
+                'section': '11V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2306,14 +2396,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20788,
-                'course': 'MATH F010.12W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.12W',
                 'seats': 34,
-                'section': '10',
+                'section': '12W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2329,14 +2420,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20789,
-                'course': 'MATH F010.13V',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.13V',
                 'seats': 21,
-                'section': '10',
+                'section': '13V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2352,14 +2444,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20790,
-                'course': 'MATH F010.14W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.14W',
                 'seats': 37,
-                'section': '10',
+                'section': '14W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2375,14 +2468,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21000,
-                'course': 'MATH F010.16V',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.16V',
                 'seats': 14,
-                'section': '10',
+                'section': '16V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2398,14 +2492,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20792,
-                'course': 'MATH F010.17W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.17W',
                 'seats': 33,
-                'section': '10',
+                'section': '17W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2421,14 +2516,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20793,
-                'course': 'MATH F010.18W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.18W',
                 'seats': 39,
-                'section': '10',
+                'section': '18W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2444,14 +2540,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20794,
-                'course': 'MATH F010.19W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.19W',
                 'seats': 31,
-                'section': '10',
+                'section': '19W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2467,14 +2564,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20812,
-                'course': 'MATH F010.20W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.20W',
                 'seats': 36,
-                'section': '10',
+                'section': '20W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2490,14 +2588,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21001,
-                'course': 'MATH F010.21W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.21W',
                 'seats': 36,
-                'section': '10',
+                'section': '21W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2513,14 +2612,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21002,
-                'course': 'MATH F010.22W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.22W',
                 'seats': 38,
-                'section': '10',
+                'section': '22W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2536,14 +2636,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21312,
-                'course': 'MATH F010.23W',
+                'course': '10',
                 'dept': 'MATH',
                 'desc': 'ELEMENTARY STATISTICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F010.23W',
                 'seats': 37,
-                'section': '10',
+                'section': '23W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2561,14 +2662,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '105': [
             {
                 'CRN': 20811,
-                'course': 'MATH F105.01W',
+                'course': '105',
                 'dept': 'MATH',
                 'desc': 'INTERMEDIATE ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F105.01W',
                 'seats': 0,
-                'section': '105',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2584,14 +2686,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20091,
-                'course': 'MATH F105.02W',
+                'course': '105',
                 'dept': 'MATH',
                 'desc': 'INTERMEDIATE ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F105.02W',
                 'seats': 0,
-                'section': '105',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2607,14 +2710,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20813,
-                'course': 'MATH F105.03W',
+                'course': '105',
                 'dept': 'MATH',
                 'desc': 'INTERMEDIATE ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F105.03W',
                 'seats': 0,
-                'section': '105',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2630,14 +2734,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21018,
-                'course': 'MATH F105.04V',
+                'course': '105',
                 'dept': 'MATH',
                 'desc': 'INTERMEDIATE ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F105.04V',
                 'seats': 0,
-                'section': '105',
+                'section': '04V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2653,14 +2758,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20814,
-                'course': 'MATH F105.05W',
+                'course': '105',
                 'dept': 'MATH',
                 'desc': 'INTERMEDIATE ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F105.05W',
                 'seats': 6,
-                'section': '105',
+                'section': '05W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2678,14 +2784,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '12': [
             {
                 'CRN': 20277,
-                'course': 'MATH F012.01Z',
+                'course': '12',
                 'dept': 'MATH',
                 'desc': 'CALCULUS FOR BUSINESS & ECONOM',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F012.01Z',
                 'seats': 30,
-                'section': '12',
+                'section': '01Z',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2708,14 +2815,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20843,
-                'course': 'MATH F012.02W',
+                'course': '12',
                 'dept': 'MATH',
                 'desc': 'CALCULUS FOR BUSINESS & ECONOM',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F012.02W',
                 'seats': 25,
-                'section': '12',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2733,14 +2841,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '180': [
             {
                 'CRN': 21380,
-                'course': 'MATH F180.01W',
+                'course': '180',
                 'dept': 'MATH',
                 'desc': 'QUANTITATIVE REASONING',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F180.01W',
                 'seats': 13,
-                'section': '180',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2758,14 +2867,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1A': [
             {
                 'CRN': 20086,
-                'course': 'MATH F001A01V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A01V',
                 'seats': 28,
-                'section': '1A',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2781,14 +2891,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20087,
-                'course': 'MATH F001A02V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A02V',
                 'seats': 0,
-                'section': '1A',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2804,14 +2915,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20088,
-                'course': 'MATH F001A03V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A03V',
                 'seats': 0,
-                'section': '1A',
+                'section': '03V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2827,14 +2939,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20257,
-                'course': 'MATH F001A04V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A04V',
                 'seats': 0,
-                'section': '1A',
+                'section': '04V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2850,14 +2963,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20761,
-                'course': 'MATH F001A05V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A05V',
                 'seats': 32,
-                'section': '1A',
+                'section': '05V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2873,14 +2987,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20762,
-                'course': 'MATH F001A06V',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A06V',
                 'seats': 23,
-                'section': '1A',
+                'section': '06V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2896,14 +3011,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20305,
-                'course': 'MATH F001A07W',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A07W',
                 'seats': 0,
-                'section': '1A',
+                'section': '07W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2919,14 +3035,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21310,
-                'course': 'MATH F001A08W',
+                'course': '1A',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001A08W',
                 'seats': 28,
-                'section': '1A',
+                'section': '08W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2944,14 +3061,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1B': [
             {
                 'CRN': 20672,
-                'course': 'MATH F001B01W',
+                'course': '1B',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001B01W',
                 'seats': 14,
-                'section': '1B',
+                'section': '01W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2967,14 +3085,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20089,
-                'course': 'MATH F001B02W',
+                'course': '1B',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001B02W',
                 'seats': 26,
-                'section': '1B',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -2990,14 +3109,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20769,
-                'course': 'MATH F001B03V',
+                'course': '1B',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001B03V',
                 'seats': 0,
-                'section': '1B',
+                'section': '03V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3013,14 +3133,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20773,
-                'course': 'MATH F001B04W',
+                'course': '1B',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001B04W',
                 'seats': 0,
-                'section': '1B',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3038,14 +3159,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1C': [
             {
                 'CRN': 20774,
-                'course': 'MATH F001C01V',
+                'course': '1C',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001C01V',
                 'seats': 0,
-                'section': '1C',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3061,14 +3183,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20177,
-                'course': 'MATH F001C03W',
+                'course': '1C',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001C03W',
                 'seats': 1,
-                'section': '1C',
+                'section': '03W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3084,14 +3207,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20959,
-                'course': 'MATH F001C04W',
+                'course': '1C',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001C04W',
                 'seats': 0,
-                'section': '1C',
+                'section': '04W',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3107,14 +3231,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21675,
-                'course': 'MATH F001C9DV',
+                'course': '1C',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001C9DV',
                 'seats': 0,
-                'section': '1C',
+                'section': '9DV',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3132,14 +3257,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '1D': [
             {
                 'CRN': 20194,
-                'course': 'MATH F001D01V',
+                'course': '1D',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001D01V',
                 'seats': 0,
-                'section': '1D',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3155,14 +3281,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20178,
-                'course': 'MATH F001D02V',
+                'course': '1D',
                 'dept': 'MATH',
                 'desc': 'CALCULUS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F001D02V',
                 'seats': 0,
-                'section': '1D',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3180,14 +3307,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '22': [
             {
                 'CRN': 20798,
-                'course': 'MATH F022.01V',
+                'course': '22',
                 'dept': 'MATH',
                 'desc': 'DISCRETE MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F022.01V',
                 'seats': 0,
-                'section': '22',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3203,14 +3331,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20799,
-                'course': 'MATH F022.02V',
+                'course': '22',
                 'dept': 'MATH',
                 'desc': 'DISCRETE MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F022.02V',
                 'seats': 0,
-                'section': '22',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3228,14 +3357,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '248A': [
             {
                 'CRN': 20848,
-                'course': 'MATH F248A3CV',
+                'course': '248A',
                 'dept': 'MATH',
                 'desc': 'SUPPORT FOR MATH 48A',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F248A3CV',
                 'seats': 14,
-                'section': '248A',
+                'section': '3CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3251,14 +3381,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20849,
-                'course': 'MATH F248A4CV',
+                'course': '248A',
                 'dept': 'MATH',
                 'desc': 'SUPPORT FOR MATH 48A',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F248A4CV',
                 'seats': 26,
-                'section': '248A',
+                'section': '4CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3274,14 +3405,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20850,
-                'course': 'MATH F248A5CV',
+                'course': '248A',
                 'dept': 'MATH',
                 'desc': 'SUPPORT FOR MATH 48A',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F248A5CV',
                 'seats': 24,
-                'section': '248A',
+                'section': '5CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3297,14 +3429,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20851,
-                'course': 'MATH F248A6CV',
+                'course': '248A',
                 'dept': 'MATH',
                 'desc': 'SUPPORT FOR MATH 48A',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F248A6CV',
                 'seats': 1,
-                'section': '248A',
+                'section': '6CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3322,14 +3455,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '2A': [
             {
                 'CRN': 20258,
-                'course': 'MATH F002A01V',
+                'course': '2A',
                 'dept': 'MATH',
                 'desc': 'DIFFERENTIAL EQUATIONS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F002A01V',
                 'seats': 0,
-                'section': '2A',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3345,14 +3479,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20472,
-                'course': 'MATH F002A02V',
+                'course': '2A',
                 'dept': 'MATH',
                 'desc': 'DIFFERENTIAL EQUATIONS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F002A02V',
                 'seats': 0,
-                'section': '2A',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3370,14 +3505,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '2B': [
             {
                 'CRN': 20353,
-                'course': 'MATH F002B01V',
+                'course': '2B',
                 'dept': 'MATH',
                 'desc': 'LINEAR ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F002B01V',
                 'seats': 11,
-                'section': '2B',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3393,14 +3529,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21135,
-                'course': 'MATH F002B02V',
+                'course': '2B',
                 'dept': 'MATH',
                 'desc': 'LINEAR ALGEBRA',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F002B02V',
                 'seats': 0,
-                'section': '2B',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3418,14 +3555,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '48A': [
             {
                 'CRN': 20198,
-                'course': 'MATH F048A02W',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048A02W',
                 'seats': 9,
-                'section': '48A',
+                'section': '02W',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3441,14 +3579,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20807,
-                'course': 'MATH F048A3CV',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048A3CV',
                 'seats': 14,
-                'section': '48A',
+                'section': '3CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3464,14 +3603,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20808,
-                'course': 'MATH F048A4CV',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048A4CV',
                 'seats': 26,
-                'section': '48A',
+                'section': '4CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3487,14 +3627,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20809,
-                'course': 'MATH F048A5CV',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048A5CV',
                 'seats': 24,
-                'section': '48A',
+                'section': '5CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3510,14 +3651,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20810,
-                'course': 'MATH F048A6CV',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048A6CV',
                 'seats': 1,
-                'section': '48A',
+                'section': '6CV',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3533,14 +3675,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20199,
-                'course': 'MATH F048AMVP',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048AMVP',
                 'seats': 0,
-                'section': '48A',
+                'section': 'MVP',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3556,14 +3699,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21676,
-                'course': 'MATH F048AVMP',
+                'course': '48A',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS I',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048AVMP',
                 'seats': 0,
-                'section': '48A',
+                'section': 'VMP',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3581,14 +3725,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '48B': [
             {
                 'CRN': 20260,
-                'course': 'MATH F048B02V',
+                'course': '48B',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS II',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048B02V',
                 'seats': 31,
-                'section': '48B',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3604,14 +3749,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20261,
-                'course': 'MATH F048B03V',
+                'course': '48B',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS II',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048B03V',
                 'seats': 14,
-                'section': '48B',
+                'section': '03V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3627,14 +3773,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20334,
-                'course': 'MATH F048B04V',
+                'course': '48B',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS II',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048B04V',
                 'seats': 29,
-                'section': '48B',
+                'section': '04V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3652,14 +3799,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '48C': [
             {
                 'CRN': 20606,
-                'course': 'MATH F048C01V',
+                'course': '48C',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS III',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048C01V',
                 'seats': 35,
-                'section': '48C',
+                'section': '01V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3675,14 +3823,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 21016,
-                'course': 'MATH F048C02V',
+                'course': '48C',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS III',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048C02V',
                 'seats': 0,
-                'section': '48C',
+                'section': '02V',
                 'start': '09/21/2020',
-                'status': 'Waitlist',
+                'status': 'waitlist',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3698,14 +3847,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20314,
-                'course': 'MATH F048C03V',
+                'course': '48C',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS III',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048C03V',
                 'seats': 16,
-                'section': '48C',
+                'section': '03V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3721,14 +3871,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
             },
             {
                 'CRN': 20429,
-                'course': 'MATH F048C04V',
+                'course': '48C',
                 'dept': 'MATH',
                 'desc': 'PRECALCULUS III',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F048C04V',
                 'seats': 19,
-                'section': '48C',
+                'section': '04V',
                 'start': '09/21/2020',
-                'status': 'Open',
+                'status': 'open',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3746,14 +3897,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '70R': [
             {
                 'CRN': 20488,
-                'course': 'MATH F070R01',
+                'course': '70R',
                 'dept': 'MATH',
                 'desc': 'INDEPENDENT STUDY MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F070R01',
                 'seats': 0,
-                'section': '70R',
+                'section': '01',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3771,14 +3923,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '71R': [
             {
                 'CRN': 20489,
-                'course': 'MATH F071R01',
+                'course': '71R',
                 'dept': 'MATH',
                 'desc': 'INDEPENDENT STUDY MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F071R01',
                 'seats': 0,
-                'section': '71R',
+                'section': '01',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3796,14 +3949,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '72R': [
             {
                 'CRN': 20490,
-                'course': 'MATH F072R01',
+                'course': '72R',
                 'dept': 'MATH',
                 'desc': 'INDEPENDENT STUDY MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F072R01',
                 'seats': 0,
-                'section': '72R',
+                'section': '01',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3821,14 +3975,15 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
         '73R': [
             {
                 'CRN': 20491,
-                'course': 'MATH F073R01',
+                'course': '73R',
                 'dept': 'MATH',
                 'desc': 'INDEPENDENT STUDY MATHEMATICS',
                 'end': '12/11/2020',
+                'raw_course': 'MATH F073R01',
                 'seats': 0,
-                'section': '73R',
+                'section': '01',
                 'start': '09/21/2020',
-                'status': 'Full',
+                'status': 'full',
                 'time': [
                     {
                         'campus': 'FH',
@@ -3846,205 +4001,170 @@ snapshots['TestGetMany::test_get_many_dept 1'] = [
     }
 ]
 
-snapshots['TestGetOne::test_get_one_dept_and_honors_course 1'] = {
-    '21030': [
-        {
-            'CRN': '21030',
-            'campus': 'FH',
-            'course': 'MUS F02AH01Z',
-            'days': 'TBA',
-            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
-            'end': '12/11/2020',
-            'instructor': 'Barkley',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '5.00',
-            'wait_cap': '5',
-            'wait_seats': '2'
-        },
-        {
-            'CRN': '21030',
-            'campus': 'FH',
-            'course': 'MUS F02AH01Z',
-            'days': 'MW',
-            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
-            'end': '12/11/2020',
-            'instructor': 'Hartwell',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': '12:00 PM-01:50 PM',
-            'units': '5.00',
-            'wait_cap': '5',
-            'wait_seats': '2'
-        },
-        {
-            'CRN': '21030',
-            'campus': 'FH',
-            'course': 'MUS F02AH01Z',
-            'days': 'TBA',
-            'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
-            'end': '12/11/2020',
-            'instructor': 'Carey',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '5.00',
-            'wait_cap': '5',
-            'wait_seats': '2'
-        }
-    ]
-}
+snapshots['TestGetOne::test_get_one_dept_and_honors_course 1'] = [
+    {
+        'CRN': 21030,
+        'course': '2AH',
+        'dept': 'MUS',
+        'desc': 'HONORS GREAT COMPOSR WSTRN CIV',
+        'end': '12/11/2020',
+        'raw_course': 'MUS F02AH01Z',
+        'seats': 0,
+        'section': '01Z',
+        'start': '09/21/2020',
+        'status': 'waitlist',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Barkley',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            },
+            {
+                'campus': 'FH',
+                'days': 'MW',
+                'instructor': 'Hartwell',
+                'room': 'ONLINE',
+                'time': '12:00 PM-01:50 PM'
+            },
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Carey',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 5.0,
+        'wait_cap': 5,
+        'wait_seats': 2
+    }
+]
 
-snapshots['TestGetOne::test_get_one_dept_and_complex_course 1'] = {
-    '20661': [
-        {
-            'CRN': '20661',
-            'campus': 'FH',
-            'course': 'CHEM F12AL02Z',
-            'days': 'TBA',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Painter',
-            'room': 'ONLINE',
-            'seats': '12',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': 'TBA',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        },
-        {
-            'CRN': '20661',
-            'campus': 'FH',
-            'course': 'CHEM F12AL02Z',
-            'days': 'MW',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Painter',
-            'room': 'ONLINE',
-            'seats': '12',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': '05:30 PM-07:20 PM',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        }
-    ],
-    '20662': [
-        {
-            'CRN': '20662',
-            'campus': 'FH',
-            'course': 'CHEM F12AL03Z',
-            'days': 'TTh',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Armstrong',
-            'room': 'ONLINE',
-            'seats': '9',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': '12:00 PM-01:50 PM',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        },
-        {
-            'CRN': '20662',
-            'campus': '',
-            'course': 'CHEM F12AL03Z',
-            'days': 'TBA',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Armstrong',
-            'room': '',
-            'seats': '9',
-            'start': '09/21/2020',
-            'status': 'Open',
-            'time': 'TBA',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        }
-    ],
-    '20740': [
-        {
-            'CRN': '20740',
-            'campus': 'FH',
-            'course': 'CHEM F12AL04Z',
-            'days': 'TTh',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Armstrong',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': '12:00 PM-01:50 PM',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '7'
-        },
-        {
-            'CRN': '20740',
-            'campus': 'FH',
-            'course': 'CHEM F12AL04Z',
-            'days': 'TBA',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Armstrong',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '7'
-        }
-    ],
-    '21149': [
-        {
-            'CRN': '21149',
-            'campus': 'FH',
-            'course': 'CHEM F12AL01Z',
-            'days': 'TBA',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Painter',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': 'TBA',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        },
-        {
-            'CRN': '21149',
-            'campus': 'FH',
-            'course': 'CHEM F12AL01Z',
-            'days': 'MW',
-            'desc': 'ORGANIC CHEMISTRY LABORATORY',
-            'end': '12/11/2020',
-            'instructor': 'Painter',
-            'room': 'ONLINE',
-            'seats': '0',
-            'start': '09/21/2020',
-            'status': 'Waitlist',
-            'time': '05:30 PM-07:20 PM',
-            'units': '2.00',
-            'wait_cap': '8',
-            'wait_seats': '8'
-        }
-    ]
-}
+snapshots['TestGetOne::test_get_one_dept_and_complex_course 1'] = [
+    {
+        'CRN': 21149,
+        'course': '12AL',
+        'dept': 'CHEM',
+        'desc': 'ORGANIC CHEMISTRY LABORATORY',
+        'end': '12/11/2020',
+        'raw_course': 'CHEM F12AL01Z',
+        'seats': 0,
+        'section': '01Z',
+        'start': '09/21/2020',
+        'status': 'waitlist',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Painter',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            },
+            {
+                'campus': 'FH',
+                'days': 'MW',
+                'instructor': 'Painter',
+                'room': 'ONLINE',
+                'time': '05:30 PM-07:20 PM'
+            }
+        ],
+        'units': 2.0,
+        'wait_cap': 8,
+        'wait_seats': 8
+    },
+    {
+        'CRN': 20661,
+        'course': '12AL',
+        'dept': 'CHEM',
+        'desc': 'ORGANIC CHEMISTRY LABORATORY',
+        'end': '12/11/2020',
+        'raw_course': 'CHEM F12AL02Z',
+        'seats': 12,
+        'section': '02Z',
+        'start': '09/21/2020',
+        'status': 'open',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Painter',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            },
+            {
+                'campus': 'FH',
+                'days': 'MW',
+                'instructor': 'Painter',
+                'room': 'ONLINE',
+                'time': '05:30 PM-07:20 PM'
+            }
+        ],
+        'units': 2.0,
+        'wait_cap': 8,
+        'wait_seats': 8
+    },
+    {
+        'CRN': 20662,
+        'course': '12AL',
+        'dept': 'CHEM',
+        'desc': 'ORGANIC CHEMISTRY LABORATORY',
+        'end': '12/11/2020',
+        'raw_course': 'CHEM F12AL03Z',
+        'seats': 9,
+        'section': '03Z',
+        'start': '09/21/2020',
+        'status': 'open',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TTh',
+                'instructor': 'Armstrong',
+                'room': 'ONLINE',
+                'time': '12:00 PM-01:50 PM'
+            },
+            {
+                'campus': '',
+                'days': 'TBA',
+                'instructor': 'Armstrong',
+                'room': '',
+                'time': 'TBA'
+            }
+        ],
+        'units': 2.0,
+        'wait_cap': 8,
+        'wait_seats': 8
+    },
+    {
+        'CRN': 20740,
+        'course': '12AL',
+        'dept': 'CHEM',
+        'desc': 'ORGANIC CHEMISTRY LABORATORY',
+        'end': '12/11/2020',
+        'raw_course': 'CHEM F12AL04Z',
+        'seats': 0,
+        'section': '04Z',
+        'start': '09/21/2020',
+        'status': 'waitlist',
+        'time': [
+            {
+                'campus': 'FH',
+                'days': 'TTh',
+                'instructor': 'Armstrong',
+                'room': 'ONLINE',
+                'time': '12:00 PM-01:50 PM'
+            },
+            {
+                'campus': 'FH',
+                'days': 'TBA',
+                'instructor': 'Armstrong',
+                'room': 'ONLINE',
+                'time': 'TBA'
+            }
+        ],
+        'units': 2.0,
+        'wait_cap': 8,
+        'wait_seats': 7
+    }
+]

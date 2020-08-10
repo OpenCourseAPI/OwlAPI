@@ -229,7 +229,7 @@ def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
                 continue
             types.add(name)
         # Get course flags
-        course_str = course[course_key]['course']
+        course_str = course[course_key]['raw_course']
         flags = parse_course_str(course_str)['flags']
         class_type = get_class_type(campus, flags)
         return class_type in types
