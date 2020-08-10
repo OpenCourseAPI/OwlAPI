@@ -1,15 +1,13 @@
 from os import makedirs, rename, remove
 from os.path import join, exists
-from re import match
 from collections import defaultdict
 
 # 3rd party
 import requests
-import click
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from utils import parse_course_str, ValidationError
+from utils import parse_course_str, ValidationError, log_info, log_err
 from settings import DB_DIR, SSB_URL, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
@@ -30,7 +28,11 @@ def main():
             remove(temp_path)
 
         db = TinyDB(join(DB_DIR, f'{term}_database.json'))
-        print(term, db.tables())
+
+        depts = ', '.join(db.tables())
+        log_info(f'Scraped term {term}', pad=False, details={
+            'depts': depts,
+        })
 
 
 def mine(term, filename=None):
@@ -88,7 +90,10 @@ def parse(content, db):
                     data = dict(zip(HEADERS, cols))
 
                     if parsed_course['dept'] != dept:
-                        raise ValidationError('Departments do not match!', '')
+                        raise ValidationError(
+                            'Departments do not match',
+                            f"'{parsed_course['dept']}' != '{dept}'"
+                        )
 
                     crn = data['CRN']
                     if s[key][crn]:
@@ -102,12 +107,12 @@ def parse(content, db):
                 except KeyError:
                     continue
                 except ValidationError as e:
-                    err = click.style('err', fg='red', bold=True)
-                    label = lambda text: click.style(text, fg='white', dim=True, bold=True)
-                    print(f'{err} Unable to parse course - ValidationError')
-                    print(f'    {label("message:")} {e.message}')
-                    print(f'    {label("details:")} {e.details}')
-                    print(f'    {label("course:")}', cols, '\n')
+                    log_err('Unable to parse course - data validation failed', details={
+                        'message': e.message,
+                        'details': e.details,
+                        'course': cols,
+                    })
+                    print('\n')
                     continue
 
         j = dict(s)

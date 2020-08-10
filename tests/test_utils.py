@@ -1,5 +1,6 @@
 from unittest import TestCase
-from utils import parse_course_str, get_class_type
+from pytest import raises
+from utils import parse_course_str, get_class_type, ValidationError
 
 # Handpicked test cases for `parse_course_str()`
 course_str_data = {
@@ -198,22 +199,82 @@ course_str_data = {
     'V T F057L04Y': ('VT', '57L', '04Y', {'Y'}),
 }
 
+DEBUG = True
+
+def show(error_info):
+    if not DEBUG:
+        return
+    e = error_info.value
+    print(e.message, '-', e.details)
+
+
 class TestParseCourseString(TestCase):
-    def test_parse_course_str_works(self):
+    def test_parser_works_correctly(self):
+        # Loop test cases data for `parse_course_str`
         for raw, expected in course_str_data.items():
             parsed = parse_course_str(raw)
             match = (parsed['dept'], parsed['course'], parsed['section'], parsed['flags'])
-            self.assertEqual(match, expected, 'Expected and parsed course string data does not match')
+
+            self.assertEqual(
+                match,
+                expected,
+                'Expected and parsed course string data does not match'
+            )
+
+
+    def test_error_on_empty_str(self):
+        # Test empty string
+        with raises(ValidationError) as error_info:
+            parse_course_str('')
+        show(error_info)
+
+
+    def test_error_with_invalid_num_of_parts(self):
+        # Test string with less than 2 space-separated parts
+        with raises(ValidationError) as error_info:
+            parse_course_str('CS ')
+        show(error_info)
+
+
+    def test_error_with_too_short_course_section_part(self):
+        # Test string with invalid course + section string (last part)
+        # Length is less than 8
+        with raises(ValidationError) as error_info:
+            parse_course_str('CIS D00F')
+        show(error_info)
+
+
+    def test_error_with_too_long_course_section_part(self):
+        # Test string with invalid course + section string (last part - 'D001CXXXX')
+        # Length is greater than 8
+        with raises(ValidationError) as error_info:
+            parse_course_str('CIS D001CXXXX')
+        show(error_info)
+
+
+    def test_error_with_invalid_course_part_format1(self):
+        # Test string with invalid course part ('X001C' starts with invalid 'X')
+        with raises(ValidationError) as error_info:
+            parse_course_str('CS X001C01')
+        show(error_info)
+
+
+    def test_error_with_invalid_course_part_format2(self):
+        # Test string with invalid course part ('XXXXX' has an invalid format - no numbers)
+        with raises(ValidationError) as error_info:
+            parse_course_str('CS XXXXX00')
+        show(error_info)
 
 
 class TestGetClassType(TestCase):
-    def test_get_class_type_returns_fallback(self):
+    def test_fallback_case(self):
         for campus in ['fh', 'da']:
             self.assertEqual(get_class_type(campus, set()), 'standard')
             self.assertEqual(get_class_type(campus, {'A'}), 'standard')
             self.assertEqual(get_class_type(campus, {'A', 'B'}), 'standard')
 
-    def test_get_class_type_works(self):
+
+    def test_correct_type_is_returned(self):
         self.assertEqual(get_class_type('fh', {'W'}), 'online')
         self.assertEqual(get_class_type('fh', {'V'}), 'virtual')
         self.assertEqual(get_class_type('fh', {'Z'}), 'hybrid')
@@ -221,7 +282,7 @@ class TestGetClassType(TestCase):
         self.assertEqual(get_class_type('da', {'Z'}), 'online')
         self.assertEqual(get_class_type('da', {'Y'}), 'hybrid')
 
-    def test_get_class_type_works_with_multiple_flags(self):
+
+    def test_correct_type_is_returned_with_multiple_flags(self):
         self.assertEqual(get_class_type('fh', {'W', '?'}), 'online')
         self.assertEqual(get_class_type('da', {'L', 'Y', 'A'}), 'hybrid')
-

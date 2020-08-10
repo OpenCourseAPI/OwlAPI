@@ -223,10 +223,10 @@ def filter_courses(campus, filters: ty.Dict[str, ty.Any], course):
             return True
         # Compute filters
         types = set()
-        for k, v in filters['types'].items():
-            if not v:
+        for name, include in filters['types'].items():
+            if not include:
                 continue
-            types.add(k)
+            types.add(name)
         # Get course flags
         course_str = course[course_key][0]['course']
         flags = parse_course_str(course_str)['flags']
