@@ -1,6 +1,5 @@
 from os import makedirs, rename, remove
 from os.path import join, exists
-from re import match
 from collections import defaultdict
 
 # 3rd party
@@ -8,7 +7,8 @@ import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
-from settings import DB_DIR, SSB_URL, COURSE_PATTERN, HEADERS
+from utils import parse_course_str, ValidationError, log_info, log_err
+from settings import DB_DIR, SSB_URL, HEADERS
 
 CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
 
@@ -28,7 +28,11 @@ def main():
             remove(temp_path)
 
         db = TinyDB(join(DB_DIR, f'{term}_database.json'))
-        print(term, db.tables())
+
+        depts = ', '.join(db.tables())
+        log_info(f'Scraped term {term}', pad=False, details={
+            'depts': depts,
+        })
 
 
 def mine(term, filename=None):
@@ -81,8 +85,15 @@ def parse(content, db):
                     cols[i] = (a.get_text() if a else cols[i].get_text()).strip()
 
                 try:
-                    key = get_key(cols[0])[0]
+                    parsed_course = parse_course_str(cols[0])
+                    key = parsed_course['course']
                     data = dict(zip(HEADERS, cols))
+
+                    if parsed_course['dept'] != dept:
+                        raise ValidationError(
+                            'Departments do not match',
+                            f"'{parsed_course['dept']}' != '{dept}'"
+                        )
 
                     crn = data['CRN']
                     if s[key][crn]:
@@ -95,23 +106,17 @@ def parse(content, db):
                     s[key][crn].append(data)
                 except KeyError:
                     continue
+                except ValidationError as e:
+                    log_err('Unable to parse course - data validation failed', details={
+                        'message': e.message,
+                        'details': e.details,
+                        'course': cols,
+                    })
+                    print('\n')
+                    continue
 
         j = dict(s)
         db.table(f'{dept}').insert(j)
-
-
-def get_key(course):
-    '''
-    This is the key parser for the course names
-    :param course: (str) The unparsed string containing the course name
-    :return match_obj.groups(): (list) the string for the regex match
-    '''
-    c = course.split(' ')
-    idx = 1 if len(c) < 3 else 2
-    section = c[idx]
-
-    match_obj = match(COURSE_PATTERN, section)
-    return match_obj.groups()
 
 
 if __name__ == "__main__":

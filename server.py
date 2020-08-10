@@ -10,12 +10,9 @@ from flask import Flask, jsonify, request, render_template, send_from_directory
 from tinydb import TinyDB
 from maya import when, MayaInterval
 
-from settings import COURSE_PATTERN, DAYS_PATTERN, CAMPUS_LIST
+from utils import parse_course_str, get_class_type
+from settings import DAYS_PATTERN, CAMPUS_LIST, DB_DIR
 
-DB_ROOT = 'db/'
-
-FH_TYPE_ALIAS = {'standard': None, 'online': 'W', 'hybrid': 'Y'}
-DA_TYPE_ALIAS = {'standard': None, 'online': 'Z', 'hybrid': 'Y'}
 
 # Flask config
 def add_cors_headers(response):
@@ -39,7 +36,7 @@ def idx():
 
 
 @application.route('/<campus>/single', methods=['GET'])
-def api_one(campus):
+def api_one(campus: str):
     """
     `/single` with [GET] handles a single request to get a whole
     department or a whole course listing from the database
@@ -66,15 +63,15 @@ def api_one(campus):
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
-    data = get_one(db, qp, filters=dict())
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
+    data = get_one(campus, db, qp, filters=dict())
     json = jsonify(data)
     return (json, 200) if data else (
         'Error! Could not find given selectors in database', 404)
 
 
 @application.route('/<campus>/batch', methods=['POST'])
-def api_many(campus):
+def api_many(campus: str):
     """
     `/batch` with [POST] handles a batch request to get many
     departments or a many course listings from the database.
@@ -110,13 +107,13 @@ def api_many(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
     raw = request.get_json()
 
     data = raw['courses']
     filters = raw['filters'] if ('filters' in raw) else dict()
 
-    courses = get_many(db=db, data=data, filters=filters)
+    courses = get_many(campus=campus, db=db, data=data, filters=filters)
     if not courses:  # null case from get_one (invalid param or filter)
         return 'Error! Could not find one or more course selectors in database', 404
 
@@ -124,7 +121,7 @@ def api_many(campus):
     return json, 200
 
 
-def get_one(db: TinyDB, data: dict, filters: dict):
+def get_one(campus: str, db: TinyDB, data: dict, filters: dict):
     """
     This is a helper used by the `/get` route to extract course data.
     It works for both [GET] and [POST] and fetches data from the database
@@ -154,7 +151,7 @@ def get_one(db: TinyDB, data: dict, filters: dict):
             course = next((dict(e[f'{data_course}']) for e in entries
                            if f'{data_course}' in e))
             if filters:
-                filter_courses(filters, course)
+                filter_courses(campus, filters, course)
 
         except StopIteration:
             return dict()
@@ -162,11 +159,11 @@ def get_one(db: TinyDB, data: dict, filters: dict):
     return course
 
 
-def get_many(db: TinyDB, data: dict(), filters: dict()):
+def get_many(campus: str, db: TinyDB, data: dict(), filters: dict()):
     ret = []
 
     for course in data:
-        d = get_one(db, course, filters=filters)
+        d = get_one(campus, db, course, filters=filters)
         if not d:  # null case from get_one (invalid param or filter)
             continue
         ret.append(d)
@@ -174,7 +171,7 @@ def get_many(db: TinyDB, data: dict(), filters: dict()):
     return ret
 
 
-def filter_courses(filters: ty.Dict[str, ty.Any], course):
+def filter_courses(campus: str, filters: ty.Dict[str, ty.Any], course):
     """
     This is a helper called by get_one() that filters a set of classes
     based on some filter conditionals
@@ -224,15 +221,17 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
         # {'standard':1, 'online':1, 'hybrid':0}
         if 'types' not in filters:
             return True
-        # Get course section
-        section = get_key(course[course_key][0]['course'])
-        mask = set()
-        for k, v in filters['types'].items():
-            if not v:
+        # Compute filters
+        types = set()
+        for name, include in filters['types'].items():
+            if not include:
                 continue
-            mask.add(FH_TYPE_ALIAS[k])
-            mask.add(DA_TYPE_ALIAS[k])
-        return section[1] in mask
+            types.add(name)
+        # Get course flags
+        course_str = course[course_key][0]['course']
+        flags = parse_course_str(course_str)['flags']
+        class_type = get_class_type(campus, flags)
+        return class_type in types
 
     def day_filter(course_key) -> bool:
         # {'M':1, 'T':0, 'W':1, 'Th':0, 'F':0, 'S':0, 'U':0}
@@ -272,25 +271,8 @@ def filter_courses(filters: ty.Dict[str, ty.Any], course):
         del course[key]
 
 
-def get_key(key):
-    """
-    This is the key parser for the course names
-
-    :param campus: (str) The campus to retrieve data from
-    :param key: (str) The unparsed string containing the course name
-
-    :return match_obj.groups(): (list) the string for the regex match
-    """
-    k = key.split(' ')
-    i = 1 if len(k) < 3 else 2
-    section = k[i]
-
-    match_obj = match(COURSE_PATTERN, section)
-    return match_obj.groups()
-
-
 @application.route('/<campus>/list', methods=['GET'])
-def api_list(campus):
+def api_list(campus: str):
     """
     `/list` with [GET] handles a single request to list department or
     course keys from the database
@@ -308,7 +290,7 @@ def api_list(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
 
     raw = request.args
     qp = {k: v.upper() for k, v in raw.items()}
@@ -326,7 +308,7 @@ def api_list(campus):
 
 
 @application.route('/<campus>/urls', methods=['GET'])
-def api_list_url(campus):
+def api_list_url(campus: str):
     """
     `/urls` with [GET] returns a tree of all departments, their
     courses, and the courses' endpoints to hit.
@@ -338,7 +320,7 @@ def api_list_url(campus):
     if campus not in CAMPUS_LIST:
         return 'Error! Could not find campus in database', 404
 
-    db = TinyDB(join(DB_ROOT, f'{CAMPUS_LIST[campus]}_database.json'))
+    db = TinyDB(join(DB_DIR, f'{CAMPUS_LIST[campus]}_database.json'))
 
     data = defaultdict(list)
 

@@ -25,14 +25,28 @@ class TestGetOne(TestCase):
     def test_get_one_dept(self):
         data = {'dept': 'CS'}  # opencourse.dev/<campus>/single?dept=CS
 
-        result = get_one(db=test_database, data=data, filters=dict())
+        result = get_one(campus='test', db=test_database, data=data, filters=dict())
         self.assertMatchSnapshot(result)
 
 
     def test_get_one_dept_and_course(self):
         data = {'dept': 'CS', 'course': '2A'}
 
-        result = get_one(db=test_database, data=data, filters=dict())
+        result = get_one(campus='test', db=test_database, data=data, filters=dict())
+        self.assertMatchSnapshot(result)
+
+
+    def test_get_one_dept_and_honors_course(self):
+        data = {'dept': 'MUS', 'course': '2AH'}
+
+        result = get_one(campus='test', db=test_database, data=data, filters=dict())
+        self.assertMatchSnapshot(result)
+
+
+    def test_get_one_dept_and_complex_course(self):
+        data = {'dept': 'CHEM', 'course': '12AL'}
+
+        result = get_one(campus='test', db=test_database, data=data, filters=dict())
         self.assertMatchSnapshot(result)
 
 
@@ -41,7 +55,12 @@ class TestGetMany(TestCase):
     def test_get_many_dept(self):
         data = {'courses': [{'dept': 'CS'}, {'dept': 'MATH'}]}
 
-        result = get_many(db=test_database, data=data['courses'], filters=dict())
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=dict(),
+        )
         self.assertMatchSnapshot(result)
 
 
@@ -51,7 +70,12 @@ class TestFilters(TestCase):
         data = {'courses': [{'dept':'CS', 'course':'1A'}],
                 'filters': {'status': {'open':0, 'waitlist':1, 'full':0}}}
 
-        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=data['filters'],
+        )
 
         self.assertEqual(
             1,
@@ -62,10 +86,15 @@ class TestFilters(TestCase):
         data = {'courses':[{'dept':'CS', 'course':'1A'}],
                 'filters':{'types':{'standard':0, 'online':1, 'hybrid':0}}}
 
-        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=data['filters'],
+        )
 
         self.assertEqual(
-            5,
+            4,
             len(result[0].keys())
         )
 
@@ -73,7 +102,12 @@ class TestFilters(TestCase):
         data = {'courses':[{'dept':'DANC', 'course':'14'}],
                 'filters':{'days':{'M':1, 'T':0, 'W':0, 'Th':0, 'F':0, 'S':0, 'U':0}}}
 
-        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=data['filters'],
+        )
 
         self.assertEqual(
             2,
@@ -99,14 +133,25 @@ class TestFilters(TestCase):
             }
         }
 
-        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=data['filters'],
+        )
+
         self.assertEqual(len(result[0].keys()), 2)
 
     def test_filters_time_returns_n_courses(self):
         data = {'courses':[{'dept':'DANC', 'course':'14'}],
                 'filters': {'time':{'start':'7:30 AM', 'end':'12:00 PM'}}}
 
-        result = get_many(db=test_database, data=data['courses'], filters=data['filters'])
+        result = get_many(
+            campus='test',
+            db=test_database,
+            data=data['courses'],
+            filters=data['filters'],
+        )
 
         self.assertEqual(
             2,
