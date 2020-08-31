@@ -51,7 +51,13 @@ class ClassDataSchema(Schema):
         unknown = EXCLUDE
 
     @validates('start')
+    def validate_start(self, date_str):
+        self.validate_date(date_str)
+
     @validates('end')
+    def validate_end(self, date_str):
+        self.validate_date(date_str)
+
     def validate_date(self, date_str):
         """
         Validate the date string format

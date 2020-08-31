@@ -1,4 +1,4 @@
-from os import makedirs, rename, remove
+from os import makedirs
 from os.path import join, exists
 from collections import defaultdict
 
@@ -6,6 +6,7 @@ from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
 from tinydb import TinyDB
+from tinydb.storages import MemoryStorage
 from marshmallow import ValidationError as MarshValidationError
 
 from owl_models import interimClassDataSchema, classDataSchema, classTimeSchema
@@ -20,21 +21,20 @@ def main():
         makedirs(DB_DIR, exist_ok=True)
 
     for term in CURRENT_TERM_CODES.values():
-        temp_path = join(DB_DIR, 'temp.json')
-        temp = TinyDB(temp_path)
+        temp = TinyDB(storage=MemoryStorage)
 
         content = mine(term)
         parse(content, db=temp)
 
-        if rename(temp_path, join(DB_DIR, f'{term}_database.json')):
-            remove(temp_path)
-
         db = TinyDB(join(DB_DIR, f'{term}_database.json'))
+        db.storage.write(temp.storage.read())
 
         depts = ', '.join(db.tables())
         log_info(f'Scraped term {term}', pad=False, details={
             'depts': depts,
         })
+
+        db.close()
 
 
 def mine(term, filename=None):
