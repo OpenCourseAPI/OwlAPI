@@ -71,7 +71,10 @@ def login(session):
                     ('_eventId_proceed', ''),
                 ]
             except KeyError:
-                print('[ERROR] Login - username or password not specified. Use the env variables MP_USER and MP_PASS.\n')
+                print(
+                    '[ERROR] Login - username or password not specified. ' +
+                    'Use the env variables MP_USER and MP_PASS.\n'
+                )
                 raise
         else:
             # Subsequent HTML pages have an autosubmitting <form>

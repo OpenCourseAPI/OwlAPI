@@ -39,7 +39,7 @@ ADVANCED_FORM_DATA = [
          ('sel_insm', 'dummy'), ('sel_camp', 'dummy'), ('sel_levl', 'dummy'),
          ('sel_sess', 'dummy'), ('sel_instr', 'dummy'), ('sel_ptrm', 'dummy'),
          ('sel_attr', 'dummy')],
-        [('sel_crse', ''), ('sel_title', ''),  ('sel_schd', '%'),
+        [('sel_crse', ''), ('sel_title', ''), ('sel_schd', '%'),
          ('sel_from_cred', ''), ('sel_to_cred', ''), ('sel_camp', '%'),
          ('sel_instr', '%'), ('sel_sess', '%'), ('sel_ptrm', '%'),
          ('sel_attr', '%'), ('begin_hh', '0'), ('begin_mi', '0'),
@@ -75,7 +75,7 @@ def main():
     if DEBUG:
         codes = codes[:5]
 
-    print_c(f'Scraping session cookie…\r')
+    print_c('Scraping session cookie…\r')
 
     session = requests.session()
     login(session)
