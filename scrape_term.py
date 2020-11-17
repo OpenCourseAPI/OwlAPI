@@ -10,7 +10,7 @@ from tinydb import TinyDB
 from utils import parse_course_str, ValidationError, log_info, log_err
 from settings import DB_DIR, SSB_URL, HEADERS
 
-CURRENT_TERM_CODES = {'fh': '202121', 'da': '202122'}
+CURRENT_TERM_CODES = {'fh': '202131', 'da': '202132'}
 
 
 def main():

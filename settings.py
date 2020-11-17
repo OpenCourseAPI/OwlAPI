@@ -31,7 +31,7 @@ HEADERS = (
 SSB_URL = 'https://ssb-prod.ec.fhda.edu'
 
 # Available Campuses - Foothill, De Anza, and test
-CAMPUS_LIST = {'fh': '202121', 'da': '202122', 'test': 'test'}
+CAMPUS_LIST = {'fh': '202131', 'da': '202132', 'test': 'test'}
 
 '''
 Course Type Flags - Foothill College
