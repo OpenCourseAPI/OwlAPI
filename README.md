@@ -1,14 +1,16 @@
 # OwlAPI
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/OpenCourseAPI/OwlAPI)
 
+>  ⚠️ **NOTE: OwlAPI has been deprecated in favor of [OpenCourseAPI](https://github.com/OpenCourseAPI/OpenCourseAPI/), and may be shut down anytime. Use OpenCourseAPI for your latest projects!**
 
-This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI currently lives at [opencourse.dev](https://opencourse.dev).
 
-OwlAPI serves data directly from MyPortal. It parses and cleanses the data in order to make it more usable. For now, only the most recent quarter's data is pulled from MyPortal. On [opencourse.dev](https://opencourse.dev), seat data is synced every 2 minutes with MyPortal.
+This is an unofficial API that serves course data from Foothill DeAnza MyPortal to students wishing to use it. If you have a suggestion for what other FHDA data this API should serve, drop an issue on Github. OwlAPI currently lives at [opencourse.dev:3000](https://opencourse.dev:3000).
+
+OwlAPI serves data directly from MyPortal. It parses and cleanses the data in order to make it more usable. For now, only the most recent quarter's data is pulled from MyPortal. On [opencourse.dev:3000](https://opencourse.dev:3000), seat data is synced every 2 minutes with MyPortal.
 
 ## Quickstart
 
-### Go to *[opencourse.dev](https://opencourse.dev)*.
+### Go to *[opencourse.dev:3000](https://opencourse.dev:3000)*.
 
 
 ## About
@@ -32,4 +34,4 @@ Powered by OwlAPI:
 
 ## License
 
-The MIT License.
+The [MIT License](LICENSE).
