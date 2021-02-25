@@ -30,8 +30,15 @@ HEADERS = (
 # MyPortal endpoint
 SSB_URL = 'https://ssb-prod.ec.fhda.edu'
 
+# Current banner term codes
+CURRENT_TERM_CODES = {'fh': '202141', 'da': '202142'}
+
 # Available Campuses - Foothill, De Anza, and test
-CAMPUS_LIST = {'fh': '202131', 'da': '202132', 'test': 'test'}
+CAMPUS_LIST = {
+    'fh': CURRENT_TERM_CODES['fh'],
+    'da': CURRENT_TERM_CODES['da'],
+    'test': 'test'
+}
 
 '''
 Course Type Flags - Foothill College

@@ -8,9 +8,7 @@ from bs4 import BeautifulSoup
 from tinydb import TinyDB
 
 from utils import parse_course_str, ValidationError, log_info, log_err
-from settings import DB_DIR, SSB_URL, HEADERS
-
-CURRENT_TERM_CODES = {'fh': '202131', 'da': '202132'}
+from settings import DB_DIR, SSB_URL, HEADERS, CURRENT_TERM_CODES
 
 
 def main():
