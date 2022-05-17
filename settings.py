@@ -31,7 +31,7 @@ HEADERS = (
 SSB_URL = 'https://ssb-prod.ec.fhda.edu'
 
 # Current banner term codes
-CURRENT_TERM_CODES = {'fh': '202231', 'da': '202232'}
+CURRENT_TERM_CODES = {'fh': '202311', 'da': '202312'}
 
 # Available Campuses - Foothill, De Anza, and test
 CAMPUS_LIST = {
